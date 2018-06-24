@@ -8,40 +8,54 @@ namespace ElimpParse
     public class ElimpUser
     {
         public string Login { get; }
+        public string Title { get; }
         public TaskPack TaskPack { get; private set; }
-        public int ComplitedTaskCount { get; private set; }
+        public int ComplitedTaskCount { get; set; }
 
         public ElimpUser(string login)
         {
             Login = login;
         }
 
-        public void LoadFromWeb()
+        public ElimpUser(string login, string title)
         {
-            TaskPack = Parser.GetUserTaskList(Login);
-            ComplitedTaskCount = Parser.ComplitedTaskCount(Login);
+            Login = login;
+            Title = title;
         }
 
-        public void LoadFromJson()
+        public override string ToString()
         {
-            var data = File.ReadAllText($"data_{Login}.json");
-            var obj = JsonConvert.DeserializeObject<ElimpUser>(data);
+            if (Title != null)
+            {
+                return $"{Login} [{Title}] ({ComplitedTaskCount})";
+            }
+            else
+            {
+                return $"{Login} ({ComplitedTaskCount})";
 
-            TaskPack = obj.TaskPack;
-            ComplitedTaskCount = obj.ComplitedTaskCount;
-
+            }
         }
 
-        public void SaveToJson()
-        {
-            File.WriteAllText($"data_{Login}.json", JsonConvert.SerializeObject(this));
-        }
+        //public void LoadFromWeb()
+        //{
+        //    TaskPack = Parser.GetUserTaskList(Login);
+        //    ComplitedTaskCount = Parser.ComplitedTaskCount(Login);
+        //}
 
-        public string GetResult(List<int> taskList)
-        {
-            var result = taskList.Select(t => TaskPack.GetTaskResult(t));
-            return string.Join(" ", result);
-        }
+        //public void LoadFromJson()
+        //{
+        //    var data = File.ReadAllText($"data_{Login}.json");
+        //    var obj = JsonConvert.DeserializeObject<ElimpUser>(data);
+
+        //    TaskPack = obj.TaskPack;
+        //    ComplitedTaskCount = obj.ComplitedTaskCount;
+
+        //}
+
+        //public void SaveToJson()
+        //{
+        //    File.WriteAllText($"data_{Login}.json", JsonConvert.SerializeObject(this));
+        //}
 
     }
 }
