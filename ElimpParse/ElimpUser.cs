@@ -27,12 +27,20 @@ namespace ElimpParse
         {
             if (Title != null)
             {
-                return $"{Login} [{Title}] ({ComplitedTaskCount})";
+
+                return $"{Login} [{Title}] {ComplitedTaskCount}";
+
             }
             else
             {
-                return $"{Login} ({ComplitedTaskCount})";
-
+                return $"{Login}{getspace(Login.Length)} |{ComplitedTaskCount}";
+            }
+            string getspace(int a)
+            {
+                string s = "";
+                for (int i = 0; i < 20 - a; i++)
+                    s += " ";
+                return s;
             }
         }
 
