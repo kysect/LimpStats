@@ -9,57 +9,56 @@ namespace ElimpParse
     {
         static void Main(string[] args)
         {
-            List<string> names = new List<string>()
+            var users = new List<ElimpUser>()
             {
-                "Andrey2005",
-                "DDsov",
-                "Den4758",
-                "Gladtoseeyou",
-                "Koteika",
-                "liza.898",
-                "Mr.Hovik",
-                "NastyaVadko284",
-                "papercut6820",
-                "Pozitiv4ik",
-                "prostoroma",
-                "Swoop",
-                "v_7946",
-                "Versuzzz",
-                "Xsqten",
-                "Enosha"
+                new ElimpUser("Andrey2005"),
+                new ElimpUser("DDsov"),
+                new ElimpUser("Den4758"),
+                new ElimpUser("Gladtoseeyou"),
+                new ElimpUser("Koteika"),
+                new ElimpUser("liza.898"),
+                new ElimpUser("Mr.Hovik"),
+                new ElimpUser("NastyaVadko284"),
+                new ElimpUser("papercut6820"),
+                new ElimpUser("Pozitiv4ik"),
+                new ElimpUser("prostoroma"),
+                new ElimpUser("Swoop"),
+                new ElimpUser("v_7946"),
+                new ElimpUser("Versuzzz"),
+                new ElimpUser("Xsqten"),
+                new ElimpUser("Enosha", "Нет места на всеукре :с")
             };
-            List<string> oldPlayers = new List<string>
+            var oldPlayers = new List<ElimpUser>
             {
-                "Strannik",
-                "iNooByX",
-                "Maxkolpak",
-                "krab397",
-                "i4happy",
-                "vlad986523"
+                new ElimpUser("Strannik", "II место на области"),
+                new ElimpUser("iNooByX", "III место на области"),
+                new ElimpUser("Maxkolpak", "III место на городе"),
+                new ElimpUser("krab397", "III место на облати"),
+                new ElimpUser("i4happy", "I место на городе"),
+                new ElimpUser("vlad986523", "II место на городе")
             };
-            names.InsertRange(0, oldPlayers);
-            PrintResult(names, false);
+            users.InsertRange(0, oldPlayers);
+            PrintResult(users, false);
             
         }
 
-        public static void PrintResult(List<string> names, bool isHtml)
+        public static void PrintResult(List<ElimpUser> users, bool isHtml)
         {
-            List<(string login, int count)> result = new List<(string, int)>();
-            foreach (var name in names)
+            foreach (var user in users)
             {
-                result.Add((name, Parser.ComplitedTaskCount(name)));
+                user.ComplitedTaskCount = Parser.ComplitedTaskCount(user.Login);
             }
 
-            var sorted = result.OrderByDescending(e => e.count).ToList();
+            var sorted = users.OrderByDescending(e => e.ComplitedTaskCount).ToList();
             for (var i = 0; i < sorted.Count; i++)
             {
                 if (isHtml)
                 {
-                    Console.WriteLine($"<tr><td>{i}.</td><td>{sorted[i].login}</td><td>{sorted[i].count}</td></tr>");
+                    Console.WriteLine($"<tr><td>{i}.</td><td>{sorted[i].Login}</td><td>{sorted[i].ComplitedTaskCount}</td></tr>");
                 }
                 else
                 {
-                    Console.WriteLine($"{i}. {sorted[i].login} ({sorted[i].count})");
+                    Console.WriteLine($"{i}. {sorted[i]}");
                 }
             }
         }
