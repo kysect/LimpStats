@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using Telegram;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.ReplyMarkups;
-
-
+using System.Text;
+using System.IO;
+using Newtonsoft.Json;
 namespace ElimpParse
 {
     class Program
     {
-        public static readonly TelegramBotClient Bot = new TelegramBotClient("574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw");
+        public static readonly TelegramBotClient Bot = new TelegramBotClient("557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y"); // 574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw");
+        static bool flag = true;
         static void Main(string[] args)
         {
 
@@ -31,6 +31,7 @@ namespace ElimpParse
             //   users.InsertRange(0, oldPlayers);
             Bot.OnMessage += Bot_OnMassage;
             Bot.StartReceiving();
+
             Console.ReadLine();
             Bot.StopReceiving();
         }
@@ -46,19 +47,21 @@ namespace ElimpParse
             string s = "";
             for (var i = 0; i < sorted.Count; i++)
             {
-                if (isHtml)
-                {
-                    return $"<tr><td>{i}.</td><td>{sorted[i].Login}</td><td>{sorted[i].ComplitedTaskCount}</td></tr>";
-                }
-                else
-                {
-                    s += $"<code>{sorted[i]}</code>\n";
-                    Console.WriteLine($"{sorted[i]}\n");
-                }
-            }
-            return s;
+                s += $"<code>{sorted[i]}</code>\n"; // s += $"<code>{sorted[i]} ({Parsetxt(sorted[i])})</code>\n";
+                //    Console.WriteLine($"{sorted[i]}\n");
 
+            }
+
+            return s;
         }
+        public static string Parsetxt()
+        {
+            string s = "";
+            File.ReadAllLines("Info.txt");
+            return s;
+        }
+
+        
         public static void Bot_OnMassage(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             var users = new List<ElimpUser>()
@@ -78,17 +81,31 @@ namespace ElimpParse
                 new ElimpUser("v_7946"),
                 new ElimpUser("Versuzzz"),
                 new ElimpUser("Xsqten"),
+                new ElimpUser("tur4ik"),
                 new ElimpUser("Enosha")
             };
+    
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text)
             {
+                int Hour = 13;
+                int Minute = 43;
+                if ((Hour == System.DateTime.Now.Hour) && (Minute - System.DateTime.Now.Minute <= 10) && flag)
+                {
+                    flag = false;
+                    Bot.SendTextMessageAsync(e.Message.Chat.Id, "Ежедневное обновление списка \n" + PrintResult(users, false), ParseMode.Html);
+                    File.Delete("Info.txt");
+                    File.WriteAllText("Info.txt", PrintResult(users, false));
+
+                }
                 if (e.Message.Text == "/getinfo")
                 {
                     Bot.SendTextMessageAsync(e.Message.Chat.Id, PrintResult(users, false), ParseMode.Html);
                     Console.WriteLine("good");
                 }
-            }
-
+            }            
         }
     }
+
 }
+
+

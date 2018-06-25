@@ -38,7 +38,7 @@ namespace ElimpParse
             string getspace(int a)
             {
                 string s = "";
-                for (int i = 0; i < 20 - a; i++)
+                for (int i = 0; i < 15 - a; i++)
                     s += " ";
                 return s;
             }
