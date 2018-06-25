@@ -16,7 +16,7 @@ namespace ElimpParse
             return new TaskPack(userNodeList);
         }
 
-        public static int ComplitedTaskCount(string username)
+        public static int CompletedTaskCount(string username)
         {
             string link = $"https://www.e-olymp.com/ru/users/{username}";
             var floatRow = _client.Load(link)
