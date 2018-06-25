@@ -14,15 +14,7 @@
 
         public static string TelegramFormat(ElimpUser user)
         {
-            return $"{user.Login}{GetSpace(user.Login.Length)} |{user.CompletedTaskCount}";
-        }
-
-        private static string GetSpace(int loginLength)
-        {
-            string s = "";
-            for (int i = 0; i < 15 - loginLength; i++)
-                s += " ";
-            return s;
+            return $"{user.Login, -14} |{user.CompletedTaskCount}";
         }
     }
 }

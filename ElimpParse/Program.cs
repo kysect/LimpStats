@@ -26,6 +26,7 @@ namespace ElimpParse
              };
              */
             //users.InsertRange(0, oldPlayers);
+
             List<ElimpUser> users = new List<ElimpUser>
             {
                 new ElimpUser("Andrey2005"),
