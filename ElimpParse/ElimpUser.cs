@@ -9,8 +9,9 @@ namespace ElimpParse
     {
         public string Login { get; }
         public string Title { get; }
-        public TaskPack TaskPack { get; private set; }
-        public int ComplitedTaskCount { get; set; }
+
+        //public TaskPack TaskPack { get; private set; }
+        public int CompletedTaskCount { get; set; }
 
         public ElimpUser(string login)
         {
@@ -23,31 +24,10 @@ namespace ElimpParse
             Title = title;
         }
 
-        public override string ToString()
-        {
-            if (Title != null)
-            {
-
-                return $"{Login} [{Title}] {ComplitedTaskCount}";
-
-            }
-            else
-            {
-                return $"{Login}{getspace(Login.Length)} |{ComplitedTaskCount}";
-            }
-            string getspace(int a)
-            {
-                string s = "";
-                for (int i = 0; i < 15 - a; i++)
-                    s += " ";
-                return s;
-            }
-        }
-
         //public void LoadFromWeb()
         //{
         //    TaskPack = Parser.GetUserTaskList(Login);
-        //    ComplitedTaskCount = Parser.ComplitedTaskCount(Login);
+        //    CompletedTaskCount = Parser.CompletedTaskCount(Login);
         //}
 
         //public void LoadFromJson()
@@ -56,7 +36,7 @@ namespace ElimpParse
         //    var obj = JsonConvert.DeserializeObject<ElimpUser>(data);
 
         //    TaskPack = obj.TaskPack;
-        //    ComplitedTaskCount = obj.ComplitedTaskCount;
+        //    CompletedTaskCount = obj.CompletedTaskCount;
 
         //}
 
