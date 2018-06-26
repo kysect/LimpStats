@@ -64,9 +64,18 @@ namespace ElimpParse
                 2862,
                 910,
                 382,
-                473,    
+                473,
                 500,
                 7410
+            };
+            List<int> tasksEGroup = new List<int>
+            {
+                922,
+                2098,    
+                4760,
+                1952,
+                1965,
+                7402
             };
 
             foreach (var elimpUser in _users)
@@ -88,6 +97,11 @@ namespace ElimpParse
             {
                 elimpUser.TaskPack = Parser.GetUserTaskList(elimpUser.Login);
                 Console.WriteLine(FormatPrint.ConsoleTaskSumFormat(elimpUser, tasksDGroup, 'D'));
+            }
+            foreach (var elimpUser in _users)
+            {
+                elimpUser.TaskPack = Parser.GetUserTaskList(elimpUser.Login);
+                Console.WriteLine(FormatPrint.ConsoleTaskSumFormat(elimpUser, tasksEGroup, 'E'));
             }
         }
     }

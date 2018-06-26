@@ -13,7 +13,7 @@ namespace ElimpParse
         private static string _firstToken = "557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y";
         private static string _secondToken = "574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw";
         public readonly TelegramBotClient Bot;
-        private bool flag = true;
+        private bool _flag = true;
 
         public SummerSchoolBot(List<ElimpUser> users)
         {
@@ -27,11 +27,11 @@ namespace ElimpParse
         {
             if (e.Message.Type != MessageType.Text) return;
 
-            int Hour = 09;
-            int Minute = 30;
-            if ((Hour == System.DateTime.Now.Hour) && (System.DateTime.Now.Minute - Minute <= 10) && flag)
+            var hour = 09;
+            var minute = 30;
+            if ((hour == System.DateTime.Now.Hour) && (System.DateTime.Now.Minute - minute <= 10) && _flag)
             {
-                flag = false;
+                _flag = false;
                 string msg = "Ежедневное обновление списка \n" + GenerateMessage(_users, false);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
                 BackUpManager.SaveJson(_users);               

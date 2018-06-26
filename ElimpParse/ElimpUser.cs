@@ -7,8 +7,8 @@ namespace ElimpParse
 {
     public class ElimpUser
     {
-        public string Login { get; }
-        public string Title { get; }
+        public string Login { get; set; }
+        public string Title { get; set; }
         public TaskPack TaskPack { get; set; }
         public int CompletedTaskCount { get; set; }
 

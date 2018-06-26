@@ -34,8 +34,9 @@ namespace ElimpParse
                 new ElimpUser("Xsqten"),
                 new ElimpUser("Enosha", "Так и не взял всеукр"),
                 new ElimpUser("tur4ik"),
+                new ElimpUser("DiMaNsKi"),
+                new ElimpUser("cerepawka"),
             };
-
             //var oldPlayers = new List<ElimpUser>
             // {
             //     new ElimpUser("Strannik", "II место на области"),
@@ -46,28 +47,17 @@ namespace ElimpParse
             //     new ElimpUser("vlad986523", "II место на городе")
             // };
             //users.InsertRange(0, oldPlayers);
-
-
-            //var bot = new SummerSchoolBot(users);
-            //Console.ReadLine();
-            //bot.Bot.StopReceiving();
-
-
+            var bot = new SummerSchoolBot(users);
+            Console.ReadLine();
+            bot.Bot.StopReceiving();
             //foreach (var elimpUser in users)
             //{
             //    elimpUser.CompletedTaskCount = Parser.CompletedTaskCount(elimpUser.Login);
             //}
             //users = users.OrderByDescending(u => u.CompletedTaskCount).ToList();
-
-    //     foreach (var elimpUser in users)
-      //      {
-             //   Console.WriteLine(elimpUser);
-                NeedMoreInfo.GetMoreInfo(users);
-        //    }
+     //       NeedMoreInfo.GetMoreInfo(users);
         }
-
     }
-
 }
 
 
