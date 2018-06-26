@@ -15,18 +15,6 @@ namespace ElimpParse
     {
         static void Main(string[] args)
         {
-            /* var oldPlayers = new List<ElimpUser>
-             {
-                 new ElimpUser("Strannik", "II место на области"),
-                 new ElimpUser("iNooByX", "III место на области"),
-                 new ElimpUser("Maxkolpak", "III место на городе"),
-                 new ElimpUser("krab397", "III место на облати"),
-                 new ElimpUser("i4happy", "I место на городе"),
-                 new ElimpUser("vlad986523", "II место на городе")
-             };
-             */
-            //users.InsertRange(0, oldPlayers);
-
             List<ElimpUser> users = new List<ElimpUser>
             {
                 new ElimpUser("Andrey2005"),
@@ -44,14 +32,55 @@ namespace ElimpParse
                 new ElimpUser("v_7946"),
                 new ElimpUser("Versuzzz"),
                 new ElimpUser("Xsqten"),
-                new ElimpUser("Enosha"),
+                new ElimpUser("Enosha", "Так и не взял всеукр"),
                 new ElimpUser("tur4ik"),
             };
-            var bot = new SummerSchoolBot(users);
 
-            Console.ReadLine();
-            
-            bot.Bot.StopReceiving();
+            //var oldPlayers = new List<ElimpUser>
+            // {
+            //     new ElimpUser("Strannik", "II место на области"),
+            //     new ElimpUser("iNooByX", "III место на области"),
+            //     new ElimpUser("Maxkolpak", "III место на городе"),
+            //     new ElimpUser("krab397", "III место на облати"),
+            //     new ElimpUser("i4happy", "I место на городе"),
+            //     new ElimpUser("vlad986523", "II место на городе")
+            // };
+            //users.InsertRange(0, oldPlayers);
+
+
+            //var bot = new SummerSchoolBot(users);
+            //Console.ReadLine();
+            //bot.Bot.StopReceiving();
+
+
+            //foreach (var elimpUser in users)
+            //{
+            //    elimpUser.CompletedTaskCount = Parser.CompletedTaskCount(elimpUser.Login);
+            //}
+            //users = users.OrderByDescending(u => u.CompletedTaskCount).ToList();
+
+            List<int> tasks = new List<int>
+            {
+                5133,
+                7401,
+                7944,
+                4716,
+                133,
+                138,
+                923,
+                108,
+                1623,
+                927,
+                1118,
+                542,
+                4538
+            };
+
+            foreach (var elimpUser in users)
+            {
+                elimpUser.TaskPack = Parser.GetUserTaskList(elimpUser.Login);
+                Console.WriteLine(FormatPrint.ConsoleTaskListFormat(elimpUser, tasks));
+            }
         }
 
     }

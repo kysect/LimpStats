@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using HtmlAgilityPack;
 
 namespace ElimpParse
@@ -14,8 +15,21 @@ namespace ElimpParse
 
         public int GetTaskResult(int taskId)
         {
-            var currentNode = _nodes.First(n => n.Attributes["href"].Value == $"/ru/problems/{taskId}");
-            return TitleToResult(currentNode.Attributes["title"].Value);
+            foreach (var node in _nodes)
+            {
+                try
+                {
+
+                    if (node.Attributes["href"].Value == $"/ru/problems/{taskId}")
+                        return TitleToResult(node.Attributes["title"].Value);
+                }
+                catch (Exception e)
+                {
+                    // ignored
+                }
+            }
+
+            return -1;
         }
 
         private int TitleToResult(string title)
