@@ -40,8 +40,12 @@ namespace ElimpParse
 
         public static string TelegramFormat(ElimpUser user)
         {
-            var list = BackUpManager.LoadJson().Where(u => u.Login == user.Login).First();
-            return $"{user.Login, -14} |{user.CompletedTaskCount, -3} ({user.CompletedTaskCount - list.CompletedTaskCount})";
+            var list = BackUpManager.LoadJson();
+            var currentuser = list.Where(u => u.Login == user.Login).FirstOrDefault();
+            if(currentuser == null)
+                return $"{user.Login,-14} |{user.CompletedTaskCount,-3} ({user.CompletedTaskCount})";
+            
+            return $"{user.Login,-14} |{user.CompletedTaskCount,-3} ({user.CompletedTaskCount - currentuser.CompletedTaskCount})";
         }
     }
 }
