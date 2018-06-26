@@ -23,6 +23,15 @@ namespace ElimpParse
             }
             return $"{user.Login, -15} | {result}";
         }
+        public static string ConsoleTaskSumFormat(ElimpUser user, List<int> taskList, char idGroup)
+        {
+            int result = 0;
+            foreach (var taskId in taskList)
+            {
+                result += (user.TaskPack.GetTaskResult(taskId) == 100) ? 1 : 0;
+            }
+            return $"`{user.Login, -15} Group {idGroup} Solutions {result}`";
+        }
 
         public static string WebFormat(ElimpUser user)
         {
