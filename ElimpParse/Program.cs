@@ -59,28 +59,11 @@ namespace ElimpParse
             //}
             //users = users.OrderByDescending(u => u.CompletedTaskCount).ToList();
 
-            List<int> tasks = new List<int>
-            {
-                5133,
-                7401,
-                7944,
-                4716,
-                133,
-                138,
-                923,
-                108,
-                1623,
-                927,
-                1118,
-                542,
-                4538
-            };
-
-            foreach (var elimpUser in users)
-            {
-                elimpUser.TaskPack = Parser.GetUserTaskList(elimpUser.Login);
-                Console.WriteLine(FormatPrint.ConsoleTaskListFormat(elimpUser, tasks));
-            }
+    //     foreach (var elimpUser in users)
+      //      {
+             //   Console.WriteLine(elimpUser);
+                NeedMoreInfo.GetMoreInfo(users);
+        //    }
         }
 
     }
