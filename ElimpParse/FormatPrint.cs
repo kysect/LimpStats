@@ -1,12 +1,27 @@
 ﻿using System.Linq;
-
+﻿using System.Collections.Generic;
 namespace ElimpParse
 {
     public static class FormatPrint
     {
         public static string ConsoleFormat(ElimpUser user)
         {
-            return $"{user.Login} [{user.Title}] ({user.CompletedTaskCount})";
+            if (user.Title != null)
+            {
+                return $"{user.Login + " [" + user.Title + "]",-30} ({user.CompletedTaskCount})";
+            }
+            return $"{user.Login,-30} ({user.CompletedTaskCount})";
+
+        }
+
+        public static string ConsoleTaskListFormat(ElimpUser user, List<int> taskList)
+        {
+            string result ="";
+            foreach (var taskId in taskList)
+            {
+                result += (user.TaskPack.GetTaskResult(taskId) == 100) ? "1" : "0";
+            }
+            return $"{user.Login, -15} | {result}";
         }
 
         public static string WebFormat(ElimpUser user)
