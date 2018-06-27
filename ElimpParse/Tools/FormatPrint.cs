@@ -1,14 +1,16 @@
-﻿using System.Linq;
 ﻿using System.Collections.Generic;
-namespace ElimpParse
+using System.Linq;
+using ElimpParse.Model;
+
+namespace ElimpParse.Tools
 {
     public static class FormatPrint
     {
-        public static string ConsoleFormat(ElimpUser user)
+        public static string ConsoleTaskCountFormat(ElimpUser user)
         {
             if (user.Title != null)
             {
-                return $"{user.Login + " [" + user.Title + "]",-30} ({user.CompletedTaskCount})";
+                return $"{user.Login + " [" + user.Title + "]",-40} ({user.CompletedTaskCount})";
             }
             return $"{user.Login,-30} ({user.CompletedTaskCount})";
 
@@ -23,6 +25,7 @@ namespace ElimpParse
             }
             return $"{user.Login, -15} | {result}";
         }
+
         public static string ConsoleTaskSumFormat(ElimpUser user, List<int> taskList, char idGroup)
         {
             int result = 0;
@@ -40,12 +43,13 @@ namespace ElimpParse
 
         public static string TelegramFormat(ElimpUser user)
         {
-            var list = BackUpManager.LoadJson();
-            var currentuser = list.Where(u => u.Login == user.Login).FirstOrDefault();
-            if(currentuser == null)
+            var list = BackUpManager.LoadFromJson();
+            var currentUser = list.FirstOrDefault(u => u.Login == user.Login);
+
+            if(currentUser == null)
                 return $"{user.Login,-14} |{user.CompletedTaskCount,-3} ({user.CompletedTaskCount})";
             
-            return $"{user.Login,-14} |{user.CompletedTaskCount,-3} ({user.CompletedTaskCount - currentuser.CompletedTaskCount})";
+            return $"{user.Login,-14} |{user.CompletedTaskCount,-3} ({user.CompletedTaskCount - currentUser.CompletedTaskCount})";
         }
     }
 }

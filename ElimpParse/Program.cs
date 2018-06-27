@@ -8,6 +8,7 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using System.Text;
 using System.IO;
+using ElimpParse.Model;
 using Newtonsoft.Json;
 namespace ElimpParse
 {

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using ElimpParse.Tools;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 
-namespace ElimpParse
+namespace ElimpParse.Model
 {
     public class SummerSchoolBot
     {
-        private List<ElimpUser> _users;
+        private readonly List<ElimpUser> _users;
         private static string _firstToken = "557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y";
         private static string _secondToken = "574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw";
         public readonly TelegramBotClient Bot;
@@ -34,7 +34,7 @@ namespace ElimpParse
                 _flag = false;
                 string msg = "Ежедневное обновление списка \n" + GenerateMessage(_users, false);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
-                BackUpManager.SaveJson(_users);               
+                BackUpManager.SaveToJson(_users);               
             }
             if (e.Message.Text == "/getinfo")
             {
@@ -64,11 +64,5 @@ namespace ElimpParse
 
             return res;
         }
-        //public static string Parsetxt()
-        //{
-        //    string s = "";
-        //    File.ReadAllLines("Info.txt");
-        //    return s;
-        //}
     }
 }
