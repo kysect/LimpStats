@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-
-namespace ElimpParse
+﻿namespace ElimpParse.Model
 {
     public class ElimpUser
     {
@@ -26,6 +21,11 @@ namespace ElimpParse
         {
             Login = login;
             Title = title;
+        }
+
+        public override string ToString()
+        {
+            return $"{Login}, {CompletedTaskCount}";
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using HtmlAgilityPack;
 
-namespace ElimpParse
+namespace ElimpParse.Model
 {
     public class TaskPack
     {
