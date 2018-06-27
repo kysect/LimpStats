@@ -16,28 +16,6 @@ namespace ElimpParse
     {
         static void Main(string[] args)
         {
-            List<ElimpUser> users = new List<ElimpUser>
-            {
-                new ElimpUser("Andrey2005"),
-                new ElimpUser("DDsov"),
-                new ElimpUser("Den4758"),
-                new ElimpUser("Gladtoseeyou"),
-                new ElimpUser("Koteika"),
-                new ElimpUser("liza.898"),
-                new ElimpUser("Mr.Hovik"),
-                new ElimpUser("NastyaVadko284"),
-                new ElimpUser("papercut6820"),
-                new ElimpUser("Pozitiv4ik"),
-                new ElimpUser("prostoroma"),
-                new ElimpUser("Swoop"),
-                new ElimpUser("v_7946"),
-                new ElimpUser("Versuzzz"),
-                new ElimpUser("Xsqten"),
-                new ElimpUser("Enosha", "Так и не взял всеукр"),
-                new ElimpUser("tur4ik"),
-                new ElimpUser("DiMaNsKi"),
-                new ElimpUser("cerepawka"),
-            };
             //var oldPlayers = new List<ElimpUser>
             // {
             //     new ElimpUser("Strannik", "II место на области"),
@@ -48,6 +26,9 @@ namespace ElimpParse
             //     new ElimpUser("vlad986523", "II место на городе")
             // };
             //users.InsertRange(0, oldPlayers);
+     //       string idGroup = 'A';
+            List<ElimpUser> users = UserGroup.GetUserList();
+     //       List<int> tasks       = UserGroup.GetTaskList(users, idGroup);
             var bot = new SummerSchoolBot(users);
             Console.ReadLine();
             bot.Bot.StopReceiving();
@@ -56,7 +37,7 @@ namespace ElimpParse
             //    elimpUser.CompletedTaskCount = Parser.CompletedTaskCount(elimpUser.Login);
             //}
             //users = users.OrderByDescending(u => u.CompletedTaskCount).ToList();
-     //       NeedMoreInfo.GetMoreInfo(users);
+          //  NeedMoreInfo.GetMoreInfo(users, tasks, idGroup);
         }
     }
 }

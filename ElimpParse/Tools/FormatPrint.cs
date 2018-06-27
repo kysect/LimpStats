@@ -26,14 +26,14 @@ namespace ElimpParse.Tools
             return $"{user.Login, -15} | {result}";
         }
 
-        public static string ConsoleTaskSumFormat(ElimpUser user, List<int> taskList, char idGroup)
+        public static string ConsoleTaskSumFormat(ElimpUser user, List<int> taskList, string  idGroup)
         {
             int result = 0;
             foreach (var taskId in taskList)
             {
                 result += (user.TaskPack.GetTaskResult(taskId) == 100) ? 1 : 0;
             }
-            return $"`{user.Login, -15} Group {idGroup} Solutions {result}`";
+            return $"{user.Login, -15} Group {idGroup} Solutions" + $"{"", -2}" + (result == taskList.Count ? "Complited" : $"{result, -2}| {taskList.Count}");
         }
 
         public static string WebFormat(ElimpUser user)
@@ -43,6 +43,7 @@ namespace ElimpParse.Tools
 
         public static string TelegramFormat(ElimpUser user)
         {
+            //TODO: remove
             var list = BackUpManager.LoadFromJson();
             var currentUser = list.FirstOrDefault(u => u.Login == user.Login);
 
