@@ -4,6 +4,7 @@ using HtmlAgilityPack;
 
 namespace ElimpParse.Model
 {
+    //TODO: remove
     public class TaskPack
     {
         private readonly HtmlNodeCollection _nodes;

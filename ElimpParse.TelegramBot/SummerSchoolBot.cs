@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using ElimpParse.Tools;
+using ElimpParse.Core;
+using ElimpParse.DatabaseProvider;
+using ElimpParse.Model;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
-   
-namespace ElimpParse.Model
+
+namespace ElimpParse.TelegramBot
 {
-    
     public class SummerSchoolBot
     {
         public static bool flag = false;
@@ -39,7 +38,7 @@ namespace ElimpParse.Model
                 _flag = false;
                 string msg = "Ежедневное обновление списка \n" + GenerateMessage(_users, false);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
-                BackUpManager.SaveToJson(_users);               
+                JsonBackupManager.SaveToJson(_users);
             }
             if (e.Message.Text == "/getinfo")
             {
@@ -50,40 +49,40 @@ namespace ElimpParse.Model
             if (e.Message.Text == "/gettaskpackinfo" || flag == true)
             {
                 flag = true;
-   /*             var rkm = new ReplyKeyboardMarkup();
-                rkm.Keyboard =
-                    new KeyboardButton[][]
-                    {
-                        new KeyboardButton[]
-                        {
-                            new KeyboardButton("A"),
-                            new KeyboardButton("B")
-                        },
-                        new KeyboardButton[]
-                        {
-                            new KeyboardButton("C"),
-                            new KeyboardButton("D")
-                        },
-                        new KeyboardButton[]
-                        {
-                        new KeyboardButton("E"),
-                        new KeyboardButton("F")
-                        }
-                    };*/
-           //&     Bot.OnMessage += OnNewMessage;
-             //   Bot.StartReceiving();
+                /*             var rkm = new ReplyKeyboardMarkup();
+                             rkm.Keyboard =
+                                 new KeyboardButton[][]
+                                 {
+                                     new KeyboardButton[]
+                                     {
+                                         new KeyboardButton("A"),
+                                         new KeyboardButton("B")
+                                     },
+                                     new KeyboardButton[]
+                                     {
+                                         new KeyboardButton("C"),
+                                         new KeyboardButton("D")
+                                     },
+                                     new KeyboardButton[]
+                                     {
+                                     new KeyboardButton("E"),
+                                     new KeyboardButton("F")
+                                     }
+                                 };*/
+                //&     Bot.OnMessage += OnNewMessage;
+                //   Bot.StartReceiving();
                 if (e.Message.Text == "A" || e.Message.Text == "B" || e.Message.Text == "C" || e.Message.Text == "D" || e.Message.Text == "E" || e.Message.Text == "F")
                 {
                     string s = e.Message.Text;
-                    List<int> a = UserGroup.GetTaskList(_users, s);
+                    List<int> a = DataGenerator.GetTaskList(_users, s);
                     string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";
 
                     Bot.SendTextMessageAsync(e.Message.Chat.Id, g, ParseMode.Html).Wait();
                     Console.WriteLine("good");
                     flag = false;
                 }
-               // Bot.StopReceiving();
-                
+                // Bot.StopReceiving();
+
                 //   Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_users, false), ParseMode.Default, false, false, 0,  rkm);
                 Console.WriteLine("good");
             }
@@ -96,7 +95,7 @@ namespace ElimpParse.Model
                 user.CompletedTaskCount = Parser.CompletedTaskCount(user.Login);
             }
 
-            
+
             var sorted = users.OrderByDescending(e => e.CompletedTaskCount).ToList();
             var res = sorted.Aggregate("", (s1, user) => s1 + $"<code>{FormatPrint.TelegramFormat(user)}</code>\n");
             //string s = "";

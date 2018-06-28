@@ -4,9 +4,9 @@ using System.IO;
 using ElimpParse.Model;
 using Newtonsoft.Json;
 
-namespace ElimpParse.Tools
+namespace ElimpParse.DatabaseProvider
 {
-    public static class BackUpManager
+    public static class JsonBackupManager
     {
         private const string FilePath = "Info.json";
 

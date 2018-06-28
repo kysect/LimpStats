@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ElimpParse.Core</AssemblyName>
+    <RootNamespace>ElimpParse.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElimpParse.DatabaseProvider\ElimpParse.DatabaseProvider.csproj" />
+    <ProjectReference Include="..\ElimpParse.Model\ElimpParse.Model.csproj" />
+  </ItemGroup>
+
+</Project>

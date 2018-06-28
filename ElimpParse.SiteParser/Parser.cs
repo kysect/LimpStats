@@ -1,7 +1,7 @@
 ﻿using ElimpParse.Model;
 using HtmlAgilityPack;
 
-namespace ElimpParse.Tools
+namespace ElimpParse.Core
 {
     public class Parser
     {
