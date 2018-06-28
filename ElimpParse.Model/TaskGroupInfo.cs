@@ -4,10 +4,6 @@ namespace ElimpParse.Model
 {
     public class TaskGroupInfo
     {
-        public string GroupTitle { get; }
-        public List<int> TaskIdList { get; }
-        public int? FullSolutionPoints { get; }
-
         public TaskGroupInfo(string groupTitle, List<int> taskIdList)
         {
             GroupTitle = groupTitle;
@@ -20,5 +16,9 @@ namespace ElimpParse.Model
             TaskIdList = taskIdList;
             FullSolutionPoints = fullSolutionPoints;
         }
+
+        public string GroupTitle { get; set; }
+        public List<int> TaskIdList { get; set; }
+        public int? FullSolutionPoints { get; set; }
     }
 }
