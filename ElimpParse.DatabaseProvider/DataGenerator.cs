@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Text;
+﻿using System.Collections.Generic;
 using ElimpParse.Model;
-namespace ElimpParse
+
+namespace ElimpParse.DatabaseProvider
 {
-    class UserGroup
+    public class DataGenerator
     {
         public static List<ElimpUser> GetUserList()
         {
@@ -122,9 +120,8 @@ namespace ElimpParse
                 case "D": return tasksDGroup;
                 case "E": return tasksEGroup;
                 case "F": return tasksFGroup;
-                default: return tasksAGroup; 
+                default: return tasksAGroup;
             }
         }
     }
 }
-

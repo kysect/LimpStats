@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ElimpParse.Model;
-using ElimpParse.Tools;
 
-namespace ElimpParse
+namespace ElimpParse.Core
 {
-    public static class NeedMoreInfo
+    //TODO: remove this
+    public class NeedMoreInfo
     {
         public static string GetMoreInfo(List<ElimpUser> _users, List<int> tasksGroup, string idGroup)
         {
@@ -14,7 +12,7 @@ namespace ElimpParse
             foreach (var elimpUser in _users)
             {
                 elimpUser.TaskPack = Parser.GetUserTaskList(elimpUser.Login);
-               s += FormatPrint.ConsoleTaskSumFormat(elimpUser, tasksGroup, idGroup) + "\n";
+                s += FormatPrint.ConsoleTaskSumFormat(elimpUser, tasksGroup, idGroup) + "\n";
             }
             return s;
         }
