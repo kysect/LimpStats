@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using ElimpParse.DatabaseProvider;
-using ElimpParse.Model;
 
 namespace ElimpParse.TelegramBot
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //users.InsertRange(0, oldPlayers);
             //string idGroup = 'A';
-            List<ElimpUser> users = DataGenerator.GetUserList();
+            //List<ElimpUser> users = DataGenerator.GetUserList();
+            var group = DataGenerator.GenerateTemplateGroup();
             //       List<int> tasks       = DataGenerator.GetTaskList(users, idGroup);
-            var bot = new SummerSchoolBot(users);
+            var bot = new SummerSchoolBot(group);
             Console.ReadLine();
             bot.Bot.StopReceiving();
             //foreach (var elimpUser in users)

@@ -5,48 +5,50 @@ using ElimpParse.Core;
 using ElimpParse.DatabaseProvider;
 using ElimpParse.Model;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 
 namespace ElimpParse.TelegramBot
 {
     public class SummerSchoolBot
     {
-        public static bool flag = false;
-        private readonly List<ElimpUser> _users;
-        private static string _tMaze = "557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y";
+        public static bool flag;
+        private static readonly string _tMaze = "557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y";
         private static string _SSB = "574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw";
+        private readonly StudyGroup _group;
         public readonly TelegramBotClient Bot;
         private bool _flag = true;
 
-        public SummerSchoolBot(List<ElimpUser> users)
+        public SummerSchoolBot(StudyGroup group)
         {
-            _users = users;
+            _group = group;
             Bot = new TelegramBotClient(_tMaze);
             Bot.OnMessage += OnNewMessage;
 
             Bot.StartReceiving();
         }
 
-        public void OnNewMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        public void OnNewMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Type != MessageType.Text) return;
 
             var hour = 09;
             var minute = 30;
-            if ((hour == System.DateTime.Now.Hour) && (System.DateTime.Now.Minute - minute <= 10) && _flag)
+            if (hour == DateTime.Now.Hour && DateTime.Now.Minute - minute <= 10 && _flag)
             {
                 _flag = false;
-                string msg = "Ежедневное обновление списка \n" + GenerateMessage(_users, false);
+                var msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList, false);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
-                JsonBackupManager.SaveToJson(_users);
+                JsonBackupManager.SaveToJson(_group.UserList);
             }
+
             if (e.Message.Text == "/getinfo")
             {
-                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_users, false), ParseMode.Html);
+                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_group.UserList, false), ParseMode.Html);
                 Console.WriteLine("good");
             }
 
-            if (e.Message.Text == "/gettaskpackinfo" || flag == true)
+            if (e.Message.Text == "/gettaskpackinfo" || flag)
             {
                 flag = true;
                 /*             var rkm = new ReplyKeyboardMarkup();
@@ -71,11 +73,15 @@ namespace ElimpParse.TelegramBot
                                  };*/
                 //&     Bot.OnMessage += OnNewMessage;
                 //   Bot.StartReceiving();
-                if (e.Message.Text == "A" || e.Message.Text == "B" || e.Message.Text == "C" || e.Message.Text == "D" || e.Message.Text == "E" || e.Message.Text == "F")
+                if (e.Message.Text == "A" || e.Message.Text == "B" || e.Message.Text == "C" || e.Message.Text == "D" ||
+                    e.Message.Text == "E" || e.Message.Text == "F")
                 {
-                    string s = e.Message.Text;
-                    List<int> a = DataGenerator.GetTaskList(_users, s);
-                    string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";
+                    var s = e.Message.Text;
+                    var a = _group.TaskPackList.First(pack => pack.GroupTitle == s);
+
+                    //TODO: user Group.GetPackResult
+                    //string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";
+                    var g = string.Empty;
 
                     Bot.SendTextMessageAsync(e.Message.Chat.Id, g, ParseMode.Html).Wait();
                     Console.WriteLine("good");
@@ -91,12 +97,11 @@ namespace ElimpParse.TelegramBot
         public static string GenerateMessage(List<ElimpUser> users, bool isHtml)
         {
             foreach (var user in users)
-            {
-                user.CompletedTaskCount = Parser.CompletedTaskCount(user.Login);
-            }
+                Parser.LoadUserData(user);
+            //user = Parser.CompletedTaskCount(user.Login);
 
 
-            var sorted = users.OrderByDescending(e => e.CompletedTaskCount).ToList();
+            var sorted = users.OrderByDescending(e => e.CompletedTaskCount()).ToList();
             var res = sorted.Aggregate("", (s1, user) => s1 + $"<code>{FormatPrint.TelegramFormat(user)}</code>\n");
             //string s = "";
             //for (var i = 0; i < sorted.Count; i++)
