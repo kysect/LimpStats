@@ -25,7 +25,7 @@ namespace ElimpParse.Core
             {
                 var taskString = string.Join(" ", result.TaskResultList);
                 var fullString = $"{result.User.Login,-15}: {taskString}";
-                if (result.IsFullCorrect) fullString += $"| (+{taskPack.FullSolutionPoints})";
+                if (result.IsFullCorrect) fullString += $"| (+{taskPack.FullSolutionPoints ?? 0})";
                 output.Add(fullString);
             }
 

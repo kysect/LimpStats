@@ -31,12 +31,12 @@ namespace ElimpParse.DatabaseProvider
             };
 
             var group = new StudyGroup(users);
-            group.TaskPackList.Add(new TaskGroupInfo("A", TaskPackStorage.TasksAGroup));
-            group.TaskPackList.Add(new TaskGroupInfo("B", TaskPackStorage.TasksBGroup));
-            group.TaskPackList.Add(new TaskGroupInfo("C", TaskPackStorage.TasksCGroup));
-            group.TaskPackList.Add(new TaskGroupInfo("D", TaskPackStorage.TasksDGroup));
-            group.TaskPackList.Add(new TaskGroupInfo("E", TaskPackStorage.TasksEGroup));
-            group.TaskPackList.Add(new TaskGroupInfo("F", TaskPackStorage.TasksFGroup));
+            group.TaskPackList.Add(new TaskGroupInfo("A", TaskPackStorage.TasksAGroup, 3));
+            group.TaskPackList.Add(new TaskGroupInfo("B", TaskPackStorage.TasksBGroup, 3));
+            group.TaskPackList.Add(new TaskGroupInfo("C", TaskPackStorage.TasksCGroup, 3));
+            group.TaskPackList.Add(new TaskGroupInfo("D", TaskPackStorage.TasksDGroup, 3));
+            group.TaskPackList.Add(new TaskGroupInfo("E", TaskPackStorage.TasksEGroup, 3));
+            group.TaskPackList.Add(new TaskGroupInfo("F", TaskPackStorage.TasksFGroup, 3));
 
             return group;
         }
