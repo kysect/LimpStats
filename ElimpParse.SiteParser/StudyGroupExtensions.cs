@@ -4,9 +4,38 @@ using ElimpParse.Model;
 
 namespace ElimpParse.Core
 {
-    public static class GroupExtensions
+    public static class StudyGroupExtensions
     {
-        public static List<(ElimpUser user, int count)> GetEachUserTaskCount(this StudyGroup group)
+        public static void LoadStudentsResults(this StudyGroup group)
+        {
+            foreach (var user in group.UserList)
+            {
+                Parser.LoadUserData(user);
+            }
+        }
+
+        public static void LoadStudentsResultMultiThread(this StudyGroup group)
+        {
+            MultiThreadParser.MakeMultiThreadExecute(group.UserList, Parser.LoadUserData);
+        }
+
+        public static List<(ElimpUser, int)> GetTaskCountMultiThread(this StudyGroup group)
+        {
+            return MultiThreadParser.GetCountParallel(group.UserList);
+        }
+
+        public static List<(ElimpUser user, int count)> LoadTaskCount(this StudyGroup group)
+        {
+            var result = new List<(ElimpUser user, int count)>();
+            foreach (var user in group.UserList)
+            {
+                result.Add((user, Parser.CompletedTaskCount(user.Login)));
+            }
+
+            return result;
+        }
+
+        public static List<(ElimpUser user, int count)> GetTaskCount(this StudyGroup group)
         {
             var result = new List<(ElimpUser user, int count)>();
             foreach (var user in group.UserList) result.Add((user, user.CompletedTaskCount()));

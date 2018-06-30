@@ -2,6 +2,7 @@
 
 namespace ElimpParse.Model
 {
+    //TODO: rename coz StudyGroup/TaskGroup
     public class TaskGroupInfo
     {
         public TaskGroupInfo(string groupTitle, List<int> taskIdList)
