@@ -20,9 +20,9 @@ namespace ElimpParse.Core
 
             foreach (var result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
-                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, -3}"));
-                var additionalPoints = $"| (+{result.AdditionalPoints})";
-                var totalCount = $" | ({result.ProblemResultList.Sum() + result.AdditionalPoints, 3})";
+                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, 3}"));
+                var additionalPoints = $"| (+{result.AdditionalPoints, 3})";
+                var totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints, 5}";
                 var fullString = $"{result.User.Login,-15}:{taskString}{additionalPoints}{totalCount}";
 
 
