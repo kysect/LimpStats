@@ -29,5 +29,19 @@ namespace ElimpParse.Model
         {
             return $"{Login}";
         }
+
+        public override int GetHashCode()
+        {
+            return Login.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ElimpUser user)
+            {
+                return user.Login == Login;
+            }
+            return false;
+        }
     }
 }

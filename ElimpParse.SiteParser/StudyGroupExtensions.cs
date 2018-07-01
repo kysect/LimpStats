@@ -42,24 +42,22 @@ namespace ElimpParse.Core
             return result;
         }
 
-        public static List<List<UserPackResult>> GetAllPackResult(this StudyGroup group)
+        public static List<(ProblemPackInfo pack, List<ProblemPackResult> results)> GetAllPackResult(this StudyGroup group)
         {
-            var result = new List<List<UserPackResult>>();
-            foreach (var taskPack in group.TaskPackList) result.Add(group.GetPackResult(taskPack));
-
+            var result = new List<(ProblemPackInfo, List<ProblemPackResult>)>();
+            foreach (var taskPack in group.ProblemPackList)
+            {
+                result.Add((taskPack, group.GetPackResult(taskPack)));
+            }
             return result;
         }
 
-        public static List<UserPackResult> GetPackResult(this StudyGroup group, TaskGroupInfo taskPack)
+        public static List<ProblemPackResult> GetPackResult(this StudyGroup group, ProblemPackInfo taskPack)
         {
-            var allPackResult = new List<UserPackResult>();
+            var allPackResult = new List<ProblemPackResult>();
             foreach (var user in group.UserList)
             {
-                var userResult = new List<int>();
-                foreach (var taskId in taskPack.TaskIdList) userResult.Add(user.UserProfileResult[taskId]);
-                var isFull = userResult.All(res => res == 100);
-
-                allPackResult.Add(new UserPackResult(user, userResult, isFull));
+                allPackResult.Add(new ProblemPackResult(user, taskPack));
             }
 
             return allPackResult;

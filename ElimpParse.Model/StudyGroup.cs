@@ -11,18 +11,21 @@ namespace ElimpParse.Model
         public StudyGroup(List<ElimpUser> userList)
         {
             UserList = userList;
-            TaskPackList = new List<TaskGroupInfo>();
+            ProblemPackList = new List<ProblemPackInfo>();
         }
 
         public StudyGroup(List<string> usernameList)
         {
-            TaskPackList = new List<TaskGroupInfo>();
             UserList = new List<ElimpUser>(usernameList.Count);
+            ProblemPackList = new List<ProblemPackInfo>();
 
-            foreach (var username in usernameList) UserList.Add(new ElimpUser(username));
+            foreach (var username in usernameList)
+            {
+                UserList.Add(new ElimpUser(username));
+            }
         }
 
         public List<ElimpUser> UserList { get; set; }
-        public List<TaskGroupInfo> TaskPackList { get; set; }
+        public List<ProblemPackInfo> ProblemPackList { get; set; }
     }
 }
