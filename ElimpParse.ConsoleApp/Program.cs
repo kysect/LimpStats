@@ -22,15 +22,34 @@ namespace ElimpParse.ConsoleApp
             //     new ElimpUser("vlad986523", "II место на городе")
             // };
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
+            group.LoadStudentsResultMultiThread();
+            var result = group.GetAllPackResult();
 
-            foreach (var user in group.UserList)
+
+            var list = result.SelectMany(l => l.results)
+                .GroupBy(l => l.User)
+                .Select(gr => (gr.Key.Login, gr.Sum(g => g.TotalPoints)))
+                .OrderByDescending(t => t.Item2);
+
+            foreach (var tuple in list)
             {
-                Parser.CompletedTaskCount(user.Login);
+                Console.WriteLine($"{tuple.Item1, -15}: {tuple.Item2, -5}");
             }
-            group.GetTaskCountMultiThread();
         }
 
-        private static void GetInfo()
+        private static void LoadAllPackInfo()
+        {
+            StudyGroup group = DataGenerator.GenerateTemplateGroup();
+            group.LoadStudentsResultMultiThread();
+
+            var result = group.GetAllPackResult();
+            foreach (var (pack, results) in group.GetAllPackResult())
+            {
+                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(pack, results)));
+            }
+        }
+
+        private static void LoadStudentsCountInfo()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
 
@@ -43,19 +62,7 @@ namespace ElimpParse.ConsoleApp
 
             foreach (var elimpUser in group.UserList.OrderByDescending(u => u.CompletedTaskCount()))
             {
-                Console.WriteLine(FormatPrint.ConsoleTaskCountFormat(elimpUser));
-            }
-        }
-
-        private static void TaskPackTimeTest(StudyGroup group)
-        {
-            Stopwatch watch = new Stopwatch();
-            group.LoadStudentsResults();
-
-            foreach (var taskPack in group.TaskPackList)
-            {
-                var res = FormatPrint.ConsoleTaskListFormat(group, taskPack);
-                Console.WriteLine(string.Join("\n", res));
+                Console.WriteLine(FormatPrint.GenerateCountResultData(elimpUser));
             }
         }
     }

@@ -77,7 +77,7 @@ namespace ElimpParse.TelegramBot
                     e.Message.Text == "E" || e.Message.Text == "F")
                 {
                     var s = e.Message.Text;
-                    var a = _group.TaskPackList.First(pack => pack.GroupTitle == s);
+                    var a = _group.ProblemPackList.First(pack => pack.PackTitle == s);
 
                     //TODO: user Group.GetPackResult
                     //string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";

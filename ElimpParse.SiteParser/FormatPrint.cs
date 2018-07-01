@@ -7,25 +7,25 @@ namespace ElimpParse.Core
 {
     public class FormatPrint
     {
-        //TODO: rename (and remake) to GenerateTaskCountData
-        public static string ConsoleTaskCountFormat(ElimpUser user)
+        public static string GenerateCountResultData(ElimpUser user)
         {
             if (user.Title != null)
                 return $"{user.Login + " [" + user.Title + "]",-40} ({user.CompletedTaskCount()})";
             return $"{user.Login,-40} ({user.CompletedTaskCount()})";
         }
 
-        //TODO: rename (and remake) to GenerateTaskPackResultData
-        public static List<string> ConsoleTaskListFormat(StudyGroup group, TaskGroupInfo taskPack)
+        public static List<string> GeneratePackResultData(ProblemPackInfo pack, List<ProblemPackResult> results)
         {
             var output = new List<string>();
-            var userResultList = group.GetPackResult(taskPack);
 
-            foreach (var result in userResultList)
+            foreach (var result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
-                var taskString = string.Join(" ", result.TaskResultList);
-                var fullString = $"{result.User.Login,-15}: {taskString}";
-                if (result.IsFullCorrect) fullString += $"| (+{taskPack.FullSolutionPoints ?? 0})";
+                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, -3}"));
+                var additionalPoints = $"| (+{result.AdditionalPoints})";
+                var totalCount = $" | ({result.ProblemResultList.Sum() + result.AdditionalPoints, 3})";
+                var fullString = $"{result.User.Login,-15}:{taskString}{additionalPoints}{totalCount}";
+
+
                 output.Add(fullString);
             }
 
