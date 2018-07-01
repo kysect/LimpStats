@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElimpParse.ConsoleApp", "El
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElimpParse.TelegramBot", "ElimpParse.TelegramBot\ElimpParse.TelegramBot.csproj", "{C0A439DF-ED39-4C12-9C40-133C923E2DC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElimpParse.WebApp", "ElimpParse.WebApp\ElimpParse.WebApp.csproj", "{B0859DC5-79CB-4DD0-BCBC-96CD3B9F7967}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C0A439DF-ED39-4C12-9C40-133C923E2DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0A439DF-ED39-4C12-9C40-133C923E2DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0A439DF-ED39-4C12-9C40-133C923E2DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0859DC5-79CB-4DD0-BCBC-96CD3B9F7967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0859DC5-79CB-4DD0-BCBC-96CD3B9F7967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0859DC5-79CB-4DD0-BCBC-96CD3B9F7967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0859DC5-79CB-4DD0-BCBC-96CD3B9F7967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
