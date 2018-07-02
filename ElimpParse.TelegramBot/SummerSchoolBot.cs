@@ -7,6 +7,7 @@ using ElimpParse.Model;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
+using ElimpParse.DatabaseProvider.repositories;
 
 namespace ElimpParse.TelegramBot
 {
@@ -92,7 +93,20 @@ namespace ElimpParse.TelegramBot
                 //   Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_users, false), ParseMode.Default, false, false, 0,  rkm);
                 Console.WriteLine("good");
             }
+
+            if (e.Message.Text.Contains("/adduser"))
+            {
+                var User = e.Message.Text.Replace("/adduser -", "");
+                var elimpUser = new ElimpUser(User);
+                Parser.LoadUserData(elimpUser);
+                foreach (KeyValuePair<int, int> valuePair in elimpUser.UserProfileResult)
+                {
+                    UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
+                }
+            }
+
         }
+
 
         public static string GenerateMessage(List<ElimpUser> users, bool isHtml)
         {
