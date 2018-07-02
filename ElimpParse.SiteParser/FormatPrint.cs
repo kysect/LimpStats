@@ -2,6 +2,9 @@
 using System.Linq;
 using ElimpParse.DatabaseProvider;
 using ElimpParse.Model;
+using Newtonsoft.Json;
+using  System;
+using System.IO;
 
 namespace ElimpParse.Core
 {
@@ -13,7 +16,10 @@ namespace ElimpParse.Core
                 return $"{user.Login + " [" + user.Title + "]",-40} ({user.CompletedTaskCount()})";
             return $"{user.Login,-40} ({user.CompletedTaskCount()})";
         }
-
+        public static (string, int) GenerateCountResultDataForDB(ElimpUser user)
+        {
+            return (user.Login, user.CompletedTaskCount());
+        }
         public static List<string> GeneratePackResultData(ProblemPackInfo pack, List<ProblemPackResult> results)
         {
             var output = new List<string>();
@@ -21,17 +27,17 @@ namespace ElimpParse.Core
             foreach (var result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
                 var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, 3}"));
+                
                 var additionalPoints = $"| (+{result.AdditionalPoints, 3})";
                 var totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints, 5}";
                 var fullString = $"{result.User.Login,-15}:{taskString}{additionalPoints}{totalCount}";
 
 
                 output.Add(fullString);
+                
             }
-
             return output;
         }
-
         public static string WebFormat(ElimpUser user)
         {
             //TODO: refactoring

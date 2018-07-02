@@ -24,7 +24,7 @@ namespace ElimpParse.DatabaseProvider
                 new ElimpUser("v_7946"),
                 new ElimpUser("Versuzzz"),
                 //new ElimpUser("Xsqten"),
-                new ElimpUser("Enosha", "Так и не взял всеукр"),
+                new ElimpUser("Enosha"),
                 new ElimpUser("tur4ik"),
                 new ElimpUser("DiMaNsKi"),
                 new ElimpUser("cerepawka")
