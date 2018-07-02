@@ -62,13 +62,13 @@ namespace ElimpParse.DatabaseProvider.repositories
             }
            
         }
-        public static void UpdateAllInfoDB(string username, string taskid, int res)
+        public static void UpdateAllInfoDB(string username, int taskid, int res)
         {
             try
             {
                 connection.Open();
                 string sqlExpression =
-                    String.Format("UPDATE AllInfo SET taskid={0}, res={1} WHERE username='{2}'", taskid, res, username);
+                    String.Format("INSERT INTO AllInfo (taskid, res, username) VALUES ({0}, {1}, '{2}')", taskid, res, username);
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandText = sqlExpression;
                 command.ExecuteNonQuery();
@@ -81,7 +81,7 @@ namespace ElimpParse.DatabaseProvider.repositories
             {
                 // закрываем подключение
                 connection.Close();
-                Console.WriteLine("Подключение закрыто...");
+          //      Console.WriteLine("Подключение закрыто...");
             }
 
         }
