@@ -47,7 +47,7 @@ namespace ElimpParse.Core
             var result = new List<(ProblemPackInfo, List<ProblemPackResult>)>();
             foreach (var taskPack in group.ProblemPackList)
             {
-                result.Add((taskPack, group.GetPackResult(taskPack)));
+                result.Add((taskPack, group.GetPackResult(taskPack).OrderByDescending(r => r.TotalPoints).ToList()));
             }
             return result;
         }
@@ -59,7 +59,6 @@ namespace ElimpParse.Core
             {
                 allPackResult.Add(new ProblemPackResult(user, taskPack));
             }
-
             return allPackResult;
         }
     }
