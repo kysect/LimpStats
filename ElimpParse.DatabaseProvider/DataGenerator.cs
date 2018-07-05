@@ -30,6 +30,7 @@ namespace ElimpParse.DatabaseProvider
                 new ElimpUser("cerepawka")
             };
 
+            //TODO: Разные баллы за паки
             var group = new StudyGroup(users);
             group.ProblemPackList.Add(new ProblemPackInfo("A", TaskPackStorage.TasksAGroup, 300));
             group.ProblemPackList.Add(new ProblemPackInfo("B", TaskPackStorage.TasksBGroup, 300));
@@ -39,6 +40,19 @@ namespace ElimpParse.DatabaseProvider
             group.ProblemPackList.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 300));
 
             return group;
+        }
+
+        private List<ElimpUser> GetOldGeneration()
+        {
+            return new List<ElimpUser>
+             {
+                 new ElimpUser("Strannik", "II место на области"),
+                 new ElimpUser("iNooByX", "III место на области"),
+                 new ElimpUser("Maxkolpak", "III место на городе"),
+                 new ElimpUser("krab397", "III место на облати"),
+                 new ElimpUser("i4happy", "I место на городе"),
+                 new ElimpUser("vlad986523", "II место на городе")
+             };
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ElimpParse.Core
 {
     public static class StudyGroupExtensions
     {
+        //TODO: заархивировать, есть многопоточный
         public static void LoadStudentsResults(this StudyGroup group)
         {
             foreach (var user in group.UserList)
@@ -19,6 +20,7 @@ namespace ElimpParse.Core
             MultiThreadParser.MakeMultiThreadExecute(group.UserList, Parser.LoadUserData);
         }
 
+        //TODO: Нужен ли, если грузит на ~2% быстрее толькo
         public static List<(ElimpUser, int)> GetTaskCountMultiThread(this StudyGroup group)
         {
             return MultiThreadParser.GetCountParallel(group.UserList);
@@ -35,6 +37,7 @@ namespace ElimpParse.Core
             return result;
         }
 
+        //TODO: как-то обяснить нам разницу, что один метод уже на готовых данных работает, а второй отправляет запрос
         public static List<(ElimpUser user, int count)> GetTaskCount(this StudyGroup group)
         {
             var result = new List<(ElimpUser user, int count)>();
@@ -42,6 +45,7 @@ namespace ElimpParse.Core
             return result;
         }
 
+        //TODO: убрать pack? Возвращаться просто лист<лист>?
         public static List<(ProblemPackInfo pack, List<ProblemPackResult> results)> GetAllPackResult(this StudyGroup group)
         {
             var result = new List<(ProblemPackInfo, List<ProblemPackResult>)>();

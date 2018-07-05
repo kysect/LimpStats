@@ -33,8 +33,6 @@ namespace ElimpParse.Core
                 .GetElementbyId("punch-card")
                 .ChildNodes;
 
-            //TODO: test
-            //TODO: user regular-expression
             var userResult = nodeList.Where(n => n.GetAttributeValue("href", "empty") != "empty")
                 .Where(n => n.Attributes["href"].Value.Substring(0, 13) == "/ru/problems/")
                 .Select(n => (TaskIdFromLink(n.Attributes["href"].Value), TitleToResult(n.Attributes["title"].Value)))
