@@ -9,18 +9,7 @@ namespace ElimpParse.Core
 {
     public static class MultiThreadParser
     {
-        //public static void LoadUserGroupData(List<ElimpUser> userList)
-        //{
-        //    List<Task> taskList = new List<Task>();
-        //    foreach (var user in userList)
-        //    {
-        //        //Console.WriteLine($"try {user.Login}");
-        //        taskList.Add(Task.Run(() => TryLoad(user, Parser.LoadUserData)));
-        //    }
-
-        //    Task.WaitAll(taskList.ToArray());
-        //}
-
+        //TODO: убрать Action, нормлаьно реализовать нужный метод
         public static void MakeMultiThreadExecute(List<ElimpUser> userList, Action<ElimpUser> action)
         {
             var taskList = new List<Task>();

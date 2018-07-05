@@ -51,7 +51,6 @@ namespace ElimpParse.DatabaseProvider
             11,
             125
         };
-
         public static readonly List<int> TasksDGroup = new List<int>
         {
             2,
@@ -80,12 +79,12 @@ namespace ElimpParse.DatabaseProvider
 
         public static readonly List<int> TasksFGroup = new List<int>
         {
-            922,
-            2098,
-            4760,
-            1952,
-            1965,
-            7402
+            494,
+            928,
+            4725,
+            1123,
+            1151,
+            5083
         };
     }
 }

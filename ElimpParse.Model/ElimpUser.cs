@@ -24,6 +24,8 @@ namespace ElimpParse.Model
             return UserProfileResult.Count(t => t.Value == 100);
         }
 
+        #region inheritance
+
         public override string ToString()
         {
             return $"{Login}";
@@ -42,5 +44,7 @@ namespace ElimpParse.Model
             }
             return false;
         }
+        #endregion
+
     }
 }
