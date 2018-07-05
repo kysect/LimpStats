@@ -16,15 +16,15 @@ namespace ElimpParse.DatabaseProvider
                 new ElimpUser("Koteika"),
                 new ElimpUser("liza.898"),
                 new ElimpUser("Mr.Hovik"),
-                new ElimpUser("NastyaVadko284"),
+                //new ElimpUser("NastyaVadko284"),
                 //new ElimpUser("papercut6820"),
-                new ElimpUser("Pozitiv4ik"),
+                //new ElimpUser("Pozitiv4ik"),
                 //new ElimpUser("prostoroma"),
                 new ElimpUser("Swoop"),
-                new ElimpUser("v_7946"),
+                //new ElimpUser("v_7946"),
                 new ElimpUser("Versuzzz"),
                 //new ElimpUser("Xsqten"),
-                new ElimpUser("Enosha"),
+                //new ElimpUser("Enosha"),
                 new ElimpUser("tur4ik"),
                 new ElimpUser("DiMaNsKi"),
                 new ElimpUser("cerepawka")
@@ -37,7 +37,7 @@ namespace ElimpParse.DatabaseProvider
             group.ProblemPackList.Add(new ProblemPackInfo("C", TaskPackStorage.TasksCGroup, 300));
             group.ProblemPackList.Add(new ProblemPackInfo("D", TaskPackStorage.TasksDGroup, 300));
             group.ProblemPackList.Add(new ProblemPackInfo("E", TaskPackStorage.TasksEGroup, 300));
-            group.ProblemPackList.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 300));
+            group.ProblemPackList.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 0));
 
             return group;
         }
