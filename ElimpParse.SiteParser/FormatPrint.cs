@@ -19,23 +19,22 @@ namespace ElimpParse.Core
         }
 
         //TODO: ??? Это не логика формати принта, выноситб
-        public static (string, int) GenerateCountResultDataForDB(ElimpUser user)
+        public static (string, int) GenerateCountResultDataForDb(ElimpUser user)
         {
             return (user.Login, user.CompletedTaskCount());
         }
 
 
-        public static List<string> GeneratePackResultData(ProblemPackInfo pack, List<ProblemPackResult> results)
+        public static List<string> GeneratePackResultData(List<ProblemPackResult> results)
         {
             var output = new List<string>();
 
             foreach (var result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
-                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, 3}"));
-                
+                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, 5}"));
                 var additionalPoints = $"| (+{result.AdditionalPoints, 3})";
                 var totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints, 5}";
-                var fullString = $"{result.User.Login,-15}:{taskString}{additionalPoints}{totalCount}";
+                var fullString = $"{result.Username,-15}:{taskString}{additionalPoints}{totalCount}";
 
 
                 output.Add(fullString);

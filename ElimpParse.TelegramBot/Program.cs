@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ElimpParse.DatabaseProvider;
-using ElimpParse.DatabaseProvider.repositories;
+using ElimpParse.DatabaseProvider.Repositories;
 using Telegram.Bot.Types;
 using ElimpParse.Core;
 using ElimpParse.Model;

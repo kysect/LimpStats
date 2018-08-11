@@ -48,7 +48,6 @@ namespace ElimpParse.DatabaseProvider
             407,
             904,
             2218,
-            11,
             125
         };
         public static readonly List<int> TasksDGroup = new List<int>

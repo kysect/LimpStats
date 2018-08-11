@@ -11,7 +11,7 @@ namespace ElimpParse.Model
 
         public ProblemPackResult(ElimpUser user, ProblemPackInfo problemPack)
         {
-            User = user;
+            Username = user.Login;
             Problems = problemPack;
 
             var resultList = new List<int>();
@@ -24,9 +24,9 @@ namespace ElimpParse.Model
         }
 
         //TODO: возможно заменить ElimpUser на Username
-        public ElimpUser User { get; set; }
+        public string Username { get; set; }
         public List<int> ProblemResultList { get; set; }
-        public ProblemPackInfo Problems { get; }
+        public ProblemPackInfo Problems { get; set; }
         public int AdditionalPoints => ProblemResultList.All(res => res == 100) ? Problems.FullSolutionPoints : 0;
         public int TotalPoints => ProblemResultList.Sum() + (AdditionalPoints);
     }

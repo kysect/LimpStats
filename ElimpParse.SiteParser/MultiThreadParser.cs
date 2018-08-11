@@ -20,7 +20,7 @@ namespace ElimpParse.Core
             Task.WaitAll(taskList.ToArray());
         }
 
-        public static List<(ElimpUser, int)> GetCountParallel(List<ElimpUser> userList)
+        public static List<(ElimpUser, int)> LoadProblemsCount(List<ElimpUser> userList)
         {
             (ElimpUser, int) RecursiveExecute(ElimpUser user)
             {
@@ -28,19 +28,14 @@ namespace ElimpParse.Core
                 {
                     return (user, Parser.CompletedTaskCount(user.Login));
                 }
-                catch (Exception e)
+                catch
                 {
                     return RecursiveExecute(user);
                 }
             }
 
-            var taskList = new List<Task<(ElimpUser, int)>>();
-            foreach (var user in userList)
-            {
-                taskList.Add(Task.Run(() => RecursiveExecute(user)));
-            }
-            Task.WaitAll(taskList.ToArray());
-            return taskList.Select(t => t.Result).ToList();
+            var res = userList.AsParallel().Select(RecursiveExecute).ToList();
+            return res;
         }
 
         private static void TryLoad(ElimpUser user, Action<ElimpUser> action)

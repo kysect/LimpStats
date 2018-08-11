@@ -12,21 +12,37 @@ namespace ElimpParse.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //LoadStudentsCountInfo();
-            //AllPackInfo();
-            LoadAllPackInfo();
+            //var oldPlayers = new List<ElimpUser>
+            // {
+            //     new ElimpUser("Strannik", "II место на области"),
+            //     new ElimpUser("iNooByX", "III место на области"),
+            //     new ElimpUser("Maxkolpak", "III место на городе"),
+            //     new ElimpUser("krab397", "III место на облати"),
+            //     new ElimpUser("i4happy", "I место на городе"),
+            //     new ElimpUser("vlad986523", "II место на городе")
+            // };
+            StudyGroup group = DataGenerator.GenerateTemplateGroup();
+            group.LoadStudentsResult();
+
+            FinalTest(group);
+            LoadTotalPoints(group);
+            LoadAllPackInfo(group);
         }
 
-        private static void AllPackInfo()
+        private static void FinalTest(StudyGroup group)
         {
-            StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResultMultiThread();
+            var res = group.GetPackResult(group.ProblemPackList.Last());
+            Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(res)));
+        }
+
+        private static void LoadTotalPoints(StudyGroup group)
+        {
             var result = group.GetAllPackResult();
 
 
-            var list = result.SelectMany(l => l.results)
-                .GroupBy(l => l.User)
-                .Select(gr => (gr.Key.Login, gr.Sum(g => g.TotalPoints)))
+            var list = result.SelectMany(l => l)
+                .GroupBy(l => l.Username)
+                .Select(gr => (gr.Key, gr.Sum(g => g.TotalPoints)))
                 .OrderByDescending(t => t.Item2);
 
             foreach (var tuple in list)
@@ -35,15 +51,12 @@ namespace ElimpParse.ConsoleApp
             }
         }
 
-        private static void LoadAllPackInfo()
+        private static void LoadAllPackInfo(StudyGroup group)
         {
-            StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResultMultiThread();
-
             var result = group.GetAllPackResult();
-            foreach (var (pack, results) in group.GetAllPackResult())
+            foreach (var results in group.GetAllPackResult())
             {
-                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(pack, results)));
+                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(results)));
                 Console.WriteLine("\n\n");
             }
         }
@@ -51,7 +64,7 @@ namespace ElimpParse.ConsoleApp
         private static void LoadStudentsCountInfo()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResultMultiThread();
+            group.LoadStudentsResult();
 
             foreach (var elimpUser in group.UserList.OrderByDescending(u => u.CompletedTaskCount()))
             {
