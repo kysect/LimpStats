@@ -7,15 +7,13 @@ using ElimpParse.Model;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using ElimpParse.DatabaseProvider.repositories;
+using ElimpParse.DatabaseProvider.Repositories;
 
 namespace ElimpParse.TelegramBot
 {
     public class SummerSchoolBot
     {
         public static bool flag;
-        private static readonly string _tMaze = "557358914:AAE03Faw9-BwKFygJHFMl530FiGH9sPvB6Y";
-        private static string _SSB = "574977062:AAHC1xLdYfEtZ8EYQYuprhAi3DJYDhcgeGw";
         private readonly StudyGroup _group;
         public readonly TelegramBotClient Bot;
         private bool _flag = true;
@@ -23,7 +21,7 @@ namespace ElimpParse.TelegramBot
         public SummerSchoolBot(StudyGroup group)
         {
             _group = group;
-            Bot = new TelegramBotClient(_tMaze);
+            Bot = new TelegramBotClient(Config.MazeBotToken);
             Bot.OnMessage += OnNewMessage;
 
             Bot.StartReceiving();
@@ -101,7 +99,7 @@ namespace ElimpParse.TelegramBot
                 Parser.LoadUserData(elimpUser);
                 foreach (KeyValuePair<int, int> valuePair in elimpUser.UserProfileResult)
                 {
-                    UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
+                    //UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
                 }
 
             }

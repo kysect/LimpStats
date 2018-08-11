@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using ElimpParse.Model;
 using Newtonsoft.Json;
 
-namespace ElimpParse.DatabaseProvider.repositories
+namespace ElimpParse.DatabaseProvider.Repositories
 {
     public class UserRepositoriy
     {
-        public const string connectionString =
+        public const string ConnectionString =
             @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=_telegramDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public void Create(ElimpUser user, int taskId)
         {
             //TODO: дописать
-            using (var connect = new SqlConnection(connectionString))
+            using (var connect = new SqlConnection(ConnectionString))
             {
                 string sqlExpression =
                     String.Format("INSERT INTO AllInfo (taskid, res, username) VALUES ({0}, {1}, '{2}')", taskId, user.UserProfileResult, user.Login);
@@ -48,7 +48,7 @@ namespace ElimpParse.DatabaseProvider.repositories
         public void Update(ElimpUser user, List<int> taskpack)
         {
             //TODO: дописать
-            using (var connect = new SqlConnection(connectionString))
+            using (var connect = new SqlConnection(ConnectionString))
             {
                 string sqlExpression = "";
 

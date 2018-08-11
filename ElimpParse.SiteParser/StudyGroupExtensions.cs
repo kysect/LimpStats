@@ -6,52 +6,22 @@ namespace ElimpParse.Core
 {
     public static class StudyGroupExtensions
     {
-        //TODO: заархивировать, есть многопоточный
-        public static void LoadStudentsResults(this StudyGroup group)
-        {
-            foreach (var user in group.UserList)
-            {
-                Parser.LoadUserData(user);
-            }
-        }
-
-        public static void LoadStudentsResultMultiThread(this StudyGroup group)
+        public static void LoadStudentsResult(this StudyGroup group)
         {
             MultiThreadParser.MakeMultiThreadExecute(group.UserList, Parser.LoadUserData);
         }
 
-        //TODO: Нужен ли, если грузит на ~2% быстрее толькo
-        public static List<(ElimpUser, int)> GetTaskCountMultiThread(this StudyGroup group)
+        public static List<(ElimpUser, int)> LoadTaskCountMultiThread(this StudyGroup group)
         {
-            return MultiThreadParser.GetCountParallel(group.UserList);
+            return MultiThreadParser.LoadProblemsCount(group.UserList);
         }
 
-        public static List<(ElimpUser user, int count)> LoadTaskCount(this StudyGroup group)
+        public static List<List<ProblemPackResult>> GetAllPackResult(this StudyGroup group)
         {
-            var result = new List<(ElimpUser user, int count)>();
-            foreach (var user in group.UserList)
-            {
-                result.Add((user, Parser.CompletedTaskCount(user.Login)));
-            }
-
-            return result;
-        }
-
-        //TODO: как-то обяснить нам разницу, что один метод уже на готовых данных работает, а второй отправляет запрос
-        public static List<(ElimpUser user, int count)> GetTaskCount(this StudyGroup group)
-        {
-            var result = new List<(ElimpUser user, int count)>();
-            foreach (var user in group.UserList) result.Add((user, user.CompletedTaskCount()));
-            return result;
-        }
-
-        //TODO: убрать pack? Возвращаться просто лист<лист>?
-        public static List<(ProblemPackInfo pack, List<ProblemPackResult> results)> GetAllPackResult(this StudyGroup group)
-        {
-            var result = new List<(ProblemPackInfo, List<ProblemPackResult>)>();
+            var result = new List<List<ProblemPackResult>>();
             foreach (var taskPack in group.ProblemPackList)
             {
-                result.Add((taskPack, group.GetPackResult(taskPack).OrderByDescending(r => r.TotalPoints).ToList()));
+                result.Add(group.GetPackResult(taskPack).OrderByDescending(r => r.TotalPoints).ToList());
             }
             return result;
         }
