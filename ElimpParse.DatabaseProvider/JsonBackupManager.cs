@@ -14,10 +14,6 @@ namespace ElimpParse.DatabaseProvider
         {
             var jsonString = JsonConvert.SerializeObject(users);
 
-#if DEBUG
-            Console.WriteLine(jsonString);
-#endif
-
             using (var streamWriter = new StreamWriter(FilePath, false))
             {
                 streamWriter.WriteLine(jsonString);

@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using ElimpParse.Core;
 using ElimpParse.DatabaseProvider;
+using ElimpParse.DatabaseProvider.Models;
+using ElimpParse.DatabaseProvider.Repositories;
 using ElimpParse.Model;
 
 namespace ElimpParse.ConsoleApp
@@ -12,35 +14,12 @@ namespace ElimpParse.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //var oldPlayers = new List<ElimpUser>
-            // {
-            //     new ElimpUser("Strannik", "II место на области"),
-            //     new ElimpUser("iNooByX", "III место на области"),
-            //     new ElimpUser("Maxkolpak", "III место на городе"),
-            //     new ElimpUser("krab397", "III место на облати"),
-            //     new ElimpUser("i4happy", "I место на городе"),
-            //     new ElimpUser("vlad986523", "II место на городе")
-            // };
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
             MultiThreadParser.LoadProfiles(group.UserList);
 
             FinalTest(group);
             LoadTotalPoints(group);
             LoadAllPackInfo(group);
-        }
-
-        private static void SpeedTest(StudyGroup group)
-        {
-            Stopwatch sw = new Stopwatch();
-
-            sw.Start();
-            MultiThreadParser.LoadProfiles(group.UserList);
-            Console.WriteLine(sw.Elapsed);
-            sw.Restart();
-
-            //MultiThreadParser.Test_LoadProfiles(group.UserList);
-            Console.WriteLine(sw.Elapsed);
-            Console.WriteLine("\n");
         }
 
         private static void FinalTest(StudyGroup group)
