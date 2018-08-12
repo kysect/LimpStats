@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,18 +8,24 @@ namespace ElimpParse.Core
 {
     public static class MultiThreadParser
     {
-        //TODO: убрать Action, нормлаьно реализовать нужный метод
-        public static void MakeMultiThreadExecute(List<ElimpUser> userList, Action<ElimpUser> action)
+        public static void LoadProfiles(IEnumerable<ElimpUser> userList)
         {
-            var taskList = new List<Task>();
-            foreach (var user in userList)
+            void TryLoad(ElimpUser user, Action<ElimpUser> action)
             {
-                taskList.Add(Task.Run(() => TryLoad(user, action)));
+                try
+                {
+                    action.Invoke(user);
+                }
+                catch
+                {
+                    TryLoad(user, action);
+                }
             }
-            Task.WaitAll(taskList.ToArray());
+
+            Parallel.ForEach(userList, u => TryLoad(u, Parser.LoadUserData));
         }
 
-        public static List<(ElimpUser, int)> LoadProblemsCount(List<ElimpUser> userList)
+        public static List<(ElimpUser, int)> LoadProblemsCount(IEnumerable<ElimpUser> userList)
         {
             (ElimpUser, int) RecursiveExecute(ElimpUser user)
             {
@@ -34,20 +39,7 @@ namespace ElimpParse.Core
                 }
             }
 
-            var res = userList.AsParallel().Select(RecursiveExecute).ToList();
-            return res;
-        }
-
-        private static void TryLoad(ElimpUser user, Action<ElimpUser> action)
-        {
-            try
-            {
-                action.Invoke(user);
-            }
-            catch (Exception e)
-            {
-                TryLoad(user, action);
-            }
+            return userList.AsParallel().Select(RecursiveExecute).ToList();
         }
     }
 }

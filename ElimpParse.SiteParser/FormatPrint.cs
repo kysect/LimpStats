@@ -8,22 +8,16 @@ using System.IO;
 
 namespace ElimpParse.Core
 {
-    public class FormatPrint
+    public static class FormatPrint
     {
-        //TODO: переписать метод, чтобы он работал не с User, а с StudyGroup
-        public static string GenerateCountResultData(ElimpUser user)
+        public static string GenerateCountResultData(StudyGroup group)
         {
-            if (user.Title != null)
-                return $"{user.Login + " [" + user.Title + "]",-40} ({user.CompletedTaskCount()})";
-            return $"{user.Login,-40} ({user.CompletedTaskCount()})";
+            return group
+                .UserList
+                .OrderByDescending(u => u.CompletedTaskCount())
+                .Select(u => $"{u.Login,-40} ({u.CompletedTaskCount()})")
+                .Aggregate((f, s) => $"{f}\n{s}");
         }
-
-        //TODO: ??? Это не логика формати принта, выноситб
-        public static (string, int) GenerateCountResultDataForDb(ElimpUser user)
-        {
-            return (user.Login, user.CompletedTaskCount());
-        }
-
 
         public static List<string> GeneratePackResultData(List<ProblemPackResult> results)
         {
@@ -38,7 +32,6 @@ namespace ElimpParse.Core
 
 
                 output.Add(fullString);
-                
             }
             return output;
         }

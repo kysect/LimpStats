@@ -13,9 +13,9 @@ namespace ElimpParse.TelegramBot
 {
     public class SummerSchoolBot
     {
-        public static bool flag;
         private readonly StudyGroup _group;
         public readonly TelegramBotClient Bot;
+        public static bool flag;
         private bool _flag = true;
 
         public SummerSchoolBot(StudyGroup group)
@@ -27,7 +27,7 @@ namespace ElimpParse.TelegramBot
             Bot.StartReceiving();
         }
 
-        public void OnNewMessage(object sender, MessageEventArgs e)
+        private void OnNewMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Type != MessageType.Text) return;
 
@@ -72,8 +72,12 @@ namespace ElimpParse.TelegramBot
                                  };*/
                 //&     Bot.OnMessage += OnNewMessage;
                 //   Bot.StartReceiving();
-                if (e.Message.Text == "A" || e.Message.Text == "B" || e.Message.Text == "C" || e.Message.Text == "D" ||
-                    e.Message.Text == "E" || e.Message.Text == "F")
+                if (e.Message.Text == "A"
+                    || e.Message.Text == "B"
+                    || e.Message.Text == "C"
+                    || e.Message.Text == "D"
+                    ||e.Message.Text == "E"
+                    || e.Message.Text == "F")
                 {
                     var s = e.Message.Text;
                     var a = _group.ProblemPackList.First(pack => pack.PackTitle == s);
@@ -86,7 +90,6 @@ namespace ElimpParse.TelegramBot
                     Console.WriteLine("good");
                     flag = false;
                 }
-                // Bot.StopReceiving();
 
                 //   Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_users, false), ParseMode.Default, false, false, 0,  rkm);
                 Console.WriteLine("good");
@@ -94,8 +97,9 @@ namespace ElimpParse.TelegramBot
 
             if (e.Message.Text.Contains("/adduser"))
             {
-                var User = e.Message.Text.Replace("/adduser -", "");
-                var elimpUser = new ElimpUser(User);
+                throw new NotImplementedException();
+                var username = e.Message.Text.Replace("/adduser -", "");
+                var elimpUser = new ElimpUser(username);
                 Parser.LoadUserData(elimpUser);
                 foreach (KeyValuePair<int, int> valuePair in elimpUser.UserProfileResult)
                 {
@@ -107,24 +111,13 @@ namespace ElimpParse.TelegramBot
         }
 
 
-        public static string GenerateMessage(List<ElimpUser> users, bool isHtml)
+        private static string GenerateMessage(List<ElimpUser> users, bool isHtml)
         {
-            foreach (var user in users)
-                Parser.LoadUserData(user);
-            //user = Parser.CompletedTaskCount(user.Login);
-
-
-            var sorted = users.OrderByDescending(e => e.CompletedTaskCount()).ToList();
-            var res = sorted.Aggregate("", (s1, user) => s1 + $"<code>{FormatPrint.TelegramFormat(user)}</code>\n");
-            //string s = "";
-            //for (var i = 0; i < sorted.Count; i++)
-            //{
-            //    s += $"<code>{sorted[i]}</code>\n"; // s += $"<code>{sorted[i]} ({Parsetxt(sorted[i])})</code>\n";
-            //    //    Console.WriteLine($"{sorted[i]}\n");
-
-            //}
-
-            return res;
+            users.ForEach(Parser.LoadUserData);
+            var res = users
+                .OrderByDescending(e => e.CompletedTaskCount())
+                .Select(FormatPrint.TelegramFormat);
+            return $"<code>{string.Join("\n", res)}</code>";
         }
     }
 }

@@ -11,36 +11,26 @@ namespace ElimpParse.WebApp
     {
         static void Main(string[] args)
         {
-            FinalTest();
+            var jsonData = FinalTest();
+            Console.WriteLine(jsonData);
         }
 
-        private static void LoadAllPackInfo()
+        private static string LoadAllPackInfo()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResult();
-
-            //var result = group.GetPackResult(group.ProblemPackList.First());
+            MultiThreadParser.LoadProfiles(group.UserList);
             var res = group.GetAllPackResult();
                     
-            var jsonString = JsonConvert.SerializeObject(res);
-            Console.WriteLine(jsonString);
+            return JsonConvert.SerializeObject(res);
         }
 
-        private static void FinalTest()
+        private static string FinalTest()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResult();
+            MultiThreadParser.LoadProfiles(group.UserList);
             var res = group.GetPackResult(group.ProblemPackList.Last());
-
-            foreach (var packResult in res)
-            {
-                if (packResult.ProblemResultList[0] == 27)
-                {
-                    packResult.ProblemResultList[0] = 100;
-                }
-            }
-            var jsonString = JsonConvert.SerializeObject(res);
-            Console.WriteLine(jsonString);
+            
+            return JsonConvert.SerializeObject(res);
         }
     }
 }
