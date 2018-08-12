@@ -23,7 +23,6 @@ namespace ElimpParse.Model
             ProblemResultList = resultList;
         }
 
-        //TODO: возможно заменить ElimpUser на Username
         public string Username { get; set; }
         public List<int> ProblemResultList { get; set; }
         public ProblemPackInfo Problems { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using ElimpParse.Model;
@@ -29,14 +30,14 @@ namespace ElimpParse.Core
             var client = new HtmlWeb();
             var link = $"https://www.e-olymp.com/ru/users/{user.Login}/punchcard";
 
-            var nodeList = client.Load(link)
+            Dictionary<int, int> userResult = client.Load(link)
                 .GetElementbyId("punch-card")
-                .ChildNodes;
-
-            var userResult = nodeList.Where(n => n.GetAttributeValue("href", "empty") != "empty")
+                .ChildNodes
+                .Where(n => n.GetAttributeValue("href", "empty") != "empty")
                 .Where(n => n.Attributes["href"].Value.Substring(0, 13) == "/ru/problems/")
-                .Select(n => (TaskIdFromLink(n.Attributes["href"].Value), TitleToResult(n.Attributes["title"].Value)))
+                .Select(n => (TaskIdFromLink(n.Attributes["href"].Value),TitleToResult(n.Attributes["title"].Value)))
                 .ToDictionary(pair => pair.Item1, pair => pair.Item2);
+
             user.UserProfileResult = userResult;
         }
 

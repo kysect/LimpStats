@@ -22,11 +22,25 @@ namespace ElimpParse.ConsoleApp
             //     new ElimpUser("vlad986523", "II место на городе")
             // };
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResult();
+            MultiThreadParser.LoadProfiles(group.UserList);
 
             FinalTest(group);
             LoadTotalPoints(group);
             LoadAllPackInfo(group);
+        }
+
+        private static void SpeedTest(StudyGroup group)
+        {
+            Stopwatch sw = new Stopwatch();
+
+            sw.Start();
+            MultiThreadParser.LoadProfiles(group.UserList);
+            Console.WriteLine(sw.Elapsed);
+            sw.Restart();
+
+            //MultiThreadParser.Test_LoadProfiles(group.UserList);
+            Console.WriteLine(sw.Elapsed);
+            Console.WriteLine("\n");
         }
 
         private static void FinalTest(StudyGroup group)
@@ -58,17 +72,6 @@ namespace ElimpParse.ConsoleApp
             {
                 Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(results)));
                 Console.WriteLine("\n\n");
-            }
-        }
-
-        private static void LoadStudentsCountInfo()
-        {
-            StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadStudentsResult();
-
-            foreach (var elimpUser in group.UserList.OrderByDescending(u => u.CompletedTaskCount()))
-            {
-                Console.WriteLine(FormatPrint.GenerateCountResultData(elimpUser));
             }
         }
     }

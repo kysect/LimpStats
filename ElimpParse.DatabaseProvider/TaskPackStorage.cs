@@ -2,7 +2,7 @@
 
 namespace ElimpParse.DatabaseProvider
 {
-    public class TaskPackStorage
+    public static class TaskPackStorage
     {
         public static readonly List<int> TasksAGroup = new List<int>
         {
