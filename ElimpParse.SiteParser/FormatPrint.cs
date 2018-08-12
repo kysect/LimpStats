@@ -12,11 +12,11 @@ namespace ElimpParse.Core
     {
         public static string GenerateCountResultData(StudyGroup group)
         {
-            return group
+            var data = group
                 .UserList
                 .OrderByDescending(u => u.CompletedTaskCount())
-                .Select(u => $"{u.Login,-40} ({u.CompletedTaskCount()})")
-                .Aggregate((f, s) => $"{f}\n{s}");
+                .Select(u => $"{u.Login,-40} ({u.CompletedTaskCount()})");
+            return string.Join("\n", data);
         }
 
         public static List<string> GeneratePackResultData(List<ProblemPackResult> results)
