@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ElimpParse.Model\ElimpParse.Model.csproj" />
+    <ProjectReference Include="..\LimpStats.Model\LimpStats.Model.csproj" />
   </ItemGroup>
 
 </Project>

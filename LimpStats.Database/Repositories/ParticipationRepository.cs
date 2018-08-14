@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using Dapper.Contrib.Extensions;
-using ElimpParse.DatabaseProvider.Models;
-using Newtonsoft.Json;
+using LimpStats.Database.Models;
 
-namespace ElimpParse.DatabaseProvider.Repositories
+namespace LimpStats.Database.Repositories
 {
-    public class UserRepositoriy
+    public class ParticipationRepository
     {
         private readonly string _connectionString;
-        public UserRepositoriy(string connectionString)
+        public ParticipationRepository(string connectionString)
         {
             _connectionString = connectionString;
         }

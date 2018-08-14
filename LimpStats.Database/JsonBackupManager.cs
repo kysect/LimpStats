@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using LimpStats.Model;
 using Newtonsoft.Json;
 
-namespace ElimpParse.DatabaseProvider
+namespace LimpStats.Database
 {
     public static class JsonBackupManager
     {

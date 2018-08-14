@@ -1,6 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 
-namespace ElimpParse.DatabaseProvider.Models
+namespace LimpStats.Database.Models
 {
     [Table("UserResults")]
     public class UserResult

@@ -2,7 +2,7 @@
 using System.Linq;
 using LimpStats.Model;
 
-namespace ElimpParse.Core
+namespace LimpStats.Core
 {
     public static class StudyGroupExtensions
     {

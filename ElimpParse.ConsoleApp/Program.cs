@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ElimpParse.Core;
-using ElimpParse.DatabaseProvider;
-using ElimpParse.DatabaseProvider.Models;
-using ElimpParse.DatabaseProvider.Repositories;
-using ElimpParse.Model;
+using LimpStats.Core;
+using LimpStats.Database;
+using LimpStats.Model;
 
 namespace ElimpParse.ConsoleApp
 {

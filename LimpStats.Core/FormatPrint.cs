@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ElimpParse.DatabaseProvider;
+using LimpStats.Database;
 using LimpStats.Model;
 
-namespace ElimpParse.Core
+namespace LimpStats.Core
 {
     public static class FormatPrint
     {
@@ -22,15 +22,14 @@ namespace ElimpParse.Core
 
             foreach (var result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
-                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value,5}"));
-                var additionalPoints = $"| (+{result.AdditionalPoints,3})";
-                var totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints,5}";
+                var taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value, 5}"));
+                var additionalPoints = $"| (+{result.AdditionalPoints, 3})";
+                var totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints, 5}";
                 var fullString = $"{result.Username,-15}:{taskString}{additionalPoints}{totalCount}";
 
 
                 output.Add(fullString);
             }
-
             return output;
         }
 
