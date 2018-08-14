@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using LimpStats.Model;
 
-namespace ElimpParse.DatabaseProvider
+namespace LimpStats.Database
 {
-    public class DataGenerator
+    public static class DataGenerator
     {
         public static StudyGroup GenerateTemplateGroup()
         {

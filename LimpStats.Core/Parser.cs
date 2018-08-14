@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using LimpStats.Model;
 
-namespace ElimpParse.Core
+namespace LimpStats.Core
 {
     public static class Parser
     {
@@ -43,7 +41,7 @@ namespace ElimpParse.Core
 
         private static int TitleToResult(string taskTitle)
         {
-            var stringRes = taskTitle.Split(", ") //["title"], ["{count}%"]
+            var stringRes = taskTitle.Split(',') //["title"], ["{count}%"]
                 .Last() //"{count}%"
                 .Replace("%", "");
             return int.Parse(stringRes);
@@ -51,7 +49,7 @@ namespace ElimpParse.Core
 
         private static int TaskIdFromLink(string link)
         {
-            var stringRes = link.Split("/")
+            var stringRes = link.Split('/')
                 .Last();
             return int.Parse(stringRes);
         }

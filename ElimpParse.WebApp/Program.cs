@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using ElimpParse.Core;
-using ElimpParse.DatabaseProvider;
-using ElimpParse.Model;
+using LimpStats.Core;
+using LimpStats.Database;
+using LimpStats.Model;
 using Newtonsoft.Json;
 namespace ElimpParse.WebApp
 {

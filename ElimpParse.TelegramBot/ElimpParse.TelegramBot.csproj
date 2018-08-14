@@ -11,9 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ElimpParse.DatabaseProvider\ElimpParse.DatabaseProvider.csproj" />
-    <ProjectReference Include="..\ElimpParse.Model\ElimpParse.Model.csproj" />
-    <ProjectReference Include="..\ElimpParse.SiteParser\ElimpParse.Core.csproj" />
+    <ProjectReference Include="..\LimpStats.Core\LimpStats.Core.csproj" />
+    <ProjectReference Include="..\LimpStats.Model\LimpStats.Model.csproj" />
   </ItemGroup>
 
 </Project>

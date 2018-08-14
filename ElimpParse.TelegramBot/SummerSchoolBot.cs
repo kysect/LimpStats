@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ElimpParse.Core;
-using ElimpParse.DatabaseProvider;
-using ElimpParse.Model;
+using LimpStats.Core;
+using LimpStats.Database;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using ElimpParse.DatabaseProvider.Repositories;
+using LimpStats.Model;
 
 namespace ElimpParse.TelegramBot
 {

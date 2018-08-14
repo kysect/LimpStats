@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LimpStats.Model;
 
-namespace ElimpParse.Core
+namespace LimpStats.Core
 {
     public static class MultiThreadParser
     {
