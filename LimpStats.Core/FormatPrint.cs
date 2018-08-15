@@ -7,16 +7,15 @@ namespace LimpStats.Core
 {
     public static class FormatPrint
     {
-        public static string GenerateCountResultData(StudyGroup group)
+        public static IEnumerable<string> GenerateCountResults(StudyGroup group)
         {
-            var data = group
+            return group
                 .UserList
                 .OrderByDescending(u => u.CompletedTaskCount())
                 .Select(u => $"{u.Login,-40} ({u.CompletedTaskCount()})");
-            return string.Join("\n", data);
         }
 
-        public static List<string> GeneratePackResultData(List<ProblemPackResult> results)
+        public static IEnumerable<string> GeneratePackResults(IEnumerable<ProblemPackResult> results)
         {
             var output = new List<string>();
 
@@ -33,10 +32,8 @@ namespace LimpStats.Core
             return output;
         }
 
-        //TODO: удалить
-        public static string TelegramFormat(ElimpUser user)
+        public static string GenerateDayResults(ElimpUser user)
         {
-            //TODO: refactoring
             var list = JsonBackupManager.LoadFromJson();
             var currentUser = list.FirstOrDefault(u => u.Login == user.Login);
 

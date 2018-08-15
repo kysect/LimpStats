@@ -8,7 +8,7 @@ using LimpStats.Model;
 
 namespace ElimpParse.ConsoleApp
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@ namespace ElimpParse.ConsoleApp
         private static void FinalTest(StudyGroup group)
         {
             var res = group.GetPackResult(group.ProblemPackList.Last());
-            Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(res)));
+            Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResults(res)));
         }
 
         private static void LoadTotalPoints(StudyGroup group)
@@ -47,7 +47,7 @@ namespace ElimpParse.ConsoleApp
             var result = group.GetAllPackResult();
             foreach (var results in group.GetAllPackResult())
             {
-                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResultData(results)));
+                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResults(results)));
                 Console.WriteLine("\n\n");
             }
         }
