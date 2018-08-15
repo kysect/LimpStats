@@ -35,14 +35,14 @@ namespace ElimpParse.TelegramBot
             if (hour == DateTime.Now.Hour && DateTime.Now.Minute - minute <= 10 && _flag)
             {
                 _flag = false;
-                var msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList, false);
+                var msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
                 JsonBackupManager.SaveToJson(_group.UserList);
             }
 
             if (e.Message.Text == "/getinfo")
             {
-                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_group.UserList, false), ParseMode.Html);
+                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_group.UserList), ParseMode.Html);
                 Console.WriteLine("good");
             }
 
@@ -110,12 +110,12 @@ namespace ElimpParse.TelegramBot
         }
 
 
-        private static string GenerateMessage(List<ElimpUser> users, bool isHtml)
+        private static string GenerateMessage(List<ElimpUser> users)
         {
             users.ForEach(Parser.LoadUserData);
             var res = users
                 .OrderByDescending(e => e.CompletedTaskCount())
-                .Select(FormatPrint.TelegramFormat);
+                .Select(FormatPrint.GenerateDayResults);
             return $"<code>{string.Join("\n", res)}</code>";
         }
     }
