@@ -5,18 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.6" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LimpStats.Database\LimpStats.Database.csproj" />
     <ProjectReference Include="..\LimpStats.Model\LimpStats.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>C:\Users\inred\.nuget\packages\htmlagilitypack\1.8.4\lib\netstandard2.0\HtmlAgilityPack.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
