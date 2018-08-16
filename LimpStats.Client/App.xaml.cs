@@ -14,4 +14,5 @@ namespace LimpStats.Client
     public partial class App : Application
     {
     }
+
 }
