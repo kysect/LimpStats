@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LimpStats.Client"
+        xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="Lavender">
+        <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="300" Margin="23,23,0,0" VerticalAlignment="Top" Width="700" Loaded="grid_loaded"/>
     </Grid>
+
 </Window>
