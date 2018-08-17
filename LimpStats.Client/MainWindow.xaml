@@ -12,11 +12,11 @@
         Width="1366" Height="768"
         WindowState="Maximized" WindowStyle="None">
     <Grid Background="#202020">
-        <DataGrid x:Name="grid" Margin="294,143,872,273" Width="200" FrozenColumnCount="3" MinColumnWidth ="50" GridLinesVisibility="None" Background="#555555" RowBackground="#555555"/>
         <Button x:Name="RefreshAllResults" Content="Обновить" Click="grid_loaded" Margin="294,88,872,630" Width="200" Height="50" />
-        <Button x:Name="AddUser" Content="Добавить енота" Click="grid_AddUser" Margin="664,264,502,454" Width="200" Height="50" />
         <ProgressBar x:Name="progressBar1" Minimum="0" Maximum="100" Value="50" Height="25"  Margin="10,743,-10,0" />
         <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
+        <Canvas x:Name="Panel" />
+
     </Grid>
 
 </Window>

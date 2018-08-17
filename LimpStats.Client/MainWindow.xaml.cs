@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -25,16 +26,40 @@ namespace LimpStats.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            Button btn = new Button();
+            btn.Name = "AddUser";
+            btn.Width = 200;
+            btn.Height = 50;
+            btn.Content = "Добавить енота";
+            btn.Click += grid_AddUser;
+            btn.Margin = new Thickness(664,264,502,454); 
+            Panel.Children.Add(btn);
+               // < DataGrid x: Name = "grid" Margin = "294,143,872,273" Width = "200" FrozenColumnCount = "3" MinColumnWidth = "50" GridLinesVisibility = "None" Background = "#555555" RowBackground = "#555555" />
+           
+                DataGrid grid = new DataGrid();
+            grid.Name = "grid";
+            grid.Margin = new Thickness(294, 143, 872, 273);
+            grid.Width = 200;
+            grid.FrozenColumnCount = 3;
+            grid.MinColumnWidth = 50;
+            grid.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            grid.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+            grid.RowBackground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+            Panel.Children.Add(grid);
+
         }
+
 
         private void grid_loaded(object sender, RoutedEventArgs e)
         {
             var worker = new BackgroundWorker();
             worker.DoWork += UpdateGrid;
             worker.RunWorkerAsync();
+
 
         }
         private void grid_AddUser(object sender, RoutedEventArgs e)
@@ -72,7 +97,7 @@ namespace LimpStats.Client
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                grid.ItemsSource = items;
+         /      grid.ItemsSource = items;
             });
         }
         private static IEnumerable<(string Key, int)> LoadTotalPoints(StudyGroup group)
