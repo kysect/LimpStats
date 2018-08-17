@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,15 +32,48 @@ namespace LimpStats.Client
 
         private void grid_loaded(object sender, RoutedEventArgs e)
         {
+            var worker = new BackgroundWorker();
+            worker.DoWork += UpdateGrid;
+            worker.RunWorkerAsync();
+
+        }
+        private void grid_AddUser(object sender, RoutedEventArgs e)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += AddUserToGrid;
+            worker.RunWorkerAsync();
+
+        }
+        private void UpdateGrid(object sender, DoWorkEventArgs e)
+        {
             StudyGroup group = GenerateTemplateGroup();
-                MultiThreadParser.LoadProfiles(group.UserList);
+            MultiThreadParser.LoadProfiles(group.UserList);
             var res = LoadTotalPoints(group);
-            Dictionary<string, int> items = new Dictionary<string, int>();
+            List<GridCard> items = new List<GridCard>();
             foreach (var item in res)
             {
-               items.Add(item.Key, item.Item2);
+                items.Add(new GridCard(item.Key, item.Key, item.Item2));
             }
-            grid.ItemsSource = items;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                grid.ItemsSource = items;
+            });
+        }
+        private void AddUserToGrid(object sender, DoWorkEventArgs e)
+        {
+            StudyGroup group = GenerateTemplateGroup();
+            group.UserList.Add(new ElimpUser {Login = "Enosha"});
+            MultiThreadParser.LoadProfiles(group.UserList);
+            var res = LoadTotalPoints(group);
+            List<GridCard> items = new List<GridCard>();
+            foreach (var item in res)
+            {
+                items.Add(new GridCard(item.Key, item.Key, item.Item2));
+            }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                grid.ItemsSource = items;
+            });
         }
         private static IEnumerable<(string Key, int)> LoadTotalPoints(StudyGroup group)
         {
