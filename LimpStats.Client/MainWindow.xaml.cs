@@ -26,6 +26,7 @@ namespace LimpStats.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Button presbutton;
 
         public MainWindow()
         {
@@ -34,8 +35,9 @@ namespace LimpStats.Client
             btn.Name = "AddUser";
             btn.Width = 200;
             btn.Height = 50;
+            btn.DataContext = "grid";
             btn.Content = "Добавить енота";
-            btn.Click += grid_AddUser;
+            btn.Click += (grid_AddUser);
             btn.Margin = new Thickness(664,264,502,454); 
             Panel.Children.Add(btn);
                // < DataGrid x: Name = "grid" Margin = "294,143,872,273" Width = "200" FrozenColumnCount = "3" MinColumnWidth = "50" GridLinesVisibility = "None" Background = "#555555" RowBackground = "#555555" />
@@ -57,7 +59,7 @@ namespace LimpStats.Client
         private void grid_loaded(object sender, RoutedEventArgs e)
         {
             var worker = new BackgroundWorker();
-            worker.DoWork += UpdateGrid;
+            worker.DoWork += new DoWorkEventHandler(this.UpdateGrid);
             worker.RunWorkerAsync();
 
 
@@ -65,6 +67,7 @@ namespace LimpStats.Client
         private void grid_AddUser(object sender, RoutedEventArgs e)
         {
             var worker = new BackgroundWorker();
+            presbutton = sender as Button;
             worker.DoWork += AddUserToGrid;
             worker.RunWorkerAsync();
 
@@ -81,7 +84,7 @@ namespace LimpStats.Client
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                grid.ItemsSource = items;
+                Panel.Children.OfType<DataGrid>().First(a => a.Name ==  DataContext).ItemsSource = items;
             });
         }
         private void AddUserToGrid(object sender, DoWorkEventArgs e)
@@ -97,7 +100,7 @@ namespace LimpStats.Client
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-         /      grid.ItemsSource = items;
+                Panel.Children.OfType<DataGrid>().First(a => a.Name == presbutton.DataContext).ItemsSource = items;
             });
         }
         private static IEnumerable<(string Key, int)> LoadTotalPoints(StudyGroup group)
