@@ -6,10 +6,17 @@
         xmlns:local="clr-namespace:LimpStats.Client"
         xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
         xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        Width="1366" Height="768"
+        WindowState="Maximized" WindowStyle="None">
     <Grid Background="Lavender">
-        <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="300" Margin="23,23,0,0" VerticalAlignment="Top" Width="700" Loaded="grid_loaded"/>
+        <DataGrid x:Name="grid" Margin="294,143,872,273" Width="200" FrozenColumnCount="3" MinColumnWidth ="50" />
+        <Button x:Name="RefreshAllResults" Content="Обновить" Click="grid_loaded" Margin="294,88,872,630" Width="200" Height="50" />
+        <Button x:Name="AddUser" Content="Добавить енота" Click="grid_AddUser" Margin="664,264,502,454" Width="200" Height="50" />
+        <ProgressBar x:Name="progressBar1" Minimum="0" Maximum="100" Value="50" Height="25"  Margin="10,743,-10,0" />
+        <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
     </Grid>
 
 </Window>
