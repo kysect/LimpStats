@@ -27,42 +27,67 @@ namespace LimpStats.Client
     public partial class MainWindow : Window
     {
         private Button presbutton;
-
+        private int gridid = 0;
         public MainWindow()
         {
             InitializeComponent();
-            Button btn = new Button();
-            btn.Name = "AddUser";
-            btn.Width = 200;
-            btn.Height = 50;
-            btn.DataContext = "grid";
-            btn.Content = "Добавить енота";
-            btn.Click += (grid_AddUser);
-            btn.Margin = new Thickness(664,264,502,454); 
-            Panel.Children.Add(btn);
-               // < DataGrid x: Name = "grid" Margin = "294,143,872,273" Width = "200" FrozenColumnCount = "3" MinColumnWidth = "50" GridLinesVisibility = "None" Background = "#555555" RowBackground = "#555555" />
-           
-                DataGrid grid = new DataGrid();
-            grid.Name = "grid";
-            grid.Margin = new Thickness(294, 143, 872, 273);
-            grid.Width = 200;
-            grid.FrozenColumnCount = 3;
-            grid.MinColumnWidth = 50;
-            grid.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            grid.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
-            grid.RowBackground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
-            Panel.Children.Add(grid);
-
         }
 
+        private void newGrid(object sender, DoWorkEventArgs e)
+        {
+            //<Button x:Name="RefreshAllResults" Content="Обновить" Click="grid_loaded" Margin="294,88,872,630" Width="200" Height="50" />
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+            double xLeftShift = 0;
+            double xRightShift = 0;
+            if (gridid != 0)
+            {
+                    xLeftShift = panel.Children?.OfType<DataGrid>()?.Last().Margin.Left ?? 600;
+            } // < DataGrid x: Name = "grid" Margin = "294,143,872,273" Width = "200" FrozenColumnCount = "3" MinColumnWidth = "50" GridLinesVisibility = "None" Background = "#555555" RowBackground = "#555555" />
+            else
+            {
+                xLeftShift  = -150;
+            }
+                Button btn = new Button();
+                btn.Name = "Refresh";
+                btn.Width = 200;
+                btn.Height = 50;
+                btn.DataContext = $"grid{gridid}";
+                btn.Content = "Refresh";
+                btn.Click += grid_loaded;
+                //btn.Margin = new Thickness(xLeftShift + 50, 200, panel.Margin.Right-xLeftShift, 200);
+                btn.Margin = new Thickness(xLeftShift + 250, 100, 0, 0);
+                panel.Children.Add(btn);
 
+                DataGrid grid = new DataGrid();
+                grid.Name = $"grid{gridid}";
+                grid.Margin = new Thickness(xLeftShift + 250, 150, 0, 0);
+                grid.Width = 200;
+                grid.Height = 100;
+                grid.FrozenColumnCount = 3;
+                grid.MinColumnWidth = 50;
+                grid.GridLinesVisibility = DataGridGridLinesVisibility.None;
+                grid.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                grid.RowBackground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                panel.Children.Add(grid);
+            gridid++;
+            });
+        }
         private void grid_loaded(object sender, RoutedEventArgs e)
         {
             var worker = new BackgroundWorker();
-            worker.DoWork += new DoWorkEventHandler(this.UpdateGrid);
+            presbutton = sender as Button;
+            worker.DoWork += UpdateGrid;
             worker.RunWorkerAsync();
 
 
+        }
+        private void grid_newgrid(object sender, RoutedEventArgs e)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += newGrid;
+            worker.RunWorkerAsync();
+            // newGrid(1);
         }
         private void grid_AddUser(object sender, RoutedEventArgs e)
         {
@@ -84,7 +109,7 @@ namespace LimpStats.Client
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Panel.Children.OfType<DataGrid>().First(a => a.Name ==  DataContext).ItemsSource = items;
+                panel.Children.OfType<DataGrid>().First(a => a.Name == (string)presbutton.DataContext).ItemsSource = items;
             });
         }
         private void AddUserToGrid(object sender, DoWorkEventArgs e)
@@ -100,7 +125,7 @@ namespace LimpStats.Client
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Panel.Children.OfType<DataGrid>().First(a => a.Name == presbutton.DataContext).ItemsSource = items;
+                panel.Children.OfType<DataGrid>().First(a => a.Name == presbutton.DataContext).ItemsSource = items;
             });
         }
         private static IEnumerable<(string Key, int)> LoadTotalPoints(StudyGroup group)
