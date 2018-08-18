@@ -51,7 +51,7 @@ namespace LimpStats.Client
                 Button btn = new Button();
                 btn.Name = "Refresh";
                 btn.Width = 200;
-                btn.Height = 50;
+                btn.Height = 50; 
                 btn.DataContext = $"grid{gridid}";
                 btn.Content = "Refresh";
                 btn.Click += grid_loaded;
@@ -64,13 +64,13 @@ namespace LimpStats.Client
                 grid.Margin = new Thickness(xLeftShift + 250, 150, 0, 0);
                 grid.Width = 200;
                 grid.Height = 100;
-                grid.FrozenColumnCount = 3;
+                grid.FrozenColumnCount = 1;
                 grid.MinColumnWidth = 50;
                 grid.GridLinesVisibility = DataGridGridLinesVisibility.None;
                 grid.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                 grid.RowBackground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                 panel.Children.Add(grid);
-            gridid++;
+                gridid++;
             });
         }
         private void grid_loaded(object sender, RoutedEventArgs e)
@@ -99,17 +99,44 @@ namespace LimpStats.Client
         }
         private void UpdateGrid(object sender, DoWorkEventArgs e)
         {
-            StudyGroup group = GenerateTemplateGroup();
-            MultiThreadParser.LoadProfiles(group.UserList);
-            var res = LoadTotalPoints(group);
-            List<GridCard> items = new List<GridCard>();
-            foreach (var item in res)
-            {
-                items.Add(new GridCard(item.Key, item.Key, item.Item2));
-            }
+            //StudyGroup group = GenerateTemplateGroup();
+            //MultiThreadParser.LoadProfiles(group.UserList);
+            //var res = LoadTotalPoints(group);
+            //List<GridCard> items = new List<GridCard>();
+            //foreach (var item in res)
+            //{
+            //    items.Add(new GridCard(item.Key, item.Key, item.Item2));
+            //}
+            //Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    panel.Children.OfType<DataGrid>().First(a => a.Name == (string)presbutton.DataContext).ItemsSource = items;
+            //});
             Application.Current.Dispatcher.Invoke(() =>
             {
-                panel.Children.OfType<DataGrid>().First(a => a.Name == (string)presbutton.DataContext).ItemsSource = items;
+            StudyGroup group = GenerateTemplateGroup();
+            //MultiThreadParser.LoadProfiles(group.UserList);
+            //var res = LoadTotalPoints(group);
+            var res = group
+                .UserList
+                .OrderByDescending(u => u.CompletedTaskCount());
+            //List<GridCard> items = new List<GridCard>();
+            List<Button> items = new List<Button>();
+            foreach (var item in res)
+            {
+                Button btn = new Button();
+                btn.Name = "Button";
+                btn.Width = 200;
+                btn.Height = 50;
+                btn.DataContext = $"{item.Login}";
+                btn.Content = $"{item.Login,30} | {item.CompletedTaskCount()}";
+                btn.Click += grid_loaded;
+                //btn.Margin = new Thickness(xLeftShift + 50, 200, panel.Margin.Right-xLeftShift, 200);
+                //btn.Margin = new Thickness(xLeftShift + 250, 100, 0, 0);
+                //presbutton.DataContext .Children.Add(btn);
+                //items.Add(new GridCard(item.Key, item.Key, item.Item2));
+                items.Add(btn);
+            }
+                panel.Children.OfType<DataGrid>().First(a => a.Name == (string)presbutton.DataContext).ItemsSource = items as List<Button>;
             });
         }
         private void AddUserToGrid(object sender, DoWorkEventArgs e)
