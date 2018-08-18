@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LimpStats.Client
+﻿namespace LimpStats.Client
 {
-    class GridCard
+    public class GridCard
     {
-        public GridCard(string Name, string Nickname, int TotalPoints)
+        public GridCard(string name, string nickname, int totalPoints)
         {
-            this.Name = Name;
-            this.Nickname = Nickname;
-            this.TotalPoints = TotalPoints;
+            Name = name;
+            Nickname = nickname;
+            TotalPoints = totalPoints;
         }
-        public string Name { get; set; }
-        public string Nickname { get; set; }
-        public int TotalPoints { get; set; }
+
+        public string Name { get; }
+        public string Nickname { get; }
+        public int TotalPoints { get; }
     }
 }
