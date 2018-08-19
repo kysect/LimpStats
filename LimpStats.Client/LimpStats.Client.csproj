@@ -58,9 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InitializationCardWinow.xaml.cs">
+      <DependentUpon>InitializationCardWinow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\InstanceGenerator.cs" />
     <Compile Include="Services\MainWindowService.cs" />
     <Compile Include="Services\UiElementsGenerator.cs" />
+    <Page Include="InitializationCardWinow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

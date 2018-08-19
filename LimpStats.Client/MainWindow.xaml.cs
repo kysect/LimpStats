@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -18,12 +19,21 @@ namespace LimpStats.Client
     {
         private int _gridid;
         private Button _presbutton;
+        public delegate void MyDelegate(string data);
 
         public MainWindow()
         {
             InitializeComponent();
         }
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            InitializationCardWinow f = new InitializationCardWinow(new MyDelegate(func));
+            f.ShowDialog();
+        }
+        void func(string param)
+        {
+            MessageBox.Show(param + "!");
+        }
         private void NewGrid(object sender, DoWorkEventArgs e)
         {
             //<Button x:Name="RefreshAllResults" Content="Обновить" Click="grid_loaded" Margin="294,88,872,630" Width="200" Height="50" />
@@ -59,7 +69,7 @@ namespace LimpStats.Client
             worker.RunWorkerAsync();
         }
 
-        private void Grid_newgrid(object sender, RoutedEventArgs e)
+        public void Grid_newgrid(object sender, RoutedEventArgs e)
         {
             var worker = new BackgroundWorker();
             worker.DoWork += NewGrid;
@@ -95,22 +105,29 @@ namespace LimpStats.Client
                 //var res = LoadTotalPoints(group);
                 //List<GridCard> items = new List<GridCard>();
                 var group = InstanceGenerator.GenerateTemplateGroup();
-                var res = group
-                    .UserList
-                    .OrderByDescending(u => u.CompletedTaskCount());
+                MultiThreadParser.LoadProfiles(group.UserList);
 
+                var res = group.GetAllPackResult().SelectMany(l => l)
+                    .GroupBy(l => l.Username)
+                    .Select(gr => (gr.Key, gr.Sum(g => g.TotalPoints)))
+                    .OrderByDescending(t => t.Item2);
                 var items = new List<Button>();
                 foreach (var item in res)
                 {
-                    var btn = new Button
-                    {
-                        Name = "Button",
-                        Width = 200,
-                        Height = 50,
-                        DataContext = $"{item.Login}",
-                        Content = $"{item.Login,30} | {item.CompletedTaskCount()}"
-                    };
+                    var btn = UiElementsGenerator.CreateUserButton(_presbutton.DataContext.ToString(), Panel.Children.OfType<ListBox>().First(a => a.Name == (string)_presbutton.DataContext).Margin, item.Item1, item.Item2);
                     btn.Click += Grid_loaded;
+
+                    //var btn = new Button
+                    //{
+                    //    Name = "Button",
+                    //    Width = 200,
+                    //    Height = 50,
+                    //    DataContext = $"{item.Item1}",
+                    //    Content = $"{item.Item1, 15} | {item.Item2, 3}"
+                    //};
+                    //btn.Click += Grid_loaded;
+
+
                     //btn.Margin = new Thickness(xLeftShift + 50, 200, panel.Margin.Right-xLeftShift, 200);
                     //btn.Margin = new Thickness(xLeftShift + 250, 100, 0, 0);
                     //presbutton.DataContext .Children.Add(btn);

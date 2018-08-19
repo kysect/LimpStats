@@ -15,9 +15,9 @@ namespace ElimpParse.ConsoleApp
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
             MultiThreadParser.LoadProfiles(group.UserList);
 
-            FinalTest(group);
+            //  FinalTest(group);
             LoadTotalPoints(group);
-            LoadAllPackInfo(group);
+         //   LoadAllPackInfo(group);
         }
 
         private static void FinalTest(StudyGroup group)
