@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using LimpStats.Model;
@@ -21,6 +22,15 @@ namespace LimpStats.Core
                 .ChildNodes[0]
                 .ChildNodes[1]
                 .InnerText);
+        }
+        public static bool LoginValidation(string username)
+        {
+            var client = new HtmlWeb();
+            var link = $"https://www.e-olymp.com/ru/users/{username}";
+
+            if(client.Load(link).Text.Contains($"{username}"))
+                return true;
+            return false;
         }
 
         public static void LoadUserData(ElimpUser user)

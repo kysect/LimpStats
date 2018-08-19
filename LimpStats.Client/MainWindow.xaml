@@ -16,6 +16,7 @@
         <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
         <Canvas x:Name="Panel" >
             <Button x:Name="Button" RenderTransformOrigin="0.5,0.5" Click="Grid_newgrid" Height="110" Canvas.Left="1246" Canvas.Top="10" Width="110"/>
+            <Button x:Name="Buton" RenderTransformOrigin="0.5,0.5" Click="button1_Click" Height="110" Canvas.Left="1210" Canvas.Top="162" Width="110"/>
         </Canvas>
 
     </Grid>
