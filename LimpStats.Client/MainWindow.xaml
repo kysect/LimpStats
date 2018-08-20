@@ -12,12 +12,12 @@
         Width="1366" Height="768"
         WindowState="Maximized" WindowStyle="None">
     <Grid Background="#202020">
-        <ProgressBar x:Name="ProgressBar1" Minimum="0" Maximum="100" Value="50" Height="25"  Margin="10,743,-10,0" />
         <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
         <Button Content="Add list" RenderTransformOrigin="0.5,0.5" Click="OnClick_UpdatePanel" Margin="1204,10,10,717"/>
         <Button x:Name="Buton" RenderTransformOrigin="0.5,0.5" Click="button1_Click" Margin="993,10,263,717"/>
-        <StackPanel Orientation="Horizontal" x:Name="Panel" HorizontalAlignment="Left" Height="358" Margin="48,173,0,0" VerticalAlignment="Top" Width="1237"/>
-
+        <ScrollViewer x:Name="ScrollViewer" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Disabled" Margin="223,126,10,70">
+            <StackPanel Orientation="Horizontal" x:Name="Panel" HorizontalAlignment="Left" Height="358" VerticalAlignment="Top" Width="0"/>
+        </ScrollViewer>
     </Grid>
-
 </Window>

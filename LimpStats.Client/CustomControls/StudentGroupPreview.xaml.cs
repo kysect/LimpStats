@@ -40,7 +40,15 @@ namespace LimpStats.Client.CustomControls
                 .Select(res => $"{res.Username} [{res.Points}]");
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
+            //TODO
+            StudentList.SelectionChanged += ElimpUserStatistic;
 
+        }
+        private void ElimpUserStatistic(object sender, SelectionChangedEventArgs e)
+        {
+            var group = DataContext as StudyGroup;
+            //TODO
+            MessageBox.Show(e.AddedItems[0].ToString());
         }
     }
 }
