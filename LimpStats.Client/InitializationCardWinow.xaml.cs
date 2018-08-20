@@ -69,5 +69,12 @@ namespace LimpStats.Client
                 textBox2.Content = "X";
             }
         }
+
+        private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox1_OnGotFocus;
+        }
     }
 }
