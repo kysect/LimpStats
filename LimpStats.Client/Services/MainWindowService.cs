@@ -7,7 +7,7 @@ namespace LimpStats.Client.Services
 {
     public static class MainWindowService
     {
-        public static IEnumerable<(string Key, int)> LoadTotalPoints(StudyGroup group)
+        public static IEnumerable<(string Username, int Points)> LoadTotalPoints(StudyGroup group)
         {
             var result = group.GetAllPackResult()
                 .SelectMany(l => l)
@@ -23,7 +23,7 @@ namespace LimpStats.Client.Services
             group.UserList.Add(new ElimpUser { Login = "Enosha" });
             MultiThreadParser.LoadProfiles(group.UserList);
             var res = LoadTotalPoints(group)
-                .Select(item => new GridCard(item.Key, item.Key, item.Item2));
+                .Select(item => new GridCard(item.Username, item.Username, item.Points));
             return res;
         }
     }

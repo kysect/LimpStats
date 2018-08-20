@@ -19,8 +19,8 @@ namespace LimpStats.Client
     /// </summary>
     public partial class InitializationCardWinow : Window
     {
-        private MainWindow.MyDelegate d;
-        public InitializationCardWinow(MainWindow.MyDelegate sender)
+        private Action<string> d;
+        public InitializationCardWinow(Action<string> sender)
         {
             InitializeComponent();
             d = sender;
