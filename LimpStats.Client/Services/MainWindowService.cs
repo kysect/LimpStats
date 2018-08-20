@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LimpStats.Client.Models;
 using LimpStats.Core;
 using LimpStats.Model;
 
@@ -7,6 +8,7 @@ namespace LimpStats.Client.Services
 {
     public static class MainWindowService
     {
+        //TODO: Возможно, это тоже стоит выносить в .Core
         public static IEnumerable<(string Username, int Points)> LoadTotalPoints(StudyGroup group)
         {
             var result = group.GetAllPackResult()

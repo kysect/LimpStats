@@ -61,9 +61,11 @@
     <Compile Include="CustomControls\StudentGroupPreview.xaml.cs">
       <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InitializationCardWinow.xaml.cs">
+    <Compile Include="CustomControls\InitializationCardWinow.xaml.cs">
       <DependentUpon>InitializationCardWinow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GridCard.cs" />
+    <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Services\InstanceGenerator.cs" />
     <Compile Include="Services\MainWindowService.cs" />
     <Compile Include="Services\UiElementsGenerator.cs" />
@@ -72,7 +74,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InitializationCardWinow.xaml">
+    <Page Include="CustomControls\InitializationCardWinow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,7 +86,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GridCard.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
