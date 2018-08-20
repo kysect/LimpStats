@@ -32,6 +32,8 @@ namespace LimpStats.Client
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             Panel.Children.Add(new StudentGroupPreview());
+            Panel.Width += 200;
+            ScrollViewer.ScrollToRightEnd();
         }
 
         //private void Grid_AddUser(object sender, RoutedEventArgs e)
