@@ -1,31 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using HtmlAgilityPack;
 
-namespace LimpStats.Client
+namespace LimpStats.Client.CustomControls
 {
-    /// <summary>
-    /// Логика взаимодействия для InitializationCardWinow.xaml
-    /// </summary>
     public partial class InitializationCardWinow : Window
     {
         private Action<string> d;
 
         private int s = -1;
-        private string textboxcontent;
         public InitializationCardWinow(Action<string> sender)
         {
             InitializeComponent();
@@ -38,24 +23,28 @@ namespace LimpStats.Client
             else
             {
                 MessageBox.Show("Неверный логин");
-                
             }
         }
-        private int LoginValidation()
+
+        //TODO: Вынести в Парсер проверку на существование логина
+        private int LoginValidation(string username)
         {
             var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{textboxcontent}";
+            var link = $"https://www.e-olymp.com/ru/users/{username}";
 
-            if (client.Load(link).Text.Contains($"{textboxcontent}"))
+            if (client.Load(link).Text.Contains($"{username}"))
                 return 1;
             return 0;
         }
         private async void TextBox_TextChanged(object sender, EventArgs e)
         {
-            textboxcontent = textBox1.Text;
+            string username = textBox1.Text;
+            //TODO: Каждый раз запускается таск, но если я сразу вверду два символа, то будет одновременно
+            //два запроса + ты не знаешь, какой из низ быстрее выполниться: с одной буквой
+            //или с двумя. Все же лучше сделать кнопку "Check"
             int result = await Task.Run(() =>
             {
-                var res = LoginValidation();
+                var res = LoginValidation(username);
                 return res == 1 ? 1 : 0;
             });
             if (result == 1)

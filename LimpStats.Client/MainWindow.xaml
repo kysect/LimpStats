@@ -1,23 +1,44 @@
-﻿<Window x:Class="LimpStats.Client.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LimpStats.Client"
-        xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
-        xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
-        mc:Ignorable="d" 
-        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" 
-        Width="1366" Height="768"
-        WindowState="Maximized" WindowStyle="None">
+﻿<Window
+    x:Class="LimpStats.Client.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:LimpStats.Client"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
+    Width="1366"
+    Height="768"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
     <Grid Background="#202020">
-        <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
-        <Button Content="Add list" RenderTransformOrigin="0.5,0.5" Click="OnClick_UpdatePanel" Margin="1204,10,10,717"/>
-        <Button x:Name="Buton" RenderTransformOrigin="0.5,0.5" Click="button1_Click" Margin="993,10,263,717"/>
-        <ScrollViewer x:Name="ScrollViewer" HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Disabled" Margin="223,126,10,70">
-            <StackPanel Orientation="Horizontal" x:Name="Panel" HorizontalAlignment="Left" Height="358" VerticalAlignment="Top" Width="0"/>
+        <TextBlock
+            x:Name="Text"
+            Margin="864,264,447,474"
+            Text="text" />
+        <Button
+            Margin="1204,10,10,717"
+            Click="OnClick_UpdatePanel"
+            Content="Add list"
+            RenderTransformOrigin="0.5,0.5" />
+        <Button
+            x:Name="Buton"
+            Margin="993,10,263,717"
+            Click="button1_Click"
+            RenderTransformOrigin="0.5,0.5" />
+        <ScrollViewer
+            Name="PanelViewer"
+            Margin="200,200,200,200"
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Disabled">
+            <StackPanel
+                x:Name="Panel"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Orientation="Horizontal" />
         </ScrollViewer>
     </Grid>
 </Window>
