@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="LimpStats.Client.CustomControls.StudentGroupPreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
+             mc:Ignorable="d" 
+             Width="200"
+             d:DesignHeight="250">
+    <StackPanel>
+        <Button Name="UpdateButton" Content="Update data" Click="ButtonClick_Update"/>
+        <ListBox Name="StudentList" MinHeight="50"/>
+
+    </StackPanel>
+</UserControl>

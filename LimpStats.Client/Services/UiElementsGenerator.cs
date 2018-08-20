@@ -2,12 +2,17 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using LimpStats.Client.CustomControls;
 using LimpStats.Model;
 
 namespace LimpStats.Client.Services
 {
     public static class UiElementsGenerator
     {
+        public static StudentGroupPreview CretePreview(StudyGroup group)
+        {
+            return new StudentGroupPreview() {DataContext = group};
+        }
         public static Button CreateButton(int id, double marginLeft)
         {
             return new Button
@@ -17,7 +22,7 @@ namespace LimpStats.Client.Services
                 Height = 50,
                 DataContext = $"grid{id}",
                 Content = "Refresh",
-                Margin = new Thickness(marginLeft + 250, 100, 0, 0)
+                //Margin = new Thickness(marginLeft + 250, 100, 0, 0)
             };
         }
         public static Button CreateUserButton(string id, Thickness margin, string login, int CompletedTaskCount)
@@ -33,12 +38,12 @@ namespace LimpStats.Client.Services
                 //      Margin = new Thickness(margin.Left-350, margin.Top-150, 0, 0)
             };
         }
-        public static ListBox CreateDataGrid(int id, double marginLeft)
+        public static ListBox CreateListBox(int id, double marginLeft)
         {
             return new ListBox
             {
                 Name = $"grid{id}",
-                Margin = new Thickness(marginLeft + 250, 150, 0, 0),
+                //Margin = new Thickness(marginLeft + 250, 150, 0, 0),
                 //FrozenColumnCount = 1,
                 //MinColumnWidth = 50,
                 //GridLinesVisibility = DataGridGridLinesVisibility.None,

@@ -14,10 +14,9 @@
     <Grid Background="#202020">
         <ProgressBar x:Name="ProgressBar1" Minimum="0" Maximum="100" Value="50" Height="25"  Margin="10,743,-10,0" />
         <TextBlock x:Name="Text" Text="text" Margin="864,264,447,474"/>
-        <Canvas x:Name="Panel" >
-            <Button x:Name="Button" RenderTransformOrigin="0.5,0.5" Click="Grid_newgrid" Height="110" Canvas.Left="1246" Canvas.Top="10" Width="110"/>
-            <Button x:Name="Buton" RenderTransformOrigin="0.5,0.5" Click="button1_Click" Height="110" Canvas.Left="1210" Canvas.Top="162" Width="110"/>
-        </Canvas>
+        <Button Content="Add list" RenderTransformOrigin="0.5,0.5" Click="OnClick_UpdatePanel" Margin="1204,10,10,717"/>
+        <Button x:Name="Buton" RenderTransformOrigin="0.5,0.5" Click="button1_Click" Margin="993,10,263,717"/>
+        <StackPanel Orientation="Horizontal" x:Name="Panel" HorizontalAlignment="Left" Height="358" Margin="48,173,0,0" VerticalAlignment="Top" Width="1237"/>
 
     </Grid>
 
