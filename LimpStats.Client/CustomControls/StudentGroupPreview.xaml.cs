@@ -27,16 +27,11 @@ namespace LimpStats.Client.CustomControls
         private void Update()
         {
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
-
-            MultiThreadParser.LoadProfiles(_group.UserList);
-            //TODO: Аналогично, нужно вынести логику в .Core
-            var studentsData = MainWindowService
-                .LoadTotalPoints(_group)
-                .Select(res => new ProfilePreviewData(res.Username, res.Points));
+            _group.LoadProfiles();
+            var studentsData = MainWindowService.LoadProfilePreview(_group);
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
-
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
-            //TODO
+
             StudentList.SelectionChanged += ElimpUserStatistic;
 
         }

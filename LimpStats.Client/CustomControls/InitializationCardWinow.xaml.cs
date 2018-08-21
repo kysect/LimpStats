@@ -26,28 +26,14 @@ namespace LimpStats.Client.CustomControls
             }
         }
 
-        //TODO: Вынести в Парсер проверку на существование логина
-        private int LoginValidation(string username)
-        {
-            var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{username}";
-
-            if (client.Load(link).Text.Contains($"{username}"))
-                return 1;
-            return 0;
-        }
         private async void TextBox_TextChanged(object sender, EventArgs e)
         {
             string username = textBox1.Text;
             //TODO: Каждый раз запускается таск, но если я сразу вверду два символа, то будет одновременно
             //два запроса + ты не знаешь, какой из низ быстрее выполниться: с одной буквой
             //или с двумя. Все же лучше сделать кнопку "Check"
-            int result = await Task.Run(() =>
-            {
-                var res = LoginValidation(username);
-                return res == 1 ? 1 : 0;
-            });
-            if (result == 1)
+            bool isExist = await Task.Run(() => Core.Parser.IsUserExist(username));
+            if (isExist)
             {
                 button.Visibility = Visibility.Visible;
                 textBox2.Content = "OK";

@@ -8,6 +8,13 @@ namespace LimpStats.Core
 {
     public static class Parser
     {
+        public static bool IsUserExist(string username)
+        {
+            var client = new HtmlWeb();
+            var link = $"https://www.e-olymp.com/ru/users/{username}";
+
+            return (client.Load(link).Text.Contains($"{username}"));
+        }
         public static int CompletedTaskCount(string username)
         {
             var client = new HtmlWeb();
@@ -23,6 +30,7 @@ namespace LimpStats.Core
                 .ChildNodes[1]
                 .InnerText);
         }
+
         public static bool LoginValidation(string username)
         {
             var client = new HtmlWeb();
