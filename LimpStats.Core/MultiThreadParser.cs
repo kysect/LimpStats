@@ -8,6 +8,10 @@ namespace LimpStats.Core
 {
     public static class MultiThreadParser
     {
+        public static void LoadProfiles(this StudyGroup group)
+        {
+            LoadProfiles(group.UserList);
+        }
         public static void LoadProfiles(IEnumerable<ElimpUser> userList)
         {
             void TryLoad(ElimpUser user, Action<ElimpUser> action)

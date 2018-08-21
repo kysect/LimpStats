@@ -8,6 +8,16 @@ namespace LimpStats.Client.Services
 {
     public static class MainWindowService
     {
+        public static IEnumerable<GridCard> GetCardWithEnosha()
+        {
+            var group = InstanceGenerator.GenerateTemplateGroup();
+            group.UserList.Add(new ElimpUser { Login = "Enosha" });
+            group.LoadProfiles();
+            var res = LoadTotalPoints(group)
+                .Select(item => new GridCard(item.Username, item.Username, item.Points));
+            return res;
+        }
+
         //TODO: Возможно, это тоже стоит выносить в .Core
         public static IEnumerable<(string Username, int Points)> LoadTotalPoints(StudyGroup group)
         {
@@ -19,14 +29,10 @@ namespace LimpStats.Client.Services
             return result;
         }
 
-        public static IEnumerable<GridCard> GetCardWithEnosha()
+        public static IEnumerable<ProfilePreviewData> LoadProfilePreview(StudyGroup group)
         {
-            var group = InstanceGenerator.GenerateTemplateGroup();
-            group.UserList.Add(new ElimpUser { Login = "Enosha" });
-            MultiThreadParser.LoadProfiles(group.UserList);
-            var res = LoadTotalPoints(group)
-                .Select(item => new GridCard(item.Username, item.Username, item.Points));
-            return res;
+            return LoadTotalPoints(group)
+                .Select(res => new ProfilePreviewData(res.Username, res.Points));
         }
     }
 }

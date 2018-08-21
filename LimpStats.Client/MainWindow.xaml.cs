@@ -14,7 +14,7 @@ namespace LimpStats.Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var f = new CustomControls.InitializationCardWinow(param => MessageBox.Show(param + "!"));
+            var f = new InitializationCardWinow(param => MessageBox.Show(param + "!"));
             f.ShowDialog();
         }
 
