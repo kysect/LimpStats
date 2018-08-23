@@ -1,8 +1,8 @@
 ﻿namespace LimpStats.Client.Models
 {
-    public class GridCard
+    public class UserCard
     {
-        public GridCard(string name, string nickname, int totalPoints)
+        public UserCard(string name, string nickname, int totalPoints)
         {
             Name = name;
             Nickname = nickname;

@@ -7,9 +7,21 @@
              mc:Ignorable="d" 
              Width="200"
              d:DesignHeight="250">
-    <StackPanel>
-        <Button Name="UpdateButton" Content="Update data" Click="ButtonClick_Update"/>
-        <ListBox Name="StudentList" MinHeight="50"/>
-
-    </StackPanel>
+    <Canvas>
+        <Button x:Name="UpdateButton" Content="🔄" Click="ButtonClick_Update" HorizontalAlignment="Left" Width="25" Height="25" Canvas.Left="175"/>
+        <Button x:Name="CardButton" Content="" Click="ButtonClick_Update" Width="159" Height="25"/>
+        <ListBox x:Name="StudentList" MinHeight="50" Width="200" Canvas.Top="25" Height="225"/>
+        <Menu Height="25" VerticalAlignment="Top" Canvas.Left="159" Width="16">
+            <MenuItem Header="⋮" Height="25" Width="18" RenderTransformOrigin="0.05,0.56">
+                <MenuItem Header="Rename" />
+                <MenuItem Header="Sort by" >
+                    <MenuItem Header="Nickname"/>
+                    <MenuItem Header="Name" />
+                    <MenuItem Header="Points" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Delete card" />
+            </MenuItem>
+        </Menu>
+    </Canvas>
 </UserControl>
