@@ -13,10 +13,15 @@ namespace LimpStats.Client.CustomControls
     public partial class StudentGroupPreview : UserControl
     {
         private readonly StudyGroup _group;
-        public StudentGroupPreview(StudyGroup group)
+        public int Id;
+        private string Name;
+        public StudentGroupPreview(StudyGroup group, int id, string name)
         {
             _group = group;
+            Id = id;
+            Name = name;
             InitializeComponent();
+            CardButton.Content = Name;
         }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)

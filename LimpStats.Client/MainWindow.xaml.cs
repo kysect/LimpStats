@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using LimpStats.Client.CustomControls;
 using LimpStats.Client.Services;
@@ -21,7 +22,7 @@ namespace LimpStats.Client
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             var group = InstanceGenerator.GenerateTemplateGroup();
-            Panel.Children.Add(new StudentGroupPreview(group));
+            Panel.Children.Add(new StudentGroupPreview(group, Panel.Children.OfType<StudentGroupPreview>().Count(), "Name"));
             PanelViewer.ScrollToRightEnd();
         }
     }

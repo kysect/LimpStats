@@ -58,23 +58,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\StudentGroupInitializationBlock.xaml.cs">
+      <DependentUpon>StudentGroupInitializationBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\StudentGroupPreview.xaml.cs">
       <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\InitializationCardWinow.xaml.cs">
-      <DependentUpon>InitializationCardWinow.xaml</DependentUpon>
+    <Compile Include="CustomControls\InitializationUserWinow.xaml.cs">
+      <DependentUpon>InitializationUserWinow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\GridCard.cs" />
+    <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\ProfilePreviewData.cs" />
+    <Compile Include="Models\UserGroupCard.cs" />
     <Compile Include="Services\InstanceGenerator.cs" />
     <Compile Include="Services\MainWindowService.cs" />
     <Compile Include="Services\UiElementsGenerator.cs" />
     <Compile Include="Tools\ThreadingTools.cs" />
+    <Page Include="CustomControls\StudentGroupInitializationBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\StudentGroupPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\InitializationCardWinow.xaml">
+    <Page Include="CustomControls\InitializationUserWinow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

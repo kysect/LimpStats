@@ -8,13 +8,13 @@ namespace LimpStats.Client.Services
 {
     public static class MainWindowService
     {
-        public static IEnumerable<GridCard> GetCardWithEnosha()
+        public static IEnumerable<UserCard> GetCardWithEnosha()
         {
             var group = InstanceGenerator.GenerateTemplateGroup();
             group.UserList.Add(new ElimpUser { Login = "Enosha" });
             group.LoadProfiles();
             var res = LoadTotalPoints(group)
-                .Select(item => new GridCard(item.Username, item.Username, item.Points));
+                .Select(item => new UserCard(item.Username, item.Username, item.Points));
             return res;
         }
 
