@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,7 @@ namespace LimpStats.Client.CustomControls
         }
         private void button1_Click(object sender, EventArgs e)
         {
+           
             if(LimpStats.Core.Parser.LoginValidation(textBox1.Text))
                 d(textBox1.Text);
             else

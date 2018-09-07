@@ -10,7 +10,7 @@ namespace LimpStats.Client.Services
     {
         public static IEnumerable<UserCard> GetCardWithEnosha()
         {
-            var group = InstanceGenerator.GenerateTemplateGroup();
+            var group = InstanceGenerator.GenerateTemplateGroup(0);
             group.UserList.Add(new ElimpUser { Login = "Enosha" });
             group.LoadProfiles();
             var res = LoadTotalPoints(group)

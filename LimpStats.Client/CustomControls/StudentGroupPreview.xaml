@@ -10,7 +10,8 @@
     <Canvas>
         <Button x:Name="UpdateButton" Content="🔄" Click="ButtonClick_Update" HorizontalAlignment="Left" Width="25" Height="25" Canvas.Left="175"/>
         <Button x:Name="CardButton" Content="" Click="ButtonClick_Update" Width="159" Height="25"/>
-        <ListBox x:Name="StudentList" MinHeight="50" Width="200" Canvas.Top="25" Height="225"/>
+        <Button x:Name="AddUserButton" Content="AddUser" Click="AddUserButton_OnClick" Width="200" Height="19" Canvas.Top="25"/>
+        <ListBox x:Name="StudentList" MinHeight="50" Width="200" Canvas.Top="44" Height="206"/>
         <Menu Height="25" VerticalAlignment="Top" Canvas.Left="159" Width="16">
             <MenuItem Header="⋮" Height="25" Width="18" RenderTransformOrigin="0.05,0.56">
                 <MenuItem Header="Rename" />

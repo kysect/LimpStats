@@ -38,6 +38,9 @@
     <Reference Include="HtmlAgilityPack, Version=1.8.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,8 +70,8 @@
     <Compile Include="CustomControls\InitializationUserWinow.xaml.cs">
       <DependentUpon>InitializationUserWinow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\ProfilePreviewData.cs" />
+    <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
     <Compile Include="Services\InstanceGenerator.cs" />
     <Compile Include="Services\MainWindowService.cs" />
@@ -130,6 +133,10 @@
     <ProjectReference Include="..\LimpStats.Core\LimpStats.Core.csproj">
       <Project>{a95d9556-b032-4421-a36a-83dc3435ffe3}</Project>
       <Name>LimpStats.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LimpStats.Database\LimpStats.Database.csproj">
+      <Project>{66c8060a-5efe-47e5-ad9d-ee8f9ae96284}</Project>
+      <Name>LimpStats.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\LimpStats.Model\LimpStats.Model.csproj">
       <Project>{5212533a-91f7-4704-bb46-af0f3fb8133e}</Project>
