@@ -10,11 +10,13 @@ namespace LimpStats.Client.Services
     {
         public static StudyGroup GenerateTemplateGroup(int groupid)
         {
-           return new StudyGroup(JsonBackupManager
+           var a =  new StudyGroup(JsonBackupManager
                                 .LoadFromJson()
                                 .Where(e => e.GridConteinsId.Contains(groupid))
                                 .OrderByDescending(user => user.UserProfileResult.Keys)
                                 .ToList());
+            a.ProblemPackList = new List<ProblemPackInfo>{new ProblemPackInfo("name", TaskPackStorage.TasksAGroup)};
+            return a;
         }
 
         public static class TaskPackStorage
