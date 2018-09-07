@@ -15,10 +15,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid Background="#202020">
-        <TextBlock
-            x:Name="Text"
-            Margin="864,264,447,474"
-            Text="text" />
         <Button
             Margin="1204,10,10,717"
             Click="OnClick_UpdatePanel"

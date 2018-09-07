@@ -11,17 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LimpStats.Client.Services;
 
 namespace LimpStats.Client.CustomControls
 {
     /// <summary>
     /// Логика взаимодействия для StudentGroupInitializationBlock.xaml
     /// </summary>
-    public partial class StudentGroupInitializationBlock : Window
+    public partial class StudentGroupInitializationBlock : UserControl
     {
         public StudentGroupInitializationBlock()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow a = new MainWindow();
+            a.OnClick_UpdatePanel(sender, e);
         }
     }
 }

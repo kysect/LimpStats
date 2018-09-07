@@ -9,15 +9,24 @@ namespace LimpStats.Model
         {
         }
 
-        public ElimpUser(string login, string title = null)
+        public ElimpUser(string login, string name)
         {
             Login = login;
-            Title = title;
+            Name = name;
             UserProfileResult = new Dictionary<int, int>();
+            GridConteinsId = new List<int>();
+        }
+
+        public ElimpUser(string login)
+        {
+            Login = login;
+            UserProfileResult = new Dictionary<int, int>();
+            GridConteinsId = new List<int>();
         }
 
         public string Login { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
+        public List<int> GridConteinsId { get; set; }
         public Dictionary<int, int> UserProfileResult { get; set; }
 
         public int CompletedTaskCount()
@@ -37,11 +46,11 @@ namespace LimpStats.Model
             return Login.GetHashCode();
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is ElimpUser user) return user.Login == Login;
-            return false;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is ElimpUser user) return user.Login == Login;
+        //    return false;
+        //}
 
         #endregion
     }

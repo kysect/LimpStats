@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LimpStats.Model;
 
 namespace LimpStats.Client.Models
 {
     class UserGroupCard
     {
-        public UserGroupCard(string name, List<ProblemPackInfo> problemPacks, List<UserCard> usersInGroup)
+        public UserGroupCard(string name, List<ProblemPackInfo> problemPacks, List<ElimpUser> usersInGroup)
         {
             Name = name;
             ProblemPacks = problemPacks;
@@ -22,6 +18,6 @@ namespace LimpStats.Client.Models
         }
         public string Name { get; }
         public List<ProblemPackInfo> ProblemPacks { get; }
-        public List<UserCard> UsersInGroup { get; }
+        public List<ElimpUser> UsersInGroup { get; }
     }
 }
