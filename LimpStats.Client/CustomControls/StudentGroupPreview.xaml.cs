@@ -36,8 +36,8 @@ namespace LimpStats.Client.CustomControls
 
         private void Update()
         {
-            ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
             _group = InstanceGenerator.GenerateTemplateGroup(Id);
+            ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
             var studentsData = MainWindowService.LoadProfilePreview(_group);
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
