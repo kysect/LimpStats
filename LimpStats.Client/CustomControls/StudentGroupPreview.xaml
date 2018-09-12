@@ -21,7 +21,7 @@
                     <MenuItem Header="Points" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Delete card" />
+                <MenuItem Header="Delete card" Click="ButtonDeleteCard" />
             </MenuItem>
         </Menu>
     </Canvas>
