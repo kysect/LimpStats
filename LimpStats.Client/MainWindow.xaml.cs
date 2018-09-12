@@ -11,6 +11,7 @@ namespace LimpStats.Client
 {
     public partial class MainWindow : Window
     {
+        //TODO: если нет инета, крашится прога
         public MainWindow()
         {
             InitializeComponent();

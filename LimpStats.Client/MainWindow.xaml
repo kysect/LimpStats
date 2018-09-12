@@ -27,7 +27,7 @@
             RenderTransformOrigin="0.5,0.5" />
         <ScrollViewer
             Name="PanelViewer"
-            Margin="200,200,200,200"
+            Margin="320,136,0,0"
             HorizontalScrollBarVisibility="Visible"
             VerticalScrollBarVisibility="Disabled">
             <StackPanel
@@ -35,6 +35,12 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Orientation="Horizontal" />
+
         </ScrollViewer>
+        <ScrollViewer
+            Name="PanelViewergorbuttons"
+            Margin="0,0,1046,0"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility= "Visible"/>
     </Grid>
 </Window>

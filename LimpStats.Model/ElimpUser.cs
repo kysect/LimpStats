@@ -9,7 +9,7 @@ namespace LimpStats.Model
         {
         }
 
-        public ElimpUser(string login, string name)
+        public ElimpUser(string login, string name=null)
         {
             Login = login;
             Name = name;
@@ -17,12 +17,12 @@ namespace LimpStats.Model
             GridConteinsId = new List<int>();
         }
 
-        public ElimpUser(string login)
-        {
-            Login = login;
-            UserProfileResult = new Dictionary<int, int>();
-            GridConteinsId = new List<int>();
-        }
+        //public ElimpUser(string login)
+        //{
+        //    Login = login;
+        //    UserProfileResult = new Dictionary<int, int>();
+        //    GridConteinsId = new List<int>();
+        //}
 
         public string Login { get; set; }
         public string Name { get; set; }

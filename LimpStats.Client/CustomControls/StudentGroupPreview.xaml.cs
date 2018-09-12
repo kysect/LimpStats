@@ -61,5 +61,11 @@ namespace LimpStats.Client.CustomControls
             ElimpUser user = new ElimpUser(f.textBox1.Text, "enosha");
                 Database.JsonBackupManager.SaveToJsonOne(user, Id);
         }
+
+        private void ButtonDeleteCard(object sender, RoutedEventArgs e)
+        {
+            MainWindow a = new MainWindow();
+            a.Panel.Children.Remove(a.Panel.Children.OfType<StudentGroupPreview>().First(f => f.Id == this.Id));
+        }
     }
 }
