@@ -8,24 +8,28 @@ using LimpStats.Client.Services;
 using LimpStats.Client.Tools;
 using LimpStats.Core;
 using LimpStats.Model;
-using Newtonsoft.Json;
+
 namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupPreview : UserControl
     {
         private  StudyGroup _group;
-        public int Id;
+        public readonly int Id;
         private string Name;
-        private ProblemPackInfo pack = new ProblemPackInfo("name", InstanceGenerator.TaskPackStorage.TasksAGroup);
+        private readonly ProblemPackInfo _pack = new ProblemPackInfo("name", InstanceGenerator.TaskPackStorage.TasksAGroup);
+
         public StudentGroupPreview(int id, string name)
         {
-            _group = new StudyGroup();
-            _group.UserList = new List<ElimpUser>();
+            InitializeComponent();
+
+            _group = new StudyGroup
+            {
+                UserList = new List<ElimpUser>(),
+                ProblemPackList = new List<ProblemPackInfo> {_pack}
+            };
             //TODO
-            _group.ProblemPackList = new List<ProblemPackInfo>{pack};
             Id = id;
             Name = name;
-            InitializeComponent();
             CardButton.Content = Name;
         }
 
@@ -37,6 +41,7 @@ namespace LimpStats.Client.CustomControls
         private void Update()
         {
             _group = InstanceGenerator.GenerateTemplateGroup(Id);
+
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
             var studentsData = MainWindowService.LoadProfilePreview(_group);
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
@@ -56,16 +61,17 @@ namespace LimpStats.Client.CustomControls
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new InitializationCardWinow(param => MessageBox.Show(param + "!"));
+            var f = new InitializationCardWindow();
             f.ShowDialog();
-            ElimpUser user = new ElimpUser(f.textBox1.Text, "enosha");
+            ElimpUser user = new ElimpUser(f.LoginTextBox.Text, "enosha");
                 Database.JsonBackupManager.SaveToJsonOne(user, Id);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             MainWindow a = new MainWindow();
-            a.Panel.Children.Remove(a.Panel.Children.OfType<StudentGroupPreview>().First(f => f.Id == this.Id));
+            //TODO: словил ошибку, что не id не найден
+            a.Panel.Children.Remove(a.Panel.Children.OfType<StudentGroupPreview>().First(f => f.Id == Id));
         }
     }
 }

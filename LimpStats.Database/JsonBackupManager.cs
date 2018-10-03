@@ -7,7 +7,8 @@ namespace LimpStats.Database
 {
     public static class JsonBackupManager
     {
-        private const string FilePath = "E:\\coding\\summer_school_bot\\E-olymp_Parser\\Info.json";
+        //TODO: fix path
+        private const string FilePath = @"Info.json";
         private const string FilePathUserGroup = "Cards.json";
 
         public static void SaveToJson(List<ElimpUser> users)
@@ -21,7 +22,7 @@ namespace LimpStats.Database
             if (File.Exists(FilePath))
             {
                 var jsonString = File.ReadAllText(FilePath);
-                var userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString);
+                var userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString) ?? new List<ElimpUser>();
 
 
                 var user = userList.Find(e => e.Login == newuser.Login);
@@ -47,6 +48,13 @@ namespace LimpStats.Database
                 newuser.GridConteinsId.Add(id);
                 userList.Add(newuser);
                 string jsonString = JsonConvert.SerializeObject(userList);
+
+                if (File.Exists(FilePath) == false)
+                {
+                    //TODO: Фиксить работу с файлами
+                    File.Create(FilePath).Dispose();
+                }
+
                 File.WriteAllText(FilePath, jsonString);
             }
 
@@ -54,6 +62,10 @@ namespace LimpStats.Database
 
         public static List<ElimpUser> LoadFromJson()
         {
+            if (File.Exists(FilePath) == false)
+            {
+                return new List<ElimpUser>();
+            }
             var jsonString = File.ReadAllText(FilePath);
             var userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString);
             return userList;

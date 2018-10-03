@@ -7,40 +7,60 @@
     xmlns:local="clr-namespace:LimpStats.Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
-    Width="1366"
-    Height="768"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowState="Maximized"
     WindowStyle="None"
+  
     mc:Ignorable="d">
     <Grid Background="#202020">
-        <Button
-            Margin="1204,10,10,717"
-            Click="OnClick_UpdatePanel"
-            Content="Add list"
-            RenderTransformOrigin="0.5,0.5" />
-        <Button
-            x:Name="Buton"
-            Margin="993,10,263,717"
-            Click="button1_Click"
-            RenderTransformOrigin="0.5,0.5" />
-        <ScrollViewer
-            Name="PanelViewer"
-            Margin="320,136,0,0"
-            HorizontalScrollBarVisibility="Visible"
-            VerticalScrollBarVisibility="Disabled">
-            <StackPanel
-                x:Name="Panel"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Orientation="Horizontal" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-        </ScrollViewer>
         <ScrollViewer
+            Grid.Column="0"
+            Grid.RowSpan="2"
             Name="PanelViewergorbuttons"
-            Margin="0,0,1046,0"
+            Width="350"
+            HorizontalAlignment="Left"
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility= "Visible"/>
+
+        <StackPanel
+            VerticalAlignment="Stretch"
+            Grid.Column="1">
+            <StackPanel
+                VerticalAlignment="Top"
+                Orientation="Horizontal"
+                Height="80">
+                <Button
+                    Width="70"
+                    Height="30"
+                    Click="OnClick_UpdatePanel"
+                    Content="Add list"
+                    RenderTransformOrigin="0.5,0.5" />
+                <Button
+                    Content="Open window"
+                    Width="70"
+                    Height="30"
+                    Click="button1_Click"
+                    RenderTransformOrigin="0.5,0.5" />
+            </StackPanel>
+            <ScrollViewer
+                Name="PanelViewer"
+                MaxWidth="600"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Disabled">
+                <StackPanel
+                    MinHeight="400"
+                    MinWidth="300"
+                    x:Name="Panel"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal" />
+
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
 </Window>
