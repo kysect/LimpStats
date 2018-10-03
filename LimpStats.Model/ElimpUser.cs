@@ -13,7 +13,11 @@ namespace LimpStats.Model
         {
             Login = login;
             Name = name;
-            UserProfileResult = new Dictionary<int, int>();
+            UserProfileResult = new Dictionary<int, int>(10000);
+            for (int i = 0; i < 10000; i++)
+            {
+                UserProfileResult.Add(i, 0);
+            }
             GridConteinsId = new List<int>();
         }
 

@@ -15,6 +15,7 @@ namespace LimpStats.Database
             var jsonString = JsonConvert.SerializeObject(users);
             File.WriteAllText(FilePath, jsonString);
         }
+
         public static void SaveToJsonOne(ElimpUser newuser, int id)
         {
             if (File.Exists(FilePath))
@@ -32,7 +33,7 @@ namespace LimpStats.Database
                 }
                 else
                 {
-                    userList = new List<ElimpUser>();
+//                    userList = new List<ElimpUser>();
                     newuser.GridConteinsId.Add(id);
                     userList.Add(newuser);
                 }
