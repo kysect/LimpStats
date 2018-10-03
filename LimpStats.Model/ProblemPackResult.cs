@@ -13,6 +13,7 @@ namespace LimpStats.Model
         {
             Username = user.Login;
             Problems = problemPack;
+            //TODO: загружать тут данные
 
             var resultList = new List<int>();
             foreach (var taskId in Problems.ProblemIdList)

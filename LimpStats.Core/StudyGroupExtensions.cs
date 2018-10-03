@@ -16,6 +16,8 @@ namespace LimpStats.Core
 
         public static List<ProblemPackResult> GetPackResult(this StudyGroup group, ProblemPackInfo taskPack)
         {
+            //TODO: возможно это фикс
+            group.LoadProfiles();
             return group
                 .UserList
                 .Select(u => new ProblemPackResult(u, taskPack))

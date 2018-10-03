@@ -1,0 +1,15 @@
+﻿<Window x:Class="LimpStats.Client.CustomControls.InitializationCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LimpStats.Client"
+        mc:Ignorable="d"
+        Title="InitializationCardWindow" Height="227.064" Width="282.624">
+    <Grid>
+        <TextBox x:Name="LoginTextBox" MaxLength="250" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="82,53,79,119" GotFocus="TextBox1_OnGotFocus" >Введите логин</TextBox>
+        <Label x:Name="StatusLabel" Margin="215,53,10,118.6" HorizontalAlignment="Center">X</Label>
+        <Button x:Name="AddUserButton" RenderTransformOrigin="0.5,0.5" Click="ValidateLogin" Canvas.Left="1246" Canvas.Top="10" Margin="122,154,121,10" Visibility="Hidden" />
+
+    </Grid>
+</Window>
