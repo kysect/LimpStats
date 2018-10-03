@@ -9,5 +9,7 @@ namespace LimpStats.Client.Services
 {
     public static class UiElementsGenerator
     {
+
+
     }
 }

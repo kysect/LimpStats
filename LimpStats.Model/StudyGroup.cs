@@ -6,6 +6,7 @@ namespace LimpStats.Model
     {
         public StudyGroup()
         {
+
         }
 
         public StudyGroup(List<ElimpUser> userList)
