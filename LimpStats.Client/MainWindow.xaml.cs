@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using LimpStats.Client.CustomControls;
-using LimpStats.Client.Services;
-using LimpStats.Model;
 
 namespace LimpStats.Client
 {
@@ -25,9 +21,6 @@ namespace LimpStats.Client
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            //StudentGroupInitializationBlock a = new StudentGroupInitializationBlock();
-            //Panel.Children.Add(a);
-            
             Panel.Children.Add(new StudentGroupPreview(Panel.Children.OfType<StudentGroupPreview>().Count(), "Name"));
             PanelViewer.ScrollToRightEnd();
         }

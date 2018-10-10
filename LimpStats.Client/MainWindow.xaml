@@ -9,7 +9,7 @@
     xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
+    WindowStyle="SingleBorderWindow"
   
     mc:Ignorable="d">
     <Grid Background="#202020">
