@@ -7,68 +7,58 @@ namespace LimpStats.Database
 {
     public static class JsonBackupManager
     {
-        //TODO: fix path
         private const string FilePath = @"Info.json";
         private const string FilePathUserGroup = "Cards.json";
 
+        private static void CheckFileExist(string filePath)
+        {
+            if (File.Exists(filePath) == false)
+            {
+                using (FileStream file = File.Create(filePath))
+                {
+                    file.Close();
+                }
+            }
+        }
+    
         public static void SaveToJson(List<ElimpUser> users)
         {
-            var jsonString = JsonConvert.SerializeObject(users);
+            CheckFileExist(FilePath);
+
+            string jsonString = JsonConvert.SerializeObject(users);
             File.WriteAllText(FilePath, jsonString);
         }
 
-        public static void SaveToJsonOne(ElimpUser newuser, int id)
+        public static void SaveToJsonOne(ElimpUser newUser, int id)
         {
-            if (File.Exists(FilePath))
+            CheckFileExist(FilePath);
+
+            string jsonData = File.ReadAllText(FilePath);
+            List<ElimpUser> userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonData) ?? new List<ElimpUser>();
+            ElimpUser user = userList.Find(e => e.Login == newUser.Login);
+
+            if (user != null)
             {
-                var jsonString = File.ReadAllText(FilePath);
-                var userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString) ?? new List<ElimpUser>();
-
-
-                var user = userList.Find(e => e.Login == newuser.Login);
-                if (user != null)
-                {
-                    userList.Remove(user);
-                    user.GridConteinsId.Add(id);
-                    userList.Add(user);
-                }
-                else
-                {
-//                    userList = new List<ElimpUser>();
-                    newuser.GridConteinsId.Add(id);
-                    userList.Add(newuser);
-                }
-
-                jsonString = JsonConvert.SerializeObject(userList);
-                File.WriteAllText(FilePath, jsonString);
+                userList.Remove(user);
+                user.GridConteinsId.Add(id);
+                userList.Add(user);
             }
             else
             {
-                var userList = new List<ElimpUser>();
-                newuser.GridConteinsId.Add(id);
-                userList.Add(newuser);
-                string jsonString = JsonConvert.SerializeObject(userList);
-
-                if (File.Exists(FilePath) == false)
-                {
-                    //TODO: Фиксить работу с файлами
-                    File.Create(FilePath).Dispose();
-                }
-
-                File.WriteAllText(FilePath, jsonString);
+                newUser.GridConteinsId.Add(id);
+                userList.Add(newUser);
             }
 
+            jsonData = JsonConvert.SerializeObject(userList);
+            File.WriteAllText(FilePath, jsonData);
         }
 
         public static List<ElimpUser> LoadFromJson()
         {
-            if (File.Exists(FilePath) == false)
-            {
-                return new List<ElimpUser>();
-            }
-            var jsonString = File.ReadAllText(FilePath);
-            var userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString);
-            return userList;
+            CheckFileExist(FilePath);
+
+            string jsonString = File.ReadAllText(FilePath);
+            return JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString) ?? new List<ElimpUser>();
         }
      }
 }

@@ -3,7 +3,7 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.Models
 {
-    class UserGroupCard
+    public class UserGroupCard
     {
         public UserGroupCard(string name, List<ProblemPackInfo> problemPacks, List<ElimpUser> usersInGroup)
         {

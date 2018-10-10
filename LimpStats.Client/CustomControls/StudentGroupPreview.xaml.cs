@@ -6,19 +6,20 @@ using System.Windows.Controls;
 using LimpStats.Client.Models;
 using LimpStats.Client.Services;
 using LimpStats.Client.Tools;
-using LimpStats.Core;
+using LimpStats.Database;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupPreview : UserControl
     {
-        private  StudyGroup _group;
-        public readonly int Id;
-        private string Name;
-        private readonly ProblemPackInfo _pack = new ProblemPackInfo("name", InstanceGenerator.TaskPackStorage.TasksAGroup);
+        private readonly ProblemPackInfo _pack =
+            new ProblemPackInfo("name", InstanceGenerator.TaskPackStorage.TasksAGroup);
 
-        public StudentGroupPreview(int id, string name)
+        public readonly int Id;
+        private StudyGroup _group;
+
+        public StudentGroupPreview(int id, string username)
         {
             InitializeComponent();
 
@@ -29,9 +30,11 @@ namespace LimpStats.Client.CustomControls
             };
             //TODO
             Id = id;
-            Name = name;
-            CardButton.Content = Name;
+            Username = username;
+            CardButton.Content = Username;
         }
+
+        public string Username { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
@@ -43,19 +46,21 @@ namespace LimpStats.Client.CustomControls
             _group = InstanceGenerator.GenerateTemplateGroup(Id);
 
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
-            var studentsData = MainWindowService.LoadProfilePreview(_group);
+            IEnumerable<ProfilePreviewData> studentsData = MainWindowService.LoadProfilePreview(_group);
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
 
             StudentList.SelectionChanged += ElimpUserStatistic;
-
         }
+
         private void ElimpUserStatistic(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)
             {
                 if (e.AddedItems[0] is ProfilePreviewData user)
+                {
                     MessageBox.Show($"{user.Username} has {user.Points} points.");
+                }
             }
         }
 
@@ -63,15 +68,19 @@ namespace LimpStats.Client.CustomControls
         {
             var f = new InitializationCardWindow();
             f.ShowDialog();
-            ElimpUser user = new ElimpUser(f.LoginTextBox.Text, "enosha");
-                Database.JsonBackupManager.SaveToJsonOne(user, Id);
+            var user = new ElimpUser(f.LoginTextBox.Text, "enosha");
+            JsonBackupManager.SaveToJsonOne(user, Id);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            MainWindow a = new MainWindow();
+            var a = new MainWindow();
             //TODO: словил ошибку, что не id не найден
-            a.Panel.Children.Remove(a.Panel.Children.OfType<StudentGroupPreview>().First(f => f.Id == Id));
+            var element = a.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
+            if (element != null)
+            {
+                a.Panel.Children.Remove(element);
+            }
         }
     }
 }

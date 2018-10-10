@@ -54,6 +54,5 @@ namespace LimpStats.Database
                 new ElimpUser("vlad986523", "II место на городе")
             };
         }
-
     }
 }

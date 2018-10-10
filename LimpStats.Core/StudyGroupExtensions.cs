@@ -24,5 +24,15 @@ namespace LimpStats.Core
                 .OrderByDescending(res => res.TotalPoints)
                 .ToList();
         }
+
+        public static IEnumerable<(string Username, int Points)> GetTotalPoints(this StudyGroup group)
+        {
+            IOrderedEnumerable<(string, int)> result = group.GetAllPackResult()
+                .SelectMany(l => l)
+                .GroupBy(l => l.Username)
+                .Select(gr => (gr.Key, gr.Sum(g => g.TotalPoints)))
+                .OrderByDescending(t => t.Item2);
+            return result;
+        }
     }
 }

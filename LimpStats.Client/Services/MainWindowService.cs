@@ -8,30 +8,21 @@ namespace LimpStats.Client.Services
 {
     public static class MainWindowService
     {
-        public static IEnumerable<UserCard> GetCardWithEnosha()
-        {
-            var group = InstanceGenerator.GenerateTemplateGroup(0);
-            group.UserList.Add(new ElimpUser { Login = "Enosha" });
-            group.LoadProfiles();
-            var res = LoadTotalPoints(group)
-                .Select(item => new UserCard(item.Username, item.Username, item.Points));
-            return res;
-        }
-
-        //TODO: Возможно, это тоже стоит выносить в .Core
-        public static IEnumerable<(string Username, int Points)> LoadTotalPoints(StudyGroup group)
-        {
-            var result = group.GetAllPackResult()
-                .SelectMany(l => l)
-                .GroupBy(l => l.Username)
-                .Select(gr => (gr.Key, gr.Sum(g => g.TotalPoints)))
-                .OrderByDescending(t => t.Item2);
-            return result;
-        }
+        //public static IEnumerable<UserCard> GetCardWithEnosha()
+        //{
+        //    var group = InstanceGenerator.GenerateTemplateGroup(0);
+        //    group.UserList.Add(new ElimpUser { Login = "Enosha" });
+        //    group.LoadProfiles();
+        //    var res = group
+        //        .GetTotalPoints()
+        //        .Select(item => new UserCard(item.Username, item.Username, item.Points));
+        //    return res;
+        //}
 
         public static IEnumerable<ProfilePreviewData> LoadProfilePreview(StudyGroup group)
         {
-            return LoadTotalPoints(group)
+            return group
+                .GetTotalPoints()
                 .Select(res => new ProfilePreviewData(res.Username, res.Points));
         }
     }
