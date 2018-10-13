@@ -9,7 +9,7 @@ namespace LimpStats.Core.Parsers
     {
         private const int MaxDepthLevel = 15;
 
-        public static void LoadProfiles(this StudyGroup group)
+        public static void LoadProfiles(StudyGroup group)
         {
             void TryLoad(ElimpUser user, int depthLevel)
             {

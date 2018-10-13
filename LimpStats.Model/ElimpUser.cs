@@ -13,13 +13,10 @@ namespace LimpStats.Model
             {
                 UserProfileResult.Add(i, 0);
             }
-            GridConteinsId = new List<int>();
         }
 
 
         public string Username { get; set; }
-        //TODO: remove
-        public List<int> GridConteinsId { get; set; }
         public Dictionary<int, int> UserProfileResult { get; set; }
 
         public int CompletedTaskCount()

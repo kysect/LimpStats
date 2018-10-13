@@ -8,7 +8,6 @@ namespace LimpStats.Database
     public static class JsonBackupManager
     {
         private const string FilePath = @"Info.json";
-        private const string FilePathUserGroup = "Cards.json";
 
         private static void CheckFileExist(string filePath)
         {
@@ -29,29 +28,26 @@ namespace LimpStats.Database
             File.WriteAllText(FilePath, jsonString);
         }
 
-        public static void SaveToJsonOne(ElimpUser newUser, int id)
+        #region Card data
+
+        public static StudyGroup LoadCardUserList(string cardTitle)
         {
-            CheckFileExist(FilePath);
-
-            string jsonData = File.ReadAllText(FilePath);
-            List<ElimpUser> userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonData) ?? new List<ElimpUser>();
-            ElimpUser user = userList.Find(e => e.Username == newUser.Username);
-
-            if (user != null)
-            {
-                userList.Remove(user);
-                user.GridConteinsId.Add(id);
-                userList.Add(user);
-            }
-            else
-            {
-                newUser.GridConteinsId.Add(id);
-                userList.Add(newUser);
-            }
-
-            jsonData = JsonConvert.SerializeObject(userList);
-            File.WriteAllText(FilePath, jsonData);
+            string filePath = $"card_{cardTitle}.json";
+            CheckFileExist(filePath);
+            string jsonData = File.ReadAllText(filePath);
+            StudyGroup group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
+            return group;
         }
+
+        public static void SaveCardUserList(StudyGroup group, string cardTitle)
+        {
+            string filePath = $"card_{cardTitle}.json";
+            string jsonString = JsonConvert.SerializeObject(group);
+            File.WriteAllText(filePath, jsonString);
+        }
+
+        #endregion
+
 
         public static List<ElimpUser> LoadFromJson()
         {

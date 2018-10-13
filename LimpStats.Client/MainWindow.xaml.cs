@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using LimpStats.Client.CustomControls;
+using LimpStats.Model;
 
 namespace LimpStats.Client
 {
@@ -13,15 +14,23 @@ namespace LimpStats.Client
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            var f = new InitializationCardWindow();
+            var f = new InitializationCardWindow(new StudyGroup());
             f.ShowDialog();
         }
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            Panel.Children.Add(new StudentGroupPreview(Panel.Children.OfType<StudentGroupPreview>().Count(), "Name"));
+            Panel.Children.Add(new StudentGroupPreview(this, "Name"));
+            PanelViewer.ScrollToRightEnd();
+        }
+
+        private void LoadFromFile_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            var preview = new StudentGroupPreview(this, FilePath.Text);
+            preview.Update();
+            Panel.Children.Add(preview);
             PanelViewer.ScrollToRightEnd();
         }
     }

@@ -15,9 +15,6 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var a = new MainWindow();
-            //TODO: wtf??o_O
-            a.OnClick_UpdatePanel(sender, e);
         }
     }
 }

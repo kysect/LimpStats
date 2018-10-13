@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.Models;
-using LimpStats.Client.Services;
 using LimpStats.Client.Tools;
+using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 
@@ -13,44 +13,52 @@ namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupPreview : UserControl
     {
-        private readonly ProblemPackInfo _pack =
-            new ProblemPackInfo("name", InstanceGenerator.TaskPackStorage.TasksAGroup);
+        public int Id { get; }
 
-        public readonly int Id;
-        private StudyGroup _group;
+        private static int _totalCount = 0;
+        private readonly StudyGroup _group;
+        private readonly MainWindow _window;
 
-        public StudentGroupPreview(int id, string username)
+        public StudentGroupPreview(MainWindow mainWindow, string groupTitle)
         {
             InitializeComponent();
+            
+            Id = _totalCount;
+            GroupTitle = groupTitle;
+            CardTitle.Content = GroupTitle;
+            _window = mainWindow;
+            _totalCount++;
 
-            _group = new StudyGroup
+            _group = JsonBackupManager.LoadCardUserList(GroupTitle);
+            if (_group == null)
             {
-                UserList = new List<ElimpUser>(),
-                ProblemPackList = new List<ProblemPackInfo> {_pack}
-            };
-            //TODO
-            Id = id;
-            Username = username;
-            CardButton.Content = Username;
+                _group = new StudyGroup
+                {
+                    UserList = new List<ElimpUser>(),
+                    ProblemPackList = new List<ProblemPackInfo> { new ProblemPackInfo("name", TaskPackStorage.TasksAGroup) }
+                };
+            }
+
+            StudentList.SelectionChanged += ElimpUserStatistic;
         }
 
-        public string Username { get; }
+        public string GroupTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
             Task.Run(() => Update());
+            JsonBackupManager.SaveCardUserList(_group, GroupTitle);
         }
 
-        private void Update()
+        public void Update()
         {
-            _group = InstanceGenerator.GenerateTemplateGroup(Id);
-
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
-            IEnumerable<ProfilePreviewData> studentsData = MainWindowService.LoadProfilePreview(_group);
-            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
-            ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
 
-            StudentList.SelectionChanged += ElimpUserStatistic;
+            MultiThreadParser.LoadProfiles(_group);
+            IEnumerable<ProfilePreviewData> studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+
+            ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
         }
 
         private void ElimpUserStatistic(object sender, SelectionChangedEventArgs e)
@@ -66,20 +74,16 @@ namespace LimpStats.Client.CustomControls
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new InitializationCardWindow();
+            var f = new InitializationCardWindow(_group);
             f.ShowDialog();
-            var user = new ElimpUser(f.LoginTextBox.Text);
-            JsonBackupManager.SaveToJsonOne(user, Id);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            var a = new MainWindow();
-            //TODO: словил ошибку, что не id не найден
-            var element = a.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
+            var element = _window.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
             if (element != null)
             {
-                a.Panel.Children.Remove(element);
+                _window.Panel.Children.Remove(element);
             }
         }
     }
