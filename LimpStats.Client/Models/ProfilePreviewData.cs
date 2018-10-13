@@ -1,4 +1,9 @@
-﻿namespace LimpStats.Client.Models
+﻿using System.Collections.Generic;
+using System.Linq;
+using LimpStats.Core;
+using LimpStats.Model;
+
+namespace LimpStats.Client.Models
 {
     public class ProfilePreviewData
     {
@@ -13,6 +18,13 @@
         public override string ToString()
         {
             return $"{Username} [{Points}]";
+        }
+
+        public static IEnumerable<ProfilePreviewData> GetProfilePreview(StudyGroup group)
+        {
+            return group
+                .GetTotalPoints()
+                .Select(res => new ProfilePreviewData(res.Username, res.Points));
         }
     }
 }

@@ -10,30 +10,26 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
-  
     mc:Ignorable="d">
     <Grid Background="#202020">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <ScrollViewer
-            Grid.Column="0"
             Grid.RowSpan="2"
-            Name="PanelViewergorbuttons"
-            Width="350"
+            Grid.Column="0"
+            Width="250"
             HorizontalAlignment="Left"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility= "Visible"/>
+            VerticalScrollBarVisibility="Visible" />
 
-        <StackPanel
-            VerticalAlignment="Stretch"
-            Grid.Column="1">
+        <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
             <StackPanel
+                Height="40"
                 VerticalAlignment="Top"
-                Orientation="Horizontal"
-                Height="80">
+                Orientation="Horizontal">
                 <Button
                     Width="70"
                     Height="30"
@@ -41,11 +37,24 @@
                     Content="Add list"
                     RenderTransformOrigin="0.5,0.5" />
                 <Button
-                    Content="Open window"
                     Width="70"
                     Height="30"
-                    Click="button1_Click"
+                    Click="Button1_Click"
+                    Content="Open window"
+                    IsEnabled="False"
                     RenderTransformOrigin="0.5,0.5" />
+                <Button
+                    Width="75"
+                    Height="30"
+                    Click="LoadFromFile_ButtonClick"
+                    Content="Button" />
+                <TextBox
+                    Name="FilePath"
+                    Width="150"
+                    Height="30"
+                    VerticalContentAlignment="Center"
+                    Text="TextBox"
+                    TextWrapping="Wrap" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"
@@ -53,9 +62,9 @@
                 HorizontalScrollBarVisibility="Visible"
                 VerticalScrollBarVisibility="Disabled">
                 <StackPanel
-                    MinHeight="400"
-                    MinWidth="300"
                     x:Name="Panel"
+                    MinWidth="300"
+                    MinHeight="400"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" />

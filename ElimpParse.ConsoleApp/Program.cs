@@ -12,7 +12,7 @@ namespace ElimpParse.ConsoleApp
         static void Main(string[] args)
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadProfiles();
+            MultiThreadParser.LoadProfiles(group);
 
             FinalTest(group);
             LoadTotalPoints(group);

@@ -1,27 +1,58 @@
-﻿<UserControl x:Class="LimpStats.Client.CustomControls.StudentGroupPreview"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
-             mc:Ignorable="d" 
-             Width="200"
-             d:DesignHeight="250">
+﻿<UserControl
+    x:Class="LimpStats.Client.CustomControls.StudentGroupPreview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="200"
+    d:DesignHeight="250"
+    mc:Ignorable="d">
     <Canvas>
-        <Button x:Name="UpdateButton" Content="🔄" Click="ButtonClick_Update" HorizontalAlignment="Left" Width="25" Height="25" Canvas.Left="175"/>
-        <Button x:Name="CardButton" Content="" Click="ButtonClick_Update" Width="159" Height="25"/>
-        <Button x:Name="AddUserButton" Content="AddUser" Click="AddUserButton_OnClick" Width="200" Height="19" Canvas.Top="25"/>
-        <ListBox x:Name="StudentList" MinHeight="50" Width="200" Canvas.Top="44" Height="206"/>
-        <Menu Height="25" VerticalAlignment="Top" Canvas.Left="159" Width="16">
-            <MenuItem Header="⋮" Height="25" Width="18" RenderTransformOrigin="0.05,0.56">
+        <Button
+            Name="UpdateButton"
+            Canvas.Right="0"
+            Width="25"
+            Height="25"
+            HorizontalAlignment="Left"
+            Click="ButtonClick_Update"
+            Content="🔄" />
+        <Label
+            Name="CardTitle"
+            Width="159"
+            Height="25"
+            Background="Azure"
+            Content="GroupTitle" />
+        <Button
+            Canvas.Top="25"
+            Width="200"
+            Height="19"
+            Click="AddUserButton_OnClick"
+            Content="AddUser" />
+        <ListBox
+            Name="StudentList"
+            Canvas.Top="44"
+            Width="200"
+            Height="206"
+            MinHeight="50" />
+        <Menu
+            Canvas.Right="25"
+            Width="15"
+            Height="25"
+            VerticalAlignment="Top">
+            <MenuItem
+                Width="18"
+                Height="25"
+                Header="⋮"
+                RenderTransformOrigin="0.05,0.56">
                 <MenuItem Header="Rename" />
-                <MenuItem Header="Sort by" >
-                    <MenuItem Header="Nickname"/>
+                <MenuItem Header="Sort by">
+                    <MenuItem Header="Nickname" />
                     <MenuItem Header="Name" />
                     <MenuItem Header="Points" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Delete card" Click="ButtonDeleteCard" />
+                <MenuItem Click="ButtonDeleteCard" Header="Delete card" />
             </MenuItem>
         </Menu>
     </Canvas>

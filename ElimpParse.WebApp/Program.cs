@@ -19,7 +19,7 @@ namespace ElimpParse.WebApp
         private static string LoadAllPackInfo()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadProfiles();
+            MultiThreadParser.LoadProfiles(group);
             var res = group.GetAllPackResult();
                     
             return JsonConvert.SerializeObject(res);
@@ -28,7 +28,7 @@ namespace ElimpParse.WebApp
         private static string FinalTest()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
-            group.LoadProfiles();
+            MultiThreadParser.LoadProfiles(group);
             var res = group.GetPackResult(group.ProblemPackList.Last());
             
             return JsonConvert.SerializeObject(res);

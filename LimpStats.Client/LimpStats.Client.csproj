@@ -73,8 +73,6 @@
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
-    <Compile Include="Services\InstanceGenerator.cs" />
-    <Compile Include="Services\MainWindowService.cs" />
     <Compile Include="Tools\ThreadingTools.cs" />
     <Page Include="CustomControls\StudentGroupInitializationBlock.xaml">
       <SubType>Designer</SubType>
