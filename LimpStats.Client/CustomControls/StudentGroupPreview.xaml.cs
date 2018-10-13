@@ -68,7 +68,7 @@ namespace LimpStats.Client.CustomControls
         {
             var f = new InitializationCardWindow();
             f.ShowDialog();
-            var user = new ElimpUser(f.LoginTextBox.Text, "enosha");
+            var user = new ElimpUser(f.LoginTextBox.Text);
             JsonBackupManager.SaveToJsonOne(user, Id);
         }
 

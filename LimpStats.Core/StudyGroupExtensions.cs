@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LimpStats.Core.Parsers;
 using LimpStats.Model;
 
 namespace LimpStats.Core
@@ -16,7 +17,7 @@ namespace LimpStats.Core
 
         public static List<ProblemPackResult> GetPackResult(this StudyGroup group, ProblemPackInfo taskPack)
         {
-            //TODO: возможно это фикс
+            //TODO: возможно это фикс (костыль)
             group.LoadProfiles();
             return group
                 .UserList

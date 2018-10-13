@@ -11,7 +11,7 @@ namespace LimpStats.Client.Services
         //public static IEnumerable<UserCard> GetCardWithEnosha()
         //{
         //    var group = InstanceGenerator.GenerateTemplateGroup(0);
-        //    group.UserList.Add(new ElimpUser { Login = "Enosha" });
+        //    group.UserList.Add(new ElimpUser { Username = "Enosha" });
         //    group.LoadProfiles();
         //    var res = group
         //        .GetTotalPoints()

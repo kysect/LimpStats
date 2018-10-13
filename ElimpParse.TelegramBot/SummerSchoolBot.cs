@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LimpStats.Core;
+using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -99,7 +100,7 @@ namespace ElimpParse.TelegramBot
                 throw new NotImplementedException();
                 var username = e.Message.Text.Replace("/adduser -", "");
                 var elimpUser = new ElimpUser(username);
-                Parser.LoadUserData(elimpUser);
+                Parser.LoadProfileData(elimpUser);
                 foreach (KeyValuePair<int, int> valuePair in elimpUser.UserProfileResult)
                 {
                     //UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
@@ -112,7 +113,7 @@ namespace ElimpParse.TelegramBot
 
         private static string GenerateMessage(List<ElimpUser> users)
         {
-            users.ForEach(Parser.LoadUserData);
+            users.ForEach(Parser.LoadProfileData);
             var res = users
                 .OrderByDescending(e => e.CompletedTaskCount())
                 .Select(FormatPrint.GenerateDayResults);

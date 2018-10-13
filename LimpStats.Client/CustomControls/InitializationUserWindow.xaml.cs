@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using LimpStats.Core.Parsers;
 
 namespace LimpStats.Client.CustomControls
 {
@@ -14,7 +15,7 @@ namespace LimpStats.Client.CustomControls
         private void ValidateLogin(object sender, EventArgs e)
         {
            
-            if(Core.Parser.LoginValidation(LoginTextBox.Text))
+            if(Parser.IsUserExist(LoginTextBox.Text))
             {
                 MessageBox.Show($"{LoginTextBox.Text} !");
             }
@@ -31,7 +32,7 @@ namespace LimpStats.Client.CustomControls
             //TODO: Каждый раз запускается таск, но если я сразу вверду два символа, то будет одновременно
             //два запроса + ты не знаешь, какой из низ быстрее выполниться: с одной буквой
             //или с двумя. Все же лучше сделать кнопку "Check"
-            bool isExist = await Task.Run(() => Core.Parser.IsUserExist(username));
+            bool isExist = await Task.Run(() => Parser.IsUserExist(username));
             if (isExist)
             {
                 AddUserButton.Visibility = Visibility.Visible;

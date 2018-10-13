@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Telegram.Bot.Types;
 using LimpStats.Database;
 
 namespace ElimpParse.TelegramBot
