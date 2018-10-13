@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using LimpStats.Core;
+using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 
@@ -15,9 +14,9 @@ namespace ElimpParse.ConsoleApp
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
             group.LoadProfiles();
 
-            //  FinalTest(group);
+            FinalTest(group);
             LoadTotalPoints(group);
-         //   LoadAllPackInfo(group);
+            LoadAllPackInfo(group);
         }
 
         private static void FinalTest(StudyGroup group)

@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using LimpStats.Model;
 
-namespace LimpStats.Core
+namespace LimpStats.Core.Parsers
 {
     public static class Parser
     {
         public static bool IsUserExist(string username)
         {
             var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{username}";
+            string link = $"https://www.e-olymp.com/ru/users/{username}";
 
-            return (client.Load(link).Text.Contains($"{username}"));
+            return client.Load(link).Text.Contains($"{username}");
         }
-        public static int CompletedTaskCount(string username)
+
+        public static int LoadSolutionCount(string username)
         {
             var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{username}";
+            string link = $"https://www.e-olymp.com/ru/users/{username}";
 
-            var floatRow = client.Load(link)
+            HtmlNode floatRow = client.Load(link)
                 .DocumentNode
                 .SelectSingleNode("//*[contains(@class,'eo-flex-row')]");
 
@@ -31,27 +31,17 @@ namespace LimpStats.Core
                 .InnerText);
         }
 
-        public static bool LoginValidation(string username)
+        public static void LoadProfileData(ElimpUser user)
         {
             var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{username}";
-
-            if(client.Load(link).Text.Contains($"{username}"))
-                return true;
-            return false;
-        }
-
-        public static void LoadUserData(ElimpUser user)
-        {
-            var client = new HtmlWeb();
-            var link = $"https://www.e-olymp.com/ru/users/{user.Login}/punchcard";
+            string link = $"https://www.e-olymp.com/ru/users/{user.Username}/punchcard";
 
             Dictionary<int, int> userResult = client.Load(link)
                 .GetElementbyId("punch-card")
                 .ChildNodes
                 .Where(n => n.GetAttributeValue("href", "empty") != "empty")
                 .Where(n => n.Attributes["href"].Value.Substring(0, 13) == "/ru/problems/")
-                .Select(n => (TaskIdFromLink(n.Attributes["href"].Value),TitleToResult(n.Attributes["title"].Value)))
+                .Select(n => (TaskIdFromLink(n.Attributes["href"].Value), TitleToResult(n.Attributes["title"].Value)))
                 .ToDictionary(pair => pair.Item1, pair => pair.Item2);
 
             user.UserProfileResult = userResult;
@@ -59,7 +49,7 @@ namespace LimpStats.Core
 
         private static int TitleToResult(string taskTitle)
         {
-            var stringRes = taskTitle.Split(',') //["title"], ["{count}%"]
+            string stringRes = taskTitle.Split(',') //["title"], ["{count}%"]
                 .Last() //"{count}%"
                 .Replace("%", "");
             return int.Parse(stringRes);
@@ -67,7 +57,7 @@ namespace LimpStats.Core
 
         private static int TaskIdFromLink(string link)
         {
-            var stringRes = link.Split('/')
+            string stringRes = link.Split('/')
                 .Last();
             return int.Parse(stringRes);
         }

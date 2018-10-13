@@ -35,7 +35,7 @@ namespace LimpStats.Database
 
             string jsonData = File.ReadAllText(FilePath);
             List<ElimpUser> userList = JsonConvert.DeserializeObject<List<ElimpUser>>(jsonData) ?? new List<ElimpUser>();
-            ElimpUser user = userList.Find(e => e.Login == newUser.Login);
+            ElimpUser user = userList.Find(e => e.Username == newUser.Username);
 
             if (user != null)
             {
