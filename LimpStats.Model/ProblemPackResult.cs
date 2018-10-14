@@ -6,7 +6,7 @@ namespace LimpStats.Model
 {
     public class ProblemPackResult
     {
-        public ProblemPackResult(ElimpUser user, ProblemPackInfo problemPack)
+        public ProblemPackResult(LimpUser user, ProblemPackInfo problemPack)
         {
             Username = user.Username;
             Problems = problemPack;

@@ -9,13 +9,13 @@ namespace LimpStats.Model
 
         }
 
-        public StudyGroup(List<ElimpUser> userList)
+        public StudyGroup(List<LimpUser> userList)
         {
             UserList = userList;
             ProblemPackList = new List<ProblemPackInfo>();
         }
 
-        public List<ElimpUser> UserList { get; set; }
+        public List<LimpUser> UserList { get; set; }
         public List<ProblemPackInfo> ProblemPackList { get; set; }
     }
 }

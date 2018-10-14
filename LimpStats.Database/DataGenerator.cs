@@ -7,27 +7,27 @@ namespace LimpStats.Database
     {
         public static StudyGroup GenerateTemplateGroup()
         {
-            var users = new List<ElimpUser>
+            var users = new List<LimpUser>
             {
-                new ElimpUser("Andrey2005"),
-                new ElimpUser("DDsov"),
-                new ElimpUser("Den4758"),
-                new ElimpUser("Gladtoseeyou"),
-                new ElimpUser("Koteika"),
-                new ElimpUser("liza.898"),
-                new ElimpUser("Mr.Hovik"),
-                new ElimpUser("NastyaVadko284"),
-                new ElimpUser("papercut6820"),
-                new ElimpUser("Pozitiv4ik"),
-                new ElimpUser("prostoroma"),
-                new ElimpUser("Swoop"),
-                new ElimpUser("v_7946"),
-                new ElimpUser("Versuzzz"),
-                new ElimpUser("Xsqten"),
-                new ElimpUser("Enosha"),
-                new ElimpUser("tur4ik"),
-                new ElimpUser("DiMaNsKi"),
-                new ElimpUser("cerepawka")
+                new LimpUser("Andrey2005"),
+                new LimpUser("DDsov"),
+                new LimpUser("Den4758"),
+                new LimpUser("Gladtoseeyou"),
+                new LimpUser("Koteika"),
+                new LimpUser("liza.898"),
+                new LimpUser("Mr.Hovik"),
+                new LimpUser("NastyaVadko284"),
+                new LimpUser("papercut6820"),
+                new LimpUser("Pozitiv4ik"),
+                new LimpUser("prostoroma"),
+                new LimpUser("Swoop"),
+                new LimpUser("v_7946"),
+                new LimpUser("Versuzzz"),
+                new LimpUser("Xsqten"),
+                new LimpUser("Enosha"),
+                new LimpUser("tur4ik"),
+                new LimpUser("DiMaNsKi"),
+                new LimpUser("cerepawka")
             };
             users.AddRange(GetOldGeneration());
 
@@ -42,16 +42,16 @@ namespace LimpStats.Database
             return group;
         }
 
-        private static List<ElimpUser> GetOldGeneration()
+        private static List<LimpUser> GetOldGeneration()
         {
-            return new List<ElimpUser>
+            return new List<LimpUser>
             {
-                //new ElimpUser("Strannik", "II место на области"),
-                //new ElimpUser("iNooByX", "III место на области"),
-                //new ElimpUser("Maxkolpak", "III место на городе"),
-                //new ElimpUser("krab397", "III место на облати"),
-                //new ElimpUser("i4happy", "I место на городе"),
-                //new ElimpUser("vlad986523", "II место на городе")
+                //new LimpUser("Strannik", "II место на области"),
+                //new LimpUser("iNooByX", "III место на области"),
+                //new LimpUser("Maxkolpak", "III место на городе"),
+                //new LimpUser("krab397", "III место на облати"),
+                //new LimpUser("i4happy", "I место на городе"),
+                //new LimpUser("vlad986523", "II место на городе")
             };
         }
     }

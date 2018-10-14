@@ -11,7 +11,7 @@ namespace LimpStats.Core.Parsers
 
         public static void LoadProfiles(StudyGroup group)
         {
-            void TryLoad(ElimpUser user, int depthLevel)
+            void TryLoad(LimpUser user, int depthLevel)
             {
                 depthLevel++;
                 if (depthLevel == MaxDepthLevel)
@@ -36,9 +36,9 @@ namespace LimpStats.Core.Parsers
             Parallel.ForEach(group.UserList, u => TryLoad(u, 0));
         }
 
-        public static List<(ElimpUser, int)> LoadSolutionCount(IEnumerable<ElimpUser> userList)
+        public static List<(LimpUser, int)> LoadSolutionCount(IEnumerable<LimpUser> userList)
         {
-            (ElimpUser, int) RecursiveExecute(ElimpUser user, int depthLevel)
+            (LimpUser, int) RecursiveExecute(LimpUser user, int depthLevel)
             {
                 depthLevel++;
                 if (depthLevel == MaxDepthLevel)

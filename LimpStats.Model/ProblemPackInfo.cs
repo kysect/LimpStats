@@ -11,7 +11,6 @@ namespace LimpStats.Model
             FullSolutionPoints = fullSolutionPoints;
         }
 
-        //TODO: remove set;
         public string PackTitle { get; set; }
         public List<int> ProblemIdList { get; set; }
         public int FullSolutionPoints { get; set; }
