@@ -5,7 +5,7 @@ namespace LimpStats.Client.Models
 {
     public class UserGroupCard
     {
-        public UserGroupCard(string name, List<ProblemPackInfo> problemPacks, List<ElimpUser> usersInGroup)
+        public UserGroupCard(string name, List<ProblemPackInfo> problemPacks, List<LimpUser> usersInGroup)
         {
             Name = name;
             ProblemPacks = problemPacks;
@@ -18,6 +18,6 @@ namespace LimpStats.Client.Models
         }
         public string Name { get; }
         public List<ProblemPackInfo> ProblemPacks { get; }
-        public List<ElimpUser> UsersInGroup { get; }
+        public List<LimpUser> UsersInGroup { get; }
     }
 }

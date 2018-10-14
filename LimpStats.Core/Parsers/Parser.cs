@@ -31,7 +31,7 @@ namespace LimpStats.Core.Parsers
                 .InnerText);
         }
 
-        public static void LoadProfileData(ElimpUser user)
+        public static void LoadProfileData(LimpUser user)
         {
             var client = new HtmlWeb();
             string link = $"https://www.e-olymp.com/ru/users/{user.Username}/punchcard";

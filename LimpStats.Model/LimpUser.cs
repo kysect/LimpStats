@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace LimpStats.Model
 {
-    public class ElimpUser
+    public class LimpUser
     {
-        public ElimpUser(string username)
+        public LimpUser(string username)
         {
             Username = username;
             UserProfileResult = new Dictionary<int, int>(10000);

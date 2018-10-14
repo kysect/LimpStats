@@ -33,10 +33,10 @@ namespace LimpStats.Core
             return output;
         }
 
-        public static string GenerateDayResults(ElimpUser user)
+        public static string GenerateDayResults(LimpUser user)
         {
-            List<ElimpUser> list = JsonBackupManager.LoadFromJson();
-            ElimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
+            List<LimpUser> list = JsonBackupManager.LoadFromJson();
+            LimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
 
             int completed = user.CompletedTaskCount() -
                             (currentUser?.CompletedTaskCount() ?? 0);

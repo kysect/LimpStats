@@ -21,7 +21,7 @@ namespace LimpStats.Client.CustomControls
             if (Parser.IsUserExist(username))
             {
                 MessageBox.Show($"{username} !");
-                _group.UserList.Add(new ElimpUser(username));
+                _group.UserList.Add(new LimpUser(username));
             }
             else
             {

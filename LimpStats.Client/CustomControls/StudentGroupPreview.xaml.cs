@@ -34,7 +34,7 @@ namespace LimpStats.Client.CustomControls
             {
                 _group = new StudyGroup
                 {
-                    UserList = new List<ElimpUser>(),
+                    UserList = new List<LimpUser>(),
                     ProblemPackList = new List<ProblemPackInfo> { new ProblemPackInfo("name", TaskPackStorage.TasksAGroup) }
                 };
             }

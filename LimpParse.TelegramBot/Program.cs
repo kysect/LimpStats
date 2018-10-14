@@ -1,13 +1,14 @@
 ﻿using System;
 using LimpStats.Database;
+using LimpStats.Model;
 
-namespace ElimpParse.TelegramBot
+namespace LimpParse.TelegramBot
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            var group = DataGenerator.GenerateTemplateGroup();
+            StudyGroup group = DataGenerator.GenerateTemplateGroup();
             var bot = new SummerSchoolBot(group);
             Console.ReadLine();
             bot.Bot.StopReceiving();

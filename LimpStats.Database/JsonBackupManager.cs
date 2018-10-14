@@ -20,7 +20,7 @@ namespace LimpStats.Database
             }
         }
     
-        public static void SaveToJson(List<ElimpUser> users)
+        public static void SaveToJson(List<LimpUser> users)
         {
             CheckFileExist(FilePath);
 
@@ -49,12 +49,12 @@ namespace LimpStats.Database
         #endregion
 
 
-        public static List<ElimpUser> LoadFromJson()
+        public static List<LimpUser> LoadFromJson()
         {
             CheckFileExist(FilePath);
 
             string jsonString = File.ReadAllText(FilePath);
-            return JsonConvert.DeserializeObject<List<ElimpUser>>(jsonString) ?? new List<ElimpUser>();
+            return JsonConvert.DeserializeObject<List<LimpUser>>(jsonString) ?? new List<LimpUser>();
         }
      }
 }

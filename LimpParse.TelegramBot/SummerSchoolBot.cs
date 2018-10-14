@@ -4,24 +4,24 @@ using System.Linq;
 using LimpStats.Core;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
+using LimpStats.Model;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using LimpStats.Model;
 
-namespace ElimpParse.TelegramBot
+namespace LimpParse.TelegramBot
 {
     public class SummerSchoolBot
     {
+        public static bool flag;
         private readonly StudyGroup _group;
         public readonly TelegramBotClient Bot;
-        public static bool flag;
         private bool _flag = true;
 
         public SummerSchoolBot(StudyGroup group)
         {
             _group = group;
-            Bot = new TelegramBotClient(Config.MazeBotToken);
+            Bot = new TelegramBotClient(Config.TelegramBotToken);
             Bot.OnMessage += OnNewMessage;
 
             Bot.StartReceiving();
@@ -29,14 +29,17 @@ namespace ElimpParse.TelegramBot
 
         private void OnNewMessage(object sender, MessageEventArgs e)
         {
-            if (e.Message.Type != MessageType.Text) return;
+            if (e.Message.Type != MessageType.Text)
+            {
+                return;
+            }
 
             var hour = 09;
             var minute = 30;
             if (hour == DateTime.Now.Hour && DateTime.Now.Minute - minute <= 10 && _flag)
             {
                 _flag = false;
-                var msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList);
+                string msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
                 JsonBackupManager.SaveToJson(_group.UserList);
             }
@@ -76,15 +79,15 @@ namespace ElimpParse.TelegramBot
                     || e.Message.Text == "B"
                     || e.Message.Text == "C"
                     || e.Message.Text == "D"
-                    ||e.Message.Text == "E"
+                    || e.Message.Text == "E"
                     || e.Message.Text == "F")
                 {
-                    var s = e.Message.Text;
-                    var a = _group.ProblemPackList.First(pack => pack.PackTitle == s);
+                    string s = e.Message.Text;
+                    ProblemPackInfo a = _group.ProblemPackList.First(pack => pack.PackTitle == s);
 
                     //TODO: user Group.GetPackResult
                     //string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";
-                    var g = string.Empty;
+                    string g = string.Empty;
 
                     Bot.SendTextMessageAsync(e.Message.Chat.Id, g, ParseMode.Html).Wait();
                     Console.WriteLine("good");
@@ -98,23 +101,21 @@ namespace ElimpParse.TelegramBot
             if (e.Message.Text.Contains("/adduser"))
             {
                 throw new NotImplementedException();
-                var username = e.Message.Text.Replace("/adduser -", "");
-                var elimpUser = new ElimpUser(username);
+                string username = e.Message.Text.Replace("/adduser -", "");
+                var elimpUser = new LimpUser(username);
                 Parser.LoadProfileData(elimpUser);
                 foreach (KeyValuePair<int, int> valuePair in elimpUser.UserProfileResult)
                 {
                     //UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
                 }
-
             }
-
         }
 
 
-        private static string GenerateMessage(List<ElimpUser> users)
+        private static string GenerateMessage(List<LimpUser> users)
         {
             users.ForEach(Parser.LoadProfileData);
-            var res = users
+            IEnumerable<string> res = users
                 .OrderByDescending(e => e.CompletedTaskCount())
                 .Select(FormatPrint.GenerateDayResults);
             return $"<code>{string.Join("\n", res)}</code>";
