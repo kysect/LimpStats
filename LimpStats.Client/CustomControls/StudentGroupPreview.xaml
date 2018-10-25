@@ -17,7 +17,7 @@
             HorizontalAlignment="Left"
             Click="ButtonClick_Update"
             Content="🔄" />
-        <Label
+        <Button
             Name="CardTitle"
             Width="159"
             Height="25"

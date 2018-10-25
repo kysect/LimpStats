@@ -8,6 +8,7 @@ namespace LimpStats.Database
     public static class JsonBackupManager
     {
         private const string FilePath = @"Info.json";
+        private const string CardsName = @"Cards.json";
 
         private static void CheckFileExist(string filePath)
         {
@@ -38,9 +39,19 @@ namespace LimpStats.Database
             StudyGroup group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
             return group;
         }
+        public static void SaveCardName(string cardTitle)
+        {
+            CheckFileExist(CardsName);
+            var jsonData =  File.ReadAllText(CardsName);
+            List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
+            if(names.Contains(cardTitle) == false)
+                names.Add(cardTitle);
+            File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
+        }
 
         public static void SaveCardUserList(StudyGroup group, string cardTitle)
         {
+            SaveCardName(cardTitle);
             string filePath = $"card_{cardTitle}.json";
             string jsonString = JsonConvert.SerializeObject(group);
             File.WriteAllText(filePath, jsonString);

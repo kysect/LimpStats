@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Policy;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using LimpStats.Client.CustomControls;
 using LimpStats.Model;
 
@@ -8,7 +11,6 @@ namespace LimpStats.Client
 {
     public partial class MainWindow : Window
     {
-        //TODO: если нет инета, крашится прога
         public MainWindow()
         {
             InitializeComponent();
@@ -22,7 +24,8 @@ namespace LimpStats.Client
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            Panel.Children.Add(new StudentGroupPreview(this, "Name"));
+            Panel.Children.Add(new StudentGroupPreview(this, FilePath.Text));
+            FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();
         }
 
@@ -32,6 +35,26 @@ namespace LimpStats.Client
             preview.Update();
             Panel.Children.Add(preview);
             PanelViewer.ScrollToRightEnd();
+        }
+        private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox1_OnGotFocus;
+        }
+
+        private void FilePath_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            AddList.IsEnabled = tb.Text != string.Empty;
+        }
+
+        private void FilePath_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                OnClick_UpdatePanel(new object(), new RoutedEventArgs());
+            }
         }
     }
 }

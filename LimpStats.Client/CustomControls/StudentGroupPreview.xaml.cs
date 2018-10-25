@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,6 +47,11 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
+            if (ConnectionAvailable("https://www.google.com") == false)
+            {
+                MessageBox.Show("Internet connection error");
+                return;
+            }
             Task.Run(() => Update());
             JsonBackupManager.SaveCardUserList(_group, GroupTitle);
         }
@@ -84,6 +90,29 @@ namespace LimpStats.Client.CustomControls
             if (element != null)
             {
                 _window.Panel.Children.Remove(element);
+            }
+        }
+        public bool ConnectionAvailable(string strServer)
+        {
+            try
+            {
+                HttpWebRequest reqFP = (HttpWebRequest)HttpWebRequest.Create(strServer);
+
+                HttpWebResponse rspFP = (HttpWebResponse)reqFP.GetResponse();
+                if (HttpStatusCode.OK == rspFP.StatusCode)
+                {
+                    rspFP.Close();
+                    return true;
+                }
+                else
+                {
+                    rspFP.Close();
+                    return false;
+                }
+            }
+            catch (WebException)
+            {
+                return false;
             }
         }
     }
