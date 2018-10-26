@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Policy;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls;
+using LimpStats.Database;
 using LimpStats.Model;
 
 namespace LimpStats.Client
 {
     public partial class MainWindow : Window
     {
+        LoadWindow f = new LoadWindow();
         public MainWindow()
         {
+            f.Show();
             InitializeComponent();
+            PanelViewer_OnLoaded(new object(), new RoutedEventArgs());
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -28,13 +33,13 @@ namespace LimpStats.Client
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();
         }
-
-        private void LoadFromFile_ButtonClick(object sender, RoutedEventArgs e)
+        private void LoadFromFile_ButtonClick(string title)
         {
-            var preview = new StudentGroupPreview(this, FilePath.Text);
+            var preview = new StudentGroupPreview(this, title);
             preview.Update();
             Panel.Children.Add(preview);
             PanelViewer.ScrollToRightEnd();
+
         }
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
         {
@@ -55,6 +60,16 @@ namespace LimpStats.Client
             {
                 OnClick_UpdatePanel(new object(), new RoutedEventArgs());
             }
+        }
+
+        private void PanelViewer_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var s = JsonBackupManager.LoadCardName();
+            foreach (var title in s)
+            {
+                LoadFromFile_ButtonClick(title);
+            }
+            f.Close();
         }
     }
 }

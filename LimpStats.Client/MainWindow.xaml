@@ -11,6 +11,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
+    
     <Grid Background="#202020">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
@@ -37,11 +38,6 @@
                     Content="Open window"
                     IsEnabled="False"
                     RenderTransformOrigin="0.5,0.5" />
-                <Button
-                    Width="75"
-                    Height="30"
-                    Click="LoadFromFile_ButtonClick"
-                    Content="Button" />
 
                 <Button
                     Name="AddList"
