@@ -29,7 +29,7 @@ namespace LimpStats.Client.CustomControls
             CardTitle.Content = GroupTitle;
             _window = mainWindow;
             _totalCount++;
-
+            JsonBackupManager.SaveCardName(groupTitle);
             _group = JsonBackupManager.LoadCardUserList(GroupTitle);
             if (_group == null)
             {
