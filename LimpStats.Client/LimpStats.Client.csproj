@@ -64,6 +64,9 @@
     <Compile Include="CustomControls\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\StudentGroupBlock.xaml.cs">
+      <DependentUpon>StudentGroupBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\StudentGroupInitializationBlock.xaml.cs">
       <DependentUpon>StudentGroupInitializationBlock.xaml</DependentUpon>
     </Compile>
@@ -76,8 +79,15 @@
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
+    <Compile Include="ProblemPackWindow.xaml.cs">
+      <DependentUpon>ProblemPackWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\ThreadingTools.cs" />
     <Page Include="CustomControls\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\StudentGroupBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,6 +115,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProblemPackWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

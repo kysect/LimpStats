@@ -18,16 +18,16 @@ namespace LimpStats.Client.CustomControls
 
         private static int _totalCount = 0;
         private readonly StudyGroup _group;
-        private readonly MainWindow _window;
+        private readonly StudentGroupBlock _studentGroupBlock;
 
-        public StudentGroupPreview(MainWindow mainWindow, string groupTitle)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle)
         {
             InitializeComponent();
             
             Id = _totalCount;
             GroupTitle = groupTitle;
             CardTitle.Content = GroupTitle;
-            _window = mainWindow;
+            _studentGroupBlock = studentGroupBlock;
             _totalCount++;
             JsonBackupManager.SaveCardName(groupTitle);
             _group = JsonBackupManager.LoadCardUserList(GroupTitle);
@@ -86,17 +86,18 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            var element = _window.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
+            var element =  _studentGroupBlock.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
             if (element != null)
             {
-                _window.Panel.Children.Remove(element);
+                _studentGroupBlock.Panel.Children.Remove(element);
+                JsonBackupManager.DeleteCard(element.GroupTitle);
             }
         }
         public bool ConnectionAvailable(string strServer)
         {
             try
             {
-                HttpWebRequest reqFP = (HttpWebRequest)HttpWebRequest.Create(strServer);
+                HttpWebRequest reqFP = (HttpWebRequest)WebRequest.Create(strServer);
 
                 HttpWebResponse rspFP = (HttpWebResponse)reqFP.GetResponse();
                 if (HttpStatusCode.OK == rspFP.StatusCode)
