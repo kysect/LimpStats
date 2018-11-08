@@ -22,10 +22,29 @@ namespace LimpStats.Client.CustomControls
     /// </summary>
     public partial class StudentGroupBlock : UserControl
     {
-        public StudentGroupBlock()
+        private SumVar _sumVar;
+
+        public StudentGroupBlock(SumVar sumVar)
         {
             InitializeComponent();
+            _sumVar = sumVar;
+
         }
+        public StudentGroupBlock(SumVar sumVar, string cardTitle)
+        {
+            InitializeComponent();
+            _sumVar = sumVar;
+            var users = JsonBackupManager.LoadCardUserList(cardTitle);
+            foreach (var pack in users.ProblemPackList)
+            {
+                var k = (StackPanel)FindName("Panel");
+                k.Children.Add(new StudentGroupPreview(this, users, pack.PackTitle));
+                FilePath.Text = string.Empty;
+                PanelViewer.ScrollToRightEnd();
+            }
+        }
+
+
         private void Button1_Click(object sender, EventArgs e)
         {
             var f = new InitializationCardWindow(new StudyGroup());
@@ -35,9 +54,11 @@ namespace LimpStats.Client.CustomControls
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             var k = (StackPanel)FindName("Panel");
-            k.Children.Add(new StudentGroupPreview(this, FilePath.Text));
+            k.Children.Add(new StudentGroupPreview(this, FilePath.Text, _sumVar));
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();
+
+        
         }
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
         {

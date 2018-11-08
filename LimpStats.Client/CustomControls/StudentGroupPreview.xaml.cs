@@ -19,8 +19,9 @@ namespace LimpStats.Client.CustomControls
         private static int _totalCount = 0;
         private readonly StudyGroup _group;
         private readonly StudentGroupBlock _studentGroupBlock;
+        private readonly SumVar _sumVar;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, SumVar sumVar)
         {
             InitializeComponent();
             
@@ -29,8 +30,32 @@ namespace LimpStats.Client.CustomControls
             CardTitle.Content = GroupTitle;
             _studentGroupBlock = studentGroupBlock;
             _totalCount++;
+            _sumVar = sumVar;
             JsonBackupManager.SaveCardName(groupTitle);
             _group = JsonBackupManager.LoadCardUserList(GroupTitle);
+            if (_group == null)
+            {
+                _group = new StudyGroup
+                {
+                    UserList = new List<LimpUser>(),
+                    ProblemPackList = new List<ProblemPackInfo> { new ProblemPackInfo("name", TaskPackStorage.TasksAGroup) }
+                };
+            }
+
+            StudentList.SelectionChanged += ElimpUserStatistic;
+        }
+
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, StudyGroup users, string packTitle)
+        {
+            InitializeComponent();
+
+            Id = _totalCount;
+            GroupTitle = packTitle;
+            CardTitle.Content = GroupTitle;
+            _studentGroupBlock = studentGroupBlock;
+            _totalCount++;
+            _sumVar = SumVar.Pack;
+            _group = users;
             if (_group == null)
             {
                 _group = new StudyGroup
@@ -61,7 +86,15 @@ namespace LimpStats.Client.CustomControls
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
 
             MultiThreadParser.LoadProfiles(_group);
-            IEnumerable<ProfilePreviewData> studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
+            if (_sumVar == SumVar.AllPack)
+            {
+                studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            }
+            else
+            {
+               studentsData = ProfilePreviewData.GetProfilePackPreview(_group, CardTitle.Content.ToString());
+            }
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
 
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
@@ -115,6 +148,14 @@ namespace LimpStats.Client.CustomControls
             {
                 return false;
             }
+        }
+
+        private void CardTitle_OnClick(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Hidden;
+            var f = new StudentGroupBlock(SumVar.Pack, CardTitle.Content.ToString());
+            var k = (StackPanel)_studentGroupBlock.Panel;
+            k.Children.Add(f);
         }
     }
 }

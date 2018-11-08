@@ -19,6 +19,7 @@
             Content="🔄" />
         <Button
             Name="CardTitle"
+            Click="CardTitle_OnClick"
             Width="159"
             Height="25"
             Background="Azure"

@@ -64,6 +64,9 @@
     <Compile Include="CustomControls\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\NavigateButton.xaml.cs">
+      <DependentUpon>NavigateButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\StudentGroupBlock.xaml.cs">
       <DependentUpon>StudentGroupBlock.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
     </Compile>
     <Compile Include="Tools\ThreadingTools.cs" />
     <Page Include="CustomControls\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\NavigateButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
