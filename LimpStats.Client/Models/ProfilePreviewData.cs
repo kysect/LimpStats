@@ -26,5 +26,12 @@ namespace LimpStats.Client.Models
                 .GetTotalPoints()
                 .Select(res => new ProfilePreviewData(res.Username, res.Points));
         }
+        public static IEnumerable<ProfilePreviewData> GetProfilePackPreview(StudyGroup group, string packtitle)
+        {
+            var pack =   group.ProblemPackList.Find(e => e.PackTitle == packtitle);
+            return group
+                   .GetPackResult(pack)
+                   .Select(res => new ProfilePreviewData(res.Username, res.TotalPoints));
+        }
     }
 }

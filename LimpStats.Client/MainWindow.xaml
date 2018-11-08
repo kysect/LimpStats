@@ -24,14 +24,24 @@
             VerticalAlignment="Top"
             Orientation="Horizontal" Grid.Column="1" Margin="11,0,-510,0"/>
         <ScrollViewer
+            x:Name="ScrollViewer"
             Grid.RowSpan="2"
             Grid.Column="0"
             Width="250"
             HorizontalAlignment="Left"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Visible" />
+            VerticalScrollBarVisibility="Visible"
+            >
+            <StackPanel
+                x:Name="ScrolPanel"
+                MinWidth="250"
+                MinHeight="400"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Orientation="Horizontal" Height="506" Width="210" />
+            </ScrollViewer>
 
-        <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
+            <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
             <StackPanel
                 Height="40"
                 VerticalAlignment="Top"
