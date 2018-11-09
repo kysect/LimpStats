@@ -18,11 +18,11 @@
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel
+        <Grid
             x:Name="StackPanel"
             Height="506"
             VerticalAlignment="Top"
-            Orientation="Horizontal" Grid.Column="1" Margin="11,0,-510,0"/>
+           Grid.Column="1" Margin="11,0,-510,0"/>
         <ScrollViewer
             x:Name="ScrollViewer"
             Grid.RowSpan="2"

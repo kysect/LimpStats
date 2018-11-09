@@ -79,6 +79,9 @@
     <Compile Include="CustomControls\InitializationUserWindow.xaml.cs">
       <DependentUpon>InitializationUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\StudentPackBlock.xaml.cs">
+      <DependentUpon>StudentPackBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\InitializationUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\StudentPackBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

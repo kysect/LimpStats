@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,32 +19,28 @@ using LimpStats.Model;
 namespace LimpStats.Client.CustomControls
 {
     /// <summary>
-    /// Логика взаимодействия для StudentGroupBlock.xaml
+    /// Логика взаимодействия для StudentPackBlock.xaml
     /// </summary>
-    public partial class StudentGroupBlock : UserControl
+    public partial class StudentPackBlock : UserControl
     {
-        private SumVar _sumVar;
-        private Grid _stackPanel;
-        public StudentGroupBlock(SumVar sumVar, Grid stackPanel)
+        private readonly StudyGroup _users;
+        public StudentPackBlock(StudyGroup users)
         {
             InitializeComponent();
-            _sumVar = sumVar;
-            _stackPanel = stackPanel;
+            _users = users;
+            foreach (var pack in users.ProblemPackList)
+            {
+                var k = (StackPanel)FindName("Panel");
+                k.Children.Add(new StudentGroupPreview(this, _users, pack.PackTitle));
+                PanelViewer.ScrollToRightEnd();
+            }
         }
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            var f = new InitializationCardWindow(new StudyGroup());
-            f.ShowDialog();
-        }
-
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             var k = (StackPanel)FindName("Panel");
-            k.Children.Add(new StudentGroupPreview(this, FilePath.Text, _sumVar, _stackPanel));
+            k.Children.Add(new StudentGroupPreview(this, _users, FilePath.Text));
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();
-
-        
         }
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
         {
@@ -55,7 +52,7 @@ namespace LimpStats.Client.CustomControls
         private void FilePath_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
-            AddList.IsEnabled = tb.Text != string.Empty;
+            AddPack.IsEnabled = tb.Text != string.Empty;
         }
 
         private void FilePath_OnKeyDown(object sender, KeyEventArgs e)
