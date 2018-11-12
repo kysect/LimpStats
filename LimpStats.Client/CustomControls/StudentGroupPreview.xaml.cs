@@ -157,9 +157,12 @@ namespace LimpStats.Client.CustomControls
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new StudentPackBlock(_group);
-            _studentGroupBlock.Visibility = Visibility.Hidden;
-            _stackPanel.Children.Add(f);
+            if (_sumVar == SumVar.AllPack)
+            {
+                var f = new StudentPackBlock(_group);
+                _studentGroupBlock.Visibility = Visibility.Hidden;
+                _stackPanel.Children.Add(f);
+            }
         }
     }
 }

@@ -37,10 +37,8 @@ namespace LimpStats.Client.CustomControls
         }
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var k = (StackPanel)FindName("Panel");
-            k.Children.Add(new StudentGroupPreview(this, _users, FilePath.Text));
-            FilePath.Text = string.Empty;
-            PanelViewer.ScrollToRightEnd();
+            var f = new ProblemPackWindow();
+            f.Show();
         }
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
         {
