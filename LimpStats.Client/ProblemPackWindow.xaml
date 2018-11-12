@@ -5,61 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LimpStats.Client"
         mc:Ignorable="d"
-        Title="ProblemPackWindow" Height="450" Width="800">
+        Title="ProblemPackWindow" Height="600" Width="500">
     <Grid Background="#202020">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
         <ScrollViewer
-            Grid.RowSpan="2"
-            Grid.Column="0"
-            Width="250"
-            HorizontalAlignment="Left"
+            Name="PanelViewer"
+            MaxWidth="600"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Visible" />
-
-        <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
+            VerticalScrollBarVisibility="Visible">
             <StackPanel
-                Height="40"
+                x:Name="Panel"
+                MinWidth="300"
+                MinHeight="400"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Orientation="Horizontal">
-
-                <Button
-                    Name="AddList"
-                    Width="70"
-                    Height="30"
-                    Click="OnClick_UpdatePanel"
-                    Content="Add list"
-                    IsEnabled="False"
-                    
-                    RenderTransformOrigin="0.5,0.5" Margin="0,5" />
-                <TextBox
-                    Name="FilePath"
-                    Width="150"
-                    Height="30"
-                    VerticalContentAlignment="Center"
-                    Text="NameCard"
-                    GotFocus="TextBox1_OnGotFocus"
-                    TextChanged="FilePath_OnTextChanged"
-                    KeyDown="FilePath_OnKeyDown"
-                    TextWrapping="Wrap" />
-            </StackPanel>
-            <ScrollViewer
-                Name="PanelViewer"
-                MaxWidth="600"
-                HorizontalScrollBarVisibility="Visible"
-                VerticalScrollBarVisibility="Disabled">
-                <StackPanel
-                    x:Name="Panel"
-                    MinWidth="300"
-                    MinHeight="400"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal" />
-
-            </ScrollViewer>
-        </StackPanel>
+                Orientation="Vertical" Height="569" Width="492"/>
+        </ScrollViewer>
     </Grid>
 </Window>

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="LimpStats.Client.CustomControls.ProblemTaskPrewiew"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="500"
+             Height="50">
+                
+    <Canvas Margin="0, 0, 20, 0">
+
+        <Label Content="A" Height="30" Width="20" Foreground="AliceBlue"/>
+        <TextBox Canvas.Left="20" Height="30" Width="65" KeyDown="FilePath_OnKeyDown"/>
+        <Label Content="Название задачки" Height="30" Width="415" Canvas.Left="85" Foreground="AliceBlue"/>
+    </Canvas>
+</UserControl>
