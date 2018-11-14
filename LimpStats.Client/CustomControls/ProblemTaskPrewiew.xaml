@@ -11,7 +11,7 @@
     <Canvas Margin="0, 0, 20, 0">
 
         <Label Content="A" Height="30" Width="20" Foreground="AliceBlue"/>
-        <TextBox Canvas.Left="20" Height="30" Width="65" KeyDown="FilePath_OnKeyDown"/>
+        <TextBox Canvas.Left="20" Height="30" Width="65" KeyDown="FilePath_OnKeyDown" />
         <Label Content="Название задачки" Height="30" Width="415" Canvas.Left="85" Foreground="AliceBlue"/>
     </Canvas>
 </UserControl>
