@@ -22,10 +22,31 @@ namespace LimpStats.Client
     /// </summary>
     public partial class ProblemPackWindow : Window
     {
-        public ProblemPackWindow()
+        public List<int> tasklist = new List<int>();
+        private string _name;
+        private StudyGroup _group;
+        private StudentPackBlock _block;
+        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block)
         {
+            _block = block;
+            _group = group;
+            _name = packname;
             InitializeComponent();
-            Panel.Children.Add(new ProblemTaskPrewiew(this));
-        }   
+            Panel.Children.Add(new ProblemTaskPrewiew(this, "A"));
+        }
+
+        private void ButtonAddPack(object sender, RoutedEventArgs e)
+        {
+            foreach (var task in Panel.Children.OfType<ProblemTaskPrewiew>())
+            {
+                tasklist.Add(Int32.Parse(task.textbox.Text == "" ? "0" : task.textbox.Text));
+            }
+            _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
+            //TODO: сохранить групу пак не сохраняется
+            var k = (StackPanel)_block.FindName("Panel");
+            k.Children.Add(new StudentGroupPreview(_block, _group, _name));
+            PanelViewer.ScrollToRightEnd();
+            Close();
+        }
     }
 }
