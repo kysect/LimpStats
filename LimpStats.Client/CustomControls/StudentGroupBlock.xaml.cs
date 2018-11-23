@@ -22,7 +22,7 @@ namespace LimpStats.Client.CustomControls
     /// </summary>
     public partial class StudentGroupBlock : UserControl
     {
-        private SumVar _sumVar;
+        public SumVar _sumVar;
         private Grid _stackPanel;
         public StudentGroupBlock(SumVar sumVar, Grid stackPanel)
         {

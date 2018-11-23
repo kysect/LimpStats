@@ -37,7 +37,7 @@ namespace LimpStats.Client.CustomControls
         }
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var f = new ProblemPackWindow();
+            var f = new ProblemPackWindow(FilePath.Text, _users, this);
             f.Show();
         }
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)

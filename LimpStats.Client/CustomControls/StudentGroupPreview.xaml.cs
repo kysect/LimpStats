@@ -83,7 +83,8 @@ namespace LimpStats.Client.CustomControls
                 return;
             }
             Task.Run(() => Update());
-            JsonBackupManager.SaveCardUserList(_group, GroupTitle);
+            if(_sumVar == SumVar.AllPack)
+                JsonBackupManager.SaveCardUserList(_group, GroupTitle);
         }
 
         public void Update()

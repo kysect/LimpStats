@@ -21,18 +21,27 @@ namespace LimpStats.Client.CustomControls
     public partial class NavigateButton : UserControl
     {
         private StudentGroupBlock _block;
-        public NavigateButton(StudentGroupBlock block)
+        private MainWindow _mainWindow;
+        public NavigateButton(StudentGroupBlock block, MainWindow mainWindow)
         {
             InitializeComponent();
             _block = block;
+            _mainWindow = mainWindow;
+
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_block.Visibility == Visibility.Visible)
-                _block.Visibility = Visibility.Hidden;
-            else
-                _block.Visibility = Visibility.Visible;
+            var c = _mainWindow.StackPanel.Children.OfType<StudentGroupBlock>();
+            foreach (var block in c)
+            {
+                if (block._sumVar == _block._sumVar)
+                    block.Visibility = Visibility.Visible;
+                else
+                {
+                    block.Visibility = Visibility.Hidden;
+                }
+            }
         }
     }
 }

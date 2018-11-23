@@ -7,11 +7,17 @@
         mc:Ignorable="d"
         Title="ProblemPackWindow" Height="600" Width="500">
     <Grid Background="#202020">
-        <ScrollViewer
+        <Button
+            Margin="0,535,0,0"
+               Click="ButtonAddPack"
+                
+                />
+            
+            <ScrollViewer
             Name="PanelViewer"
             MaxWidth="600"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Visible">
+            VerticalScrollBarVisibility="Visible" Margin="0,0,0,34">
             <StackPanel
                 x:Name="Panel"
                 MinWidth="300"
