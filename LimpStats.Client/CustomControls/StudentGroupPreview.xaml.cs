@@ -8,71 +8,82 @@ using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
+using LimpStats.Database.Models;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupPreview : UserControl
     {
-        public int Id { get; }
+        //TODO: это ж пиздец какой костыль
+        private static int _totalCount;
 
-        private static int _totalCount = 0;
         private readonly StudyGroup _group;
-        private readonly StudentGroupBlock _studentGroupBlock;
-        private readonly StudentPackBlock  _studentPackBlock;
-        private readonly SumVar _sumVar;
         private readonly Grid _stackPanel;
-        private readonly string Name;
+        private readonly StudentGroupBlock _studentGroupBlock;
+        private readonly StudentPackBlock _studentPackBlock;
+        private readonly SumVar _sumVar;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, SumVar sumVar, Grid stackPanel)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, SumVar sumVar,
+            Grid stackPanel)
         {
             InitializeComponent();
-            
             Id = _totalCount;
-            GroupTitle = groupTitle;
-            CardTitle.Content = GroupTitle;
-            Name = GroupTitle;
-            _studentGroupBlock = studentGroupBlock;
             _totalCount++;
+
+            _studentGroupBlock = studentGroupBlock;
+            GroupTitle = groupTitle;
+            CardTitle.Content = groupTitle;
             _sumVar = sumVar;
             _stackPanel = stackPanel;
+
             JsonBackupManager.SaveCardName(groupTitle);
             _group = JsonBackupManager.LoadCardUserList(GroupTitle);
+
             if (_group == null)
             {
                 _group = new StudyGroup
                 {
                     UserList = new List<LimpUser>(),
-                    ProblemPackList = new List<ProblemPackInfo> { new ProblemPackInfo("A", TaskPackStorage.TasksAGroup), new ProblemPackInfo("B", TaskPackStorage.TasksBGroup) }
+                    ProblemPackList = new List<ProblemPackInfo>
+                    {
+                        new ProblemPackInfo("A", TaskPackStorage.TasksAGroup),
+                        new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
+                    }
                 };
             }
 
-            StudentList.SelectionChanged += ElimpUserStatistic;
+            StudentList.SelectionChanged += LimpUserStatistic;
         }
 
         public StudentGroupPreview(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle)
         {
             InitializeComponent();
-
             Id = _totalCount;
-            GroupTitle = packTitle;
-            CardTitle.Content = GroupTitle;
-            _studentPackBlock = studentPackBlock;
             _totalCount++;
-            _sumVar = SumVar.Pack;
+
+            _studentPackBlock = studentPackBlock;
             _group = users;
+            GroupTitle = packTitle;
+            CardTitle.Content = packTitle;
+
+            _sumVar = SumVar.Pack;
             if (_group == null)
             {
                 _group = new StudyGroup
                 {
                     UserList = new List<LimpUser>(),
-                    ProblemPackList = new List<ProblemPackInfo> { new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup) }
+                    ProblemPackList = new List<ProblemPackInfo>
+                    {
+                        new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup)
+                    }
                 };
             }
 
-            StudentList.SelectionChanged += ElimpUserStatistic;
+            StudentList.SelectionChanged += LimpUserStatistic;
         }
 
+        public int Id { get; }
         public string GroupTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
@@ -82,9 +93,12 @@ namespace LimpStats.Client.CustomControls
                 MessageBox.Show("Internet connection error");
                 return;
             }
+
             Task.Run(() => Update());
-            if(_sumVar == SumVar.AllPack)
+            if (_sumVar == SumVar.AllPack)
+            {
                 JsonBackupManager.SaveCardUserList(_group, GroupTitle);
+            }
         }
 
         public void Update()
@@ -93,20 +107,21 @@ namespace LimpStats.Client.CustomControls
 
             MultiThreadParser.LoadProfiles(_group);
             IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
+
             if (_sumVar == SumVar.AllPack)
             {
                 studentsData = ProfilePreviewData.GetProfilePreview(_group);
             }
             else
             {
-               studentsData = ProfilePreviewData.GetProfilePackPreview(_group, GroupTitle);
+                studentsData = ProfilePreviewData.GetProfilePackPreview(_group, GroupTitle);
             }
-            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
 
+            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
         }
 
-        private void ElimpUserStatistic(object sender, SelectionChangedEventArgs e)
+        private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)
             {
@@ -125,30 +140,31 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            var element =  _studentGroupBlock.Panel.Children.OfType<StudentGroupPreview>().FirstOrDefault(f => f.Id == Id);
+            StudentGroupPreview element = _studentGroupBlock.Panel.Children.OfType<StudentGroupPreview>()
+                .FirstOrDefault(f => f.Id == Id);
             if (element != null)
             {
                 _studentGroupBlock.Panel.Children.Remove(element);
                 JsonBackupManager.DeleteCard(element.GroupTitle);
             }
         }
+
+        //TODO: вынести в .Core.Tools
         public bool ConnectionAvailable(string strServer)
         {
             try
             {
-                HttpWebRequest reqFP = (HttpWebRequest)WebRequest.Create(strServer);
+                var reqFP = (HttpWebRequest) WebRequest.Create(strServer);
 
-                HttpWebResponse rspFP = (HttpWebResponse)reqFP.GetResponse();
+                var rspFP = (HttpWebResponse) reqFP.GetResponse();
                 if (HttpStatusCode.OK == rspFP.StatusCode)
                 {
                     rspFP.Close();
                     return true;
                 }
-                else
-                {
-                    rspFP.Close();
-                    return false;
-                }
+
+                rspFP.Close();
+                return false;
             }
             catch (WebException)
             {

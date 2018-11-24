@@ -1,4 +1,4 @@
-﻿namespace LimpStats.Database
+﻿namespace LimpStats.Database.Models
 {
     public enum SumVar
     {

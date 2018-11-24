@@ -32,12 +32,12 @@ namespace LimpStats.Client
             _group = group;
             _name = packname;
             InitializeComponent();
-            Panel.Children.Add(new ProblemTaskPrewiew(this, "A"));
+            Panel.Children.Add(new ProblemTaskPreview(this, "A"));
         }
 
         private void ButtonAddPack(object sender, RoutedEventArgs e)
         {
-            foreach (var task in Panel.Children.OfType<ProblemTaskPrewiew>())
+            foreach (var task in Panel.Children.OfType<ProblemTaskPreview>())
             {
                 tasklist.Add(Int32.Parse(task.textbox.Text == "" ? "0" : task.textbox.Text));
             }

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls;
 using LimpStats.Database;
+using LimpStats.Database.Models;
 using LimpStats.Model;
 
 namespace LimpStats.Client

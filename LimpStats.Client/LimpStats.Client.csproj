@@ -67,8 +67,8 @@
     <Compile Include="CustomControls\NavigateButton.xaml.cs">
       <DependentUpon>NavigateButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ProblemTaskPrewiew.xaml.cs">
-      <DependentUpon>ProblemTaskPrewiew.xaml</DependentUpon>
+    <Compile Include="CustomControls\ProblemTaskPreview.xaml.cs">
+      <DependentUpon>ProblemTaskPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\StudentGroupBlock.xaml.cs">
       <DependentUpon>StudentGroupBlock.xaml</DependentUpon>
@@ -100,7 +100,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\ProblemTaskPrewiew.xaml">
+    <Page Include="CustomControls\ProblemTaskPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

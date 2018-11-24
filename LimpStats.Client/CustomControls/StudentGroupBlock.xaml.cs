@@ -1,60 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using LimpStats.Database;
-using LimpStats.Model;
+using LimpStats.Database.Models;
 
 namespace LimpStats.Client.CustomControls
 {
-    /// <summary>
-    /// Логика взаимодействия для StudentGroupBlock.xaml
-    /// </summary>
     public partial class StudentGroupBlock : UserControl
     {
-        public SumVar _sumVar;
-        private Grid _stackPanel;
+        public readonly SumVar SumVar;
+        private readonly Grid _stackPanel;
+
         public StudentGroupBlock(SumVar sumVar, Grid stackPanel)
         {
             InitializeComponent();
-            _sumVar = sumVar;
+
+            SumVar = sumVar;
             _stackPanel = stackPanel;
         }
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            var f = new InitializationCardWindow(new StudyGroup());
-            f.ShowDialog();
-        }
 
-        public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
+        public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
-            var k = (StackPanel)FindName("Panel");
-            k.Children.Add(new StudentGroupPreview(this, FilePath.Text, _sumVar, _stackPanel));
+            var groupPanel = (StackPanel)FindName("Panel");
+            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, SumVar, _stackPanel));
+
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();
-
-        
         }
-        private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
+
+        private void FilePath_OnGotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
-            tb.GotFocus -= TextBox1_OnGotFocus;
+            tb.GotFocus -= FilePath_OnGotFocus;
         }
 
         private void FilePath_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox tb = (TextBox)sender;
+            var tb = (TextBox)sender;
             AddList.IsEnabled = tb.Text != string.Empty;
         }
 
@@ -62,7 +44,7 @@ namespace LimpStats.Client.CustomControls
         {
             if (e.Key == Key.Enter)
             {
-                OnClick_UpdatePanel(new object(), new RoutedEventArgs());
+                AddGroupToPanel(null, null);
             }
         }
     }
