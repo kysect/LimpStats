@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 
 namespace LimpStats.Database
 {
+    //TODO: Декомпозировать
+    //TODO: Создать для этого папку JsonRepository
     public static class JsonBackupManager
     {
         private const string FilePath = @"Info.json";

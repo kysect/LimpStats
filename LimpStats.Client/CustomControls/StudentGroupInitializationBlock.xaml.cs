@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace LimpStats.Client.CustomControls
 {
-    /// <summary>
-    ///     Логика взаимодействия для StudentGroupInitializationBlock.xaml
-    /// </summary>
     public partial class StudentGroupInitializationBlock : UserControl
     {
         public StudentGroupInitializationBlock()

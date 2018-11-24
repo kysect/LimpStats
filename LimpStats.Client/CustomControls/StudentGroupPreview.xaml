@@ -19,10 +19,10 @@
             Content="🔄" />
         <Button
             Name="CardTitle"
-            Click="CardTitle_OnClick"
             Width="159"
             Height="25"
             Background="Azure"
+            Click="CardTitle_OnClick"
             Content="GroupTitle" />
         <Button
             Canvas.Top="25"
