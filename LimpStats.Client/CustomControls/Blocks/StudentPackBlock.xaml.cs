@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls
@@ -8,22 +9,23 @@ namespace LimpStats.Client.CustomControls
     public partial class StudentPackBlock : UserControl
     {
         private readonly StudyGroup _users;
-
-        public StudentPackBlock(StudyGroup users)
+        private string _groupTitle;
+        public StudentPackBlock(StudyGroup users, string groupTitle)
         {
             InitializeComponent();
             _users = users;
+            _groupTitle = groupTitle;
             foreach (var pack in users.ProblemPackList)
             {
                 var k = (StackPanel)FindName("Panel");
-                k.Children.Add(new StudentGroupPreview(this, _users, pack.PackTitle));
+                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle));
                 PanelViewer.ScrollToRightEnd();
             }
         }
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var f = new ProblemPackWindow(FilePath.Text, _users, this);
+            var f = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle);
             f.Show();
         }
 

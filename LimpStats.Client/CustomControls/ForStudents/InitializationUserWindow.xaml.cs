@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Core.Parsers;
+using LimpStats.Database;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls
@@ -10,10 +11,12 @@ namespace LimpStats.Client.CustomControls
     public partial class InitializationCardWindow : Window
     {
         private readonly StudyGroup _group;
-        public InitializationCardWindow(StudyGroup group)
+        private string _groupTitle;
+        public InitializationCardWindow(StudyGroup group, string grouptitle)
         {
             InitializeComponent();
             _group = group;
+            _groupTitle = grouptitle;
         }
         
         private void ValidateLogin(object sender, EventArgs e)
@@ -23,6 +26,7 @@ namespace LimpStats.Client.CustomControls
             {
                 MessageBox.Show($"{username} добавлен");
                 _group.UserList.Add(new LimpUser(username));
+                JsonBackupManager.SaveCardUserList(_group, _groupTitle);
             }
             else
             {
