@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LimpStats.Client.CustomControls;
+using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Database;
 using LimpStats.Model;
 
@@ -26,11 +27,14 @@ namespace LimpStats.Client
         private string _name;
         private StudyGroup _group;
         private StudentPackBlock _block;
-        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block)
+        private string _groupTitle;
+        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block, string groupTitle)
         {
             _block = block;
             _group = group;
             _name = packname;
+            //TODO: мб все груптайтлы вынести в StudentGroup ибо она везде используется
+            _groupTitle = groupTitle;
             InitializeComponent();
             Panel.Children.Add(new ProblemTaskPreview(this, "A"));
         }
@@ -42,9 +46,10 @@ namespace LimpStats.Client
                 tasklist.Add(Int32.Parse(task.textbox.Text == "" ? "0" : task.textbox.Text));
             }
             _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
+            JsonBackupManager.SaveCardUserList(_group, _groupTitle);
             //TODO: сохранить групу пак не сохраняется
             var k = (StackPanel)_block.FindName("Panel");
-            k.Children.Add(new StudentGroupPreview(_block, _group, _name));
+            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name));
             PanelViewer.ScrollToRightEnd();
             Close();
         }

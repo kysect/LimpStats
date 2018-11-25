@@ -61,37 +61,44 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\ForProblemTasks\ProblemTasksPrewiew.xaml.cs">
+      <DependentUpon>ProblemTasksPrewiew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\NavigateButton.xaml.cs">
       <DependentUpon>NavigateButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ProblemTaskPreview.xaml.cs">
-      <DependentUpon>ProblemTaskPreview.xaml</DependentUpon>
+    <Compile Include="CustomControls\ForProblemTasks\InitializationTask.xaml.cs">
+      <DependentUpon>InitializationTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\StudentGroupBlock.xaml.cs">
+    <Compile Include="CustomControls\Blocks\StudentGroupBlock.xaml.cs">
       <DependentUpon>StudentGroupBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\StudentGroupInitializationBlock.xaml.cs">
+    <Compile Include="CustomControls\ForStudents\StudentGroupInitializationBlock.xaml.cs">
       <DependentUpon>StudentGroupInitializationBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\StudentGroupPreview.xaml.cs">
+    <Compile Include="CustomControls\ForStudents\StudentGroupPreview.xaml.cs">
       <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\InitializationUserWindow.xaml.cs">
+    <Compile Include="CustomControls\ForStudents\InitializationUserWindow.xaml.cs">
       <DependentUpon>InitializationUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\StudentPackBlock.xaml.cs">
+    <Compile Include="CustomControls\Blocks\StudentPackBlock.xaml.cs">
       <DependentUpon>StudentPackBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
-    <Compile Include="ProblemPackWindow.xaml.cs">
+    <Compile Include="CustomControls\ForProblemTasks\ProblemPackWindow.xaml.cs">
       <DependentUpon>ProblemPackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\ThreadingTools.cs" />
+    <Page Include="CustomControls\ForProblemTasks\ProblemTasksPrewiew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\LoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,27 +107,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\ProblemTaskPreview.xaml">
+    <Page Include="CustomControls\ForProblemTasks\InitializationTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\StudentGroupBlock.xaml">
+    <Page Include="CustomControls\Blocks\StudentGroupBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\StudentGroupInitializationBlock.xaml">
+    <Page Include="CustomControls\ForStudents\StudentGroupInitializationBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\StudentGroupPreview.xaml">
+    <Page Include="CustomControls\ForStudents\StudentGroupPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\InitializationUserWindow.xaml">
+    <Page Include="CustomControls\ForStudents\InitializationUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\StudentPackBlock.xaml">
+    <Page Include="CustomControls\Blocks\StudentPackBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,7 +143,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProblemPackWindow.xaml">
+    <Page Include="CustomControls\ForProblemTasks\ProblemPackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,5 +189,6 @@
       <Name>LimpStats.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

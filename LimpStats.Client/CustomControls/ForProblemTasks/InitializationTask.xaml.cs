@@ -15,7 +15,7 @@ namespace LimpStats.Client.CustomControls
 
             NumberTask.Content = number;
             _problemPackWindow = problemPackWindow;
-
+            _problemPackWindow.PanelViewer.ScrollToEnd();
             //TODO: wtf?
             textbox.TabIndex = 0;
         }
@@ -40,10 +40,10 @@ namespace LimpStats.Client.CustomControls
             string s = "";
             if (n[number.Length - 1] > 'Z')
             {
-                s = "A";
-                n[number.Length - 1] = 'A';
+                for (int i = 0; i < number.Length; i++)
+                    s += "A";
+                s += "A";
             }
-
             foreach (char i in n)
             {
                 s += i.ToString();

@@ -21,7 +21,7 @@ namespace LimpStats.Client.CustomControls
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
             var groupPanel = (StackPanel)FindName("Panel");
-            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, SumVar, _stackPanel));
+            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _stackPanel));
 
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();

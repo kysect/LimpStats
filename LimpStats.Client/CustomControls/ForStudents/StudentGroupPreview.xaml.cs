@@ -15,26 +15,16 @@ namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupPreview : UserControl
     {
-        //TODO: это ж пиздец какой костыль
-        private static int _totalCount;
-
         private readonly StudyGroup _group;
         private readonly Grid _stackPanel;
         private readonly StudentGroupBlock _studentGroupBlock;
-        private readonly StudentPackBlock _studentPackBlock;
-        private readonly SumVar _sumVar;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, SumVar sumVar,
-            Grid stackPanel)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, Grid stackPanel)
         {
             InitializeComponent();
-            Id = _totalCount;
-            _totalCount++;
-
             _studentGroupBlock = studentGroupBlock;
             GroupTitle = groupTitle;
             CardTitle.Content = groupTitle;
-            _sumVar = sumVar;
             _stackPanel = stackPanel;
 
             JsonBackupManager.SaveCardName(groupTitle);
@@ -56,34 +46,6 @@ namespace LimpStats.Client.CustomControls
             StudentList.SelectionChanged += LimpUserStatistic;
         }
 
-        public StudentGroupPreview(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle)
-        {
-            InitializeComponent();
-            Id = _totalCount;
-            _totalCount++;
-
-            _studentPackBlock = studentPackBlock;
-            _group = users;
-            GroupTitle = packTitle;
-            CardTitle.Content = packTitle;
-
-            _sumVar = SumVar.Pack;
-            if (_group == null)
-            {
-                _group = new StudyGroup
-                {
-                    UserList = new List<LimpUser>(),
-                    ProblemPackList = new List<ProblemPackInfo>
-                    {
-                        new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup)
-                    }
-                };
-            }
-
-            StudentList.SelectionChanged += LimpUserStatistic;
-        }
-
-        public int Id { get; }
         public string GroupTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
@@ -95,10 +57,6 @@ namespace LimpStats.Client.CustomControls
             }
 
             Task.Run(() => Update());
-            if (_sumVar == SumVar.AllPack)
-            {
-                JsonBackupManager.SaveCardUserList(_group, GroupTitle);
-            }
         }
 
         public void Update()
@@ -108,14 +66,7 @@ namespace LimpStats.Client.CustomControls
             MultiThreadParser.LoadProfiles(_group);
             IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
 
-            if (_sumVar == SumVar.AllPack)
-            {
-                studentsData = ProfilePreviewData.GetProfilePreview(_group);
-            }
-            else
-            {
-                studentsData = ProfilePreviewData.GetProfilePackPreview(_group, GroupTitle);
-            }
+            studentsData = ProfilePreviewData.GetProfilePreview(_group);
 
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
@@ -134,19 +85,13 @@ namespace LimpStats.Client.CustomControls
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new InitializationCardWindow(_group);
+            var f = new InitializationCardWindow(_group, GroupTitle);
             f.ShowDialog();
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            StudentGroupPreview element = _studentGroupBlock.Panel.Children.OfType<StudentGroupPreview>()
-                .FirstOrDefault(f => f.Id == Id);
-            if (element != null)
-            {
-                _studentGroupBlock.Panel.Children.Remove(element);
-                JsonBackupManager.DeleteCard(element.GroupTitle);
-            }
+            _studentGroupBlock.Panel.Children.Remove(this);
         }
 
         //TODO: вынести в .Core.Tools
@@ -174,12 +119,9 @@ namespace LimpStats.Client.CustomControls
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_sumVar == SumVar.AllPack)
-            {
-                var f = new StudentPackBlock(_group);
+                var f = new StudentPackBlock(_group, CardTitle.Content.ToString());
                 _studentGroupBlock.Visibility = Visibility.Hidden;
                 _stackPanel.Children.Add(f);
-            }
         }
     }
 }
