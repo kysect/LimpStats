@@ -24,6 +24,7 @@
             Width="65"
             Height="30"
             Margin="5"
+            Focusable="True"
             KeyDown="FilePath_OnKeyDown" />
         <Label
             x:Name="TaskName"

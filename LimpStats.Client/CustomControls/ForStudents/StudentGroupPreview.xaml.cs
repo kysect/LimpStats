@@ -85,7 +85,7 @@ namespace LimpStats.Client.CustomControls
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new InitializationCardWindow(_group, GroupTitle);
+            var f = new InitializationUserWindow(_group, GroupTitle);
             f.ShowDialog();
         }
 

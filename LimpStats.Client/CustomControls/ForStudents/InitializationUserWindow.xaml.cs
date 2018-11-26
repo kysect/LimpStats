@@ -8,11 +8,11 @@ using LimpStats.Model;
 namespace LimpStats.Client.CustomControls
 {
     //TODO: Стоит переименовать
-    public partial class InitializationCardWindow : Window
+    public partial class InitializationUserWindow : Window
     {
         private readonly StudyGroup _group;
         private string _groupTitle;
-        public InitializationCardWindow(StudyGroup group, string grouptitle)
+        public InitializationUserWindow(StudyGroup group, string grouptitle)
         {
             InitializeComponent();
             _group = group;

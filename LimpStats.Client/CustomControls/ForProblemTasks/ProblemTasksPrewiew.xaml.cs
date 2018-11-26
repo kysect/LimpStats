@@ -56,7 +56,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
-            if (ConnectionAvailable("https://www.google.com") == false)
+            if (Core.Tools.Tools.ConnectionAvailable("https://www.google.com") == false)
             {
                 MessageBox.Show("Internet connection error");
                 return;
@@ -100,28 +100,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _studentPackBlock.Panel.Children.Remove(this);
         }
 
-        //TODO: вынести в .Core.Tools
-        public bool ConnectionAvailable(string strServer)
-        {
-            try
-            {
-                var reqFP = (HttpWebRequest)WebRequest.Create(strServer);
 
-                var rspFP = (HttpWebResponse)reqFP.GetResponse();
-                if (HttpStatusCode.OK == rspFP.StatusCode)
-                {
-                    rspFP.Close();
-                    return true;
-                }
-
-                rspFP.Close();
-                return false;
-            }
-            catch (WebException)
-            {
-                return false;
-            }
-        }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {

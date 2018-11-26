@@ -61,5 +61,18 @@ namespace LimpStats.Core.Parsers
                 .Last();
             return int.Parse(stringRes);
         }
+
+        //TODO: Прееместить в .Core.Parsers
+        public static string GetTitleTask(int number)
+        {
+            //TODO загрузка названия задачи
+            string url = $"https://www.e-olymp.com/ru/problems/{number}";
+            var Webget = new HtmlWeb();
+            HtmlDocument doc = Webget.Load(url);
+
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//*[contains(@class,'eo-title__header')]"))
+                return node.ChildNodes[0].InnerHtml;
+            return "///";
+        }
     }
 }
