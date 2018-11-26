@@ -6,6 +6,7 @@ namespace LimpStats.Core.Parsers
     {
         public ParserException(string message) : base(message)
         {
+
         }
     }
 }

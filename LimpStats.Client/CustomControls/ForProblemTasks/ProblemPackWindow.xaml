@@ -18,7 +18,7 @@
             Margin="0,0,0,34"
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Visible">
-            <StackPanel
+                <StackPanel
                 x:Name="Panel"
                 Width="492"
                 Height="569"
@@ -27,6 +27,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Orientation="Vertical" />
-        </ScrollViewer>
-    </Grid>
+         </ScrollViewer>
+     </Grid>
 </Window>

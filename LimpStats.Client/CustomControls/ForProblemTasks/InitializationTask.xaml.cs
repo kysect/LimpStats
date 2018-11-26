@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LimpStats.Core.Parsers;
 using HtmlAgilityPack;
 
 namespace LimpStats.Client.CustomControls
@@ -16,51 +17,19 @@ namespace LimpStats.Client.CustomControls
             NumberTask.Content = number;
             _problemPackWindow = problemPackWindow;
             _problemPackWindow.PanelViewer.ScrollToEnd();
-            //TODO: wtf?
-            textbox.TabIndex = 0;
+            textbox.Focus();
         }
         private void FilePath_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 IsEnabled = false;
-                string num = GenerateNextNumber(NumberTask.Content.ToString());
+                string num = Core.Tools.Tools.GenerateNextNumber(NumberTask.Content.ToString());
                 _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
-                GetTitleTask(number: Int32.Parse(textbox.Text));
+                TaskName.Content =  Parser.GetTitleTask(number: Int32.Parse(textbox.Text));
             }
         }
 
-        private string GenerateNextNumber(string number)
-        {
-            //Todo: работает, но если есть варик попроще надо его юзать
-            //TODO: Вынести в .Core? создать там папку /Tools
 
-            var n = number.ToCharArray();
-            n[number.Length - 1]++;
-            string s = "";
-            if (n[number.Length - 1] > 'Z')
-            {
-                for (int i = 0; i < number.Length; i++)
-                    s += "A";
-                s += "A";
-            }
-            foreach (char i in n)
-            {
-                s += i.ToString();
-            }
-            return s;
-        }
-
-        //TODO: Прееместить в .Core.Parsers
-        private void GetTitleTask(int number)
-        {
-            //TODO загрузка названия задачи
-            string url = $"https://www.e-olymp.com/ru/problems/{number}";
-            var Webget = new HtmlWeb();
-            HtmlDocument doc = Webget.Load(url);
-
-            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//*[contains(@class,'eo-title__header')]"))
-                TaskName.Content = (node.ChildNodes[0].InnerHtml);
-        }
     }
 }

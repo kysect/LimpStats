@@ -47,7 +47,6 @@ namespace LimpStats.Client
             }
             _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
-            //TODO: сохранить групу пак не сохраняется
             var k = (StackPanel)_block.FindName("Panel");
             k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name));
             PanelViewer.ScrollToRightEnd();
