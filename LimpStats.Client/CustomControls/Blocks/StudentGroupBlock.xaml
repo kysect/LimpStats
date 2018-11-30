@@ -22,7 +22,7 @@
                     Click="AddGroupToPanel"
                     Content="Add list"
                     IsEnabled="False"
-                    RenderTransformOrigin="0.5,0.5" />
+                    RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic" Background="#FF993333" BorderBrush="#FF993333" Foreground="#FFE8E8E8" />
                 <TextBox
                     Name="FilePath"
                     Width="150"
@@ -33,7 +33,7 @@
                     KeyDown="FilePath_OnKeyDown"
                     Text="NameCard"
                     TextChanged="FilePath_OnTextChanged"
-                    TextWrapping="Wrap" />
+                    TextWrapping="Wrap" Background="#FFCEBD89" FontFamily="Century Gothic" FontSize="14" FontStyle="Italic" Foreground="#FF993333" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"

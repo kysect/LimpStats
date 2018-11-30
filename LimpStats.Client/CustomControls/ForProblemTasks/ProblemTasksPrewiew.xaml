@@ -15,26 +15,26 @@
             Height="25"
             HorizontalAlignment="Left"
             Click="ButtonClick_Update"
-            Content="🔄" />
+            Content="🔄" Background="#FF993333" Foreground="#FFE8E8E8" />
         <Button
             Name="CardTitle"
             Width="159"
             Height="25"
-            Background="Azure"
+            Background="#FF993333"
             Click="CardTitle_OnClick"
-            Content="GroupTitle" />
+            Content="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" FontFamily="Century Gothic" />
         <Button
             Canvas.Top="25"
             Width="200"
             Height="19"
             Click="AddUserButton_OnClick"
-            Content="AddUser" />
+            Content="AddUser" Background="#FF993333" Foreground="#FFE8E8E8" />
         <ListBox
             Name="StudentList"
             Canvas.Top="44"
             Width="200"
             Height="206"
-            MinHeight="50" />
+            MinHeight="50" Background="#FF4F7BBA" />
         <Menu
             Canvas.Right="25"
             Width="15"
@@ -44,7 +44,7 @@
                 Width="18"
                 Height="25"
                 Header="⋮"
-                RenderTransformOrigin="0.05,0.56">
+                RenderTransformOrigin="0.05,0.56" Background="#FF993333" Foreground="#FFE8E8E8">
                 <MenuItem Header="Rename" />
                 <MenuItem Header="Sort by">
                     <MenuItem Header="Nickname" />
