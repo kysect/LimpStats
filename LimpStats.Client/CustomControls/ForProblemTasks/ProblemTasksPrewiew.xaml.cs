@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
@@ -28,13 +29,14 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     public partial class ProblemTasksPrewiew : UserControl
     {
         private readonly StudyGroup _group;
-        private readonly Grid _stackPanel;
+        private readonly StackPanel _stackPanel;
         private readonly StudentPackBlock _studentPackBlock;
-        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle)
+        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, StackPanel stackPanel)
         {
             InitializeComponent();
             _studentPackBlock = studentPackBlock;
             _group = users;
+            _stackPanel = stackPanel;
             GroupTitle = packTitle;
             CardTitle.Content = packTitle;
             if (_group == null)
@@ -104,7 +106,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO:
+            var f = new ResultGridBlock();
+            _studentPackBlock.Visibility = Visibility.Hidden;
+            _stackPanel.Children.Add(f);
         }
     }
 }

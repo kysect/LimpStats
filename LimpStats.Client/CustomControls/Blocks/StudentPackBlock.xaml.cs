@@ -18,7 +18,7 @@ namespace LimpStats.Client.CustomControls
             foreach (var pack in users.ProblemPackList)
             {
                 var k = (StackPanel)FindName("Panel");
-                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle));
+                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle, k));
                 PanelViewer.ScrollToRightEnd();
             }
         }
