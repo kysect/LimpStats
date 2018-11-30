@@ -13,7 +13,7 @@
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
 
-    <Grid Background="#202020">
+    <Grid Background="#FF5DA09D">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="Auto" />
@@ -23,7 +23,7 @@
             Grid.Column="1"
             Height="506"
             Margin="11,0,-510,0"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top" Background="#FF5DA09D" />
         <ScrollViewer
             x:Name="ScrollViewer"
             Grid.RowSpan="2"
@@ -31,7 +31,7 @@
             Width="250"
             HorizontalAlignment="Left"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Visible">
+            VerticalScrollBarVisibility="Visible" Background="#FF5DA09D">
             <StackPanel
                 x:Name="ScrolPanel"
                 Width="210"
