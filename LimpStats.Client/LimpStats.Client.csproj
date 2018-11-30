@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\Blocks\ResultGridBlock.xaml.cs">
+      <DependentUpon>ResultGridBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\ForProblemTasks\ProblemTasksPrewiew.xaml.cs">
       <DependentUpon>ProblemTasksPrewiew.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
       <DependentUpon>ProblemPackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\ThreadingTools.cs" />
+    <Page Include="CustomControls\Blocks\ResultGridBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\ForProblemTasks\ProblemTasksPrewiew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
