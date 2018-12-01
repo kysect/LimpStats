@@ -5,18 +5,15 @@ using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.ForStudents
 {
-    //TODO: Стоит переименовать
-    public partial class InitializationUserWindow : Window
+    public partial class UserAddingWindow : Window
     {
-        private readonly StudyGroup _group;
-        private string _groupTitle;
-        public InitializationUserWindow(StudyGroup group, string grouptitle)
+        public string Username;
+
+        public UserAddingWindow()
         {
             InitializeComponent();
-            _group = group;
-            _groupTitle = grouptitle;
         }
         
         private void ValidateLogin(object sender, EventArgs e)
@@ -25,15 +22,13 @@ namespace LimpStats.Client.CustomControls
             if (Parser.IsUserExist(username))
             {
                 MessageBox.Show($"{username} добавлен");
-                _group.UserList.Add(new LimpUser(username));
-                JsonBackupManager.SaveCardUserList(_group, _groupTitle);
+                Username = username;
+                Close();
             }
             else
             {
                 MessageBox.Show("Неверный логин");
             }
-
-            Close();
         }
 
         private void LoginTextBox_OnGotFocus(object sender, RoutedEventArgs e)

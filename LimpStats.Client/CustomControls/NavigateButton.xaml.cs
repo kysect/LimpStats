@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +20,7 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var c = _mainWindow.StackPanel.Children.OfType<StudentGroupBlock>();
+            IEnumerable<StudentGroupBlock> c = _mainWindow.StackPanel.Children.OfType<StudentGroupBlock>();
             foreach (StudentGroupBlock block in c)
             {
                 if (block.SumVar == _block.SumVar)

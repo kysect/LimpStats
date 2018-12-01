@@ -30,15 +30,15 @@ namespace LimpStats.Database
             string jsonString = JsonConvert.SerializeObject(users);
             File.WriteAllText(FilePath, jsonString);
         }
-        public static void DeleteCard(string title)
-        {
-            var jsonData = File.ReadAllText(CardsName);
-            List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
-            names.Remove(title);
-            File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
-            string filePath = $"card_{title}.json";
-            File.Delete(filePath);
-        }
+        //public static void DeleteCard(string title)
+        //{
+        //    var jsonData = File.ReadAllText(CardsName);
+        //    List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
+        //    names.Remove(title);
+        //    File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
+        //    string filePath = $"card_{title}.json";
+        //    File.Delete(filePath);
+        //}
 
         #region Card data
 
@@ -59,13 +59,13 @@ namespace LimpStats.Database
                 names.Add(cardTitle);
             File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
         }
-        public static List<string> LoadCardName()
-        {
-            CheckFileExist(CardsName);
-            var jsonData = File.ReadAllText(CardsName);
-            List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
-            return names;
-        }
+        //public static List<string> LoadCardName()
+        //{
+        //    CheckFileExist(CardsName);
+        //    var jsonData = File.ReadAllText(CardsName);
+        //    List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
+        //    return names;
+        //}
 
         public static void SaveCardUserList(StudyGroup group, string cardTitle)
         {
