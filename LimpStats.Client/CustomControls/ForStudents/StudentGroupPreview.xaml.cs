@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,10 +6,9 @@ using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
-using LimpStats.Database.Models;
 using LimpStats.Model;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class StudentGroupPreview : UserControl
     {
@@ -22,13 +19,14 @@ namespace LimpStats.Client.CustomControls
         public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, Grid stackPanel)
         {
             InitializeComponent();
+
             _studentGroupBlock = studentGroupBlock;
             GroupTitle = groupTitle;
             CardTitle.Content = groupTitle;
             _stackPanel = stackPanel;
 
             JsonBackupManager.SaveCardName(groupTitle);
-            _group = JsonBackupManager.LoadCardUserList(GroupTitle);
+            _group = JsonBackupManager.LoadCardUserList(groupTitle);
 
             if (_group == null)
             {
@@ -50,7 +48,7 @@ namespace LimpStats.Client.CustomControls
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
-            if (ConnectionAvailable("https://www.google.com") == false)
+            if (Core.Tools.Tools.CheckInternetConnect() == false)
             {
                 MessageBox.Show("Internet connection error");
                 return;
@@ -85,36 +83,16 @@ namespace LimpStats.Client.CustomControls
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new InitializationUserWindow(_group, GroupTitle);
-            f.ShowDialog();
+            var userAdding = new UserAddingWindow();
+            userAdding.ShowDialog();
+
+            _group.UserList.Add(new LimpUser(userAdding.Username));
+            JsonBackupManager.SaveCardUserList(_group, GroupTitle);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             _studentGroupBlock.Panel.Children.Remove(this);
-        }
-
-        //TODO: вынести в .Core.Tools
-        public bool ConnectionAvailable(string strServer)
-        {
-            try
-            {
-                var reqFP = (HttpWebRequest) WebRequest.Create(strServer);
-
-                var rspFP = (HttpWebResponse) reqFP.GetResponse();
-                if (HttpStatusCode.OK == rspFP.StatusCode)
-                {
-                    rspFP.Close();
-                    return true;
-                }
-
-                rspFP.Close();
-                return false;
-            }
-            catch (WebException)
-            {
-                return false;
-            }
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
