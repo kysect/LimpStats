@@ -85,6 +85,9 @@
     <Compile Include="CustomControls\ForStudents\StudentGroupPreview.xaml.cs">
       <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\ForStudents\UserAddingWindow.xaml.cs">
+      <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\Blocks\StudentPackBlock.xaml.cs">
       <DependentUpon>StudentPackBlock.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\ForStudents\StudentGroupPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\ForStudents\UserAddingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
