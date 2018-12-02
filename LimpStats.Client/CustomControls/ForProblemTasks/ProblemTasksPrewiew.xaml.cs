@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
-using LimpStats.Database.Models;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -31,9 +19,12 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly StudyGroup _group;
         private readonly StackPanel _stackPanel;
         private readonly StudentPackBlock _studentPackBlock;
+
+        //TODO: А разве в StudentPackBlock не хранится users и packTitle?
         public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, StackPanel stackPanel)
         {
             InitializeComponent();
+
             _studentPackBlock = studentPackBlock;
             _group = users;
             _stackPanel = stackPanel;
@@ -58,7 +49,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
-            if (Core.Tools.Tools.ConnectionAvailable("https://www.google.com") == false)
+            if (Core.Tools.Tools.CheckInternetConnect() == false)
             {
                 MessageBox.Show("Internet connection error");
                 return;

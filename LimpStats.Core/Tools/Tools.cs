@@ -28,21 +28,16 @@ namespace LimpStats.Core.Tools
             }
             return s;
         }
-        public static  bool ConnectionAvailable(string strServer)
+
+        public static  bool CheckInternetConnect(string strServer = "https://www.google.com")
         {
             try
             {
-                var reqFP = (HttpWebRequest)WebRequest.Create(strServer);
-
-                var rspFP = (HttpWebResponse)reqFP.GetResponse();
-                if (HttpStatusCode.OK == rspFP.StatusCode)
+                HttpWebRequest request = WebRequest.CreateHttp(strServer);
+                using (var response = request.GetResponse() as HttpWebResponse)
                 {
-                    rspFP.Close();
-                    return true;
+                    return response != null && HttpStatusCode.OK == response.StatusCode;
                 }
-
-                rspFP.Close();
-                return false;
             }
             catch (WebException)
             {
