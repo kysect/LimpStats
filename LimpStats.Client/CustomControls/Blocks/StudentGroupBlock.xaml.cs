@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LimpStats.Client.CustomControls.ForStudents;
 using LimpStats.Database.Models;
 
 namespace LimpStats.Client.CustomControls
