@@ -21,6 +21,7 @@ namespace LimpStats.Client.CustomControls
                 k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle, k));
                 PanelViewer.ScrollToRightEnd();
             }
+
         }
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)

@@ -17,9 +17,9 @@ namespace LimpStats.Client
         public MainWindow()
         {
             InitializeComponent();
-            var f = new StudentGroupBlock(SumVar.AllPack, StackPanel);
+            var f = new StudentGroupBlock(SumVar.AllPack, StackPanel, NavigatePanel);
             StackPanel.Children.Add(f);
-            ScrolPanel.Children.Add(new NavigateButton(f, this));
+            NavigatePanel.Children.Add(new NavigateButton(f, StackPanel));
         }
     }
 }

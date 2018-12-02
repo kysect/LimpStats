@@ -38,7 +38,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _group = users;
             _stackPanel = stackPanel;
             GroupTitle = packTitle;
-            CardTitle.Content = packTitle;
+            CardTitle.DataContext = packTitle;
             if (_group == null)
             {
                 _group = new StudyGroup

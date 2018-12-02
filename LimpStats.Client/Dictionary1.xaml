@@ -38,9 +38,8 @@
                             <ColumnDefinition Width="8*"/>
                         </Grid.ColumnDefinitions>
                         <Border x:Name="Border" Grid.ColumnSpan="3"
-        CornerRadius="20,0,0,0" Background="#FF993333">
-                        </Border>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="46.013,5.333,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="GroupTitle"/></TextBlock>
+        CornerRadius="20,0,0,0" Background="#FF993333"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=CardTitle, Path=DataContext}" TextAlignment="Center" Margin="0,5.046,0,4.954" Grid.ColumnSpan="3"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
