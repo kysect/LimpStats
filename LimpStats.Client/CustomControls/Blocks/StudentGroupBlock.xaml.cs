@@ -9,11 +9,12 @@ namespace LimpStats.Client.CustomControls
     {
         public readonly SumVar SumVar;
         private readonly Grid _stackPanel;
+        private readonly StackPanel _NavigatePanel;
 
-        public StudentGroupBlock(SumVar sumVar, Grid stackPanel)
+        public StudentGroupBlock(SumVar sumVar, Grid stackPanel, StackPanel NavigatePanel)
         {
             InitializeComponent();
-
+            _NavigatePanel = NavigatePanel;
             SumVar = sumVar;
             _stackPanel = stackPanel;
         }
@@ -21,7 +22,7 @@ namespace LimpStats.Client.CustomControls
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
             var groupPanel = (StackPanel)FindName("Panel");
-            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _stackPanel));
+            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _stackPanel, _NavigatePanel));
 
             FilePath.Text = string.Empty;
             PanelViewer.ScrollToRightEnd();

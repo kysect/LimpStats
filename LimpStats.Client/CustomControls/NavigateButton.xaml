@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
              mc:Ignorable="d" Width="250" Height="30">
-    <Canvas>
+    <Canvas Margin="0, 0, 0, 20">
+        
         <Button
                 Click="ButtonBase_OnClick"
                 RenderTransformOrigin="0.5,0.5" Height="30" Width="250" 

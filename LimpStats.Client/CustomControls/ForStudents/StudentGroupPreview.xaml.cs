@@ -18,15 +18,16 @@ namespace LimpStats.Client.CustomControls
         private readonly StudyGroup _group;
         private readonly Grid _stackPanel;
         private readonly StudentGroupBlock _studentGroupBlock;
+        private readonly StackPanel _NavigatePanel;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, Grid stackPanel)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, Grid stackPanel, StackPanel Navigatepanel)
         {
             InitializeComponent();
             _studentGroupBlock = studentGroupBlock;
             GroupTitle = groupTitle;
-            CardTitle.Content = groupTitle;
+            CardTitle.DataContext = groupTitle;
             _stackPanel = stackPanel;
-
+            _NavigatePanel = Navigatepanel;
             JsonBackupManager.SaveCardName(groupTitle);
             _group = JsonBackupManager.LoadCardUserList(GroupTitle);
 
@@ -119,9 +120,10 @@ namespace LimpStats.Client.CustomControls
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-                var f = new StudentPackBlock(_group, CardTitle.Content.ToString());
+                var f = new StudentPackBlock(_group, CardTitle.DataContext.ToString());
                 _studentGroupBlock.Visibility = Visibility.Hidden;
                 _stackPanel.Children.Add(f);
+                 _NavigatePanel.Children.Add(new NavigateButton(f, _stackPanel));
         }
     }
 }
