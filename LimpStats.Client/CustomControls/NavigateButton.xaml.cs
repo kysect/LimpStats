@@ -10,20 +10,38 @@ namespace LimpStats.Client.CustomControls
         private  StudentGroupBlock _block;
         private  StudentPackBlock _blockpack;
         private  Grid _StackPanel;
+        private StackPanel _stackPanel;
 
-        public NavigateButton(StudentGroupBlock block, Grid mainWindow)
+        public NavigateButton(StudentGroupBlock block, Grid mainWindow, string name, StackPanel panel)
         {
             InitializeComponent();
             _blockpack = null;
             _block = block;
             _StackPanel = mainWindow;
+            butt.DataContext = name;
+            _stackPanel = panel;
+            foreach (NavigateButton but in _stackPanel.Children)
+            {
+                if (but != this)
+                    but.butt.IsEnabled = true;
+            }
+            butt.IsEnabled = false;
         }
-        public NavigateButton(StudentPackBlock block, Grid mainWindow)
+        public NavigateButton(StudentPackBlock block, Grid mainWindow, string name, StackPanel panel)
         {
             InitializeComponent();
+
             _block = null;
             _blockpack = block;
             _StackPanel = mainWindow;
+            butt.DataContext = name;
+            _stackPanel = panel;
+            foreach (NavigateButton but in _stackPanel.Children)
+            {
+                if (but != this)
+                    but.butt.IsEnabled = true;
+            }
+            butt.IsEnabled = false;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -44,6 +62,19 @@ namespace LimpStats.Client.CustomControls
                 else
                     block.Visibility = Visibility.Hidden;
             }
+            foreach (NavigateButton but in _stackPanel.Children)
+            {
+                if (but != this)
+                    but.butt.IsEnabled = true;
+            }
+            butt.IsEnabled = false;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _StackPanel.Children.Remove(_block);
+            _StackPanel.Children.Remove(_blockpack);
+            _stackPanel.Children.Remove(this);
         }
     }
 }

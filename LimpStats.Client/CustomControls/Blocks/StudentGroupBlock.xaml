@@ -5,35 +5,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="298"
     d:DesignHeight="450"
+    d:DesignWidth="300"
     mc:Ignorable="d">
-    <Canvas>
+    <Canvas Margin="0,0,504,0">
         <StackPanel VerticalAlignment="Stretch">
             <StackPanel
                 Height="40"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
                 <Button
-                    Name="AddList"
+                    x:Name="AddList"
                     Width="70"
-                    Height="30"
-                    Margin="5"
+                    Height="35"
                     Click="AddGroupToPanel"
                     Content="Add list"
                     IsEnabled="False"
-                    RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic" Background="#FF993333" BorderBrush="#FF993333" Foreground="#FFE8E8E8" />
+                    RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic" Background="#FF993333" BorderBrush="#FF993333" Foreground="#FFE8E8E8" VerticalAlignment="Top" HorizontalAlignment="Left" />
                 <TextBox
-                    Name="FilePath"
+                    x:Name="FilePath"
                     Width="150"
-                    Height="30"
-                    Margin="5"
+
                     VerticalContentAlignment="Center"
                     GotFocus="FilePath_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
                     Text="NameCard"
                     TextChanged="FilePath_OnTextChanged"
-                    TextWrapping="Wrap" Background="#FFCEBD89" FontFamily="Century Gothic" FontSize="14" FontStyle="Italic" Foreground="#FF993333" />
+                    TextWrapping="Wrap" Background="#FFCEBD89" FontFamily="Century Gothic" FontSize="14" FontStyle="Italic" Foreground="#FF993333" Margin="0,0,0,5" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"

@@ -22,7 +22,7 @@
             x:Name="StackPanel"
             Grid.Column="1"
             Height="506"
-            Margin="11,0,-510,0"
+            Margin="0,0,-510,0"
             VerticalAlignment="Top" Background="#FF5DA09D" />
         <StackPanel
             x:Name="NavigatePanel"
