@@ -18,8 +18,7 @@
                 <Button
                     Name="AddPack"
                     Width="70"
-                    Height="30"
-                    Margin="0,5"
+                    Margin="0,0,0,5"
                     Click="OnClick_UpdatePanel"
                     Content="Add list"
                     IsEnabled="False"
@@ -27,13 +26,12 @@
                 <TextBox
                     Name="FilePath"
                     Width="150"
-                    Height="30"
                     VerticalContentAlignment="Center"
                     GotFocus="TextBox1_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
                     Text="PackName"
                     TextChanged="FilePath_OnTextChanged"
-                    TextWrapping="Wrap" Background="#FFCEBD89" Foreground="#FF993333" BorderBrush="#FFCEBD89" FontFamily="Century Gothic" />
+                    TextWrapping="Wrap" Background="#FFCEBD89" Foreground="#FF993333" BorderBrush="#FFCEBD89" FontFamily="Century Gothic" Margin="0,0,0,5" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"
