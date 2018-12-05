@@ -97,9 +97,10 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new ResultGridBlock();
+            var f = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
             _studentPackBlock.Visibility = Visibility.Hidden;
             _stackPanel.Children.Add(f);
+
         }
     }
 }
