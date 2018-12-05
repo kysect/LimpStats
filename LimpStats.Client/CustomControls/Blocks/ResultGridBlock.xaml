@@ -7,11 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="298">
     <Canvas>
-        <StackPanel>
-            <DataGrid x:Name="ResGrid" Height="450" Width="298">
-
-
-            </DataGrid>
-        </StackPanel>
+        <DataGrid x:Name="ResGrid" Height="450" Width="298" AutoGenerateColumns="True"/>
     </Canvas>
 </UserControl>
