@@ -5,9 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="200"
-    d:DesignHeight="250"
-    mc:Ignorable="d">
+    Width="250"
+    mc:Ignorable="d" Height="312.5">
     <UserControl.Resources>
         <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -51,64 +50,140 @@
         </Style>
         <Style x:Key="ListBoxItemStyle2" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <Grid Margin="2" Height="23.5" Width="123" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Grid.ColumnSpan="2" Fill="#FF993333" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="190" RadiusX="2" RadiusY="4"/>
-                                <ContentPresenter
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid Margin="2" Height="23.5" Width="123" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Grid.ColumnSpan="2" Fill="#FFE2FCE1" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="190" RadiusX="2" RadiusY="4"/>
+                            <ContentPresenter
                                
                                     Grid.Column="1"
                                     Margin="10.5,2.286,-6.5,8.5" HorizontalAlignment="Center" Width="119" VerticalAlignment="Center" />
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="TextElement.Foreground" Value="White"></Setter>
-                <Setter Property="TextElement.FontFamily" Value="Century Gothic"></Setter>
-            </Style>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextElement.Foreground" Value="#FF000D30"></Setter>
+            <Setter Property="TextElement.FontFamily" Value="Century Gothic"></Setter>
+        </Style>
+        <ControlTemplate x:Key="MenuItemControlTemplate1" TargetType="{x:Type MenuItem}">
+            <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <Grid x:Name="Grid" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
+                    <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="3" Visibility="Collapsed" VerticalAlignment="Center"/>
+                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Bottom">
+                        <Border x:Name="SubMenuBorder" BorderBrush="#FF999999" BorderThickness="1" Background="#FFF0F0F0" Padding="2">
+                            <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                <Grid x:Name="Grid1" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=SubMenuBorder}" Height="{Binding ActualHeight, ElementName=SubMenuBorder}" Width="{Binding ActualWidth, ElementName=SubMenuBorder}"/>
+                                    </Canvas>
+                                    <Rectangle x:Name="Rectangle" Fill="#FFD7D7D7" HorizontalAlignment="Left" Margin="29,2,0,2" Width="1"/>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsSuspendingPopupAnimation" Value="True">
+                    <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None"/>
+                </Trigger>
+                <Trigger Property="Icon" Value="{x:Null}">
+                    <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                    <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
+                </Trigger>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" TargetName="templateRoot" Value="#3D26A0DA"/>
+                    <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070"/>
+                    <Setter Property="Fill" TargetName="GlyphPanel" Value="#FF707070"/>
+                </Trigger>
+                <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
+                    <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=SubMenuScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="REFRESH" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Grid.ColumnSpan="3"
+        CornerRadius="0,20,0,0" Background="#FFE2F9F1" Margin="0"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
-    <Canvas>
+    <Canvas Margin="0,-6,0,0">
+
+        <Rectangle Fill="#FF020C27" Height="68.75" Stroke="Black" Width="250"/>
+
         <Button
-            Name="UpdateButton"
+            x:Name="UpdateButton"
             Canvas.Right="0"
-            Width="25"
-            Height="25"
+            Width="33.333"
+            Height="33.333"
             HorizontalAlignment="Left"
             Click="ButtonClick_Update"
-            Content="🔄" FontFamily="Century Gothic" Background="#FF993333" Foreground="#FFE8E8E8" />
+            Content="🔄" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF879993" Canvas.Left="215.668" BorderBrush="{x:Null}" Style="{DynamicResource REFRESH}" Canvas.Top="2.334" />
         <Button
-            Name="CardTitle"
-            Width="159"
-            Height="25"
+            x:Name="CardTitle"
+            Width="196"
+            Height="33.666"
             Background="#FF993333"
             Click="CardTitle_OnClick"
-            DataContext="GrupTitle" FontFamily="Century Gothic" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" />
+            DataContext="GrupTitle" FontFamily="Century Gothic" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" Canvas.Top="2.334" />
         <Button
-            Canvas.Top="25"
-            Width="200"
-            Height="19"
+            Canvas.Top="36"
+            Width="250"
+            Height="23.75"
             Click="AddUserButton_OnClick"
-            Content="AddUser" FontFamily="Century Gothic" Background="#FF993333" Foreground="#FFE8E8E8" />
+            Content="AddUser" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF87A5B8" BorderBrush="{x:Null}" />
         <ListBox
-            Name="StudentList"
-            Canvas.Top="44"
-            Width="200"
-            Height="206"
+            x:Name="StudentList"
+            Canvas.Top="62"
+            Width="250"
+            Height="257.5"
             MinHeight="50" Background="#FF4F7BBA" ItemContainerStyle="{DynamicResource ListBoxItemStyle2}" Style="{DynamicResource ListBoxStyle2}" />
         <Menu
             Canvas.Right="25"
-            Width="15"
-            Height="25"
-            VerticalAlignment="Top">
+            Width="15.667"
+            Height="36"
+            VerticalAlignment="Top" Canvas.Left="196" Background="{x:Null}">
             <MenuItem
-                Width="15"
-                Height="25"
-                Header="⋮"
-                RenderTransformOrigin="0.05,0.56" Background="#FF993333" Foreground="#FF993333">
+                Width="15.667"
+                Height="36.667"
+                Header="⋮" Background="#FF020C27" Foreground="#FFE8E8E8" Template="{DynamicResource MenuItemControlTemplate1}">
                 <MenuItem Header="Rename" />
                 <MenuItem Header="Sort by">
                     <MenuItem Header="Nickname" />
