@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.Blocks
@@ -29,27 +18,34 @@ namespace LimpStats.Client.CustomControls.Blocks
             InitializeComponent();
             _group = group;
             _packTitle = packTitle;
-            var pack = _group.ProblemPackList.Find(e => e.PackTitle == _packTitle);
-            DataTable dt = new DataTable();
-            foreach (var item in pack.ProblemIdList)
+            ProblemPackInfo pack = _group.ProblemPackList.Find(e => e.PackTitle == _packTitle);
+            DataTable dt = InitDataTable(pack, group.UserList);
+            
+            ResGrid.ItemsSource = dt.DefaultView;
+        }
+
+        private DataTable InitDataTable(ProblemPackInfo pack, List<LimpUser> users)
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("Name");
+            foreach (int item in pack.ProblemIdList)
             {
                 dt.Columns.Add(item.ToString());
             }
-            foreach (var item in _group.UserList)
+
+
+            foreach (LimpUser user in users)
             {
-                dt.Rows.Add(item.Username);
+                var data = new List<object> {user.Username};
+                foreach (int problemNum  in pack.ProblemIdList)
+                {
+                    data.Add(user.UserProfileResult[problemNum]);
+                }
+
+                dt.Rows.Add(data.ToArray());
             }
 
-            int i = 0;
-            foreach (var user in _group.UserList)
-            {
-                for (int j = 0; j < pack.ProblemIdList.Count; j++)
-                {
-                    dt.Rows[i].ItemArray[j] = user.UserProfileResult.First(e => e.Key == pack.ProblemIdList[j]);
-                }
-                i++;
-            }
-            ResGrid.ItemsSource = dt.DefaultView;
+            return dt;
         }
     }
 }
