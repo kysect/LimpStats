@@ -71,7 +71,11 @@ namespace LimpStats.Core.Parsers
             HtmlDocument doc = Webget.Load(url);
 
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//*[contains(@class,'eo-title__header')]"))
-                return node.ChildNodes[0].InnerHtml;
+            {
+                //TODO:
+                if(node.ChildNodes[0].InnerHtml != "Задачи")
+                    return node.ChildNodes[0].InnerHtml;
+            }
             return "///";
         }
     }

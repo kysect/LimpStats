@@ -75,6 +75,41 @@
             <Setter Property="TextElement.Foreground" Value="White"></Setter>
             <Setter Property="TextElement.FontFamily" Value="Century Gothic"></Setter>
         </Style>
+        <Style x:Key="packtitlestyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="159">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="71*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="Border" Grid.ColumnSpan="3"
+                                CornerRadius="20,0,0,0" Background="#FFE2F9F1" Margin="0,0,0,-8.25"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding DataContext, ElementName=CardTitle}" TextAlignment="Center" Margin="0,9.046,-38,-4" Grid.ColumnSpan="3" Foreground="#FF879993"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FFE66A6A" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
 
     </UserControl.Resources>
@@ -93,7 +128,7 @@
             Height="25"
             Background="#FF993333"
             Click="CardTitle_OnClick"
-            DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" FontFamily="Century Gothic" />
+            DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource packtitlestyle}" FontFamily="Century Gothic" />
         <Button
             Canvas.Top="25"
             Width="200"

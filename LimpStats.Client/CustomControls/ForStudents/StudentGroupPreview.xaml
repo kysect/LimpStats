@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="250"
-    mc:Ignorable="d" Height="312.5">
+    Width="322"
+    mc:Ignorable="d" Height="400.5">
     <UserControl.Resources>
         <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -57,7 +57,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Rectangle Grid.ColumnSpan="2" Fill="#FFE2FCE1" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="190" RadiusX="2" RadiusY="4"/>
+                            <Rectangle Grid.ColumnSpan="2" Fill="#FFE2FCE1" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="240" RadiusX="2" RadiusY="4"/>
                             <ContentPresenter
                                
                                     Grid.Column="1"
@@ -136,50 +136,55 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true"/>
                             <Trigger Property="IsMouseOver" Value="true"/>
+
                             <Trigger Property="IsPressed" Value="true"/>
-                            <Trigger Property="IsEnabled" Value="false"/>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="Border" Value="#FF4F7BBA"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Canvas Margin="0,-6,0,0">
+    <Canvas Height="400.5" VerticalAlignment="Top">
 
-        <Rectangle Fill="#FF020C27" Height="68.75" Stroke="Black" Width="250"/>
+        <Rectangle Fill="#19000000" Height="404.5" Width="300"/>
+
+        <Rectangle Fill="#FF020C27" Height="62" Stroke="Black" Width="287.25"/>
 
         <Button
             x:Name="UpdateButton"
             Canvas.Right="0"
-            Width="33.333"
-            Height="33.333"
+            Width="36.333"
+            Height="36"
             HorizontalAlignment="Left"
             Click="ButtonClick_Update"
-            Content="🔄" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF879993" Canvas.Left="215.668" BorderBrush="{x:Null}" Style="{DynamicResource REFRESH}" Canvas.Top="2.334" />
+            Content="🔄" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF879993" Canvas.Left="250.917" BorderBrush="{x:Null}" Style="{DynamicResource REFRESH}" />
         <Button
             x:Name="CardTitle"
-            Width="196"
+            Width="225.25"
             Height="33.666"
             Background="#FF993333"
             Click="CardTitle_OnClick"
             DataContext="GrupTitle" FontFamily="Century Gothic" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" Canvas.Top="2.334" />
         <Button
-            Canvas.Top="36"
-            Width="250"
-            Height="23.75"
+            Canvas.Top="40.333"
+            Width="287.25"
+            Height="18.667"
             Click="AddUserButton_OnClick"
             Content="AddUser" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF87A5B8" BorderBrush="{x:Null}" />
         <ListBox
             x:Name="StudentList"
             Canvas.Top="62"
-            Width="250"
-            Height="257.5"
-            MinHeight="50" Background="#FF4F7BBA" ItemContainerStyle="{DynamicResource ListBoxItemStyle2}" Style="{DynamicResource ListBoxStyle2}" />
+            Width="287.25"
+            Height="332.951"
+            MinHeight="50" Background="#FFE8F9F2" ItemContainerStyle="{DynamicResource ListBoxItemStyle2}" Style="{DynamicResource ListBoxStyle2}" />
         <Menu
             Canvas.Right="25"
             Width="15.667"
             Height="36"
-            VerticalAlignment="Top" Canvas.Left="196" Background="{x:Null}">
+            VerticalAlignment="Top" Canvas.Left="230.25" Background="{x:Null}">
             <MenuItem
                 Width="15.667"
                 Height="36.667"
