@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
@@ -21,6 +23,17 @@ namespace LimpStats.Client.CustomControls.ForStudents
         {
             InitializeComponent();
 
+            DoubleAnimation buttonAnimation = new DoubleAnimation();
+            buttonAnimation.From = 0;
+            buttonAnimation.To = 100;
+            buttonAnimation.Duration = TimeSpan.FromSeconds(50);
+            ThicknessAnimation moveAnimation = new ThicknessAnimation();
+            moveAnimation.From = new Thickness( Margin.Left+10, Margin.Top, Margin.Right-10, Margin.Bottom);
+            moveAnimation.To   = Margin;
+            moveAnimation.Duration = TimeSpan.FromSeconds(0.5);
+            this.BeginAnimation(UserControl.OpacityProperty, buttonAnimation);
+            this.BeginAnimation(UserControl.MarginProperty, moveAnimation);
+         
             _studentGroupBlock = studentGroupBlock;
             GroupTitle = groupTitle;
             CardTitle.DataContext = groupTitle;

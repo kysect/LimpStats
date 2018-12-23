@@ -5,9 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="300"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="564" Width="831">
     <Canvas Margin="0,0,504,0">
         <StackPanel VerticalAlignment="Stretch">
             <StackPanel
@@ -33,19 +31,13 @@
                     TextChanged="FilePath_OnTextChanged"
                     TextWrapping="Wrap" Background="#FFCEBD89" FontFamily="Century Gothic" FontSize="14" FontStyle="Italic" Foreground="#FF993333" Margin="0,0,0,5" />
             </StackPanel>
-            <ScrollViewer
-                Name="PanelViewer"
-                MaxWidth="600"
-                HorizontalScrollBarVisibility="Visible"
-                VerticalScrollBarVisibility="Disabled">
-                <StackPanel
+            <StackPanel
                     x:Name="Panel"
                     MinWidth="300"
                     MinHeight="400"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" />
-            </ScrollViewer>
         </StackPanel>
     </Canvas>
 </UserControl>

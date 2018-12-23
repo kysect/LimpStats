@@ -26,7 +26,6 @@ namespace LimpStats.Client.CustomControls
             groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _stackPanel, _NavigatePanel));
 
             FilePath.Text = string.Empty;
-            PanelViewer.ScrollToRightEnd();
         }
 
         private void FilePath_OnGotFocus(object sender, RoutedEventArgs e)
