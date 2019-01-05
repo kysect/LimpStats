@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
