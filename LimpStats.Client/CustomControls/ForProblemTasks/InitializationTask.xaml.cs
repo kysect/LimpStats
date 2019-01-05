@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Core.Parsers;
-using HtmlAgilityPack;
 
 namespace LimpStats.Client.CustomControls
 {

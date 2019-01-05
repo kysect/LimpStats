@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls.Blocks;
@@ -8,6 +7,7 @@ namespace LimpStats.Client.CustomControls
 {
     public partial class NavigateButton : UserControl
     {
+        //TODO: Rewrite
         private StudentGroupBlock _block;
         private ResultGridBlock _blockres;
         private StudentPackBlock _blockpack;

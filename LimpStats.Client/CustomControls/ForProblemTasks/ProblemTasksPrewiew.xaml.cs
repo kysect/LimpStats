@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,9 +11,6 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
-    /// <summary>
-    /// Логика взаимодействия для ProblemTasksPrewiew.xaml
-    /// </summary>
     public partial class ProblemTasksPrewiew : UserControl
     {
         private readonly StudyGroup _group;

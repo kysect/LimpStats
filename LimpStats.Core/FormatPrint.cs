@@ -5,6 +5,7 @@ using LimpStats.Model;
 
 namespace LimpStats.Core
 {
+    //TODO: move/delete
     public static class FormatPrint
     {
         public static IEnumerable<string> GenerateCountResults(StudyGroup group)
