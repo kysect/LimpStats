@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,13 +18,15 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     public partial class ProblemTasksPrewiew : UserControl
     {
         private readonly StudyGroup _group;
-        private readonly StackPanel _stackPanel;
+        private readonly Grid _stackPanel;
         private readonly StudentPackBlock _studentPackBlock;
+        private readonly StackPanel _NavigatePanel;
 
         //TODO: А разве в StudentPackBlock не хранится users и packTitle?
-        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, StackPanel stackPanel)
+        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, Grid stackPanel, StackPanel Navigatepanel)
         {
             InitializeComponent();
+            _NavigatePanel = Navigatepanel;
 
             _studentPackBlock = studentPackBlock;
             _group = users;
@@ -100,6 +103,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             var f = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
             _studentPackBlock.Visibility = Visibility.Hidden;
             _stackPanel.Children.Add(f);
+            _NavigatePanel.Children.Add(new NavigateButton(f, _stackPanel, CardTitle.DataContext.ToString(), _NavigatePanel));
 
         }
     }

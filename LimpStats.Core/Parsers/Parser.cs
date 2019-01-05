@@ -63,7 +63,7 @@ namespace LimpStats.Core.Parsers
         }
 
         //TODO: Прееместить в .Core.Parsers
-        public static string GetTitleTask(int number)
+        public static string GetTitleTask(int  number)
         {
             //TODO загрузка названия задачи
             string url = $"https://www.e-olymp.com/ru/problems/{number}";

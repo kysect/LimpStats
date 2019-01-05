@@ -27,9 +27,13 @@ namespace LimpStats.Client
         private string _name;
         private StudyGroup _group;
         private StudentPackBlock _block;
+        private Grid _panel;
         private string _groupTitle;
-        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block, string groupTitle)
+        private StackPanel _navigatepanel;
+        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block, string groupTitle, Grid panel, StackPanel navigatepanel)
         {
+            _navigatepanel = navigatepanel;
+            _panel = panel;
             _block = block;
             _group = group;
             _name = packname;
@@ -48,7 +52,7 @@ namespace LimpStats.Client
             _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
             var k = (StackPanel)_block.FindName("Panel");
-            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name, k));
+            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name, _panel, _navigatepanel));
             PanelViewer.ScrollToRightEnd();
             Close();
         }

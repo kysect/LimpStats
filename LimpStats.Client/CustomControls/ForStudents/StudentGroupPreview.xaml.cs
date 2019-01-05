@@ -112,7 +112,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
             var name = CardTitle.DataContext.ToString();
-                var f = new StudentPackBlock(_group, name);
+                var f = new StudentPackBlock(_group, name, _stackPanel, _NavigatePanel);
                 _studentGroupBlock.Visibility = Visibility.Hidden;
                 _stackPanel.Children.Add(f);
                  _NavigatePanel.Children.Add(new NavigateButton(f, _stackPanel, name, _NavigatePanel));
