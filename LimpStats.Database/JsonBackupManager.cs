@@ -53,10 +53,12 @@ namespace LimpStats.Database
         public static void SaveCardName(string cardTitle)
         {
             CheckFileExist(CardsName);
-            var jsonData = File.ReadAllText(CardsName);
+            string jsonData = File.ReadAllText(CardsName);
             List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
+
             if (names.Contains(cardTitle) == false)
                 names.Add(cardTitle);
+
             File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
         }
         //public static List<string> LoadCardName()

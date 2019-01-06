@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
+using LimpStats.Client.Tools;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls
@@ -10,19 +11,19 @@ namespace LimpStats.Client.CustomControls
     {
         private readonly StudyGroup _users;
         private string _groupTitle;
-        private Grid _panel;
-        private StackPanel _navigatepanel;
-        public StudentPackBlock(StudyGroup users, string groupTitle, Grid Panel, StackPanel navigatepanel)
+        private IViewNavigateService _navigateService;
+
+        public StudentPackBlock(StudyGroup users, string groupTitle, IViewNavigateService navigateService)
         {
+            _navigateService = navigateService;
+
             InitializeComponent();
-            _navigatepanel = navigatepanel;
-            _panel = Panel;
             _users = users;
             _groupTitle = groupTitle;
             foreach (var pack in users.ProblemPackList)
             {
                 var k = (StackPanel)FindName("Panel");
-                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle, _panel, _navigatepanel));
+                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle, _navigateService));
                 PanelViewer.ScrollToRightEnd();
             }
 
@@ -30,7 +31,7 @@ namespace LimpStats.Client.CustomControls
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var f = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle, _panel, _navigatepanel);
+            var f = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle, _navigateService);
             f.Show();
         }
 

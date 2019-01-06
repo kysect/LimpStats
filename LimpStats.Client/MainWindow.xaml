@@ -2,31 +2,37 @@
     x:Class="LimpStats.Client.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:LimpStats.Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="clr-namespace:LimpStats.Model;assembly=LimpStats.Model"
     x:Name="Main"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
-
-    <Grid Background="#FF5DA09D">
+    <Grid
+        Background="#FF5DA09D">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition
+                Width="250" />
+            <ColumnDefinition
+                Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Grid
-            x:Name="StackPanel"
-            Grid.Column="1"
-            Height="506"
-            Margin="0,0,-510,0"
-            VerticalAlignment="Top" Background="#FF5DA09D" />
         <StackPanel
             x:Name="NavigatePanel"
-            Height="506"  Background="#FF5DA09D" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Grid.Row="1" Margin="0,0,0,20" />
+            Height="500"
+            Background="#FF5DA09D"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="250"
+            Grid.Row="0"/>
+        <UserControl
+            x:Name="MainWindowContent"
+            Grid.Column="1"
+            Height="500"
+            Width="500"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Background="#FF5DA09D" />
     </Grid>
 
 </Window>

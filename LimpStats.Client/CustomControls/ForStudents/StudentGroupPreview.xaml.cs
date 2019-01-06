@@ -14,34 +14,30 @@ namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class StudentGroupPreview : UserControl
     {
-        private readonly StudyGroup _group;
-        private readonly Grid _stackPanel;
-        private readonly StudentGroupBlock _studentGroupBlock;
-        private readonly StackPanel _NavigatePanel;
+        private IViewNavigateService _navigateService;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string groupTitle, Grid stackPanel, StackPanel Navigatepanel)
+        private readonly StudyGroup _group;
+        private readonly StudentGroupBlock _studentGroupBlock;
+        private readonly string _studentGroupTitle;
+
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string studentGroupTitle, IViewNavigateService navigateService)
         {
+            _navigateService = navigateService;
+
             InitializeComponent();
 
-            DoubleAnimation buttonAnimation = new DoubleAnimation();
-            buttonAnimation.From = 0;
-            buttonAnimation.To = 100;
-            buttonAnimation.Duration = TimeSpan.FromSeconds(50);
-            ThicknessAnimation moveAnimation = new ThicknessAnimation();
-            moveAnimation.From = new Thickness( Margin.Left+10, Margin.Top, Margin.Right-10, Margin.Bottom);
-            moveAnimation.To   = Margin;
-            moveAnimation.Duration = TimeSpan.FromSeconds(0.5);
-            this.BeginAnimation(UserControl.OpacityProperty, buttonAnimation);
-            this.BeginAnimation(UserControl.MarginProperty, moveAnimation);
-         
-            _studentGroupBlock = studentGroupBlock;
-            GroupTitle = groupTitle;
-            CardTitle.DataContext = groupTitle;
-            _stackPanel = stackPanel;
-            _NavigatePanel = Navigatepanel;
-            JsonBackupManager.SaveCardName(groupTitle);
-            _group = JsonBackupManager.LoadCardUserList(groupTitle);
+            _studentGroupTitle = studentGroupTitle;
 
+            CardTitle.DataContext = _studentGroupTitle;
+            _studentGroupBlock = studentGroupBlock;
+
+            //TODO: remove saving?
+            JsonBackupManager.SaveCardName(studentGroupTitle);
+            _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
+
+            AddAnimation();
+
+            //TODO: temp solution, remove
             if (_group == null)
             {
                 _group = new StudyGroup
@@ -58,7 +54,25 @@ namespace LimpStats.Client.CustomControls.ForStudents
             StudentList.SelectionChanged += LimpUserStatistic;
         }
 
-        public string GroupTitle { get; }
+        private void AddAnimation()
+        {
+            var buttonAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 100,
+                Duration = TimeSpan.FromSeconds(50)
+            };
+
+            var moveAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(Margin.Left + 10, Margin.Top, Margin.Right - 10, Margin.Bottom),
+                To = Margin,
+                Duration = TimeSpan.FromSeconds(0.5)
+            };
+
+            BeginAnimation(OpacityProperty, buttonAnimation);
+            BeginAnimation(MarginProperty, moveAnimation);
+        }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
@@ -71,7 +85,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             Task.Run(() => Update());
         }
 
-        public void Update()
+        private void Update()
         {
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
 
@@ -101,7 +115,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             userAdding.ShowDialog();
 
             _group.UserList.Add(new LimpUser(userAdding.Username));
-            JsonBackupManager.SaveCardUserList(_group, GroupTitle);
+            JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
@@ -111,11 +125,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var name = CardTitle.DataContext.ToString();
-                var f = new StudentPackBlock(_group, name, _stackPanel, _NavigatePanel);
-                _studentGroupBlock.Visibility = Visibility.Hidden;
-                _stackPanel.Children.Add(f);
-                 _NavigatePanel.Children.Add(new NavigateButton(f, _stackPanel, name, _NavigatePanel));
+            var f = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
+            _studentGroupBlock.Visibility = Visibility.Hidden;
+
+            _navigateService.AddToViewList(_studentGroupTitle, f);
+            _navigateService.OpenView(f);
         }
     }
 }
