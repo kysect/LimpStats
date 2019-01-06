@@ -11,15 +11,15 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
-    public partial class ProblemTasksPrewiew : UserControl
+    public partial class ProblemTasksPreview : UserControl
     {
-        private IViewNavigateService _navigateService;
+        private readonly IViewNavigateService _navigateService;
 
         private readonly StudyGroup _group;
         private readonly StudentPackBlock _studentPackBlock;
 
         //TODO: А разве в StudentPackBlock не хранится users и packTitle?
-        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
@@ -89,18 +89,20 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            _studentPackBlock.Panel.Children.Remove(this);
+            //TODO: check this
+            _studentPackBlock.PackListPanel.Children.Remove(this);
         }
 
 
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
+            var resultGridBlock = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
+            //TODO: check this
             _studentPackBlock.Visibility = Visibility.Hidden;
 
-            _navigateService.AddToViewList(CardTitle.DataContext.ToString(), f);
-            _navigateService.OpenView(f);
+            _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock);
+            _navigateService.OpenView(resultGridBlock);
 
         }
     }

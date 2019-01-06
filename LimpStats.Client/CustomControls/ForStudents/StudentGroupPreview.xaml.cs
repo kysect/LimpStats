@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
@@ -14,7 +15,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class StudentGroupPreview : UserControl
     {
-        private IViewNavigateService _navigateService;
+        private readonly IViewNavigateService _navigateService;
 
         private readonly StudyGroup _group;
         private readonly StudentGroupBlock _studentGroupBlock;
@@ -120,16 +121,18 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
-            _studentGroupBlock.Panel.Children.Remove(this);
+            //TODO: check this
+            _studentGroupBlock.GroupListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
+            var studentPackBlock = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
+            //TODO: check this
             _studentGroupBlock.Visibility = Visibility.Hidden;
 
-            _navigateService.AddToViewList(_studentGroupTitle, f);
-            _navigateService.OpenView(f);
+            _navigateService.AddToViewList(_studentGroupTitle, studentPackBlock);
+            _navigateService.OpenView(studentPackBlock);
         }
     }
 }

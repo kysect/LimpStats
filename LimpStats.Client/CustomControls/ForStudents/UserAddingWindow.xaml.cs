@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Core.Parsers;
-using LimpStats.Database;
-using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {

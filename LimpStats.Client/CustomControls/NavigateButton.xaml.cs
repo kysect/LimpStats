@@ -7,7 +7,7 @@ namespace LimpStats.Client.CustomControls
     public partial class NavigateButton : UserControl
     {
         private readonly IViewNavigateService _navigateService;
-        private UserControl _currentControl;
+        private readonly UserControl _currentControl;
 
         public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block)
         {
