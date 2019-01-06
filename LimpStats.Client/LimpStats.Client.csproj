@@ -131,6 +131,7 @@
     <Compile Include="CustomControls\ForProblemTasks\ProblemPackWindow.xaml.cs">
       <DependentUpon>ProblemPackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\IViewNavigateService.cs" />
     <Compile Include="Tools\ThreadingTools.cs" />
     <Page Include="CustomControls\Blocks\ResultGridBlock.xaml">
       <SubType>Designer</SubType>

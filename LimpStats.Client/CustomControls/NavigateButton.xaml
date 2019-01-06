@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
              mc:Ignorable="d" Width="250" Height="30">
     <UserControl.Resources>
         <Style x:Key="NavigateStyle" TargetType="{x:Type Button}">
@@ -20,7 +19,7 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="250">
                             <Rectangle Name="Restangle" Fill="#FF993333" HorizontalAlignment="Left" Height="30" Stroke="{x:Null}" VerticalAlignment="Top" Width="250" RadiusX="4" RadiusY="4" StrokeThickness="0"/>
-                            <TextBlock Text="{Binding ElementName=butt, Path=DataContext}" HorizontalAlignment="Left" Height="24.5" Margin="28.5,5.5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Foreground="#FFE6D7D7" FontFamily="Century Gothic" FontSize="16"/>
+                            <TextBlock Text="{Binding ElementName=OpenViewButton, Path=DataContext}" HorizontalAlignment="Left" Height="24.5" Margin="28.5,5.5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Foreground="#FFE6D7D7" FontFamily="Century Gothic" FontSize="16"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true"/>
@@ -38,14 +37,19 @@
         </Style>
     </UserControl.Resources>
     <Canvas>
-
         <Button
-            x:Name="butt"
+            x:Name="OpenViewButton"
             IsEnabled="True"
-                Click="ButtonBase_OnClick"
-                RenderTransformOrigin="0.5,0.5" Height="30" Width="219" Style="{DynamicResource NavigateStyle}" 
-            />
-        <Button Height="30" Canvas.Left="219" Width="31"
-                Click="Button_Click" Background="#FFFF7777"/>
+            Click="ShowUserControl"
+            RenderTransformOrigin="0.5,0.5"
+            Height="30"
+            Width="219"
+            Style="{DynamicResource NavigateStyle}" />
+        <Button
+            Height="30"
+            Canvas.Left="219"
+            Width="31"
+            Click="RemoveFromListButton"
+            Background="#FFFF7777" />
     </Canvas>
 </UserControl>
