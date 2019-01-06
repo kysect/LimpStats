@@ -2,28 +2,25 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForStudents;
-using LimpStats.Database.Models;
+using LimpStats.Client.Tools;
 
 namespace LimpStats.Client.CustomControls
 {
     public partial class StudentGroupBlock : UserControl
     {
-        public readonly SumVar SumVar;
-        private readonly Grid _stackPanel;
-        private readonly StackPanel _NavigatePanel;
+        private IViewNavigateService _navigateService;
 
-        public StudentGroupBlock(SumVar sumVar, Grid stackPanel, StackPanel NavigatePanel)
+        public StudentGroupBlock(IViewNavigateService navigateService)
         {
+            _navigateService = navigateService;
+
             InitializeComponent();
-            _NavigatePanel = NavigatePanel;
-            SumVar = sumVar;
-            _stackPanel = stackPanel;
         }
 
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
             var groupPanel = (StackPanel)FindName("Panel");
-            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _stackPanel, _NavigatePanel));
+            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService));
 
             FilePath.Text = string.Empty;
         }

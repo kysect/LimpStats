@@ -7,6 +7,7 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
+    //TODO: fix .csproj config and move this as nested in UserAddingWindows.xaml
     public partial class UserAddingWindow : Window
     {
         public string Username;

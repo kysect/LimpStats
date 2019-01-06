@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Controls;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
-    /// <summary>
-    /// Логика взаимодействия для ResultGridBlock.xaml
-    /// </summary>
     public partial class ResultGridBlock : UserControl
     {
+        //TODO: remove variables
         private StudyGroup _group;
         private string _packTitle;
         public ResultGridBlock(StudyGroup group, string packTitle)

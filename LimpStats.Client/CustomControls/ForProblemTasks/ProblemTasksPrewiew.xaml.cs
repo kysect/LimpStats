@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,25 +11,22 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
-    /// <summary>
-    /// Логика взаимодействия для ProblemTasksPrewiew.xaml
-    /// </summary>
     public partial class ProblemTasksPrewiew : UserControl
     {
+        private IViewNavigateService _navigateService;
+
         private readonly StudyGroup _group;
-        private readonly Grid _stackPanel;
         private readonly StudentPackBlock _studentPackBlock;
-        private readonly StackPanel _NavigatePanel;
 
         //TODO: А разве в StudentPackBlock не хранится users и packTitle?
-        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, Grid stackPanel, StackPanel Navigatepanel)
+        public ProblemTasksPrewiew(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, IViewNavigateService navigateService)
         {
+            _navigateService = navigateService;
+
             InitializeComponent();
-            _NavigatePanel = Navigatepanel;
 
             _studentPackBlock = studentPackBlock;
             _group = users;
-            _stackPanel = stackPanel;
             GroupTitle = packTitle;
             CardTitle.DataContext = packTitle;
             if (_group == null)
@@ -102,8 +98,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         {
             var f = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
             _studentPackBlock.Visibility = Visibility.Hidden;
-            _stackPanel.Children.Add(f);
-            _NavigatePanel.Children.Add(new NavigateButton(f, _stackPanel, CardTitle.DataContext.ToString(), _NavigatePanel));
+
+            _navigateService.AddToViewList(CardTitle.DataContext.ToString(), f);
+            _navigateService.OpenView(f);
 
         }
     }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using LimpStats.Core.Parsers;
 using LimpStats.Model;
 
 namespace LimpStats.Core
 {
     public static class StudyGroupExtensions
     {
+        //TODO: refactoring
         public static List<List<ProblemPackResult>> GetAllPackResult(this StudyGroup group)
         {
             return group

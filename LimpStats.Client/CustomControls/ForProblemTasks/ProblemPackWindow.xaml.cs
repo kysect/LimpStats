@@ -1,39 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using LimpStats.Client.CustomControls;
 using LimpStats.Client.CustomControls.ForProblemTasks;
+using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 
 namespace LimpStats.Client
 {
-    /// <summary>
-    /// Логика взаимодействия для ProblemPackWindow.xaml
-    /// </summary>
     public partial class ProblemPackWindow : Window
     {
+        private IViewNavigateService _navigateService;
+
+        //TODO: clean this
         public List<int> tasklist = new List<int>();
         private string _name;
         private StudyGroup _group;
         private StudentPackBlock _block;
-        private Grid _panel;
         private string _groupTitle;
-        private StackPanel _navigatepanel;
-        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block, string groupTitle, Grid panel, StackPanel navigatepanel)
+
+        public ProblemPackWindow(string packname, StudyGroup group, StudentPackBlock block, string groupTitle, IViewNavigateService navigateService)
         {
-            _navigatepanel = navigatepanel;
-            _panel = panel;
+            _navigateService = navigateService;
+
             _block = block;
             _group = group;
             _name = packname;
@@ -52,7 +44,7 @@ namespace LimpStats.Client
             _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
             var k = (StackPanel)_block.FindName("Panel");
-            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name, _panel, _navigatepanel));
+            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name, _navigateService));
             PanelViewer.ScrollToRightEnd();
             Close();
         }

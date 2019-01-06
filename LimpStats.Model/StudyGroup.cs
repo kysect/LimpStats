@@ -15,6 +15,7 @@ namespace LimpStats.Model
             ProblemPackList = new List<ProblemPackInfo>();
         }
 
+        //TODO: remove?
         public string GroupTitle { get; set; }
         public List<LimpUser> UserList { get; set; }
         public List<ProblemPackInfo> ProblemPackList { get; set; }
