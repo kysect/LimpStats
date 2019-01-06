@@ -3,10 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="322"
-    mc:Ignorable="d" Height="400.5">
+    Width="300"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -59,9 +58,11 @@
                             </Grid.ColumnDefinitions>
                             <Rectangle Grid.ColumnSpan="2" Fill="#FFE2FCE1" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="240" RadiusX="2" RadiusY="4"/>
                             <ContentPresenter
-                               
                                     Grid.Column="1"
-                                    Margin="10.5,2.286,-6.5,8.5" HorizontalAlignment="Center" Width="119" VerticalAlignment="Center" />
+                                    Margin="10.5,2.286,-6.5,8.5"
+                                    HorizontalAlignment="Center"
+                                    Width="119"
+                                    VerticalAlignment="Center" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -71,14 +72,14 @@
         </Style>
         <ControlTemplate x:Key="MenuItemControlTemplate1" TargetType="{x:Type MenuItem}">
             <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                <Grid x:Name="Grid" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
+                <Grid>
+                    <ContentPresenter
+                        x:Name="Icon"
+                        Content="{TemplateBinding Icon}"
+                        ContentSource="Icon"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="3" Visibility="Collapsed" VerticalAlignment="Center"/>
-                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Bottom">
                         <Border x:Name="SubMenuBorder" BorderBrush="#FF999999" BorderThickness="1" Background="#FFF0F0F0" Padding="2">
                             <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -115,7 +116,6 @@
                 </Trigger>
                 <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
                     <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=SubMenuScrollViewer}"/>
-                    <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -131,8 +131,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="Border" Grid.ColumnSpan="3"
-        CornerRadius="0,20,0,0" Background="#FFE2F9F1" Margin="0"/>
+                        <Border
+                            x:Name="Border"
+                            CornerRadius="0,20,0,0"
+                            Background="#FFE2F9F1"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true"/>
                             <Trigger Property="IsMouseOver" Value="true"/>
@@ -147,57 +149,66 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Canvas Height="400.5" VerticalAlignment="Top">
+    <StackPanel Background="#FF020C27">
+            <StackPanel
+                Height="35"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="CardTitle"
+                    Width="235"
+                    VerticalAlignment="Stretch"
+                    Background="#FF993333"
+                    Click="CardTitle_OnClick"
+                    DataContext="GroupTitle"
+                    FontFamily="Century Gothic"
+                    Foreground="#FFE8E8E8"
+                    Style="{DynamicResource ButtonStyle1}" />
+                <Menu
+                    Width="30"
+                    Background="{x:Null}">
+                    <MenuItem
+                        Header="⋮"
+                        Background="#FF020C27"
+                        Foreground="#FFE8E8E8"
+                        Template="{DynamicResource MenuItemControlTemplate1}">
+                        <MenuItem Header="Rename" />
+                        <MenuItem Header="Sort by">
+                            <MenuItem Header="Nickname" />
+                            <MenuItem Header="Name" />
+                            <MenuItem Header="Points" />
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Click="ButtonDeleteCard" Header="Delete card" />
+                    </MenuItem>
+                </Menu>
+                <Button
+                    x:Name="UpdateButton"
+                    Width="35"
+                    HorizontalAlignment="Left"
+                    Click="ButtonClick_Update"
+                    Content="🔄"
+                    FontFamily="Century Gothic"
+                    Foreground="#FF879993"
+                    BorderBrush="{x:Null}"
+                    Style="{DynamicResource REFRESH}" />
+            </StackPanel>
 
-        <Rectangle Fill="#19000000" Height="404.5" Width="300"/>
+            <Button
+                Margin="0,5"
+                Height="18.667"
+                Click="AddUserButton_OnClick"
+                Content="AddUser"
+                FontFamily="Century Gothic"
+                Background="#FFE2F9F1"
+                Foreground="#FF87A5B8"
+                BorderBrush="{x:Null}" />
 
-        <Rectangle Fill="#FF020C27" Height="62" Stroke="Black" Width="287.25"/>
-
-        <Button
-            x:Name="UpdateButton"
-            Canvas.Right="0"
-            Width="36.333"
-            Height="36"
-            HorizontalAlignment="Left"
-            Click="ButtonClick_Update"
-            Content="🔄" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF879993" Canvas.Left="250.917" BorderBrush="{x:Null}" Style="{DynamicResource REFRESH}" />
-        <Button
-            x:Name="CardTitle"
-            Width="225.25"
-            Height="33.666"
-            Background="#FF993333"
-            Click="CardTitle_OnClick"
-            DataContext="GrupTitle" FontFamily="Century Gothic" Foreground="#FFE8E8E8" Style="{DynamicResource ButtonStyle1}" Canvas.Top="2.334" />
-        <Button
-            Canvas.Top="40.333"
-            Width="287.25"
-            Height="18.667"
-            Click="AddUserButton_OnClick"
-            Content="AddUser" FontFamily="Century Gothic" Background="#FFE2F9F1" Foreground="#FF87A5B8" BorderBrush="{x:Null}" />
-        <ListBox
-            x:Name="StudentList"
-            Canvas.Top="62"
-            Width="287.25"
-            Height="332.951"
-            MinHeight="50" Background="#FFE8F9F2" ItemContainerStyle="{DynamicResource ListBoxItemStyle2}" Style="{DynamicResource ListBoxStyle2}" />
-        <Menu
-            Canvas.Right="25"
-            Width="15.667"
-            Height="36"
-            VerticalAlignment="Top" Canvas.Left="230.25" Background="{x:Null}">
-            <MenuItem
-                Width="15.667"
-                Height="36.667"
-                Header="⋮" Background="#FF020C27" Foreground="#FFE8E8E8" Template="{DynamicResource MenuItemControlTemplate1}">
-                <MenuItem Header="Rename" />
-                <MenuItem Header="Sort by">
-                    <MenuItem Header="Nickname" />
-                    <MenuItem Header="Name" />
-                    <MenuItem Header="Points" />
-                </MenuItem>
-                <Separator />
-                <MenuItem Click="ButtonDeleteCard" Header="Delete card" />
-            </MenuItem>
-        </Menu>
-    </Canvas>
+            <ListBox
+                x:Name="StudentList"
+                Height="330"
+                MinHeight="50"
+                Background="#FFE8F9F2"
+                ItemContainerStyle="{DynamicResource ListBoxItemStyle2}"
+                Style="{DynamicResource ListBoxStyle2}" />
+        </StackPanel>
 </UserControl>
