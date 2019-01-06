@@ -1,14 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Security.Policy;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows;
 using LimpStats.Client.CustomControls;
-using LimpStats.Database;
 using LimpStats.Database.Models;
-using LimpStats.Model;
 
 namespace LimpStats.Client
 {
