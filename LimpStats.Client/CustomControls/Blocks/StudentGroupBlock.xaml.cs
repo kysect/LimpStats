@@ -4,11 +4,11 @@ using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForStudents;
 using LimpStats.Client.Tools;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.Blocks
 {
     public partial class StudentGroupBlock : UserControl
     {
-        private IViewNavigateService _navigateService;
+        private readonly IViewNavigateService _navigateService;
 
         public StudentGroupBlock(IViewNavigateService navigateService)
         {
@@ -19,8 +19,7 @@ namespace LimpStats.Client.CustomControls
 
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
-            var groupPanel = (StackPanel)FindName("Panel");
-            groupPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService));
+            GroupListPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService));
 
             FilePath.Text = string.Empty;
         }

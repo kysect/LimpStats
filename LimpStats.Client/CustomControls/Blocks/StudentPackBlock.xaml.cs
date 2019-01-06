@@ -5,13 +5,13 @@ using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Tools;
 using LimpStats.Model;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.Blocks
 {
     public partial class StudentPackBlock : UserControl
     {
         private readonly StudyGroup _users;
-        private string _groupTitle;
-        private IViewNavigateService _navigateService;
+        private readonly string _groupTitle;
+        private readonly IViewNavigateService _navigateService;
 
         public StudentPackBlock(StudyGroup users, string groupTitle, IViewNavigateService navigateService)
         {
@@ -20,10 +20,10 @@ namespace LimpStats.Client.CustomControls
             InitializeComponent();
             _users = users;
             _groupTitle = groupTitle;
-            foreach (var pack in users.ProblemPackList)
+            foreach (ProblemPackInfo pack in users.ProblemPackList)
             {
-                var k = (StackPanel)FindName("Panel");
-                k.Children.Add(new ProblemTasksPrewiew(this, _users, pack.PackTitle, _navigateService));
+                var taskPreview = new ProblemTasksPreview(this, _users, pack.PackTitle, _navigateService);
+                PackListPanel.Children.Add(taskPreview);
                 PanelViewer.ScrollToRightEnd();
             }
 
@@ -31,8 +31,8 @@ namespace LimpStats.Client.CustomControls
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var f = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle, _navigateService);
-            f.Show();
+            var packWindow = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle, _navigateService);
+            packWindow.Show();
         }
 
         private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
+using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Tools;
 
 namespace LimpStats.Client
@@ -10,9 +11,9 @@ namespace LimpStats.Client
         public MainWindow()
         {
             InitializeComponent();
-            var f = new StudentGroupBlock(this);
-            AddToViewList("Main", f);
-            OpenView(f);
+            var studentGroupBlock = new StudentGroupBlock(this);
+            AddToViewList("Main", studentGroupBlock);
+            OpenView(studentGroupBlock);
         }
 
         public void RemoveButton(NavigateButton button)

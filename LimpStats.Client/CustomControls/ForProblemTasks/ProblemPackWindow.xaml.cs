@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
+using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
@@ -13,7 +14,7 @@ namespace LimpStats.Client
 {
     public partial class ProblemPackWindow : Window
     {
-        private IViewNavigateService _navigateService;
+        private readonly IViewNavigateService _navigateService;
 
         //TODO: clean this
         public List<int> tasklist = new List<int>();
@@ -44,7 +45,7 @@ namespace LimpStats.Client
             _group.ProblemPackList.Add(new ProblemPackInfo(_name, tasklist));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
             var k = (StackPanel)_block.FindName("Panel");
-            k.Children.Add(new ProblemTasksPrewiew(_block, _group, _name, _navigateService));
+            k.Children.Add(new ProblemTasksPreview(_block, _group, _name, _navigateService));
             PanelViewer.ScrollToRightEnd();
             Close();
         }
