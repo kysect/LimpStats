@@ -14,22 +14,22 @@ namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class StudentGroupPreview : UserControl
     {
+        private IViewNavigateService _navigateService;
+
         private readonly StudyGroup _group;
-        private readonly Grid _stackPanel;
         private readonly StudentGroupBlock _studentGroupBlock;
-        private readonly StackPanel _navigatePanel;
         private readonly string _studentGroupTitle;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string studentGroupTitle, Grid stackPanel, StackPanel navigatePanel)
+        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string studentGroupTitle, IViewNavigateService navigateService)
         {
+            _navigateService = navigateService;
+
             InitializeComponent();
 
             _studentGroupTitle = studentGroupTitle;
 
             CardTitle.DataContext = _studentGroupTitle;
             _studentGroupBlock = studentGroupBlock;
-            _stackPanel = stackPanel;
-            _navigatePanel = navigatePanel;
 
             //TODO: remove saving?
             JsonBackupManager.SaveCardName(studentGroupTitle);
@@ -125,10 +125,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var f = new StudentPackBlock(_group, _studentGroupTitle, _stackPanel, _navigatePanel);
+            var f = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
             _studentGroupBlock.Visibility = Visibility.Hidden;
-            _stackPanel.Children.Add(f);
-            _navigatePanel.Children.Add(new NavigateButton(f, _stackPanel, _studentGroupTitle, _navigatePanel));
+
+            _navigateService.AddToViewList(_studentGroupTitle, f);
+            _navigateService.OpenView(f);
         }
     }
 }
