@@ -23,9 +23,8 @@ namespace LimpStats.Core
             foreach (ProblemPackResult result in results.OrderByDescending(user => user.ProblemResultList.Sum()))
             {
                 string taskString = string.Join(" ", result.ProblemResultList.Select(value => $"{value,5}"));
-                string additionalPoints = $"| (+{result.AdditionalPoints,3})";
-                string totalCount = $" | {result.ProblemResultList.Sum() + result.AdditionalPoints,5}";
-                string fullString = $"{result.Username,-15}:{taskString}{additionalPoints}{totalCount}";
+                string totalCount = $" | {result.ProblemResultList.Sum(),5}";
+                string fullString = $"{result.Username,-15}:{taskString}{totalCount}";
 
 
                 output.Add(fullString);

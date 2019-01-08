@@ -29,8 +29,6 @@ namespace LimpStats.Model
         public List<int> ProblemResultList { get; }
         public ProblemPackInfo Problems { get; set; }
 
-        //TODO: remove
-        public int AdditionalPoints => ProblemResultList.All(res => res == 100) ? Problems.FullSolutionPoints : 0;
-        public int TotalPoints => ProblemResultList.Sum() + (AdditionalPoints);
+        public int TotalPoints => ProblemResultList.Sum();
     }
 }
