@@ -120,7 +120,7 @@
       <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\ForStudents\UserAddingWindow.xaml.cs">
-      <DependentUpon>StudentGroupPreview.xaml</DependentUpon>
+      <DependentUpon>UserAddingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\Blocks\StudentPackBlock.xaml.cs">
       <DependentUpon>StudentPackBlock.xaml</DependentUpon>
