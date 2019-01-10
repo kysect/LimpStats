@@ -61,13 +61,13 @@ namespace LimpStats.Database
 
             File.WriteAllText(CardsName, JsonConvert.SerializeObject(names));
         }
-        //public static List<string> LoadCardName()
-        //{
-        //    CheckFileExist(CardsName);
-        //    var jsonData = File.ReadAllText(CardsName);
-        //    List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
-        //    return names;
-        //}
+        public static List<string> LoadCardName()
+        {
+            CheckFileExist(CardsName);
+            var jsonData = File.ReadAllText(CardsName);
+            List<string> names = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
+            return names;
+        }
 
         public static void SaveCardUserList(StudyGroup group, string cardTitle)
         {

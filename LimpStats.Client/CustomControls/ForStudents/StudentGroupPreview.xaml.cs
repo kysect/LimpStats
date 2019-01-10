@@ -36,6 +36,9 @@ namespace LimpStats.Client.CustomControls.ForStudents
             JsonBackupManager.SaveCardName(studentGroupTitle);
             _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
 
+            var studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+
             AddAnimation();
 
             //TODO: temp solution, remove

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForStudents;
 using LimpStats.Client.Tools;
+using LimpStats.Database;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
@@ -15,6 +16,13 @@ namespace LimpStats.Client.CustomControls.Blocks
             _navigateService = navigateService;
 
             InitializeComponent();
+            var cards = JsonBackupManager.LoadCardName();
+            foreach (var card in cards)
+            {
+                JsonBackupManager.LoadCardUserList(card);
+                GroupListPanel.Children.Add(new StudentGroupPreview(this, card, _navigateService));
+            }
+
         }
 
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
