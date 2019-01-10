@@ -20,6 +20,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             InitializeComponent();
             _users = users;
             _groupTitle = groupTitle;
+
             foreach (ProblemPackInfo pack in users.ProblemPackList)
             {
                 var taskPreview = new ProblemTasksPreview(this, _users, pack.PackTitle, _navigateService);
@@ -31,21 +32,21 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            var packWindow = new ProblemPackWindow(FilePath.Text, _users, this, _groupTitle, _navigateService);
+            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _users, this, _groupTitle, _navigateService);
             packWindow.Show();
         }
 
-        private void TextBox1_OnGotFocus(object sender, RoutedEventArgs e)
+        private void PackTitleInput_OnGotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
-            tb.GotFocus -= TextBox1_OnGotFocus;
+            tb.GotFocus -= PackTitleInput_OnGotFocus;
         }
 
-        private void FilePath_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void PackTitleInput_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
-            AddPack.IsEnabled = tb.Text != string.Empty;
+            AddPack.IsEnabled = string.IsNullOrWhiteSpace(tb.Text) == false;
         }
 
         private void FilePath_OnKeyDown(object sender, KeyEventArgs e)

@@ -136,6 +136,7 @@
             Content="AddUser" Background="#FF993333" Foreground="#FFE8E8E8" />
         <ListBox
             Name="StudentList"
+            SelectionChanged="LimpUserStatistic"
             Canvas.Top="44"
             Width="200"
             Height="206"

@@ -25,7 +25,8 @@ namespace LimpStats.Client.CustomControls
                 IsEnabled = false;
                 string num = Core.Tools.Tools.GenerateNextNumber(NumberTask.Content.ToString());
                 _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
-                TaskName.Content =  Parser.GetTitleTask(number: Int32.Parse(textbox.Text));
+                //TODO: add try-catch
+                TaskName.Content =  Parser.GetTitleTask(number: int.Parse(textbox.Text));
             }
         }
 
