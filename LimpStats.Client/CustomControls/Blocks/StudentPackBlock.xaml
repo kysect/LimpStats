@@ -19,17 +19,17 @@
                     Width="70"
                     Margin="0,0,0,5"
                     Click="OnClick_UpdatePanel"
-                    Content="Add list"
+                    Content="Add pack"
                     IsEnabled="False"
                     RenderTransformOrigin="0.5,0.5" Background="#FF993333" FontFamily="Century Gothic" />
                 <TextBox
-                    Name="FilePath"
+                    Name="PackTitleInput"
                     Width="150"
                     VerticalContentAlignment="Center"
-                    GotFocus="TextBox1_OnGotFocus"
+                    GotFocus="PackTitleInput_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
-                    Text="PackName"
-                    TextChanged="FilePath_OnTextChanged"
+                    Text="Pack name"
+                    TextChanged="PackTitleInput_OnTextChanged"
                     TextWrapping="Wrap" Background="#FFCEBD89" Foreground="#FF993333" BorderBrush="#FFCEBD89" FontFamily="Century Gothic" Margin="0,0,0,5" />
             </StackPanel>
             <ScrollViewer

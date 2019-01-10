@@ -18,7 +18,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly StudyGroup _group;
         private readonly StudentPackBlock _studentPackBlock;
 
-        //TODO: А разве в StudentPackBlock не хранится users и packTitle?
         public ProblemTasksPreview(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
@@ -40,10 +39,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                     }
                 };
             }
-
-            StudentList.SelectionChanged += LimpUserStatistic;
         }
 
+        //TODO: check this. GroupTitle? Or packTitle?
         public string GroupTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
@@ -93,11 +91,12 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _studentPackBlock.PackListPanel.Children.Remove(this);
         }
 
-
-
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var resultGridBlock = new ResultGridBlock(_group, CardTitle.DataContext.ToString());
+            string packTitle = CardTitle.DataContext.ToString();
+            ProblemPackInfo pack = _group.ProblemPackList.Find(p => p.PackTitle == packTitle);
+            var resultGridBlock = new ResultGridBlock(_group.UserList, pack);
+
             //TODO: check this
             _studentPackBlock.Visibility = Visibility.Hidden;
 

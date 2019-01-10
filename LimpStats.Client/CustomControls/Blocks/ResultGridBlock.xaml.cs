@@ -7,29 +7,23 @@ namespace LimpStats.Client.CustomControls.Blocks
 {
     public partial class ResultGridBlock : UserControl
     {
-        //TODO: remove variables
-        private StudyGroup _group;
-        private string _packTitle;
-        public ResultGridBlock(StudyGroup group, string packTitle)
+        public ResultGridBlock(List<LimpUser> users, ProblemPackInfo pack)
         {
             InitializeComponent();
-            _group = group;
-            _packTitle = packTitle;
-            ProblemPackInfo pack = _group.ProblemPackList.Find(e => e.PackTitle == _packTitle);
-            DataTable dt = InitDataTable(pack, group.UserList);
+            DataTable table = InitDataTable(pack, users);
             
-            ResGrid.ItemsSource = dt.DefaultView;
+            ResGrid.ItemsSource = table.DefaultView;
         }
 
         private DataTable InitDataTable(ProblemPackInfo pack, List<LimpUser> users)
         {
-            var dt = new DataTable();
-            dt.Columns.Add("Name");
+            var table = new DataTable();
+
+            table.Columns.Add("Name");
             foreach (int item in pack.ProblemIdList)
             {
-                dt.Columns.Add(item.ToString());
+                table.Columns.Add(item.ToString());
             }
-
 
             foreach (LimpUser user in users)
             {
@@ -39,10 +33,10 @@ namespace LimpStats.Client.CustomControls.Blocks
                     data.Add(user.UserProfileResult[problemNum]);
                 }
 
-                dt.Rows.Add(data.ToArray());
+                table.Rows.Add(data.ToArray());
             }
 
-            return dt;
+            return table;
         }
     }
 }
