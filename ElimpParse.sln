@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpParse.ConsoleApp", "LimpParse.ConsoleApp\LimpParse.ConsoleApp.csproj", "{D07CF8BF-4199-472E-B73E-A82D5E343AD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimpParse.ConsoleApp", "LimpParse.ConsoleApp\LimpParse.ConsoleApp.csproj", "{D07CF8BF-4199-472E-B73E-A82D5E343AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpParse.TelegramBot", "LimpParse.TelegramBot\LimpParse.TelegramBot.csproj", "{C0A439DF-ED39-4C12-9C40-133C923E2DC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimpParse.TelegramBot", "LimpParse.TelegramBot\LimpParse.TelegramBot.csproj", "{C0A439DF-ED39-4C12-9C40-133C923E2DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpStats.Model", "LimpStats.Model\LimpStats.Model.csproj", "{5212533A-91F7-4704-BB46-AF0F3FB8133E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimpStats.Model", "LimpStats.Model\LimpStats.Model.csproj", "{5212533A-91F7-4704-BB46-AF0F3FB8133E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpStats.Client", "LimpStats.Client\LimpStats.Client.csproj", "{6990B26C-646E-4014-B331-CD74E1D25ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpStats.Core", "LimpStats.Core\LimpStats.Core.csproj", "{A95D9556-B032-4421-A36A-83DC3435FFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimpStats.Core", "LimpStats.Core\LimpStats.Core.csproj", "{A95D9556-B032-4421-A36A-83DC3435FFE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimpStats.Database", "LimpStats.Database\LimpStats.Database.csproj", "{66C8060A-5EFE-47E5-AD9D-EE8F9AE96284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimpStats.Database", "LimpStats.Database\LimpStats.Database.csproj", "{66C8060A-5EFE-47E5-AD9D-EE8F9AE96284}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{826CD7BE-68C3-4EB0-83B0-4FCC1834072D}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectCodeMap.dgml = ProjectCodeMap.dgml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
