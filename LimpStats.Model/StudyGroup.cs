@@ -6,7 +6,8 @@ namespace LimpStats.Model
     {
         public StudyGroup()
         {
-
+            UserList = new List<LimpUser>();
+            ProblemPackList = new List<ProblemPackInfo>();
         }
 
         public StudyGroup(List<LimpUser> userList)
