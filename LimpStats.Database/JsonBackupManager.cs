@@ -47,8 +47,8 @@ namespace LimpStats.Database
             string filePath = $"card_{cardTitle}.json";
             CheckFileExist(filePath);
             string jsonData = File.ReadAllText(filePath);
-            StudyGroup group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
-            return group;
+            var group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
+            return group ?? new StudyGroup();
         }
         public static void SaveCardName(string cardTitle)
         {
