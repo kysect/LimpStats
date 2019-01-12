@@ -117,29 +117,23 @@
             Name="UpdateButton"
             Canvas.Right="0"
             Width="25"
-            Height="25"
+            Height="33"
             HorizontalAlignment="Left"
             Click="ButtonClick_Update"
-            Content="🔄" Background="#FF993333" Foreground="#FFE8E8E8" />
+            Content="🔄" Background="#FF993333" Foreground="#FFE8E8E8" Canvas.Left="175" />
         <Button
             Name="CardTitle"
-            Width="159"
-            Height="25"
+            Width="160"
+            Height="33"
             Background="#FF993333"
             Click="CardTitle_OnClick"
             DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource packtitlestyle}" FontFamily="Century Gothic" />
-        <Button
-            Canvas.Top="25"
-            Width="200"
-            Height="19"
-            Click="AddUserButton_OnClick"
-            Content="AddUser" Background="#FF993333" Foreground="#FFE8E8E8" />
         <ListBox
             Name="StudentList"
             SelectionChanged="LimpUserStatistic"
-            Canvas.Top="44"
+            Canvas.Top="33"
             Width="200"
-            Height="206"
+            Height="217"
             MinHeight="50" Background="#FF4F7BBA" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" ItemTemplate="{DynamicResource DataTemplate1}" 
           />
         <Menu
@@ -148,8 +142,8 @@
             Height="25"
             VerticalAlignment="Top">
             <MenuItem
-                Width="18"
-                Height="25"
+                Width="15"
+                Height="32"
                 Header="⋮"
                 RenderTransformOrigin="0.05,0.56" Background="#FF993333" Foreground="#FFE8E8E8">
                 <MenuItem Header="Rename" />

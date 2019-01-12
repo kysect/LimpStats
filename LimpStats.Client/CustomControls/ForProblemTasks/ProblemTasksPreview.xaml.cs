@@ -26,23 +26,25 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             _studentPackBlock = studentPackBlock;
             _group = users;
-            GroupTitle = packTitle;
+            this.packTitle = packTitle;
             CardTitle.DataContext = packTitle;
-            if (_group == null)
-            {
-                _group = new StudyGroup
-                {
-                    UserList = new List<LimpUser>(),
-                    ProblemPackList = new List<ProblemPackInfo>
-                    {
-                        new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup)
-                    }
-                };
-            }
+            //if (_group == null)
+            //{
+            //    _group = new StudyGroup
+            //    {
+            //        UserList = new List<LimpUser>(),
+            //        ProblemPackList = new List<ProblemPackInfo>
+            //        {
+            //            new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup)
+            //        }
+            //    };
+            //}
+            var studentsData = ProfilePreviewData.GetProfilePackPreview(_group, packTitle);
+            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+
         }
 
-        //TODO: check this. GroupTitle? Or packTitle?
-        public string GroupTitle { get; }
+        public string packTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
@@ -63,7 +65,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             MultiThreadParser.LoadProfiles(_group);
             IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
 
-            studentsData = ProfilePreviewData.GetProfilePackPreview(_group, GroupTitle);
+            studentsData = ProfilePreviewData.GetProfilePackPreview(_group, packTitle);
 
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
@@ -80,10 +82,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             }
         }
 
-        private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            //TODO:
-        }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {

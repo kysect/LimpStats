@@ -7,20 +7,20 @@ namespace LimpStats.Core.Tools
 {
     public static class Tools
     {
-        public static string ToStringAddress(int position)
-        {
-            const int size = 26;
-            string res = "";
-            do
-            {
-                res += (char)('A' + position % size);
-                position /= size;
-            } while (position > size);
+        //public static string GenerateNextNumber(int position)
+        //{
+        //   
+        //    const int size = 26;
+        //    string res = "";
+        //    do
+        //    {
+        //        res += (char)('A' + position % size);
+        //        position /= size;
+        //    } while (position > size);
 
-            return res;
-        }
+        //    return res;
+        //}
 
-        //TODO: replace with ToStringAddress
         public static string GenerateNextNumber(string number)
         {
             //Todo: работает, но если есть варик попроще надо его юзать

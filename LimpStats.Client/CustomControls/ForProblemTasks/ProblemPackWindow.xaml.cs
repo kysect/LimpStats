@@ -34,12 +34,13 @@ namespace LimpStats.Client
 
         private void ButtonAddPack(object sender, RoutedEventArgs e)
         {
-            var taskList = new List<int>();
-
-            foreach (ProblemTaskPreview task in Panel.Children.OfType<ProblemTaskPreview>())
-            {
-                taskList.Add(int.Parse(task.textbox.Text == "" ? "0" : task.textbox.Text));
-            }
+            var taskList = Panel
+                .Children
+                .OfType<ProblemTaskPreview>()
+                .Where(text => text.textbox.Text != "")
+                .Select(task => int.Parse(task.textbox.Text))
+                .ToList();
+            
 
             _group.ProblemPackList.Add(new ProblemPackInfo(_packTitle, taskList));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
