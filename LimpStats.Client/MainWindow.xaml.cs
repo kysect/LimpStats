@@ -21,6 +21,10 @@ namespace LimpStats.Client
         public void RemoveButton(NavigateButton button)
         {
             NavigatePanel.Children.Remove(button);
+            if (MainWindowContent.Content == button.CurrentControl.Content)
+            {
+                MainWindowContent.Visibility = Visibility.Hidden;
+            }
             //TODO: implement closing content window
         }
 
@@ -31,6 +35,7 @@ namespace LimpStats.Client
 
         public void OpenView(UserControl view)
         {
+            MainWindowContent.Visibility = Visibility.Visible;
             MainWindowContent.Content = view.Content;
         }
 

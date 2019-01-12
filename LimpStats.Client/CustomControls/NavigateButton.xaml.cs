@@ -7,21 +7,21 @@ namespace LimpStats.Client.CustomControls
     public partial class NavigateButton : UserControl
     {
         private readonly IViewNavigateService _navigateService;
-        private readonly UserControl _currentControl;
+        public readonly UserControl CurrentControl;
 
         public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block)
         {
             InitializeComponent();
 
             _navigateService = navigateService;
-            _currentControl = block;
+            CurrentControl = block;
 
             OpenViewButton.DataContext = viewName;
         }
 
         private void ShowUserControl(object sender, RoutedEventArgs e)
         {
-            _navigateService.OpenView(_currentControl);
+            _navigateService.OpenView(CurrentControl);
         }
 
         private void RemoveFromListButton(object sender, RoutedEventArgs e)
