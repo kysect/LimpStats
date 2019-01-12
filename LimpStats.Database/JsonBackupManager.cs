@@ -23,6 +23,17 @@ namespace LimpStats.Database
             }
         }
 
+        public static void ClearCache()
+        {
+            var names = LoadCardName();
+            foreach (var cardTitle in names)
+            {
+                string filePath = $"card_{cardTitle}.json";
+                File.Delete(filePath);
+            }
+            File.Delete(CardsName);
+        }
+
         public static void SaveToJson(List<LimpUser> users)
         {
             CheckFileExist(FilePath);
@@ -48,7 +59,9 @@ namespace LimpStats.Database
             CheckFileExist(filePath);
             string jsonData = File.ReadAllText(filePath);
             var group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
-            return group ?? new StudyGroup();
+            return group;
+        //    var group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
+            //    return group ?? new StudyGroup();
         }
         public static void SaveCardName(string cardTitle)
         {

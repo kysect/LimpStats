@@ -32,13 +32,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
             CardTitle.DataContext = _studentGroupTitle;
             _studentGroupBlock = studentGroupBlock;
 
-            //TODO: remove saving?
             JsonBackupManager.SaveCardName(studentGroupTitle);
             _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
 
-            var studentsData = ProfilePreviewData.GetProfilePreview(_group);
-            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
-
+       
             AddAnimation();
 
             //TODO: temp solution, remove
@@ -54,6 +51,9 @@ namespace LimpStats.Client.CustomControls.ForStudents
                     }
                 };
             }
+
+            var studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
 
             StudentList.SelectionChanged += LimpUserStatistic;
         }
@@ -100,6 +100,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
+            JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)

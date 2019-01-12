@@ -27,9 +27,17 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
-            GroupListPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService));
+            var cards = JsonBackupManager.LoadCardName();
+            if (cards.Contains(FilePath.Text))
+            {
+                MessageBox.Show($"The name of group must be unique!");
+            }
+            else
+            {
+                GroupListPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService));
 
-            FilePath.Text = string.Empty;
+                FilePath.Text = string.Empty;
+            }
         }
 
         private void FilePath_OnGotFocus(object sender, RoutedEventArgs e)

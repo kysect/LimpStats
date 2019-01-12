@@ -32,6 +32,14 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
+            foreach (var pack in _users.ProblemPackList)
+            {
+                if (pack.PackTitle == PackTitleInput.Text)
+                {
+                    MessageBox.Show($"The name of group must be unique!");
+                    return;
+                }
+            }
             var packWindow = new ProblemPackWindow(PackTitleInput.Text, _users, this, _groupTitle, _navigateService);
             packWindow.Show();
         }

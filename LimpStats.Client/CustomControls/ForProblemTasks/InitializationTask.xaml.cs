@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 
 namespace LimpStats.Client.CustomControls
@@ -18,6 +21,8 @@ namespace LimpStats.Client.CustomControls
             _problemPackWindow.PanelViewer.ScrollToEnd();
             textbox.Focus();
         }
+
+  
         private void FilePath_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -25,11 +30,19 @@ namespace LimpStats.Client.CustomControls
                 IsEnabled = false;
                 string num = Core.Tools.Tools.GenerateNextNumber(NumberTask.Content.ToString());
                 _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
-                //TODO: add try-catch
-                TaskName.Content =  Parser.GetTitleTask(number: int.Parse(textbox.Text));
+                try
+                {
+                    var n = int.Parse(textbox.Text);
+                    TaskName.Content = Parser.GetTitleTask(n);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show($"{exception}");
+                }
+
             }
         }
 
-
+   
     }
 }
