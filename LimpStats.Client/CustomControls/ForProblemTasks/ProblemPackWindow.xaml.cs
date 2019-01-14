@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
-using LimpStats.Client.CustomControls;
 using LimpStats.Client.CustomControls.Blocks;
-using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 
-namespace LimpStats.Client
+namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
     public partial class ProblemPackWindow : Window
     {
@@ -37,8 +34,8 @@ namespace LimpStats.Client
             var taskList = Panel
                 .Children
                 .OfType<ProblemTaskPreview>()
-                .Where(text => text.textbox.Text != "")
-                .Select(task => int.Parse(task.textbox.Text))
+                .Where(text => text.TaskNumberInput.Text != "")
+                .Select(task => int.Parse(task.TaskNumberInput.Text))
                 .ToList();
             
 

@@ -74,7 +74,7 @@
             <Setter Property="TextElement.Foreground" Value="White"></Setter>
             <Setter Property="TextElement.FontFamily" Value="Century Gothic"></Setter>
         </Style>
-        <Style x:Key="packtitlestyle" TargetType="{x:Type Button}">
+        <Style x:Key="PackTitleStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -127,7 +127,7 @@
             Height="33"
             Background="#FF993333"
             Click="CardTitle_OnClick"
-            DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource packtitlestyle}" FontFamily="Century Gothic" />
+            DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource PackTitleStyle}" FontFamily="Century Gothic" />
         <ListBox
             Name="StudentList"
             SelectionChanged="LimpUserStatistic"

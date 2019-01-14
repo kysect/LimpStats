@@ -119,7 +119,7 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <Style x:Key="REFRESH" TargetType="{x:Type Button}">
+        <Style x:Key="Refresh" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -172,7 +172,7 @@
                     FontFamily="Century Gothic"
                     Foreground="#FF879993"
                     BorderBrush="{x:Null}"
-                    Style="{DynamicResource REFRESH}" />
+                    Style="{DynamicResource Refresh}" />
             </StackPanel>
 
             <Button

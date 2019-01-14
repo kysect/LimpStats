@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class StudentGroupInitializationBlock : UserControl
     {

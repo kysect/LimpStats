@@ -65,8 +65,8 @@ namespace LimpStats.Core.Parsers
         public static string GetTitleTask(int  number)
         {
             string url = $"https://www.e-olymp.com/ru/problems/{number}";
-            var Webget = new HtmlWeb();
-            HtmlDocument doc = Webget.Load(url);
+            var web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
 
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//*[contains(@class,'eo-title__header')]"))
             {

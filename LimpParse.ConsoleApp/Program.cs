@@ -10,7 +10,7 @@ namespace LimpParse.ConsoleApp
 {
     internal static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             StudyGroup group = DataGenerator.GenerateTemplateGroup();
             MultiThreadParser.LoadProfiles(group);
