@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 
-namespace LimpStats.Client.CustomControls
+namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
     public partial class ProblemTaskPreview : UserControl
     {
@@ -19,7 +17,7 @@ namespace LimpStats.Client.CustomControls
             NumberTask.Content = number;
             _problemPackWindow = problemPackWindow;
             _problemPackWindow.PanelViewer.ScrollToEnd();
-            textbox.Focus();
+            TaskNumberInput.Focus();
         }
 
   
@@ -32,7 +30,7 @@ namespace LimpStats.Client.CustomControls
                 _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
                 try
                 {
-                    var n = int.Parse(textbox.Text);
+                    int n = int.Parse(TaskNumberInput.Text);
                     TaskName.Content = Parser.GetTitleTask(n);
                 }
                 catch (Exception exception)

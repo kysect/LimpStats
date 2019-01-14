@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 
 namespace LimpStats.Core.Tools
 {
@@ -21,11 +18,9 @@ namespace LimpStats.Core.Tools
         //    return res;
         //}
 
+        //TODO: fix
         public static string GenerateNextNumber(string number)
         {
-            //Todo: работает, но если есть варик попроще надо его юзать
-            //TODO: Вынести в .Core? создать там папку /Tools
-
             var n = number.ToCharArray();
             n[number.Length - 1]++;
             string s = "";

@@ -1,9 +1,8 @@
 ﻿<UserControl
-    x:Class="LimpStats.Client.CustomControls.ProblemTaskPreview"
+    x:Class="LimpStats.Client.CustomControls.ForProblemTasks.ProblemTaskPreview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="500"
     Height="50"
@@ -20,7 +19,7 @@
             Content="A"
             Foreground="AliceBlue" />
         <TextBox
-            x:Name="textbox"
+            x:Name="TaskNumberInput"
             Width="65"
             Height="30"
             Margin="5"

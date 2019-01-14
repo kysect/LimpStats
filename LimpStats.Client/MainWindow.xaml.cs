@@ -25,7 +25,6 @@ namespace LimpStats.Client
             {
                 MainWindowContent.Visibility = Visibility.Hidden;
             }
-            //TODO: implement closing content window
         }
 
         public void AddToViewList(string viewTitle, UserControl view)

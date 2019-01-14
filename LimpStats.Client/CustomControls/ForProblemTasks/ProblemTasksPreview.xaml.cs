@@ -6,7 +6,6 @@ using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
-using LimpStats.Database;
 using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -26,7 +25,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             _studentPackBlock = studentPackBlock;
             _group = users;
-            this.packTitle = packTitle;
+            PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
             //if (_group == null)
             //{
@@ -35,7 +34,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             //        UserList = new List<LimpUser>(),
             //        ProblemPackList = new List<ProblemPackInfo>
             //        {
-            //            new ProblemPackInfo(packTitle, TaskPackStorage.TasksAGroup)
+            //            new ProblemPackInfo(PackTitle, TaskPackStorage.TasksAGroup)
             //        }
             //    };
             //}
@@ -44,7 +43,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         }
 
-        public string packTitle { get; }
+        public string PackTitle { get; }
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
@@ -65,7 +64,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             MultiThreadParser.LoadProfiles(_group);
             IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
 
-            studentsData = ProfilePreviewData.GetProfilePackPreview(_group, packTitle);
+            studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
 
             ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
