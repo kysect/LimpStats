@@ -134,7 +134,7 @@
                         <Border
                             x:Name="Border"
                             CornerRadius="0,20,0,0"
-                            Background="#FFE2F9F1"/>
+                            Background="CadetBlue"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true"/>
                             <Trigger Property="IsMouseOver" Value="true"/>
@@ -163,27 +163,9 @@
                     FontFamily="Century Gothic"
                     Foreground="#FFE8E8E8"
                     Style="{DynamicResource ButtonStyle1}" />
-                <Menu
-                    Width="30"
-                    Background="{x:Null}">
-                    <MenuItem
-                        Header="⋮"
-                        Background="#FF020C27"
-                        Foreground="#FFE8E8E8"
-                        Template="{DynamicResource MenuItemControlTemplate1}">
-                        <MenuItem Header="Rename" />
-                        <MenuItem Header="Sort by">
-                            <MenuItem Header="Nickname" />
-                            <MenuItem Header="Name" />
-                            <MenuItem Header="Points" />
-                        </MenuItem>
-                        <Separator />
-                        <MenuItem Click="ButtonDeleteCard" Header="Delete card" />
-                    </MenuItem>
-                </Menu>
-                <Button
+            <Button
                     x:Name="UpdateButton"
-                    Width="35"
+                    Width="64"
                     HorizontalAlignment="Left"
                     Click="ButtonClick_Update"
                     Content="🔄"

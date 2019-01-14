@@ -132,8 +132,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
             var studentPackBlock = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
-            //TODO: check this
-            _studentGroupBlock.Visibility = Visibility.Hidden;
+     
 
             _navigateService.AddToViewList(_studentGroupTitle, studentPackBlock);
             _navigateService.OpenView(studentPackBlock);

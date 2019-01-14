@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LimpStats.Client.CustomControls.Blocks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="298">
-    <Canvas>
-        <DataGrid x:Name="ResGrid" Height="450" Width="298" AutoGenerateColumns="True"/>
+    <Canvas Margin="0,0,-315,0">
+        <DataGrid x:Name="ResGrid" Height="450" Width="613" AutoGenerateColumns="True"/>
     </Canvas>
 </UserControl>

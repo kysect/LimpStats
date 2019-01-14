@@ -95,9 +95,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             ProblemPackInfo pack = _group.ProblemPackList.Find(p => p.PackTitle == packTitle);
             var resultGridBlock = new ResultGridBlock(_group.UserList, pack);
 
-            //TODO: check this
-            _studentPackBlock.Visibility = Visibility.Hidden;
-
             _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock);
             _navigateService.OpenView(resultGridBlock);
 
