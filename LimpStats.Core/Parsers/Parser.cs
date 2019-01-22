@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using LimpStats.Model;
@@ -7,10 +8,12 @@ namespace LimpStats.Core.Parsers
 {
     public static class Parser
     {
+        private const string DomainUrl = "https://www.e-olymp.com/ru";
+
         public static bool IsUserExist(string username)
         {
             var client = new HtmlWeb();
-            string link = $"https://www.e-olymp.com/ru/users/{username}";
+            string link = DomainUrl + $"/users/{username}";
 
             return client.Load(link).Text.Contains($"{username}");
         }
@@ -18,7 +21,7 @@ namespace LimpStats.Core.Parsers
         public static int LoadSolutionCount(string username)
         {
             var client = new HtmlWeb();
-            string link = $"https://www.e-olymp.com/ru/users/{username}";
+            string link = DomainUrl + $"/users/{username}";
 
             HtmlNode floatRow = client.Load(link)
                 .DocumentNode
@@ -34,7 +37,7 @@ namespace LimpStats.Core.Parsers
         public static void LoadProfileData(LimpUser user)
         {
             var client = new HtmlWeb();
-            string link = $"https://www.e-olymp.com/ru/users/{user.Username}/punchcard";
+            string link = DomainUrl + $"/users/{user.Username}/punchcard";
 
             Dictionary<int, int> userResult = client.Load(link)
                 .GetElementbyId("punch-card")
@@ -57,14 +60,15 @@ namespace LimpStats.Core.Parsers
 
         private static int TaskIdFromLink(string link)
         {
-            string stringRes = link.Split('/')
+            string stringRes = link
+                .Split('/')
                 .Last();
             return int.Parse(stringRes);
         }
 
-        public static string GetTitleTask(int  number)
+        public static string GetTitleTask(int number)
         {
-            string url = $"https://www.e-olymp.com/ru/problems/{number}";
+            string url = DomainUrl + $"/problems/{number}";
             var web = new HtmlWeb();
             HtmlDocument doc = web.Load(url);
 
@@ -74,7 +78,7 @@ namespace LimpStats.Core.Parsers
                 if(node.ChildNodes[0].InnerHtml != "Задачи")
                     return node.ChildNodes[0].InnerHtml;
             }
-            return "///";
+            throw new ParserException($"Task with id={number} wasn't found");
         }
     }
 }
