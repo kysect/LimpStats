@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using LimpStats.Model;
 
@@ -7,60 +6,28 @@ namespace LimpStats.Core.Parsers
 {
     public static class MultiThreadParser
     {
-        private const int MaxDepthLevel = 15;
+        private const int MaxRequestPerUserCount = 15;
 
         public static void LoadProfiles(StudyGroup group)
         {
-            void TryLoad(LimpUser user, int depthLevel)
+            Parallel.ForEach(group.UserList, TryLoad);
+        }
+        private static void TryLoad(LimpUser user)
+        {
+            for (var i = 0; i < MaxRequestPerUserCount; i++)
             {
-                depthLevel++;
-                if (depthLevel == MaxDepthLevel)
-                {
-                    throw new ParserException($"Can't load {user.Username}");
-                }
-
                 try
                 {
                     Parser.LoadProfileData(user);
+                    return;
                 }
                 catch (ParserException)
                 {
-                    throw;
-                }
-                catch
-                {
-                    TryLoad(user, depthLevel);
+                    Debug.WriteLine($"Failed for {user.Username}");
                 }
             }
-
-            Parallel.ForEach(group.UserList, u => TryLoad(u, 0));
+            throw new ParserException($"Can't load user data for {user.Username}");
         }
 
-        public static List<(LimpUser, int)> LoadSolutionCount(IEnumerable<LimpUser> userList)
-        {
-            (LimpUser, int) RecursiveExecute(LimpUser user, int depthLevel)
-            {
-                depthLevel++;
-                if (depthLevel == MaxDepthLevel)
-                {
-                    throw new ParserException($"Can't parse {user.Username}");
-                }
-
-                try
-                {
-                    return (user, Parser.LoadSolutionCount(user.Username));
-                }
-                catch (ParserException)
-                {
-                    throw;
-                }
-                catch
-                {
-                    return RecursiveExecute(user, depthLevel);
-                }
-            }
-
-            return userList.AsParallel().Select(RecursiveExecute).ToList();
-        }
     }
 }
