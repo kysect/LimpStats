@@ -7,13 +7,13 @@ using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
-    public partial class StudentPackBlock : UserControl
+    public partial class StudentPackBlockPrewiew : UserControl
     {
         private readonly StudyGroup _users;
         private readonly string _groupTitle;
         private readonly IViewNavigateService _navigateService;
 
-        public StudentPackBlock(StudyGroup users, string groupTitle, IViewNavigateService navigateService)
+        public StudentPackBlockPrewiew(StudyGroup users, string groupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 

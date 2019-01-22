@@ -11,16 +11,16 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     {
         private readonly IViewNavigateService _navigateService;
 
-        private readonly StudentPackBlock _block;
+        private readonly StudentPackBlockPrewiew _blockPrewiew;
         private readonly StudyGroup _group;
         private readonly string _packTitle;
         private readonly string _groupTitle;
 
-        public ProblemPackWindow(string packTitle, StudyGroup group, StudentPackBlock block, string groupTitle, IViewNavigateService navigateService)
+        public ProblemPackWindow(string packTitle, StudyGroup group, StudentPackBlockPrewiew blockPrewiew, string groupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
-            _block = block;
+            _blockPrewiew = blockPrewiew;
             _group = group;
             _packTitle = packTitle;
             //TODO: мб все груптайтлы вынести в StudentGroup ибо она везде используется
@@ -42,7 +42,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _group.ProblemPackList.Add(new ProblemPackInfo(_packTitle, taskList));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
 
-            _block.PackListPanel.Children.Add(new ProblemTasksPreview(_block, _group, _packTitle, _navigateService));
+            _blockPrewiew.PackListPanel.Children.Add(new ProblemTasksPreview(_blockPrewiew, _group, _packTitle, _navigateService));
             PanelViewer.ScrollToRightEnd();
             Close();
         }

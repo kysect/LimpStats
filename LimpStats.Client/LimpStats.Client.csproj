@@ -95,7 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\Blocks\ResultGridBlock.xaml.cs">
+    <Compile Include="CustomControls\BlocksPrewiew\ResultGridBlock.xaml.cs">
       <DependentUpon>ResultGridBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\ForProblemTasks\ProblemTasksPreview.xaml.cs">
@@ -110,8 +110,8 @@
     <Compile Include="CustomControls\ForProblemTasks\InitializationTask.xaml.cs">
       <DependentUpon>InitializationTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Blocks\StudentGroupBlock.xaml.cs">
-      <DependentUpon>StudentGroupBlock.xaml</DependentUpon>
+    <Compile Include="CustomControls\BlocksPrewiew\StudentGroupBlockPrewiew.xaml.cs">
+      <DependentUpon>StudentGroupBlockPrewiew.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\ForStudents\StudentGroupInitializationBlock.xaml.cs">
       <DependentUpon>StudentGroupInitializationBlock.xaml</DependentUpon>
@@ -122,8 +122,14 @@
     <Compile Include="CustomControls\ForStudents\UserAddingWindow.xaml.cs">
       <DependentUpon>UserAddingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Blocks\StudentPackBlock.xaml.cs">
-      <DependentUpon>StudentPackBlock.xaml</DependentUpon>
+    <Compile Include="CustomControls\BlocksPrewiew\StudentPackBlockPrewiew.xaml.cs">
+      <DependentUpon>StudentPackBlockPrewiew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Tabs\StudentGroupTab.xaml.cs">
+      <DependentUpon>StudentGroupTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Tabs\StudentPackTab.xaml.cs">
+      <DependentUpon>StudentPackTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
@@ -133,7 +139,7 @@
     </Compile>
     <Compile Include="Tools\IViewNavigateService.cs" />
     <Compile Include="Tools\ThreadingTools.cs" />
-    <Page Include="CustomControls\Blocks\ResultGridBlock.xaml">
+    <Page Include="CustomControls\BlocksPrewiew\ResultGridBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,7 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\Blocks\StudentGroupBlock.xaml">
+    <Page Include="CustomControls\BlocksPrewiew\StudentGroupBlockPrewiew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,7 +175,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\Blocks\StudentPackBlock.xaml">
+    <Page Include="CustomControls\BlocksPrewiew\StudentPackBlockPrewiew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\Tabs\StudentGroupTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\Tabs\StudentPackTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,6 +261,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomControls\BlocksOptions\" />
+    <Folder Include="CustomControls\BlocksSettings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,15 +15,15 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly IViewNavigateService _navigateService;
 
         private readonly StudyGroup _group;
-        private readonly StudentPackBlock _studentPackBlock;
+        private readonly StudentPackBlockPrewiew _studentPackBlockPrewiew;
 
-        public ProblemTasksPreview(StudentPackBlock studentPackBlock, StudyGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(StudentPackBlockPrewiew studentPackBlockPrewiew, StudyGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
             InitializeComponent();
 
-            _studentPackBlock = studentPackBlock;
+            _studentPackBlockPrewiew = studentPackBlockPrewiew;
             _group = users;
             PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
@@ -85,7 +85,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             //TODO: check this
-            _studentPackBlock.PackListPanel.Children.Remove(this);
+            _studentPackBlockPrewiew.PackListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)

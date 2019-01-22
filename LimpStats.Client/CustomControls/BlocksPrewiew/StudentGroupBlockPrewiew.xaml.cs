@@ -7,11 +7,11 @@ using LimpStats.Database;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
-    public partial class StudentGroupBlock : UserControl
+    public partial class StudentGroupBlockPrewiew : UserControl
     {
         private readonly IViewNavigateService _navigateService;
 
-        public StudentGroupBlock(IViewNavigateService navigateService)
+        public StudentGroupBlockPrewiew(IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
