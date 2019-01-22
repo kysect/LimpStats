@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
 using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 
@@ -9,13 +10,14 @@ namespace LimpStats.Client
 {
     public partial class MainWindow : Window, IViewNavigateService
     {
-        private StudentGroupBlock _block;
+        private readonly StudentGroupTab _tab;
         public MainWindow()
         {
             InitializeComponent();
-            var studentGroupBlock = new StudentGroupBlock(this);
-            OpenView(studentGroupBlock);
-            _block = studentGroupBlock;
+            var studentGroupBlock = new StudentGroupBlockPrewiew(this);
+            var studentGroupTab = new StudentGroupTab(studentGroupBlock);
+            OpenView(studentGroupTab);
+            _tab = studentGroupTab;
         }
 
         public void RemoveButton(NavigateButton button)
@@ -40,7 +42,7 @@ namespace LimpStats.Client
 
         private void ButtonHome_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenView(_block);
+            OpenView(_tab);
         }
 
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
@@ -18,10 +19,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private readonly IViewNavigateService _navigateService;
 
         private readonly StudyGroup _group;
-        private readonly StudentGroupBlock _studentGroupBlock;
+        private readonly StudentGroupBlockPrewiew _studentGroupBlockPrewiew;
         private readonly string _studentGroupTitle;
 
-        public StudentGroupPreview(StudentGroupBlock studentGroupBlock, string studentGroupTitle, IViewNavigateService navigateService)
+        public StudentGroupPreview(StudentGroupBlockPrewiew studentGroupBlockPrewiew, string studentGroupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
@@ -30,7 +31,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             _studentGroupTitle = studentGroupTitle;
 
             CardTitle.DataContext = _studentGroupTitle;
-            _studentGroupBlock = studentGroupBlock;
+            _studentGroupBlockPrewiew = studentGroupBlockPrewiew;
 
             JsonBackupManager.SaveCardName(studentGroupTitle);
             _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
@@ -126,16 +127,16 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             //TODO: check this
-            _studentGroupBlock.GroupListPanel.Children.Remove(this);
+            _studentGroupBlockPrewiew.GroupListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var studentPackBlock = new StudentPackBlock(_group, _studentGroupTitle, _navigateService);
-     
+            var studentPackBlock = new StudentPackBlockPrewiew(_group, _studentGroupTitle, _navigateService);
+            var studentPackTab = new StudentPackTab(studentPackBlock);
 
-            _navigateService.AddToViewList(_studentGroupTitle, studentPackBlock);
-            _navigateService.OpenView(studentPackBlock);
+            _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
+            _navigateService.OpenView(studentPackTab);
         }
     }
 }
