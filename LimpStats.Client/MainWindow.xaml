@@ -23,10 +23,10 @@
             Background="#FF5DA09D"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Width="250"
+            Width="205"
             Grid.Row="0">
             <Button Height="30" Content = "Clear Cache" Click="ButtonCleanCache_OnClick"/>
-            <Button Height="30" Content = "Home"        Click="ButtonHome_OnClick"/>
+            <Button Height="30" Style="{DynamicResource MainButtonStyle}" DataContext="Main" Click="ButtonHome_OnClick"/>
         </StackPanel>
         <UserControl
             x:Name="MainWindowContent"
