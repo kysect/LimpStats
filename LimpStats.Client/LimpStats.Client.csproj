@@ -266,5 +266,14 @@
     <Folder Include="CustomControls\BlocksOptions\" />
     <Folder Include="CustomControls\BlocksSettings\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconGroup-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconPack-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconTable-03.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

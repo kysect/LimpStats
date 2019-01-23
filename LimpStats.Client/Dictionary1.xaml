@@ -22,7 +22,8 @@
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 
-    <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+    
+    <Style x:Key="NavigateStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -34,29 +35,82 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Border x:Name="Border"
-                                CornerRadius="20,0,0,0"
-                                Background="#FFE2F9F1"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Stretch"/>
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            TextWrapping="Wrap"
-                            Text="{Binding ElementName=CardTitle, Path=DataContext}"
-                            TextAlignment="Center"
-                            Foreground="#FF879993"/>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Height="30" Width="175">
+                        <Rectangle Name="Restangle" Fill="#4C4C4C" Height="30" Width="175"/>
+                        <TextBlock Text="{Binding ElementName=OpenViewButton, Path=DataContext}" HorizontalAlignment="Left" Height="23.496" VerticalAlignment="Center" Width="145" Foreground="#FFE6D7D7" FontFamily="Bahnschrift Bold SemiCondensed" FontSize="16.5" Margin="30,6.504,0,0"/>
                     </Grid>
-
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
-
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="#FFE66A6A" />
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true"/>
-                        <Trigger Property="IsEnabled" Value="false"/>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="NavigateCloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Rectangle Name="Restangle" Fill="#4C4C4C" Height="30" Width="30"/>
+                        <TextBlock Text="{Binding ElementName=OpenViewButton, Path=DataContext}" HorizontalAlignment="Left" Height="23.496" VerticalAlignment="Center" Width="145" Foreground="#FFE6D7D7" FontFamily="Bahnschrift Bold SemiCondensed" FontSize="16.5" Margin="30,6.504,0,0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true"/>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true"/>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="MainButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Rectangle Name="Restangle" Fill="#4C4C4C" Height="30" Width="205"/>
+                        <TextBlock Text="Main" HorizontalAlignment="Left" Height="23.496" VerticalAlignment="Center" Width="145" Foreground="#FFE6D7D7" FontFamily="Bahnschrift Bold SemiCondensed" FontSize="16.5" Margin="30,6.504,0,0"/>
+                        <Image  x:Name="icon"  Stretch="Fill" Height="30" Width="30"  HorizontalAlignment="Left" Source="/LimpStats.Client;component/icons/iconGroup-02.png"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true"/>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true"/>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Restangle" Property="Fill" Value="#FFE66A6A" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
