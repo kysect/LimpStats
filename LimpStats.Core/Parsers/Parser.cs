@@ -47,7 +47,7 @@ namespace LimpStats.Core.Parsers
                 .Select(n => (TaskIdFromLink(n.Attributes["href"].Value), TitleToResult(n.Attributes["title"].Value)))
                 .ToDictionary(pair => pair.Item1, pair => pair.Item2);
 
-            user.UserProfileResult = userResult;
+            user.EOlimpProblemsResult = userResult;
         }
 
         private static int TitleToResult(string taskTitle)

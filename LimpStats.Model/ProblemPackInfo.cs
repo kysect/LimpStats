@@ -2,6 +2,7 @@
 
 namespace LimpStats.Model
 {
+    //TODO: remove
     public class ProblemPackInfo
     {
         public ProblemPackInfo(string packTitle, List<int> problemIdList, int fullSolutionPoints = 0)

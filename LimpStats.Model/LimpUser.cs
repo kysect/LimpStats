@@ -8,35 +8,20 @@ namespace LimpStats.Model
         public LimpUser(string username)
         {
             Username = username;
-            //TODO: fix it
-            UserProfileResult = new Dictionary<int, int>(10000);
-            for (int i = 0; i < 10000; i++)
-            {
-                UserProfileResult.Add(i, 0);
-            }
+            EOlimpProblemsResult = new Dictionary<int, int>();
+            CodeforcesSubmissions = new List<string>();
         }
 
-
         public string Username { get; set; }
-        public Dictionary<int, int> UserProfileResult { get; set; }
+        public string EOlympLogin { get; set; }
+        public string CodeforcesHandle { get; set; }
+
+        public Dictionary<int, int> EOlimpProblemsResult { get; set; }
+        public List<string> CodeforcesSubmissions { get; set; }
 
         public int CompletedTaskCount()
         {
-            return UserProfileResult.Count(t => t.Value == 100);
+            return EOlimpProblemsResult.Count(t => t.Value == 100);
         }
-
-        #region inheritance
-
-        public override string ToString()
-        {
-            return $"{Username}";
-        }
-
-        public override int GetHashCode()
-        {
-            return Username.GetHashCode();
-        }
-
-        #endregion
     }
 }

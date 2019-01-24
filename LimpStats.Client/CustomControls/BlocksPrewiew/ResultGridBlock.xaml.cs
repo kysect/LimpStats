@@ -30,7 +30,7 @@ namespace LimpStats.Client.CustomControls.Blocks
                 var data = new List<object> {user.Username};
                 foreach (int problemNum  in pack.ProblemIdList)
                 {
-                    data.Add(user.UserProfileResult[problemNum]);
+                    data.Add(user.EOlimpProblemsResult[problemNum]);
                 }
 
                 table.Rows.Add(data.ToArray());
