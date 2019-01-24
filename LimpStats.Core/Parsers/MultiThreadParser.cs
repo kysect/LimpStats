@@ -8,9 +8,9 @@ namespace LimpStats.Core.Parsers
     {
         private const int MaxRequestPerUserCount = 15;
 
-        public static void LoadProfiles(StudyGroup group)
+        public static void LoadProfiles(UserGroup group)
         {
-            Parallel.ForEach(group.UserList, TryLoad);
+            Parallel.ForEach(group.Users, TryLoad);
         }
         private static void TryLoad(LimpUser user)
         {

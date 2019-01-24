@@ -5,20 +5,21 @@ namespace LimpStats.Model.Problems
 {
     public class ProblemsPack
     {
-        public List<IProblem> Problems { get; set; } = new List<IProblem>();
-        public string Title { get; set; }
-
-        public ProblemsPack(string title)
+        public ProblemsPack(string title = null, List<IProblem> problems = null)
         {
             Title = title;
+            Problems = problems ?? new List<IProblem>();
         }
 
-        public ProblemsResult GetResults(LimpUser user)
+        public List<IProblem> Problems { get; set; }
+        public string Title { get; set; }
+
+        public ProblemPackResult GetResults(LimpUser user)
         {
-            return ProblemsResult.Create(this, user);
+            return ProblemPackResult.Create(this, user);
         }
 
-        public List<ProblemsResult> GetResults(List<LimpUser> users)
+        public List<ProblemPackResult> GetResults(List<LimpUser> users)
         {
             return users.Select(GetResults).ToList();
         }

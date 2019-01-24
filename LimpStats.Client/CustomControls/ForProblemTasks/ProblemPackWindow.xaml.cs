@@ -4,6 +4,7 @@ using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
@@ -11,12 +12,13 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     {
         private readonly IViewNavigateService _navigateService;
 
+        //TODO: fix typo
         private readonly StudentPackBlockPrewiew _blockPrewiew;
-        private readonly StudyGroup _group;
+        private readonly UserGroup _group;
         private readonly string _packTitle;
         private readonly string _groupTitle;
 
-        public ProblemPackWindow(string packTitle, StudyGroup group, StudentPackBlockPrewiew blockPrewiew, string groupTitle, IViewNavigateService navigateService)
+        public ProblemPackWindow(string packTitle, UserGroup group, StudentPackBlockPrewiew blockPrewiew, string groupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
@@ -39,7 +41,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 .ToList();
             
 
-            _group.ProblemPackList.Add(new ProblemPackInfo(_packTitle, taskList));
+            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, EOlympProblem.CreateFromList(taskList)));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
 
             _blockPrewiew.PackListPanel.Children.Add(new ProblemTasksPreview(_blockPrewiew, _group, _packTitle, _navigateService));

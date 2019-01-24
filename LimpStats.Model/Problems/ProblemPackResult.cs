@@ -3,21 +3,23 @@ using System.Linq;
 
 namespace LimpStats.Model.Problems
 {
-    public class ProblemsResult
+    public class ProblemPackResult
     {
-        public static ProblemsResult Create(ProblemsPack problems, LimpUser user)
+        public static ProblemPackResult Create(ProblemsPack problems, LimpUser user)
         {
             List<int> result = problems
                 .Problems
                 .Select(problem => problem.GetUserResult(user))
                 .ToList();
 
-            return new ProblemsResult()
+            return new ProblemPackResult()
             {
-                Points =  result
+                Points =  result,
+                Username = user.Username
             };
         }
 
+        public string Username { get; set; }
         public List<int> Points { get; set; }
         public int SumOfPoint => Points.Sum();
     }

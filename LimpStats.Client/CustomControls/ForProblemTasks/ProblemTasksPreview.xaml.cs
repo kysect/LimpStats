@@ -7,6 +7,7 @@ using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
@@ -14,10 +15,11 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     {
         private readonly IViewNavigateService _navigateService;
 
-        private readonly StudyGroup _group;
+        private readonly UserGroup _group;
+        //TODO: fix type
         private readonly StudentPackBlockPrewiew _studentPackBlockPrewiew;
 
-        public ProblemTasksPreview(StudentPackBlockPrewiew studentPackBlockPrewiew, StudyGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(StudentPackBlockPrewiew studentPackBlockPrewiew, UserGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
@@ -91,8 +93,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
             string packTitle = CardTitle.DataContext.ToString();
-            ProblemPackInfo pack = _group.ProblemPackList.Find(p => p.PackTitle == packTitle);
-            var resultGridBlock = new ResultGridBlock(_group.UserList, pack);
+            ProblemsPack pack = _group.ProblemsPacks.Find(p => p.Title == packTitle);
+            var resultGridBlock = new ResultGridBlock(_group.Users, pack);
 
             _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock);
             _navigateService.OpenView(resultGridBlock);

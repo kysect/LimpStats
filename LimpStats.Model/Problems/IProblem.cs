@@ -2,8 +2,8 @@
 {
     public interface IProblem
     {
-        string Title();
-        ProblemType Type();
+        string Title { get; }
+        ProblemType Type { get; }
         int GetUserResult(LimpUser user);
     }
 }

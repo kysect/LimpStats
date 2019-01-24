@@ -5,7 +5,7 @@ namespace LimpStats.Model
 {
     public class LimpUser
     {
-        public LimpUser(string username)
+        public LimpUser(string username = null)
         {
             Username = username;
             EOlimpProblemsResult = new Dictionary<int, int>();

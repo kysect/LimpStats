@@ -2,8 +2,8 @@
 {
     public class CodeforcesProblem : IProblem
     {
-        private readonly int _roundNumber;
         private readonly string _problemLetter;
+        private readonly int _roundNumber;
 
         public CodeforcesProblem(int roundNumber, string problemLetter)
         {
@@ -11,23 +11,13 @@
             _problemLetter = problemLetter;
         }
 
-        private string ProblemTag => $"{_roundNumber}{_problemLetter}";
+        public string Title => $"{_roundNumber}{_problemLetter}";
 
-        public string Title()
-        {
-            return ProblemTag;
-        }
-
-        public ProblemType Type()
-        {
-            return ProblemType.Codeforces;
-        }
+        public ProblemType Type => ProblemType.Codeforces;
 
         public int GetUserResult(LimpUser user)
         {
-            if (user.CodeforcesSubmissions.Contains(ProblemTag))
-                return 100;
-            return 0;
+            return user.CodeforcesSubmissions.Contains(Title) ? 100 : 0;
         }
     }
 }

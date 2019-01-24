@@ -5,6 +5,7 @@ using LimpStats.Core;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpParse.ConsoleApp
 {
@@ -12,42 +13,37 @@ namespace LimpParse.ConsoleApp
     {
         private static void Main()
         {
-            StudyGroup group = DataGenerator.GenerateTemplateGroup();
+            UserGroup group = DataGenerator.GenerateTemplateGroup();
             MultiThreadParser.LoadProfiles(group);
 
-            FinalTest(group);
-            LoadTotalPoints(group);
             LoadAllPackInfo(group);
         }
 
-        private static void FinalTest(StudyGroup group)
+        private static void LoadAllPackInfo(UserGroup group)
         {
-            List<ProblemPackResult> res = group.GetPackResult(group.ProblemPackList.Last());
-            Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResults(res)));
-        }
-
-        private static void LoadTotalPoints(StudyGroup group)
-        {
-            IOrderedEnumerable<(string, int)> list = group
-                .GetAllPackResult()
-                .SelectMany(l => l)
-                .GroupBy(l => l.Username)
-                .Select(gr => (gr.Key, gr.Sum(g => g.TotalPoints)))
-                .OrderByDescending(t => t.Item2);
-
-            foreach ((string, int) tuple in list)
+            foreach (ProblemsPack pack in group.ProblemsPacks)
             {
-                Console.WriteLine($"{tuple.Item1,-15}: {tuple.Item2,5}");
-            }
-        }
-
-        private static void LoadAllPackInfo(StudyGroup group)
-        {
-            foreach (List<ProblemPackResult> results in group.GetAllPackResult())
-            {
-                Console.WriteLine(string.Join("\n", FormatPrint.GeneratePackResults(results)));
+                IEnumerable<ProblemPackResult> results = group.Users.Select(u => pack.GetResults(u));
+                Console.WriteLine(string.Join("\n", GenerateStringForResults(results)));
                 Console.WriteLine("\n\n");
             }
         }
+
+        public static IEnumerable<string> GenerateStringForResults(IEnumerable<ProblemPackResult> results)
+        {
+            var output = new List<string>();
+
+            foreach (ProblemPackResult result in results.OrderByDescending(res => res.SumOfPoint))
+            {
+                string dataRow = $"{result.Username,-15}:"
+                                 + string.Join(" ", result.Points.Select(value => $"{value,5}"))
+                                 + $" | {result.SumOfPoint,5}";
+
+                output.Add(dataRow);
+            }
+
+            return output;
+        }
+
     }
 }
