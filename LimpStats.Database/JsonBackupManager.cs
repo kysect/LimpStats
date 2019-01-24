@@ -53,12 +53,12 @@ namespace LimpStats.Database
 
         #region Card data
 
-        public static StudyGroup LoadCardUserList(string cardTitle)
+        public static UserGroup LoadCardUserList(string cardTitle)
         {
             string filePath = $"card_{cardTitle}.json";
             CheckFileExist(filePath);
             string jsonData = File.ReadAllText(filePath);
-            var group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
+            var group = JsonConvert.DeserializeObject<UserGroup>(jsonData);
             return group;
         //    var group = JsonConvert.DeserializeObject<StudyGroup>(jsonData);
             //    return group ?? new StudyGroup();
@@ -82,7 +82,7 @@ namespace LimpStats.Database
             return names;
         }
 
-        public static void SaveCardUserList(StudyGroup group, string cardTitle)
+        public static void SaveCardUserList(UserGroup group, string cardTitle)
         {
             string filePath = $"card_{cardTitle}.json";
             string jsonString = JsonConvert.SerializeObject(group);

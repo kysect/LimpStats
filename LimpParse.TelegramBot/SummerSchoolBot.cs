@@ -5,6 +5,7 @@ using LimpStats.Core;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -14,11 +15,11 @@ namespace LimpParse.TelegramBot
     public class SummerSchoolBot
     {
         public static bool flag;
-        private readonly StudyGroup _group;
+        private readonly UserGroup _group;
         public readonly TelegramBotClient Bot;
         private bool _flag = true;
 
-        public SummerSchoolBot(StudyGroup group)
+        public SummerSchoolBot(UserGroup group)
         {
             _group = group;
             Bot = new TelegramBotClient(Config.TelegramBotToken);
@@ -39,14 +40,14 @@ namespace LimpParse.TelegramBot
             if (hour == DateTime.Now.Hour && DateTime.Now.Minute - minute <= 10 && _flag)
             {
                 _flag = false;
-                string msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.UserList);
+                string msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.Users);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
-                JsonBackupManager.SaveToJson(_group.UserList);
+                JsonBackupManager.SaveToJson(_group.Users);
             }
 
             if (e.Message.Text == "/getinfo")
             {
-                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_group.UserList), ParseMode.Html);
+                Bot.SendTextMessageAsync(e.Message.Chat.Id, GenerateMessage(_group.Users), ParseMode.Html);
                 Console.WriteLine("good");
             }
 
@@ -83,7 +84,7 @@ namespace LimpParse.TelegramBot
                     || e.Message.Text == "F")
                 {
                     string s = e.Message.Text;
-                    ProblemPackInfo a = _group.ProblemPackList.First(pack => pack.PackTitle == s);
+                    ProblemsPack a = _group.ProblemsPacks.First(pack => pack.Title == s);
 
                     //TODO: user Group.GetPackResult
                     //string g = "<code>" + NeedMoreInfo.GetMoreInfo(_users, a, s) + "</code>";
@@ -117,8 +118,19 @@ namespace LimpParse.TelegramBot
             users.ForEach(Parser.LoadProfileData);
             IEnumerable<string> res = users
                 .OrderByDescending(e => e.CompletedTaskCount())
-                .Select(FormatPrint.GenerateDayResults);
+                .Select(GenerateDayResults);
             return $"<code>{string.Join("\n", res)}</code>";
+        }
+
+        private static string GenerateDayResults(LimpUser user)
+        {
+            List<LimpUser> list = JsonBackupManager.LoadFromJson();
+            LimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
+
+            int completed = user.CompletedTaskCount() -
+                            (currentUser?.CompletedTaskCount() ?? 0);
+
+            return $"{user.Username,-14} |{user.CompletedTaskCount(),-3} ({completed})";
         }
     }
 }

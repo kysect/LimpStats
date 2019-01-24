@@ -1,22 +1,25 @@
-﻿namespace LimpStats.Model.Problems
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace LimpStats.Model.Problems
 {
     public class EOlympProblem : IProblem
     {
         private readonly int _problemNumber;
+
         public EOlympProblem(int problemNumber)
         {
             _problemNumber = problemNumber;
         }
 
-        public string Title()
+        public static List<IProblem> CreateFromList(IEnumerable<int> problemsNumber)
         {
-            return _problemNumber.ToString();
+            return problemsNumber.Select(num => new EOlympProblem(num) as IProblem).ToList();
         }
 
-        public ProblemType Type()
-        {
-            return ProblemType.EOlymp;
-        }
+        public string Title => _problemNumber.ToString();
+
+        public ProblemType Type => ProblemType.EOlymp;
 
         public int GetUserResult(LimpUser user)
         {

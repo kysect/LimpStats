@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using LimpStats.Core;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.Models
 {
@@ -20,18 +20,17 @@ namespace LimpStats.Client.Models
             return $"{Username} [{Points}]";
         }
 
-        public static IEnumerable<ProfilePreviewData> GetProfilePreview(StudyGroup group)
+        public static IEnumerable<ProfilePreviewData> GetProfilePreview(UserGroup group)
         {
             return group
                 .GetTotalPoints()
                 .Select(res => new ProfilePreviewData(res.Username, res.Points));
         }
-        public static IEnumerable<ProfilePreviewData> GetProfilePackPreview(StudyGroup group, string packtitle)
+        public static IEnumerable<ProfilePreviewData> GetProfilePackPreview(UserGroup group, string packTitle)
         {
-            var pack =   group.ProblemPackList.Find(e => e.PackTitle == packtitle);
-            return group
-                   .GetPackResult(pack)
-                   .Select(res => new ProfilePreviewData(res.Username, res.TotalPoints));
+            ProblemsPack pack = group.ProblemsPacks.Find(e => e.Title == packTitle);
+            return group.Users
+                   .Select(user => new ProfilePreviewData(user.Username, pack.GetResults(user).SumOfPoint));
         }
     }
 }

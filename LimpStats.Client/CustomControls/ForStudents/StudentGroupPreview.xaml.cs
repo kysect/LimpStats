@@ -11,6 +11,7 @@ using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
@@ -18,7 +19,8 @@ namespace LimpStats.Client.CustomControls.ForStudents
     {
         private readonly IViewNavigateService _navigateService;
 
-        private readonly StudyGroup _group;
+        private readonly UserGroup _group;
+        //TODO: fix typo
         private readonly StudentGroupBlockPrewiew _studentGroupBlockPrewiew;
         private readonly string _studentGroupTitle;
 
@@ -42,13 +44,14 @@ namespace LimpStats.Client.CustomControls.ForStudents
             //TODO: temp solution, remove
             if (_group == null)
             {
-                _group = new StudyGroup
+                _group = new UserGroup
                 {
-                    UserList = new List<LimpUser>(),
-                    ProblemPackList = new List<ProblemPackInfo>
+                    Users = new List<LimpUser>(),
+                    ProblemsPacks = new List<ProblemsPack>
                     {
-                        new ProblemPackInfo("A", TaskPackStorage.TasksAGroup),
-                        new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
+                        //TODO: implement testing factory
+                        //new ProblemPackInfo("A", TaskPackStorage.TasksAGroup),
+                        //new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
                     }
                 };
             }
@@ -120,7 +123,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             var userAdding = new UserAddingWindow();
             userAdding.ShowDialog();
 
-            _group.UserList.Add(new LimpUser(userAdding.Username));
+            _group.Users.Add(new LimpUser(userAdding.Username));
             JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 

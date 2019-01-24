@@ -5,7 +5,7 @@ namespace LimpStats.Database
 {
     public static class DataGenerator
     {
-        public static StudyGroup GenerateTemplateGroup()
+        public static UserGroup GenerateTemplateGroup()
         {
             var users = new List<LimpUser>
             {
@@ -31,13 +31,14 @@ namespace LimpStats.Database
             };
             users.AddRange(GetOldGeneration());
 
-            var group = new StudyGroup(users);
-            group.ProblemPackList.Add(new ProblemPackInfo("A", TaskPackStorage.TasksAGroup, 300));
-            group.ProblemPackList.Add(new ProblemPackInfo("B", TaskPackStorage.TasksBGroup, 200));
-            group.ProblemPackList.Add(new ProblemPackInfo("C", TaskPackStorage.TasksCGroup, 300));
-            group.ProblemPackList.Add(new ProblemPackInfo("D", TaskPackStorage.TasksDGroup, 300));
-            group.ProblemPackList.Add(new ProblemPackInfo("E", TaskPackStorage.TasksEGroup, 300));
-            group.ProblemPackList.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 500));
+            UserGroup group = new UserGroup("Test group");
+            //var group = new UserGroup(users);
+            //group.ProblemPacks.Add(new ProblemPackInfo("A", TaskPackStorage.TasksAGroup, 300));
+            //group.ProblemPacks.Add(new ProblemPackInfo("B", TaskPackStorage.TasksBGroup, 200));
+            //group.ProblemPacks.Add(new ProblemPackInfo("C", TaskPackStorage.TasksCGroup, 300));
+            //group.ProblemPacks.Add(new ProblemPackInfo("D", TaskPackStorage.TasksDGroup, 300));
+            //group.ProblemPacks.Add(new ProblemPackInfo("E", TaskPackStorage.TasksEGroup, 300));
+            //group.ProblemPacks.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 500));
 
             return group;
         }

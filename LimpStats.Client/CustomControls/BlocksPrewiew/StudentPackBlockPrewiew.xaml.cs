@@ -4,16 +4,17 @@ using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Tools;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
     public partial class StudentPackBlockPrewiew : UserControl
     {
-        private readonly StudyGroup _users;
+        private readonly UserGroup _users;
         private readonly string _groupTitle;
         private readonly IViewNavigateService _navigateService;
 
-        public StudentPackBlockPrewiew(StudyGroup users, string groupTitle, IViewNavigateService navigateService)
+        public StudentPackBlockPrewiew(UserGroup users, string groupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
@@ -21,9 +22,9 @@ namespace LimpStats.Client.CustomControls.Blocks
             _users = users;
             _groupTitle = groupTitle;
 
-            foreach (ProblemPackInfo pack in users.ProblemPackList)
+            foreach (ProblemsPack pack in users.ProblemsPacks)
             {
-                var taskPreview = new ProblemTasksPreview(this, _users, pack.PackTitle, _navigateService);
+                var taskPreview = new ProblemTasksPreview(this, _users, pack.Title, _navigateService);
                 PackListPanel.Children.Add(taskPreview);
                 PanelViewer.ScrollToRightEnd();
             }
@@ -32,9 +33,9 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            foreach (var pack in _users.ProblemPackList)
+            foreach (ProblemsPack pack in _users.ProblemsPacks)
             {
-                if (pack.PackTitle == PackTitleInput.Text)
+                if (pack.Title == PackTitleInput.Text)
                 {
                     MessageBox.Show($"The name of group must be unique!");
                     return;

@@ -1,4 +1,4 @@
-﻿namespace LimpStats.Model
+﻿namespace LimpStats.Model.Problems
 {
     public enum ProblemType
     {
