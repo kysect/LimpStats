@@ -2,6 +2,7 @@
 
 namespace LimpStats.Model
 {
+    //TODO: remove
     public class StudyGroup
     {
         public StudyGroup()
