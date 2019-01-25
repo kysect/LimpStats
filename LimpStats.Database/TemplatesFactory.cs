@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using LimpStats.Model;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Database
 {
-    public static class DataGenerator
+    public static class TemplatesFactory
     {
-        public static UserGroup GenerateTemplateGroup()
+        public static List<LimpUser> UserList()
         {
-            var users = new List<LimpUser>
+            return new List<LimpUser>
             {
                 new LimpUser("Andrey2005"),
                 new LimpUser("DDsov"),
@@ -28,31 +29,32 @@ namespace LimpStats.Database
                 new LimpUser("tur4ik"),
                 new LimpUser("DiMaNsKi"),
                 new LimpUser("cerepawka")
-            };
-            users.AddRange(GetOldGeneration());
-
-            UserGroup group = new UserGroup("Test group");
-            //var group = new UserGroup(users);
-            //group.ProblemPacks.Add(new ProblemPackInfo("A", TaskPackStorage.TasksAGroup, 300));
-            //group.ProblemPacks.Add(new ProblemPackInfo("B", TaskPackStorage.TasksBGroup, 200));
-            //group.ProblemPacks.Add(new ProblemPackInfo("C", TaskPackStorage.TasksCGroup, 300));
-            //group.ProblemPacks.Add(new ProblemPackInfo("D", TaskPackStorage.TasksDGroup, 300));
-            //group.ProblemPacks.Add(new ProblemPackInfo("E", TaskPackStorage.TasksEGroup, 300));
-            //group.ProblemPacks.Add(new ProblemPackInfo("F", TaskPackStorage.TasksFGroup, 500));
-
-            return group;
-        }
-
-        private static List<LimpUser> GetOldGeneration()
-        {
-            return new List<LimpUser>
-            {
                 //new LimpUser("Strannik", "II место на области"),
                 //new LimpUser("iNooByX", "III место на области"),
                 //new LimpUser("Maxkolpak", "III место на городе"),
                 //new LimpUser("krab397", "III место на облати"),
                 //new LimpUser("i4happy", "I место на городе"),
                 //new LimpUser("vlad986523", "II место на городе")
+            };
+        }
+
+        public static List<ProblemsPack> EOlimpPacks()
+        {
+            List<IProblem> firstPackProblems = EOlympProblem.CreateFromList(TaskPackStorage.TasksAGroup);
+            List<IProblem> secondPackProblems = EOlympProblem.CreateFromList(TaskPackStorage.TasksBGroup);
+            return new List<ProblemsPack>
+            {
+                new ProblemsPack("Test pack A", firstPackProblems),
+                new ProblemsPack("Test pack A", secondPackProblems)
+            };
+        }
+
+        public static UserGroup UserGroup()
+        {
+            return new UserGroup("Testing User Group")
+            {
+                ProblemsPacks = EOlimpPacks(),
+                Users = UserList()
             };
         }
     }

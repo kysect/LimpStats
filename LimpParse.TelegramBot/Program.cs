@@ -8,7 +8,7 @@ namespace LimpParse.TelegramBot
     {
         private static void Main()
         {
-            UserGroup group = DataGenerator.GenerateTemplateGroup();
+            UserGroup group = TemplatesFactory.UserGroup();
             var bot = new SummerSchoolBot(group);
             Console.ReadLine();
             bot.Bot.StopReceiving();
