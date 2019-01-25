@@ -13,7 +13,7 @@ namespace LimpParse.ConsoleApp
     {
         private static void Main()
         {
-            UserGroup group = DataGenerator.GenerateTemplateGroup();
+            UserGroup group = TemplatesFactory.UserGroup();
             MultiThreadParser.LoadProfiles(group);
 
             LoadAllPackInfo(group);
