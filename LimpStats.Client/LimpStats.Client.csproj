@@ -187,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionary1.xaml">
+    <Page Include="dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,6 +265,7 @@
   <ItemGroup>
     <Folder Include="CustomControls\BlocksOptions\" />
     <Folder Include="CustomControls\BlocksSettings\" />
+    <Folder Include="StylesDictionary\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\iconGroup-02.png" />
@@ -274,6 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\iconTable-03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconNavigateClose-04.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
