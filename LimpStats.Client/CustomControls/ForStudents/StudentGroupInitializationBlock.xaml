@@ -8,7 +8,9 @@
     Height="24.75"
     mc:Ignorable="d">
     <Canvas>
-        <TextBox Width="176" Height="25" />
+        <TextBox
+            Width="176"
+            Height="25" />
         <Button
             Canvas.Left="176"
             Width="24"

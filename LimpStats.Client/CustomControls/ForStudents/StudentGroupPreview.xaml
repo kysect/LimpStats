@@ -6,28 +6,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Background="#333333">
+    <StackPanel Background="#333333" Height="270" Width="180">
             <StackPanel
-                Height="35"
+                Height="40"
                 Orientation="Horizontal">
                 <Button
                     x:Name="CardTitle"
-                    Width="235"
+                    Width="140"
                     VerticalAlignment="Stretch"
-                    Background="#FF993333"
+                    Background="#333333"
                     Click="CardTitle_OnClick"
                     DataContext="GroupTitle"
-                    FontFamily="Century Gothic"
-                    Foreground="#FFE8E8E8"
-                    Style="{DynamicResource ButtonStyle1}" />
+                    BorderBrush="{x:Null}"
+                    Style="{DynamicResource CardTitle}" />
             <Button
                     x:Name="UpdateButton"
-                    Width="64"
+                    Width="40"
                     HorizontalAlignment="Left"
                     Click="ButtonClick_Update"
-                    Content="🔄"
-                    FontFamily="Century Gothic"
-                    Foreground="#FF879993"
                     BorderBrush="{x:Null}"
                     Style="{DynamicResource Refresh}" />
             </StackPanel>
@@ -42,11 +38,11 @@
                 Foreground="#FF87A5B8"
                 BorderBrush="{x:Null}" />
 
-            <ListBox
-                x:Name="StudentList"
-                Height="270"
-                Background="#4C4C4C"
-                ItemContainerStyle="{DynamicResource ListBoxItemStyle2}"
-                Style="{DynamicResource ListBoxStyle2}" />
-        </StackPanel>
+        <StackPanel
+            x:Name="Panel"
+            Height="205"
+            Width="180"
+            VerticalAlignment="Bottom"
+            Orientation="Vertical" />
+    </StackPanel>
 </UserControl>

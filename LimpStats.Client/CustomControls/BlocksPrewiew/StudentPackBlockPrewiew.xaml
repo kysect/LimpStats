@@ -21,7 +21,8 @@
                     Click="OnClick_UpdatePanel"
                     Content="Add pack"
                     IsEnabled="False"
-                    RenderTransformOrigin="0.5,0.5" Background="#FF993333" FontFamily="Century Gothic" />
+                    Background="#FF993333"
+                    FontFamily="Century Gothic" />
                 <TextBox
                     Name="PackTitleInput"
                     Width="150"
@@ -30,7 +31,12 @@
                     KeyDown="FilePath_OnKeyDown"
                     Text="Pack name"
                     TextChanged="PackTitleInput_OnTextChanged"
-                    TextWrapping="Wrap" Background="#FFCEBD89" Foreground="#FF993333" BorderBrush="#FFCEBD89" FontFamily="Century Gothic" Margin="0,0,0,5" />
+                    TextWrapping="Wrap"
+                    Background="#FFCEBD89"
+                    Foreground="#FF993333"
+                    BorderBrush="#FFCEBD89"
+                    FontFamily="Century Gothic"
+                    Margin="0,0,0,5" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"
