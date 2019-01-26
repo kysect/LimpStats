@@ -8,6 +8,8 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
+    Height="535"
+    Width="768"
     mc:Ignorable="d">
     <Grid
         Background="#666666">

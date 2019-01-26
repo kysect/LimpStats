@@ -19,7 +19,12 @@
             Click="RemoveFromListButton"
 
             Style="{DynamicResource NavigateCloseStyle}" Canvas.Left="175" />
-        <Image  x:Name="icon"  Stretch="Fill" Height="30" Width="30"  HorizontalAlignment="Left" Source="/LimpStats.Client;component/icons/iconPack-02.png"/>
-
+        <Image
+            x:Name="icon"
+            Stretch="Fill"
+            Height="30"
+            Width="30"
+            HorizontalAlignment="Left"
+            Source="/LimpStats.Client;component/icons/iconPack-02.png" />
     </Canvas>
 </UserControl>

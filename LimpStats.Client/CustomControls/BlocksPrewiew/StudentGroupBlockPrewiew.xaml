@@ -18,22 +18,30 @@
                     Click="AddGroupToPanel"
                     Content="Add list"
                     IsEnabled="False"
-                    RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic" Background="#FF993333" BorderBrush="#FF993333" Foreground="#FFE8E8E8" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    FontFamily="Century Gothic"
+                    Background="#FF993333"
+                    BorderBrush="#FF993333"
+                    Foreground="#FFE8E8E8"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left" />
                 <TextBox
                     x:Name="FilePath"
                     Width="150"
-
                     VerticalContentAlignment="Center"
                     GotFocus="FilePath_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
                     Text="NameCard"
                     TextChanged="FilePath_OnTextChanged"
-                    TextWrapping="Wrap" Background="#FFCEBD89" FontFamily="Century Gothic" FontSize="14" FontStyle="Italic" Foreground="#FF993333" Margin="0,0,0,5" />
+                    TextWrapping="Wrap"
+                    Background="#FFCEBD89"
+                    FontFamily="Century Gothic"
+                    FontSize="14"
+                    FontStyle="Italic"
+                    Foreground="#FF993333"
+                    Margin="0,0,0,5" />
             </StackPanel>
             <StackPanel
-                    x:Name="GroupListPanel"
-                    MinWidth="300"
-                    MinHeight="400"
+                    x:Name="GroupListPanel"                
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" />

@@ -3,138 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             Width="200"
-             d:DesignHeight="250"
+             Width="180"
+             Height="270"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
-        <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
-        <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
-            <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBox}">
-                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
-                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </ScrollViewer>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
-                            </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsGrouping" Value="true"/>
-                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
-        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
-        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
-        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
-        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
-        <Style  x:Key="ListBoxItemStyle1" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Grid Margin="2" Height="23.5" Width="123" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Rectangle Grid.ColumnSpan="2" Fill="#FF993333" HorizontalAlignment="Left" Height="20" Margin="2,0,-78.5,0" Stroke="{x:Null}" VerticalAlignment="Top" Width="190" RadiusX="2" RadiusY="4"/>
-                            <ContentPresenter
-                               
-                                    Grid.Column="1"
-                                    Margin="10.5,2.286,-6.5,8.5" HorizontalAlignment="Center" Width="119" VerticalAlignment="Center" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="TextElement.Foreground" Value="White"></Setter>
-            <Setter Property="TextElement.FontFamily" Value="Century Gothic"></Setter>
-        </Style>
-        <Style x:Key="PackTitleStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="159">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="71*"/>
-                                <ColumnDefinition Width="8*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="Border" Grid.ColumnSpan="3"
-                                CornerRadius="20,0,0,0" Background="#FFE2F9F1" Margin="0,0,0,-8.25"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding DataContext, ElementName=CardTitle}" TextAlignment="Center" Margin="0,9.046,-38,-4" Grid.ColumnSpan="3" Foreground="#FF879993"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true"/>
-
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#FFE66A6A" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true"/>
-                            <Trigger Property="IsEnabled" Value="false"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-    </UserControl.Resources>
-    <Canvas>
-        <Button
-            Name="UpdateButton"
-            Canvas.Right="0"
-            Width="37"
-            Height="33"
-            HorizontalAlignment="Left"
-            Click="ButtonClick_Update"
-            Content="🔄" Background="#FF993333" Foreground="#FFE8E8E8" Canvas.Left="163" />
-        <Button
-            Name="CardTitle"
-            Width="163"
-            Height="33"
-            Background="#FF993333"
-            Click="CardTitle_OnClick"
-            DataContext="PackTitle" Foreground="#FFE8E8E8" Style="{DynamicResource PackTitleStyle}" FontFamily="Century Gothic" />
-        <ListBox
-            Name="StudentList"
-            SelectionChanged="LimpUserStatistic"
-            Canvas.Top="33"
-            Width="200"
-            Height="217"
-            MinHeight="50" Background="#FF4F7BBA" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" ItemTemplate="{DynamicResource DataTemplate1}" 
-          />
-    </Canvas>
+    <StackPanel Background="#333333" Height="270" Width="180">
+        <StackPanel
+                Height="40"
+                Orientation="Horizontal">
+            <Button
+                    x:Name="CardTitle"
+                    Width="140"
+                    VerticalAlignment="Stretch"
+                    Background="#333333"
+                    Click="CardTitle_OnClick"
+                    DataContext="GroupTitle"
+                    BorderBrush="{x:Null}"
+                    Style="{DynamicResource CardTitle}" />
+            <Button
+                    x:Name="UpdateButton"
+                    Width="40"
+                    HorizontalAlignment="Left"
+                    Click="ButtonClick_Update"
+                    BorderBrush="{x:Null}"
+                    Style="{DynamicResource Refresh}" />
+        </StackPanel>
+        <StackPanel
+            x:Name="Panel"
+            Height="205"
+            Width="180"
+            VerticalAlignment="Bottom"
+            Orientation="Vertical" />
+    </StackPanel>
 </UserControl>

@@ -131,6 +131,9 @@
     <Compile Include="CustomControls\Tabs\StudentPackTab.xaml.cs">
       <DependentUpon>StudentPackTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\UserResPrewiew.xaml.cs">
+      <DependentUpon>UserResPrewiew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
@@ -187,6 +190,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\UserResPrewiew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +213,11 @@
     <Page Include="CustomControls\ForProblemTasks\ProblemPackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
   </ItemGroup>
   <ItemGroup>

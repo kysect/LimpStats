@@ -57,9 +57,13 @@ namespace LimpStats.Client.CustomControls.ForStudents
             }
 
             var studentsData = ProfilePreviewData.GetProfilePreview(_group);
-            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
-
-            StudentList.SelectionChanged += LimpUserStatistic;
+            
+            foreach (var currRes in studentsData)
+            {
+                ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
+            }
+            //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+            //StudentList.SelectionChanged += LimpUserStatistic;
         }
 
         private void AddAnimation()
@@ -92,7 +96,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             Task.Run(() => Update());
         }
-
         private void Update()
         {
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
@@ -102,7 +105,12 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             studentsData = ProfilePreviewData.GetProfilePreview(_group);
 
-            ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+            foreach (var currRes in studentsData)
+            {
+                ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
+            }
+
+            //  ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
             JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
