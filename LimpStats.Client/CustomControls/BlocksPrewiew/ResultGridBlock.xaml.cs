@@ -21,7 +21,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             var table = new DataTable();
 
             table.Columns.Add("Name");
-            foreach (IProblem problem in pack.Problems)
+            foreach (Problem problem in pack.Problems)
             {
                 table.Columns.Add(problem.Title);
             }
@@ -29,7 +29,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             foreach (LimpUser user in users)
             {
                 var data = new List<object> {user.Username};
-                foreach (IProblem problem  in pack.Problems)
+                foreach (Problem problem  in pack.Problems)
                 {
                     data.Add(problem.GetUserResult(user));
                 }

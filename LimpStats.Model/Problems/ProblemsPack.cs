@@ -5,13 +5,13 @@ namespace LimpStats.Model.Problems
 {
     public class ProblemsPack
     {
-        public ProblemsPack(string title = null, List<IProblem> problems = null)
+        public ProblemsPack(string title = null, List<Problem> problems = null)
         {
             Title = title;
-            Problems = problems ?? new List<IProblem>();
+            Problems = problems ?? new List<Problem>();
         }
 
-        public List<IProblem> Problems { get; set; }
+        public List<Problem> Problems { get; set; }
         public string Title { get; set; }
 
         public ProblemPackResult GetResults(LimpUser user)

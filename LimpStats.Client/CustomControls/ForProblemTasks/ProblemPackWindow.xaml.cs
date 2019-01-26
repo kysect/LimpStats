@@ -41,7 +41,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 .ToList();
             
 
-            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, EOlympProblem.CreateFromList(taskList)));
+            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, Problem.CreateEOlympFromList(taskList)));
             JsonBackupManager.SaveCardUserList(_group, _groupTitle);
 
             _blockPrewiew.PackListPanel.Children.Add(new ProblemTasksPreview(_blockPrewiew, _group, _packTitle, _navigateService));
