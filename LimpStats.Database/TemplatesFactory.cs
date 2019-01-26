@@ -40,8 +40,8 @@ namespace LimpStats.Database
 
         public static List<ProblemsPack> EOlimpPacks()
         {
-            List<IProblem> firstPackProblems = EOlympProblem.CreateFromList(TaskPackStorage.TasksAGroup);
-            List<IProblem> secondPackProblems = EOlympProblem.CreateFromList(TaskPackStorage.TasksBGroup);
+            List<Problem> firstPackProblems = Problem.CreateEOlympFromList(TaskPackStorage.TasksAGroup);
+            List<Problem> secondPackProblems = Problem.CreateEOlympFromList(TaskPackStorage.TasksBGroup);
             return new List<ProblemsPack>
             {
                 new ProblemsPack("Test pack A", firstPackProblems),
