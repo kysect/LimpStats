@@ -10,7 +10,7 @@
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
     <Grid
-        Background="#FF5DA09D">
+        Background="#666666">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
                 Width="250" />
@@ -19,8 +19,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel
             x:Name="NavigatePanel"
-            Height="500"
-            Background="#FF5DA09D"
+            Height="506"
+            Background="#333333"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Width="205"
@@ -35,7 +35,7 @@
             Width="500"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
-            Background="#FF5DA09D" />
+            Background="#666666" />
     </Grid>
 
 </Window>
