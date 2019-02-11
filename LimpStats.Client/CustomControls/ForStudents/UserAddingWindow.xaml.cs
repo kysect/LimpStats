@@ -1,31 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Core.Parsers;
+using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class UserAddingWindow : Window
     {
-        public string Username;
+        public string Name;
+        public string UsernameEolymp;
+        public string UsernameCodeforces;
+        private List<LimpUser> _users;
 
-        public UserAddingWindow()
+        public UserAddingWindow(List<LimpUser> users)
         {
             InitializeComponent();
+            _users = users;
         }
         
         private void ValidateLogin(object sender, EventArgs e)
         {
-            string username = LoginTextBox.Text;
-            if (Parser.IsUserExist(username))
+            string username = LoginEolympTextBox.Text;
+            if (Parser.IsUserExist(username) && _users.Count(f => f.Username == username) == 0)
             {
+                
                 MessageBox.Show($"{username} добавлен");
-                Username = username;
+                UsernameEolymp = username;
+                UsernameCodeforces = LoginCodeforcesTextBox.Text;
+                Name = NameBox.Text;
                 Close();
             }
             else
             {
-                MessageBox.Show("Неверный логин");
+                MessageBox.Show("Неверный логин или пользователь уже добавлен в группу");
             }
         }
 

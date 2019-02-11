@@ -134,6 +134,7 @@
     <Compile Include="CustomControls\UserResPrewiew.xaml.cs">
       <DependentUpon>UserResPrewiew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domain.cs" />
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />
@@ -290,6 +291,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\iconNavigateClose-04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconFlag-05.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Domains\eolymp-inverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

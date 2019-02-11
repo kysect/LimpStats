@@ -4,9 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="185"
     mc:Ignorable="d">
 
-    <StackPanel Background="#333333" Height="270" Width="180">
+    <StackPanel Height="270" Width="180">
             <StackPanel
                 Height="40"
                 Orientation="Horizontal">
@@ -40,9 +41,8 @@
 
         <StackPanel
             x:Name="Panel"
+            Background="#333333"
             Height="205"
-            Width="180"
-            VerticalAlignment="Bottom"
-            Orientation="Vertical" />
+            Width="180" />
     </StackPanel>
 </UserControl>

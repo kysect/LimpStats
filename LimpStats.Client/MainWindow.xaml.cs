@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
 using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.CustomControls.Tabs;
+using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 
@@ -10,14 +11,21 @@ namespace LimpStats.Client
 {
     public partial class MainWindow : Window, IViewNavigateService
     {
-        private readonly StudentGroupTab _tab;
+        private readonly StudentGroupTab _tabEolymp;
+        private readonly StudentGroupTab _tabCodeforces;
         public MainWindow()
         {
             InitializeComponent();
-            var studentGroupBlock = new StudentGroupBlockPrewiew(this);
-            var studentGroupTab = new StudentGroupTab(studentGroupBlock);
-            OpenView(studentGroupTab);
-            _tab = studentGroupTab;
+            var studentGroupBlockEolymp = new StudentGroupBlockPrewiew(this, Domain.Eolymp);
+            var studentGroupTabEolymp = new StudentGroupTab(studentGroupBlockEolymp);
+            OpenView(studentGroupTabEolymp);
+            _tabEolymp = studentGroupTabEolymp;
+
+            var studentGroupBlockCodeforces = new StudentGroupBlockPrewiew(this, Domain.Codeforces);
+            var studentGroupTabCodeforces = new StudentGroupTab(studentGroupBlockCodeforces);
+            OpenView(studentGroupTabCodeforces);
+            _tabCodeforces = studentGroupTabCodeforces;
+
         }
 
         public void RemoveButton(NavigateButton button)
@@ -40,9 +48,13 @@ namespace LimpStats.Client
             MainWindowContent.Content = view.Content;
         }
 
-        private void ButtonHome_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonHome_OnClickEolymp(object sender, RoutedEventArgs e)
         {
-            OpenView(_tab);
+            OpenView(_tabEolymp);
+        }
+        private void ButtonHome_OnClickCodeforces(object sender, RoutedEventArgs e)
+        {
+            OpenView(_tabCodeforces);
         }
 
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)

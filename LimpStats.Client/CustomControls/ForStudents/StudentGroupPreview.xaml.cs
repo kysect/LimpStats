@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,10 +24,12 @@ namespace LimpStats.Client.CustomControls.ForStudents
         //TODO: fix typo
         private readonly StudentGroupBlockPrewiew _studentGroupBlockPrewiew;
         private readonly string _studentGroupTitle;
+        private readonly Domain _domain;
 
-        public StudentGroupPreview(StudentGroupBlockPrewiew studentGroupBlockPrewiew, string studentGroupTitle, IViewNavigateService navigateService)
+        public StudentGroupPreview(StudentGroupBlockPrewiew studentGroupBlockPrewiew, string studentGroupTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
+            _domain = domain;
 
             InitializeComponent();
 
@@ -37,9 +40,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             JsonBackupManager.SaveCardName(studentGroupTitle);
             _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
-
-       
-            AddAnimation();
 
             //TODO: temp solution, remove
             if (_group == null)
@@ -56,35 +56,21 @@ namespace LimpStats.Client.CustomControls.ForStudents
                 };
             }
 
+            Task.Run(() => k());
+
+            //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+            //StudentList.SelectionChanged += LimpUserStatistic;
+        }
+        private void k()
+        {
             var studentsData = ProfilePreviewData.GetProfilePreview(_group);
-            
+
             foreach (var currRes in studentsData)
             {
                 ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
             }
-            //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
-            //StudentList.SelectionChanged += LimpUserStatistic;
         }
-
-        private void AddAnimation()
-        {
-            var buttonAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 100,
-                Duration = TimeSpan.FromSeconds(50)
-            };
-
-            var moveAnimation = new ThicknessAnimation
-            {
-                From = new Thickness(Margin.Left + 10, Margin.Top, Margin.Right - 10, Margin.Bottom),
-                To = Margin,
-                Duration = TimeSpan.FromSeconds(0.5)
-            };
-
-            BeginAnimation(OpacityProperty, buttonAnimation);
-            BeginAnimation(MarginProperty, moveAnimation);
-        }
+        
 
         private void ButtonClick_Update(object sender, RoutedEventArgs e)
         {
@@ -105,6 +91,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             studentsData = ProfilePreviewData.GetProfilePreview(_group);
 
+            ThreadingTools.ExecuteUiThread(() => Panel.Children.Clear());
             foreach (var currRes in studentsData)
             {
                 ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
@@ -128,11 +115,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var userAdding = new UserAddingWindow();
+            var userAdding = new UserAddingWindow(_group.Users);
             userAdding.ShowDialog();
 
-            _group.Users.Add(new LimpUser(userAdding.Username));
-            JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
+                _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
+                JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
@@ -143,7 +130,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var studentPackBlock = new StudentPackBlockPrewiew(_group, _studentGroupTitle, _navigateService);
+            var studentPackBlock = new StudentPackBlockPrewiew(_group, _studentGroupTitle, _navigateService, _domain);
             var studentPackTab = new StudentPackTab(studentPackBlock);
 
             _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);

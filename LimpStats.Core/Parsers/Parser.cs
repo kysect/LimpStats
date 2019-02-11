@@ -37,7 +37,7 @@ namespace LimpStats.Core.Parsers
         public static void LoadProfileData(LimpUser user)
         {
             var client = new HtmlWeb();
-            string link = DomainUrl + $"/users/{user.Username}/punchcard";
+            string link = DomainUrl + $"/users/{user.EOlympLogin}/punchcard";
 
             Dictionary<int, int> userResult = client.Load(link)
                 .GetElementbyId("punch-card")

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
+using LimpStats.Client.Models;
 
 namespace LimpStats.Client.Tools
 {
