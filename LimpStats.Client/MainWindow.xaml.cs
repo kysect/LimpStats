@@ -16,12 +16,12 @@ namespace LimpStats.Client
         public MainWindow()
         {
             InitializeComponent();
-            var studentGroupBlockEolymp = new StudentGroupBlockPrewiew(this, Domain.Eolymp);
+            var studentGroupBlockEolymp = new StudentGroupBlockPreview(this, Domain.Eolymp);
             var studentGroupTabEolymp = new StudentGroupTab(studentGroupBlockEolymp);
             OpenView(studentGroupTabEolymp);
             _tabEolymp = studentGroupTabEolymp;
 
-            var studentGroupBlockCodeforces = new StudentGroupBlockPrewiew(this, Domain.Codeforces);
+            var studentGroupBlockCodeforces = new StudentGroupBlockPreview(this, Domain.Codeforces);
             var studentGroupTabCodeforces = new StudentGroupTab(studentGroupBlockCodeforces);
             OpenView(studentGroupTabCodeforces);
             _tabCodeforces = studentGroupTabCodeforces;
