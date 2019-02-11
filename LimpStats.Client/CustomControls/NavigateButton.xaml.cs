@@ -17,6 +17,7 @@ namespace LimpStats.Client.CustomControls
             InitializeComponent();
             if (block is ResultGridBlock)
             {
+                //TODO: а так точно должно быть? о_О
                 icon.Source = new ImageSourceConverter().ConvertFromString("pack://application:,,,/LimpStats.Client;component/icons/iconTable-03.png") as ImageSource;      
             }
             _navigateService = navigateService;

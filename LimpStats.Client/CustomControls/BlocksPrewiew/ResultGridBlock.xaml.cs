@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 
+//TODO: Чекай неймспейсы, чтобы совпадали с папками
 namespace LimpStats.Client.CustomControls.Blocks
 {
     public partial class ResultGridBlock : UserControl
@@ -20,6 +21,7 @@ namespace LimpStats.Client.CustomControls.Blocks
         {
             var table = new DataTable();
 
+            //TODO: Нужно будет потом все подобные строки вынести отдельно, чтобы изменять можно было нормально
             table.Columns.Add("Name");
             foreach (Problem problem in pack.Problems)
             {

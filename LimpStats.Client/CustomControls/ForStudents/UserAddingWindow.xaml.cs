@@ -24,6 +24,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void ValidateLogin(object sender, EventArgs e)
         {
             string username = LoginEolympTextBox.Text;
+            //TODO: проверка существования codeforces-аккаунта
             if (Parser.IsUserExist(username) && _users.Count(f => f.Username == username) == 0)
             {
                 

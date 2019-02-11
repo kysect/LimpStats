@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForStudents;
@@ -8,18 +9,19 @@ using LimpStats.Database;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
-    public partial class StudentGroupBlockPrewiew : UserControl
+    public partial class StudentGroupBlockPreview : UserControl
     {
         private readonly IViewNavigateService _navigateService;
         private readonly Domain _domain;
-        public StudentGroupBlockPrewiew(IViewNavigateService navigateService, Domain domain)
+        public StudentGroupBlockPreview(IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
             _domain = domain;
 
             InitializeComponent();
-            var cards = JsonBackupManager.LoadCardName();
-            foreach (var card in cards)
+
+            List<string> cards = JsonBackupManager.LoadCardName();
+            foreach (string card in cards)
             {
                 JsonBackupManager.LoadCardUserList(card);
                 GroupListPanel.Children.Add(new StudentGroupPreview(this, card, _navigateService, _domain));

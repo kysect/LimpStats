@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
@@ -9,13 +10,15 @@ using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.Blocks
 {
-    public partial class StudentPackBlockPrewiew : UserControl
+    public partial class StudentPackBlockPreview : UserControl
     {
+        //TODO: Возможно, лучше использовать название _group или что-то такое
+        //Когда я увидел users, я подумал, что это List<User>
         private readonly UserGroup _users;
         private readonly string _groupTitle;
         private readonly IViewNavigateService _navigateService;
         private readonly Domain _domain;
-        public StudentPackBlockPrewiew(UserGroup users, string groupTitle, IViewNavigateService navigateService, Domain domain)
+        public StudentPackBlockPreview(UserGroup users, string groupTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
             _domain = domain;
@@ -34,6 +37,8 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
+            //TODO: Use power(linq), Luke
+            //if (_users.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))
             foreach (ProblemsPack pack in _users.ProblemsPacks)
             {
                 if (pack.Title == PackTitleInput.Text)
@@ -46,6 +51,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             packWindow.Show();
         }
 
+        //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах
         private void PackTitleInput_OnGotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;

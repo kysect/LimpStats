@@ -22,10 +22,10 @@ namespace LimpStats.Client.CustomControls.Tabs
     public partial class StudentPackTab : UserControl
     {
 
-        public StudentPackTab(StudentPackBlockPrewiew blockPrewiew)
+        public StudentPackTab(StudentPackBlockPreview blockPreview)
         {
             InitializeComponent();
-            StudentBlockPanel.Children.Add(blockPrewiew);
+            StudentBlockPanel.Children.Add(blockPreview);
         }
 
         private void Show_StudentPackBlock_Prewiew(object sender, RoutedEventArgs e)

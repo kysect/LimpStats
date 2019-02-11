@@ -17,15 +17,15 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private readonly UserGroup _group;
         //TODO: fix type
-        private readonly StudentPackBlockPrewiew _studentPackBlockPrewiew;
+        private readonly StudentPackBlockPreview _studentPackBlockPreview;
 
-        public ProblemTasksPreview(StudentPackBlockPrewiew studentPackBlockPrewiew, UserGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(StudentPackBlockPreview studentPackBlockPreview, UserGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
             InitializeComponent();
 
-            _studentPackBlockPrewiew = studentPackBlockPrewiew;
+            _studentPackBlockPreview = studentPackBlockPreview;
             _group = users;
             PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
@@ -82,6 +82,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
         }
 
+        //TODO: не забывай удалять методы, которые не юзаются, если они не нужны
         private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 1)
@@ -97,7 +98,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             //TODO: check this
-            _studentPackBlockPrewiew.PackListPanel.Children.Remove(this);
+            _studentPackBlockPreview.PackListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)

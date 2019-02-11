@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using LimpStats.Client.CustomControls.Blocks;
 using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Models;
@@ -22,11 +19,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private readonly UserGroup _group;
         //TODO: fix typo
-        private readonly StudentGroupBlockPrewiew _studentGroupBlockPrewiew;
+        private readonly StudentGroupBlockPreview _studentGroupBlockPreview;
         private readonly string _studentGroupTitle;
         private readonly Domain _domain;
 
-        public StudentGroupPreview(StudentGroupBlockPrewiew studentGroupBlockPrewiew, string studentGroupTitle, IViewNavigateService navigateService, Domain domain)
+        public StudentGroupPreview(StudentGroupBlockPreview studentGroupBlockPreview, string studentGroupTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
             _domain = domain;
@@ -36,7 +33,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             _studentGroupTitle = studentGroupTitle;
 
             CardTitle.DataContext = _studentGroupTitle;
-            _studentGroupBlockPrewiew = studentGroupBlockPrewiew;
+            _studentGroupBlockPreview = studentGroupBlockPreview;
 
             JsonBackupManager.SaveCardName(studentGroupTitle);
             _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
@@ -56,6 +53,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
                 };
             }
 
+            //TODO: Что по неймингу?)
             Task.Run(() => k());
 
             //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
@@ -125,12 +123,12 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void ButtonDeleteCard(object sender, RoutedEventArgs e)
         {
             //TODO: check this
-            _studentGroupBlockPrewiew.GroupListPanel.Children.Remove(this);
+            _studentGroupBlockPreview.GroupListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var studentPackBlock = new StudentPackBlockPrewiew(_group, _studentGroupTitle, _navigateService, _domain);
+            var studentPackBlock = new StudentPackBlockPreview(_group, _studentGroupTitle, _navigateService, _domain);
             var studentPackTab = new StudentPackTab(studentPackBlock);
 
             _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
