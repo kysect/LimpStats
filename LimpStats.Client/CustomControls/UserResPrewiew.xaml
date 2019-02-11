@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="180">
-    <Canvas>
+    <StackPanel Orientation="Horizontal">
         <Button x:Name="Title"
                 Height="30"
                 Width="120"
@@ -28,5 +28,5 @@
                 FontSize="18"
                 Canvas.Left="123"
                 BorderBrush="{x:Null}" />
-    </Canvas>
+    </StackPanel>
 </UserControl>

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
+using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
@@ -13,11 +14,11 @@ namespace LimpStats.Client.CustomControls.Blocks
         private readonly UserGroup _users;
         private readonly string _groupTitle;
         private readonly IViewNavigateService _navigateService;
-
-        public StudentPackBlockPrewiew(UserGroup users, string groupTitle, IViewNavigateService navigateService)
+        private readonly Domain _domain;
+        public StudentPackBlockPrewiew(UserGroup users, string groupTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
-
+            _domain = domain;
             InitializeComponent();
             _users = users;
             _groupTitle = groupTitle;
@@ -41,7 +42,7 @@ namespace LimpStats.Client.CustomControls.Blocks
                     return;
                 }
             }
-            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _users, this, _groupTitle, _navigateService);
+            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _users, this, _groupTitle, _navigateService, _domain);
             packWindow.Show();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
@@ -17,11 +18,11 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly UserGroup _group;
         private readonly string _packTitle;
         private readonly string _groupTitle;
-
-        public ProblemPackWindow(string packTitle, UserGroup group, StudentPackBlockPrewiew blockPrewiew, string groupTitle, IViewNavigateService navigateService)
+        private readonly Domain _domain;
+        public ProblemPackWindow(string packTitle, UserGroup group, StudentPackBlockPrewiew blockPrewiew, string groupTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
-
+            _domain = domain;
             _blockPrewiew = blockPrewiew;
             _group = group;
             _packTitle = packTitle;

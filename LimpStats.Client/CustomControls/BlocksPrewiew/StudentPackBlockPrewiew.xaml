@@ -45,8 +45,6 @@
                 VerticalScrollBarVisibility="Disabled">
                 <StackPanel
                     x:Name="PackListPanel"
-                    MinWidth="300"
-                    MinHeight="400"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" />

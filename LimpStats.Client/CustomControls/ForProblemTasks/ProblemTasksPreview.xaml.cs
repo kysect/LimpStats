@@ -73,6 +73,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
 
+            ThreadingTools.ExecuteUiThread(() => Panel.Children.Clear());
+
             foreach (var currRes in studentsData)
             {
                 ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
