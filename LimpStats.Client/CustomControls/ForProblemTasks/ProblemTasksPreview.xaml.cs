@@ -2,12 +2,14 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using ResultGridBlock = LimpStats.Client.CustomControls.BlocksPrewiew.ResultGridBlock;
+using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
@@ -16,16 +18,14 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly IViewNavigateService _navigateService;
 
         private readonly UserGroup _group;
-        //TODO: fix type
-        private readonly StudentPackBlockPreview _studentPackBlockPreview;
+       
 
-        public ProblemTasksPreview(StudentPackBlockPreview studentPackBlockPreview, UserGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(UserGroup users, string packTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
             InitializeComponent();
 
-            _studentPackBlockPreview = studentPackBlockPreview;
             _group = users;
             PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
@@ -80,25 +80,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
             }
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
-        }
-
-        //TODO: не забывай удалять методы, которые не юзаются, если они не нужны
-        private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count == 1)
-            {
-                if (e.AddedItems[0] is ProfilePreviewData user)
-                {
-                    MessageBox.Show($"{user.Username} has {user.Points} points.");
-                }
-            }
-        }
-
-
-        private void ButtonDeleteCard(object sender, RoutedEventArgs e)
-        {
-            //TODO: check this
-            _studentPackBlockPreview.PackListPanel.Children.Remove(this);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)

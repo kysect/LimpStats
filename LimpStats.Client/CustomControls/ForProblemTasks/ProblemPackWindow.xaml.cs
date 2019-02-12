@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
@@ -14,22 +15,16 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     {
         private readonly IViewNavigateService _navigateService;
 
-        //TODO: fix typo
-        private readonly StudentPackBlockPreview _blockPreview;
-        private readonly UserGroup _group;
-        private readonly string _packTitle;
-        private readonly string _groupTitle;
-        private readonly Domain _domain;
-        public ProblemPackWindow(string packTitle, UserGroup group, StudentPackBlockPreview blockPreview, string groupTitle, IViewNavigateService navigateService, Domain domain)
+        public readonly UserGroup _group;
+        public readonly string _packTitle;
+        public readonly Domain _domain;
+        public ProblemPackWindow(string packTitle, UserGroup group, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
             _domain = domain;
-            _blockPreview = blockPreview;
+
             _group = group;
             _packTitle = packTitle;
-            //TODO: мб все груптайтлы вынести в StudentGroup ибо она везде используется
-            //TODO: все еще не пофиксил
-            _groupTitle = groupTitle;
             InitializeComponent();
             Panel.Children.Add(new ProblemTaskPreview(this, "A"));
         }
@@ -45,9 +40,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             
 
             _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, Problem.CreateEOlympFromList(taskList)));
-            JsonBackupManager.SaveCardUserList(_group, _groupTitle);
+            JsonBackupManager.SaveCardUserList(_group, _group.Title);
 
-            _blockPreview.PackListPanel.Children.Add(new ProblemTasksPreview(_blockPreview, _group, _packTitle, _navigateService));
+           
             PanelViewer.ScrollToRightEnd();
             Close();
         }

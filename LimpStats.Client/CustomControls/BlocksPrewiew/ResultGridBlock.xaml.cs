@@ -4,8 +4,7 @@ using System.Windows.Controls;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 
-//TODO: Чекай неймспейсы, чтобы совпадали с папками
-namespace LimpStats.Client.CustomControls.Blocks
+namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
     public partial class ResultGridBlock : UserControl
     {

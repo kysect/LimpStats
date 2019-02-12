@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
+using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.Tabs
 {

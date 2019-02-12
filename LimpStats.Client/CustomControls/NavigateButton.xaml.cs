@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.Tools;
+using ResultGridBlock = LimpStats.Client.CustomControls.BlocksPrewiew.ResultGridBlock;
 
 namespace LimpStats.Client.CustomControls
 {

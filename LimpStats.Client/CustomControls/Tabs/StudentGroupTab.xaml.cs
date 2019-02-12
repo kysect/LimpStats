@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
+using StudentGroupBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentGroupBlockPreview;
 
 namespace LimpStats.Client.CustomControls.Tabs
 {

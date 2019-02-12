@@ -1,11 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls;
-using LimpStats.Client.CustomControls.Blocks;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
+using StudentGroupBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentGroupBlockPreview;
 
 namespace LimpStats.Client
 {
