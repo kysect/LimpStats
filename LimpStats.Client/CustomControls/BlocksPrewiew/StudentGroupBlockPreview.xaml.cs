@@ -7,7 +7,7 @@ using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
 
-namespace LimpStats.Client.CustomControls.Blocks
+namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
     public partial class StudentGroupBlockPreview : UserControl
     {
@@ -24,7 +24,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             foreach (string card in cards)
             {
                 JsonBackupManager.LoadCardUserList(card);
-                GroupListPanel.Children.Add(new StudentGroupPreview(this, card, _navigateService, _domain));
+                GroupListPanel.Children.Add(new StudentGroupPreview(card, _navigateService, _domain));
             }
 
         }
@@ -38,7 +38,7 @@ namespace LimpStats.Client.CustomControls.Blocks
             }
             else
             {
-                GroupListPanel.Children.Add(new StudentGroupPreview(this, FilePath.Text, _navigateService, _domain));
+                GroupListPanel.Children.Add(new StudentGroupPreview(FilePath.Text, _navigateService, _domain));
 
                 FilePath.Text = string.Empty;
             }

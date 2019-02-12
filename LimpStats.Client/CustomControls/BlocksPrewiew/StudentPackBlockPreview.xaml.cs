@@ -8,27 +8,23 @@ using LimpStats.Client.Tools;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 
-namespace LimpStats.Client.CustomControls.Blocks
+namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
     public partial class StudentPackBlockPreview : UserControl
     {
-        //TODO: Возможно, лучше использовать название _group или что-то такое
-        //Когда я увидел users, я подумал, что это List<User>
-        private readonly UserGroup _users;
-        private readonly string _groupTitle;
+        private readonly UserGroup _userGroup;
         private readonly IViewNavigateService _navigateService;
         private readonly Domain _domain;
-        public StudentPackBlockPreview(UserGroup users, string groupTitle, IViewNavigateService navigateService, Domain domain)
+        public StudentPackBlockPreview(UserGroup userGroup, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
             _domain = domain;
             InitializeComponent();
-            _users = users;
-            _groupTitle = groupTitle;
+            _userGroup = userGroup;
 
-            foreach (ProblemsPack pack in users.ProblemsPacks)
+            foreach (ProblemsPack pack in userGroup.ProblemsPacks)
             {
-                var taskPreview = new ProblemTasksPreview(this, _users, pack.Title, _navigateService);
+                var taskPreview = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService);
                 PackListPanel.Children.Add(taskPreview);
                 PanelViewer.ScrollToRightEnd();
             }
@@ -37,18 +33,14 @@ namespace LimpStats.Client.CustomControls.Blocks
 
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
-            //TODO: Use power(linq), Luke
-            //if (_users.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))
-            foreach (ProblemsPack pack in _users.ProblemsPacks)
-            {
-                if (pack.Title == PackTitleInput.Text)
+            if (_userGroup.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))
                 {
                     MessageBox.Show($"The name of group must be unique!");
                     return;
                 }
-            }
-            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _users, this, _groupTitle, _navigateService, _domain);
+            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService, _domain);
             packWindow.Show();
+            PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService));
         }
 
         //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах

@@ -70,15 +70,13 @@ namespace LimpStats.Core.Parsers
         {
             string url = DomainUrl + $"/problems/{number}";
             var web = new HtmlWeb();
-            HtmlDocument doc = web.Load(url);
+            HtmlNode doc = web.Load(url)
+                .DocumentNode
+                .SelectSingleNode("//*[contains(@class,'eo-paper__content')]"); ;
 
-            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//*[contains(@class,'eo-title__header')]"))
-            {
-                //TODO: wtf
-                if(node.ChildNodes[0].InnerHtml != "Задачи")
-                    return node.ChildNodes[0].InnerHtml;
-            }
-            throw new ParserException($"Task with id={number} wasn't found");
+            return doc.ChildNodes[0].InnerHtml ?? throw new ParserException($"Task with id={number} wasn't found");
+            
+            
         }
     }
 }
