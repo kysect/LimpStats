@@ -38,9 +38,9 @@ namespace LimpStats.Client
             }
         }
 
-        public void AddToViewList(string viewTitle, UserControl view)
+        public void AddToViewList(string viewTitle, UserControl view, Domain domain)
         {
-            NavigatePanel.Children.Add(new NavigateButton(viewTitle, this, view));
+            NavigatePanel.Children.Add(new NavigateButton(viewTitle, this, view, domain));
         }
 
         public void OpenView(UserControl view)

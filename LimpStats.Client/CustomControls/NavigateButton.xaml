@@ -26,21 +26,6 @@
             Width="30"
             HorizontalAlignment="Left"
             Source="/LimpStats.Client;component/icons/iconPack-02.png" />
-        <StackPanel Canvas.Left="130" >
-            <Image
-            Stretch="Fill"
-            Height="14"
-            Width="8"
-            HorizontalAlignment="Left"
-            Source="/LimpStats.Client;component/icons/iconFlag-05.png" />
-            <StackPanel.ToolTip>
-                <ToolTip Background="#268c8f">
-                    <StackPanel >
-                        <TextBlock Text="E-olymp" />
-                        <Image Source="/LimpStats.Client;component/Domains/eolymp-inverse.png" />
-                    </StackPanel>
-                </ToolTip>
-            </StackPanel.ToolTip>
-        </StackPanel>
+        <Button  x:Name="Flag"  Canvas.Left="130" />
     </Canvas>
 </UserControl>

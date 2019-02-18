@@ -24,7 +24,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
 
             foreach (ProblemsPack pack in userGroup.ProblemsPacks)
             {
-                var taskPreview = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService);
+                var taskPreview = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService, _domain);
                 PackListPanel.Children.Add(taskPreview);
                 PanelViewer.ScrollToRightEnd();
             }
@@ -40,7 +40,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
                 }
             var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService, _domain);
             packWindow.Show();
-            PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService));
+            PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService, _domain));
         }
 
         //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах

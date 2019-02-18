@@ -124,7 +124,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             var studentPackBlock = new StudentPackBlockPreview(_group, _navigateService, _domain);
             var studentPackTab = new StudentPackTab(studentPackBlock);
 
-            _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
+            _navigateService.AddToViewList(_studentGroupTitle, studentPackTab, _domain);
             _navigateService.OpenView(studentPackTab);
         }
     }

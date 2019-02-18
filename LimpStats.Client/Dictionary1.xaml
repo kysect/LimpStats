@@ -4,13 +4,71 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    
 
-            <Style x:Key="NavigateStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+
+
+
+    <Style x:Key="ButtonFlagEolympStyle" TargetType="{x:Type Button}">
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Height="14" Width="8">
+                        <Image
+                            Stretch="Fill"
+                            Height="14"
+                            Width="8"
+                            HorizontalAlignment="Left"
+                            Source="/LimpStats.Client;component/icons/iconFlag-05.png" />
+                    </Grid>
+                </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip Background="#268c8f">
+                    <StackPanel >
+                        <TextBlock Text="E-olymp" />
+                        <Image Source="/LimpStats.Client;component/Domains/eolymp-inverse.png" />
+                    </StackPanel>
+                </ToolTip>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonFlagCodeforcesStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Height="14" Width="8">
+                        <Image
+                            Stretch="Fill"
+                            Height="14"
+                            Width="8"
+                            HorizontalAlignment="Left"
+                            Source="/LimpStats.Client;component/icons/iconFlagCodeforces-06.png" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip Background="White">
+                    <StackPanel >
+                        <TextBlock Text="Codeforces" />
+                        <Image  
+                            Stretch="Fill"
+                            Height="31"
+                            Width="291"
+                            HorizontalAlignment="Left"
+                            Source="/LimpStats.Client;component/Domains/codeforceslogo.png" />
+                    </StackPanel>
+                </ToolTip>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NavigateStyle" TargetType="{x:Type Button}">
+       <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -42,11 +100,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+
     <Style x:Key="NavigateCloseStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

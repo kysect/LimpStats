@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using LimpStats.Client.CustomControls.BlocksPrewiew;
+using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using ResultGridBlock = LimpStats.Client.CustomControls.BlocksPrewiew.ResultGridBlock;
 
@@ -12,7 +13,7 @@ namespace LimpStats.Client.CustomControls
         private readonly IViewNavigateService _navigateService;
         public readonly UserControl CurrentControl;
 
-        public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block)
+        public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block, Domain domain)
         {
          
             InitializeComponent();
@@ -20,6 +21,11 @@ namespace LimpStats.Client.CustomControls
             {
                 //TODO: а так точно должно быть? о_О
                 icon.Source = new ImageSourceConverter().ConvertFromString("pack://application:,,,/LimpStats.Client;component/icons/iconTable-03.png") as ImageSource;      
+            }
+            switch(domain)
+            {
+                case Domain.Eolymp: Flag.Style = FindResource("ButtonFlagEolympStyle") as Style; break;
+                case Domain.Codeforces: Flag.Style = FindResource("ButtonFlagCodeforcesStyle") as Style; break;
             }
             _navigateService = navigateService;
             CurrentControl = block;
