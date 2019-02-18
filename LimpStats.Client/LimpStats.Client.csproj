@@ -298,5 +298,11 @@
   <ItemGroup>
     <Resource Include="Domains\eolymp-inverse.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\iconFlagCodeforces-06.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Domains\codeforceslogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

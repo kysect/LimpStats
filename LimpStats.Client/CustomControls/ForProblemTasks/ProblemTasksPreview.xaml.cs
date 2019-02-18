@@ -18,14 +18,15 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private readonly IViewNavigateService _navigateService;
 
         private readonly UserGroup _group;
-       
+       private readonly Domain _domain;
 
-        public ProblemTasksPreview(UserGroup users, string packTitle, IViewNavigateService navigateService)
+        public ProblemTasksPreview(UserGroup users, string packTitle, IViewNavigateService navigateService, Domain domain)
         {
             _navigateService = navigateService;
 
             InitializeComponent();
 
+            _domain = domain;
             _group = users;
             PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
@@ -88,7 +89,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             ProblemsPack pack = _group.ProblemsPacks.Find(p => p.Title == packTitle);
             var resultGridBlock = new ResultGridBlock(_group.Users, pack);
 
-            _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock);
+            _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock, _domain);
             _navigateService.OpenView(resultGridBlock);
 
         }
