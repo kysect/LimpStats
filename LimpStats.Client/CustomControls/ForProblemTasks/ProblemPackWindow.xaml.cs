@@ -37,12 +37,14 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 .Where(text => text.TaskNumberInput.Text != "")
                 .Select(task => int.Parse(task.TaskNumberInput.Text))
                 .ToList();
-            
 
-            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, Problem.CreateEOlympFromList(taskList)));
-            JsonBackupManager.SaveCardUserList(_group, _group.Title);
+            var problempack = Problem.CreateEOlympFromList(taskList);
+            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, problempack));
+            //TODO:
+            DataProvider.ProblemsPackRepository.Create(_group.Title, new ProblemsPack(_packTitle, problempack));
+            //JsonBackupManager.SaveCardUserList(_group, _group.Title);
 
-           
+
             PanelViewer.ScrollToRightEnd();
             Close();
         }

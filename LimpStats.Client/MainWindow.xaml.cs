@@ -60,7 +60,8 @@ namespace LimpStats.Client
 
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)
         {
-            JsonBackupManager.ClearCache();
+            DataProvider.ClearCache();
+         //   JsonBackupManager.ClearCache();
         }
     }
 }

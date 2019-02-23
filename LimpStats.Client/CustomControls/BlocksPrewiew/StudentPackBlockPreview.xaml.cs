@@ -5,6 +5,7 @@ using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
+using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 
@@ -40,7 +41,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
                 }
             var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService, _domain);
             packWindow.Show();
-            PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService, _domain));
+           PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService, _domain));
         }
 
         //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах

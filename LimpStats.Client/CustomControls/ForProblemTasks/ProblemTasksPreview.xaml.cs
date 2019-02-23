@@ -6,6 +6,7 @@ using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
+using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 using ResultGridBlock = LimpStats.Client.CustomControls.BlocksPrewiew.ResultGridBlock;
@@ -41,13 +42,18 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             //        }
             //    };
             //}
-            var studentsData = ProfilePreviewData.GetProfilePackPreview(_group, packTitle);
 
-            foreach (var currRes in studentsData)
+
+            if (_group.ProblemsPacks.Capacity != 0)
             {
-                ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
-            }
-            // ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
+                var studentsData = ProfilePreviewData.GetProfilePackPreview(_group, packTitle);
+
+                foreach (var currRes in studentsData)
+                {
+                    ThreadingTools.ExecuteUiThread(() =>
+                        Panel.Children.Add(new UserResPrewiew(currRes.Username, currRes.Points)));
+                }
+            }// ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
 
         }
 

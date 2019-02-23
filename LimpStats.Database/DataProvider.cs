@@ -12,5 +12,10 @@ namespace LimpStats.Database
 
         public static UserGroupRepository UserGroupRepository { get; }
         public static ProblemsPackRepository ProblemsPackRepository { get; }
+
+        public static void ClearCache()
+        {
+            UserGroupRepository.DeleteAll();
+        }
     }
 }
