@@ -19,20 +19,23 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             _domain = domain;
 
             InitializeComponent();
-
-            List<string> cards = JsonBackupManager.LoadCardName();
-            foreach (string card in cards)
+            
+            //TODO:
+            var groups = DataProvider.UserGroupRepository.ReadAll();
+            //List<string> cards = JsonBackupManager.LoadCardName();
+            foreach (var group in groups)
             {
-                JsonBackupManager.LoadCardUserList(card);
-                GroupListPanel.Children.Add(new StudentGroupPreview(card, _navigateService, _domain));
+                GroupListPanel.Children.Add(new StudentGroupPreview(group.Title, _navigateService, _domain));
             }
 
         }
 
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
-            var cards = JsonBackupManager.LoadCardName();
-            if (cards.Contains(FilePath.Text))
+            //TODO:
+            var group = DataProvider.UserGroupRepository.Read(FilePath.Text);
+            //var cards = JsonBackupManager.LoadCardName();
+            if (group != null)
             {
                 MessageBox.Show($"The name of group must be unique!");
             }

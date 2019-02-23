@@ -42,7 +42,9 @@ namespace LimpParse.TelegramBot
                 _flag = false;
                 string msg = "Ежедневное обновление списка \n" + GenerateMessage(_group.Users);
                 Bot.SendTextMessageAsync(-1001356694472, msg, ParseMode.Html);
-                JsonBackupManager.SaveToJson(_group.Users);
+                //TODO:
+                DataProvider.UserGroupRepository.Create(_group);
+                //JsonBackupManager.SaveToJson(_group.Users);
             }
 
             if (e.Message.Text == "/getinfo")
@@ -124,6 +126,7 @@ namespace LimpParse.TelegramBot
 
         private static string GenerateDayResults(LimpUser user)
         {
+            
             List<LimpUser> list = JsonBackupManager.LoadFromJson();
             LimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
 

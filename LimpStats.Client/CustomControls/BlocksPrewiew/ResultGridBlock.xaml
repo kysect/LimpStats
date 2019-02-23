@@ -8,6 +8,7 @@
     <Canvas Margin="0,0,-315,0">
         <DataGrid 
             x:Name="ResGrid"
+            Style="{DynamicResource ResGridStyle}"
             Height="450"
             Width="613"
             AutoGenerateColumns="True" />

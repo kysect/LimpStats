@@ -33,15 +33,19 @@ namespace LimpStats.Client.CustomControls.ForStudents
             _studentGroupTitle = studentGroupTitle;
 
             CardTitle.DataContext = _studentGroupTitle;
+            //TODO:
+            DataProvider.UserGroupRepository.Create(new UserGroup(studentGroupTitle));
+            DataProvider.UserGroupRepository.Read(studentGroupTitle);
 
-            JsonBackupManager.SaveCardName(studentGroupTitle);
-            _group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
+            //JsonBackupManager.SaveCardName(studentGroupTitle);
+            //_group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
 
             //TODO: temp solution, remove
             if (_group == null)
             {
                 _group = new UserGroup
                 {
+                    Title = studentGroupTitle,
                     Users = new List<LimpUser>(),
                     ProblemsPacks = new List<ProblemsPack>
                     {
@@ -96,7 +100,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             //  ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
-            JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
+
+            //TODO:
+            DataProvider.UserGroupRepository.Update(_group);
+            //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)
@@ -116,7 +123,9 @@ namespace LimpStats.Client.CustomControls.ForStudents
             userAdding.ShowDialog();
 
                 _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
-                JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
+                //TODO:
+                DataProvider.UserGroupRepository.Update(_group);
+                //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
