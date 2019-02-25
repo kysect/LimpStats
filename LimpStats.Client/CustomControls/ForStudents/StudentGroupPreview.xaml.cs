@@ -34,7 +34,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             CardTitle.DataContext = _studentGroupTitle;
             //TODO:
-            DataProvider.UserGroupRepository.Create(new UserGroup(studentGroupTitle));
             DataProvider.UserGroupRepository.Read(studentGroupTitle);
 
             //JsonBackupManager.SaveCardName(studentGroupTitle);

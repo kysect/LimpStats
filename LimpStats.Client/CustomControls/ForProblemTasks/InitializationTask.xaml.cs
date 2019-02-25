@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -30,8 +31,20 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
                 try
                 {
-                    int n = int.Parse(TaskNumberInput.Text);
-                    TaskName.Content = Parser.GetTitleTask(n);
+                    switch (DomainBox.Text)
+                    {
+                        case "Eolymp":
+                        {
+                            int n = int.Parse(TaskNumberInput.Text);
+                            TaskName.Content = Parser.GetTitleTask(n);
+                        }
+                            break;
+                        case "Codefotces":
+                        {
+                            TaskName.Content = CodeforcesProfileParser.GetTitleName(Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1)), TaskNumberInput.Text[TaskNumberInput.Text.Length-1].ToString());
+                        }
+                            break;
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -40,6 +53,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             }
         }
+        
 
    
     }

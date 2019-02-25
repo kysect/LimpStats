@@ -16,7 +16,7 @@ namespace LimpStats.Core.CodeforcesParser
                 .User
                 .Status(handle)
                 .Result;
-
+           
             response.ThrowExceptionIfFailed();
 
             IEnumerable<Submission> okSubmission = response
@@ -26,7 +26,7 @@ namespace LimpStats.Core.CodeforcesParser
             IEnumerable<string> solvedProblems = okSubmission
                 .Select(s => $"{s.Problem.ContestId}{s.Problem.Index}")
                 .Distinct();
-
+            
             return solvedProblems.ToList();
         }
 
@@ -36,6 +36,22 @@ namespace LimpStats.Core.CodeforcesParser
             {
                 throw new Exception(response.Comment);
             }
+        }
+        public static string GetTitleName(int contestId, string letter)
+        {
+            var contest = CodeforcesClient
+                .Contest;
+                var stand = contest
+                .Standings(contestId);
+            var k = stand
+                .Result;
+                            var m = k
+                .Result
+                .Problems;
+                    var problems = m
+                .Find(e => e.Index == letter)
+                .Name;
+            return problems;
         }
     }
 }
