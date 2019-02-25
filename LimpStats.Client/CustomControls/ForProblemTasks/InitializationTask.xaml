@@ -25,10 +25,17 @@
             Margin="5"
             Focusable="True"
             KeyDown="FilePath_OnKeyDown" />
+        <ComboBox    x:Name="DomainBox"
+                    Width="65"
+                    Height="30">
+            <Label Content="Eolymp"/>
+            <Label Content="Codeforces"/>
+        </ComboBox> 
+        
         <Label
             x:Name="TaskName"
             Height="30"
-            Margin="5"
+            Margin="200,10"
             Foreground="AliceBlue" />
     </StackPanel>
 </UserControl>

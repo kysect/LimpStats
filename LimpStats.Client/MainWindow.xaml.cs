@@ -12,21 +12,14 @@ namespace LimpStats.Client
 {
     public partial class MainWindow : Window, IViewNavigateService
     {
-        private readonly StudentGroupTab _tabEolymp;
-        private readonly StudentGroupTab _tabCodeforces;
+        private readonly StudentGroupTab _tab;
         public MainWindow()
         {
             InitializeComponent();
             var studentGroupBlockEolymp = new StudentGroupBlockPreview(this, Domain.Eolymp);
             var studentGroupTabEolymp = new StudentGroupTab(studentGroupBlockEolymp);
             OpenView(studentGroupTabEolymp);
-            _tabEolymp = studentGroupTabEolymp;
-
-            var studentGroupBlockCodeforces = new StudentGroupBlockPreview(this, Domain.Codeforces);
-            var studentGroupTabCodeforces = new StudentGroupTab(studentGroupBlockCodeforces);
-            OpenView(studentGroupTabCodeforces);
-            _tabCodeforces = studentGroupTabCodeforces;
-
+            _tab = studentGroupTabEolymp;
         }
 
         public void RemoveButton(NavigateButton button)
@@ -51,13 +44,8 @@ namespace LimpStats.Client
 
         private void ButtonHome_OnClickEolymp(object sender, RoutedEventArgs e)
         {
-            OpenView(_tabEolymp);
+            OpenView(_tab);
         }
-        private void ButtonHome_OnClickCodeforces(object sender, RoutedEventArgs e)
-        {
-            OpenView(_tabCodeforces);
-        }
-
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)
         {
             DataProvider.ClearCache();

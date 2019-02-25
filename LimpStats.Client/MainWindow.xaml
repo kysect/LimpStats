@@ -29,8 +29,7 @@
             Grid.Row="0">
             <Button Height="30" Content = "Clear Cache" Click="ButtonCleanCache_OnClick"/>
             <Button Height="30" Style="{DynamicResource MainButtonStyle}" DataContext="Main" Click="ButtonHome_OnClickEolymp" />
-            <Button Height="30" Style="{DynamicResource MainButtonStyle}" DataContext="Main" Click="ButtonHome_OnClickCodeforces" />
-        </StackPanel>
+         </StackPanel>
         <UserControl
             x:Name="MainWindowContent"
             Grid.Column="1"
