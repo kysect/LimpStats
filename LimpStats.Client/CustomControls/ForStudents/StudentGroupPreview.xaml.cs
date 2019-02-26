@@ -10,6 +10,7 @@ using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using Domain = LimpStats.Client.Models.Domain;
 using StudentGroupBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentGroupBlockPreview;
 using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 

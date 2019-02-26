@@ -39,7 +39,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                             TaskName.Content = Parser.GetTitleTask(n);
                         }
                             break;
-                        case "Codefotces":
+                        case "Codeforces":
                         {
                             TaskName.Content = CodeforcesProfileParser.GetTitleName(Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1)), TaskNumberInput.Text[TaskNumberInput.Text.Length-1].ToString());
                         }

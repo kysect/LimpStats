@@ -39,19 +39,14 @@ namespace LimpStats.Core.CodeforcesParser
         }
         public static string GetTitleName(int contestId, string letter)
         {
-            var contest = CodeforcesClient
-                .Contest;
-                var stand = contest
-                .Standings(contestId);
-            var k = stand
-                .Result;
-                            var m = k
-                .Result
-                .Problems;
-                    var problems = m
-                .Find(e => e.Index == letter)
-                .Name;
-            return problems;
+            return      CodeforcesClient
+                        .Contest
+                        .Standings(contestId)
+                        .Result
+                        .Result
+                        .Problems
+                        .Find(e => e.Index == letter)
+                        .Name;
         }
     }
 }

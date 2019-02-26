@@ -8,6 +8,7 @@ using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using Domain = LimpStats.Client.Models.Domain;
 
 namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {

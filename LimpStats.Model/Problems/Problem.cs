@@ -10,19 +10,24 @@ namespace LimpStats.Model.Problems
         {
             
         }
+        public Problem(string title, Domain type)
+        {
+            Title = title;
+            Type = type;
+        }
 
         public string Title { get; set; }
-        public ProblemType Type { get; set; }
+        public Domain Type { get; set; }
 
         public int GetUserResult(LimpUser user)
         {
-            if (Type == ProblemType.EOlymp)
+            if (Type == Domain.EOlymp)
             {
                 user.EOlimpProblemsResult.TryGetValue(int.Parse(Title), out int points);
                 return points;
             }
 
-            if (Type == ProblemType.Codeforces)
+            if (Type == Domain.Codeforces)
             {
                 return user.CodeforcesSubmissions.Contains(Title) ? 100 : 0;
             }
@@ -35,7 +40,7 @@ namespace LimpStats.Model.Problems
             return problemsNumber.Select(num => new Problem()
             {
                 Title = num.ToString(),
-                Type = ProblemType.EOlymp
+                Type = Domain.EOlymp
             }).ToList();
         }
     }
