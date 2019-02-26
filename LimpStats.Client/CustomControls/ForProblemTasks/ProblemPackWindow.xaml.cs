@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using LimpStats.Client.CustomControls.BlocksPrewiew;
@@ -7,6 +8,7 @@ using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using Domain = LimpStats.Client.Models.Domain;
 using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -31,17 +33,37 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void ButtonAddPack(object sender, RoutedEventArgs e)
         {
-            List<int> taskList = Panel
+            List<Problem> problems = new List<Problem>(); 
+             var taskList = Panel
                 .Children
                 .OfType<ProblemTaskPreview>()
-                .Where(text => text.TaskNumberInput.Text != "")
-                .Select(task => int.Parse(task.TaskNumberInput.Text))
-                .ToList();
+                .Where(text => text.TaskNumberInput.Text != "");
+            foreach (var task in taskList)
+            {
+                switch (task.DomainBox.Text)
+                {
+                    case "Eolymp":
+                    {
+                          problems.Add(new Problem(task.TaskNumberInput.Text, Model.Problems.Domain.EOlymp));
+                    }
+                        break;
+                    case "Codeforces":
+                    {
+                        problems.Add(new Problem(task.TaskNumberInput.Text, Model.Problems.Domain.Codeforces));
 
-            var problempack = Problem.CreateEOlympFromList(taskList);
-            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, problempack));
+                        }
+                        break;
+                }
+
+            }
+                //.Select(task => int.Parse(task.TaskNumberInput.Text))
+                //.ToList();
+
+            //var problems = Problem.CreateEOlympFromList(taskList);
+            
+            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, problems));
             //TODO:
-            DataProvider.ProblemsPackRepository.Create(_group.Title, new ProblemsPack(_packTitle, problempack));
+            DataProvider.ProblemsPackRepository.Create(_group.Title, new ProblemsPack(_packTitle, problems));
             //JsonBackupManager.SaveCardUserList(_group, _group.Title);
 
 
