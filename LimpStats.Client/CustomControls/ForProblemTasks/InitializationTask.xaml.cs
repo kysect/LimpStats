@@ -18,7 +18,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             NumberTask.Content = number;
             _problemPackWindow = problemPackWindow;
             _problemPackWindow.PanelViewer.ScrollToEnd();
-            TaskNumberInput.Focus();
         }
 
   

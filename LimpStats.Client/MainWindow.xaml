@@ -37,7 +37,9 @@
             Width="500"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
-            Background="#666666" />
+           
+            />
+        <!-- Background="#666666" -->
     </Grid>
 
 </Window>

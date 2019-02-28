@@ -8,6 +8,7 @@ using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
+using LimpStats.Database.Repositories;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 using Domain = LimpStats.Client.Models.Domain;
@@ -54,6 +55,8 @@ namespace LimpStats.Client.CustomControls.ForStudents
                         //new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
                     }
                 };
+                UserGroupRepository repo = new UserGroupRepository();
+                repo.Create(_group);
             }
 
             //TODO: Что по неймингу?)

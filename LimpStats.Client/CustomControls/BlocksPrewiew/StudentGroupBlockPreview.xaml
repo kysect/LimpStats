@@ -13,17 +13,14 @@
                 Orientation="Horizontal">
                 <Button
                     x:Name="AddList"
-                    Width="70"
-                    Height="35"
+                    Width="150"
+                    Height="40"
                     Click="AddGroupToPanel"
                     Content="Add list"
                     IsEnabled="False"
-                    FontFamily="Century Gothic"
-                    Background="#FF993333"
-                    BorderBrush="#FF993333"
-                    Foreground="#FFE8E8E8"
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    />
                 <TextBox
                     x:Name="FilePath"
                     Width="150"
@@ -31,14 +28,9 @@
                     GotFocus="FilePath_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
                     Text="NameCard"
+                    Foreground="Azure"
                     TextChanged="FilePath_OnTextChanged"
-                    TextWrapping="Wrap"
-                    Background="#FFCEBD89"
-                    FontFamily="Century Gothic"
-                    FontSize="14"
-                    FontStyle="Italic"
-                    Foreground="#FF993333"
-                    Margin="0,0,0,5" />
+                    TextWrapping="Wrap" />
             </StackPanel>
             <StackPanel
                     x:Name="GroupListPanel"                
