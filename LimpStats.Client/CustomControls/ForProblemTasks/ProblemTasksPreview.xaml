@@ -17,8 +17,7 @@
                     Background="#333333"
                     Click="CardTitle_OnClick"
                     DataContext="GroupTitle"
-                    BorderBrush="{x:Null}"
-                    Style="{DynamicResource CardTitle}" />
+                    Style="{DynamicResource CardTitle}" /> 
             <Button
                     x:Name="UpdateButton"
                     Width="40"

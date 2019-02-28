@@ -5,52 +5,6 @@
                     mc:Ignorable="d">
 
 
-    <Style x:Key="ResGridStyle" TargetType="DataGrid">
-        <!-- Make the border and grid lines a little less imposing -->
-        <Setter Property="BorderBrush" Value="DimGray" />
-        <Setter Property="HorizontalGridLinesBrush" Value="DimGray" />
-        <Setter Property="VerticalGridLinesBrush" Value="DimGray" />
-
-        <Setter Property="RowStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <!-- Highlight a grid row as the mouse passes over -->
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="DarkGray" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="CellStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <!-- Highlight selected rows -->
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#ff66ccff" />
-                            <Setter Property="BorderBrush" Value="Transparent" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="#ff66ccff" />
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                    <!-- Add some padding around the contents of a cell -->
-                    <Setter Property="Padding" Value="4,3,4,3" />
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                   
-                </Style>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
     <Style x:Key="ButtonFlagEolympStyle" TargetType="{x:Type Button}">
     <Setter Property="Template">
         <Setter.Value>

@@ -9,20 +9,18 @@
     mc:Ignorable="d">
     <Canvas x:Name="Main" Margin="0,0,504,0">
 
-        <StackPanel Margin="0,0,240,0" VerticalAlignment="Stretch">
+        <StackPanel VerticalAlignment="Stretch">
             <StackPanel
                 Height="40"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
                 <Button
                     Name="AddPack"
-                    Width="70"
-                    Margin="0,0,0,5"
+                    Width="150"
+                    Height="40"
                     Click="OnClick_UpdatePanel"
                     Content="Add pack"
-                    IsEnabled="False"
-                    Background="#FF993333"
-                    FontFamily="Century Gothic" />
+                    IsEnabled="False"/>
                 <TextBox
                     Name="PackTitleInput"
                     Width="150"
@@ -32,11 +30,7 @@
                     Text="Pack name"
                     TextChanged="PackTitleInput_OnTextChanged"
                     TextWrapping="Wrap"
-                    Background="#FFCEBD89"
-                    Foreground="#FF993333"
-                    BorderBrush="#FFCEBD89"
-                    FontFamily="Century Gothic"
-                    Margin="0,0,0,5" />
+                    Foreground="Azure" />
             </StackPanel>
             <ScrollViewer
                 Name="PanelViewer"
