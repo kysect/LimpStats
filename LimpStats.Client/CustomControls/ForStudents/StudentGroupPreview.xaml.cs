@@ -2,17 +2,14 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
-using LimpStats.Database.Repositories;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 using Domain = LimpStats.Client.Models.Domain;
-using StudentGroupBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentGroupBlockPreview;
 using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.ForStudents
@@ -35,11 +32,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             _studentGroupTitle = studentGroupTitle;
 
             CardTitle.DataContext = _studentGroupTitle;
-            //TODO:
-            DataProvider.UserGroupRepository.Read(studentGroupTitle);
-
-            //JsonBackupManager.SaveCardName(studentGroupTitle);
-            //_group = JsonBackupManager.LoadCardUserList(studentGroupTitle);
+            _group = DataProvider.UserGroupRepository.Read(studentGroupTitle);
 
             //TODO: temp solution, remove
             if (_group == null)
@@ -55,8 +48,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
                         //new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
                     }
                 };
-                UserGroupRepository repo = new UserGroupRepository();
-                repo.Create(_group);
+                DataProvider.UserGroupRepository.Create(_group);
             }
 
             //TODO: Что по неймингу?)

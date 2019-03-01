@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using LimpStats.Model;
 using Newtonsoft.Json;
 
 namespace LimpStats.Database.Repositories
 {
-    public class UserGroupRepository
+    internal class UserGroupRepository : IUserGroupRepository
     {
         private const string FilePath = "UserGroup.json";
 
@@ -26,11 +25,7 @@ namespace LimpStats.Database.Repositories
 
         public UserGroup Read(string title)
         {
-            var groups = ReadAll();
-            //TODO знаю что дичь, пока так
-            if(groups.Capacity == 0)
-                return null;
-            return ReadAll().First(userGroup => userGroup.Title == title);
+            return ReadAll().FirstOrDefault(userGroup => userGroup.Title == title);
         }
 
         public void Update(UserGroup userGroup)

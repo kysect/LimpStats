@@ -10,8 +10,8 @@ namespace LimpStats.Database
             ProblemsPackRepository = new ProblemsPackRepository(UserGroupRepository);
         }
 
-        public static UserGroupRepository UserGroupRepository { get; }
-        public static ProblemsPackRepository ProblemsPackRepository { get; }
+        public static IUserGroupRepository UserGroupRepository { get; }
+        public static IProblemsPackRepository ProblemsPackRepository { get; }
 
         public static void ClearCache()
         {
