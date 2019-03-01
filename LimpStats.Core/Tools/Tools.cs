@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Diagnostics;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace LimpStats.Core.Tools
 {
@@ -37,18 +40,17 @@ namespace LimpStats.Core.Tools
             return s;
         }
 
-        public static  bool CheckInternetConnect(string strServer = "https://www.google.com")
+        public static  bool CheckInternetConnect()
         {
             try
             {
-                HttpWebRequest request = WebRequest.CreateHttp(strServer);
-                using (var response = request.GetResponse() as HttpWebResponse)
-                {
-                    return response != null && HttpStatusCode.OK == response.StatusCode;
-                }
+                var ping = new Ping();
+                PingReply result = ping.Send("1.1.1.1", 5000);
+                return result?.Status == IPStatus.Success;
             }
-            catch (WebException)
+            catch (WebException e)
             {
+                Debug.WriteLine(e.Message);
                 return false;
             }
         }
