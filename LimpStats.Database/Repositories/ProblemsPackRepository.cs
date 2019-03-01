@@ -5,11 +5,11 @@ using LimpStats.Model.Problems;
 
 namespace LimpStats.Database.Repositories
 {
-    public class ProblemsPackRepository
+    internal class ProblemsPackRepository : IProblemsPackRepository
     {
-        private readonly UserGroupRepository _userGroupRepository;
+        private readonly IUserGroupRepository _userGroupRepository;
 
-        public ProblemsPackRepository(UserGroupRepository userGroupRepository)
+        public ProblemsPackRepository(IUserGroupRepository userGroupRepository)
         {
             _userGroupRepository = userGroupRepository;
         }
