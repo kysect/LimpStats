@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using LimpStats.Client.CustomControls.BlocksPrewiew;
 using LimpStats.Client.CustomControls.Tabs;
 using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
@@ -9,8 +10,6 @@ using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
-using Domain = LimpStats.Client.Models.Domain;
-using StudentPackBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentPackBlockPreview;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
