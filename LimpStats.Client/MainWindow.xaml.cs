@@ -16,7 +16,7 @@ namespace LimpStats.Client
         public MainWindow()
         {
             InitializeComponent();
-            var studentGroupBlockEolymp = new StudentGroupBlockPreview(this, Domain.Eolymp);
+            var studentGroupBlockEolymp = new StudentGroupBlockPreview(this);
             var studentGroupTabEolymp = new StudentGroupTab(studentGroupBlockEolymp);
             OpenView(studentGroupTabEolymp);
             _tab = studentGroupTabEolymp;
@@ -31,9 +31,9 @@ namespace LimpStats.Client
             }
         }
 
-        public void AddToViewList(string viewTitle, UserControl view, Domain domain)
+        public void AddToViewList(string viewTitle, UserControl view)
         {
-            NavigatePanel.Children.Add(new NavigateButton(viewTitle, this, view, domain));
+            NavigatePanel.Children.Add(new NavigateButton(viewTitle, this, view));
         }
 
         public void OpenView(UserControl view)

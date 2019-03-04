@@ -113,8 +113,17 @@
     <Compile Include="CustomControls\BlocksPrewiew\ResultGridBlock.xaml.cs">
       <DependentUpon>ResultGridBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\BlocksSettings\StudentGroupBlockSettings.xaml.cs">
+      <DependentUpon>StudentGroupBlockSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\ForProblemTasks\ProblemTasksPreview.xaml.cs">
       <DependentUpon>ProblemTasksPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ForStudents\StudentGroupSettings.xaml.cs">
+      <DependentUpon>StudentGroupSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ForStudents\StudentSettingsControl.xaml.cs">
+      <DependentUpon>StudentSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
@@ -162,7 +171,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\BlocksSettings\StudentGroupBlockSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\ForProblemTasks\ProblemTasksPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\ForStudents\StudentGroupSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\ForStudents\StudentSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,7 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomControls\BlocksOptions\" />
-    <Folder Include="CustomControls\BlocksSettings\" />
+    <Folder Include="CustomControls\ForProblemTasks\NewFolder1\" />
     <Folder Include="StylesDictionary\" />
   </ItemGroup>
   <ItemGroup>

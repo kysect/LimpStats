@@ -7,11 +7,11 @@
     Width="185"
     mc:Ignorable="d">
 
-    <StackPanel Height="270" Width="180">
-            <StackPanel
+    <StackPanel Height="245" Width="180">
+        <StackPanel
                 Height="40"
                 Orientation="Horizontal">
-                <Button
+            <Button
                     x:Name="CardTitle"
                     Width="140"
                     VerticalAlignment="Stretch"
@@ -27,18 +27,7 @@
                     Click="ButtonClick_Update"
                     BorderBrush="{x:Null}"
                     Style="{DynamicResource Refresh}" />
-            </StackPanel>
-
-            <Button
-                Margin="0,5"
-                Height="18.667"
-                Click="AddUserButton_OnClick"
-                Content="AddUser"
-                FontFamily="Century Gothic"
-                Background="#FFE2F9F1"
-                Foreground="#FF87A5B8"
-                BorderBrush="{x:Null}" />
-
+        </StackPanel>
         <StackPanel
             x:Name="Panel"
             Background="#333333"

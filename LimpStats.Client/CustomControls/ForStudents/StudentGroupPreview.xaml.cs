@@ -20,12 +20,12 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private readonly UserGroup _group;
         private readonly string _studentGroupTitle;
-        private readonly Domain _domain;
 
-        public StudentGroupPreview(string studentGroupTitle, IViewNavigateService navigateService, Domain domain)
+
+        public StudentGroupPreview(string studentGroupTitle, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
-            _domain = domain;
+
 
             InitializeComponent();
 
@@ -125,10 +125,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            var studentPackBlock = new StudentPackBlockPreview(_group, _navigateService, _domain);
+            var studentPackBlock = new StudentPackBlockPreview(_group, _navigateService);
             var studentPackTab = new StudentPackTab(studentPackBlock);
 
-            _navigateService.AddToViewList(_studentGroupTitle, studentPackTab, _domain);
+            _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
             _navigateService.OpenView(studentPackTab);
         }
     }

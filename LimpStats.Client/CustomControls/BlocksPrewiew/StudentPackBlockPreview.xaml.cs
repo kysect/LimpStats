@@ -16,17 +16,16 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
     {
         private readonly UserGroup _userGroup;
         private readonly IViewNavigateService _navigateService;
-        private readonly Domain _domain;
-        public StudentPackBlockPreview(UserGroup userGroup, IViewNavigateService navigateService, Domain domain)
+
+        public StudentPackBlockPreview(UserGroup userGroup, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
-            _domain = domain;
             InitializeComponent();
             _userGroup = userGroup;
 
             foreach (ProblemsPack pack in userGroup.ProblemsPacks)
             {
-                var taskPreview = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService, _domain);
+                var taskPreview = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService);
                 PackListPanel.Children.Add(taskPreview);
                 PanelViewer.ScrollToRightEnd();
             }
@@ -40,9 +39,9 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
                     MessageBox.Show($"The name of group must be unique!");
                     return;
                 }
-            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService, _domain);
+            var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService);
             packWindow.Show();
-           PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService, _domain));
+           PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService));
         }
 
         //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах
