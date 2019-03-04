@@ -12,11 +12,10 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
     public partial class StudentGroupBlockPreview : UserControl
     {
         private readonly IViewNavigateService _navigateService;
-        private readonly Domain _domain;
-        public StudentGroupBlockPreview(IViewNavigateService navigateService, Domain domain)
+       public StudentGroupBlockPreview(IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
-            _domain = domain;
+
 
             InitializeComponent();
             
@@ -25,7 +24,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             //List<string> cards = JsonBackupManager.LoadCardName();
             foreach (var group in groups)
             {
-                GroupListPanel.Children.Add(new StudentGroupPreview(group.Title, _navigateService, _domain));
+                GroupListPanel.Children.Add(new StudentGroupPreview(group.Title, _navigateService));
             }
 
         }
@@ -41,7 +40,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             }
             else
             {
-                GroupListPanel.Children.Add(new StudentGroupPreview(FilePath.Text, _navigateService, _domain));
+                GroupListPanel.Children.Add(new StudentGroupPreview(FilePath.Text, _navigateService));
 
                 FilePath.Text = string.Empty;
             }

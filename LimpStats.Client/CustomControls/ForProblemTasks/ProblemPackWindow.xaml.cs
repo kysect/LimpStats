@@ -19,11 +19,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         public readonly UserGroup _group;
         public readonly string _packTitle;
-        public readonly Domain _domain;
-        public ProblemPackWindow(string packTitle, UserGroup group, IViewNavigateService navigateService, Domain domain)
+        public ProblemPackWindow(string packTitle, UserGroup group, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
-            _domain = domain;
 
             _group = group;
             _packTitle = packTitle;

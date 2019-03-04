@@ -13,20 +13,18 @@ namespace LimpStats.Client.CustomControls
         private readonly IViewNavigateService _navigateService;
         public readonly UserControl CurrentControl;
 
-        public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block, Domain domain)
+        public NavigateButton(string viewName, IViewNavigateService navigateService, UserControl block)
         {
          
             InitializeComponent();
             if (block is ResultGridBlock)
             {
                 //TODO: а так точно должно быть? о_О
-                icon.Source = new ImageSourceConverter().ConvertFromString("pack://application:,,,/LimpStats.Client;component/icons/iconTable-03.png") as ImageSource;      
+                icon.Source =
+                    new ImageSourceConverter().ConvertFromString(
+                        "pack://application:,,,/LimpStats.Client;component/icons/iconTable-03.png") as ImageSource;
             }
-            switch(domain)
-            {
-                case Domain.Eolymp: Flag.Style = FindResource("ButtonFlagEolympStyle") as Style; break;
-                case Domain.Codeforces: Flag.Style = FindResource("ButtonFlagCodeforcesStyle") as Style; break;
-            }
+
             _navigateService = navigateService;
             CurrentControl = block;
 

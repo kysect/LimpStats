@@ -19,6 +19,7 @@ namespace LimpStats.Core.Parsers
                 try
                 {
                     Parser.LoadProfileData(user);
+                    user.CodeforcesSubmissions = CodeforcesParser.CodeforcesProfileParser.GetUserSolvedProblem(user.CodeforcesHandle);
                     return;
                 }
                 catch (ParserException)
