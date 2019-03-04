@@ -1,17 +1,10 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Client.CustomControls.BlocksPrewiew;
-using LimpStats.Client.CustomControls.ForStudents;
-using LimpStats.Client.Tools;
 using LimpStats.Client.CustomControls.BlocksSettings;
-using StudentGroupBlockPreview = LimpStats.Client.CustomControls.BlocksPrewiew.StudentGroupBlockPreview;
 
 namespace LimpStats.Client.CustomControls.Tabs
 {
-    /// <summary>
-    /// Логика взаимодействия для StudentGroupTab.xaml
-    /// </summary>
     public partial class StudentGroupTab : UserControl
     {
         private StudentGroupBlockPreview _block;

@@ -3,25 +3,22 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForStudents;
-using LimpStats.Client.Models;
 using LimpStats.Client.Tools;
 using LimpStats.Database;
+using LimpStats.Model;
 
 namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
     public partial class StudentGroupBlockPreview : UserControl
     {
         private readonly IViewNavigateService _navigateService;
-       public StudentGroupBlockPreview(IViewNavigateService navigateService)
+        public StudentGroupBlockPreview(IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
-
-
             InitializeComponent();
             
             //TODO:
-            var groups = DataProvider.UserGroupRepository.ReadAll();
-            //List<string> cards = JsonBackupManager.LoadCardName();
+            List<UserGroup> groups = DataProvider.UserGroupRepository.ReadAll();
             foreach (var group in groups)
             {
                 GroupListPanel.Children.Add(new StudentGroupPreview(group.Title, _navigateService));
@@ -32,7 +29,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
             //TODO:
-            var group = DataProvider.UserGroupRepository.Read(FilePath.Text);
+            UserGroup group = DataProvider.UserGroupRepository.Read(FilePath.Text);
             //var cards = JsonBackupManager.LoadCardName();
             if (group != null)
             {

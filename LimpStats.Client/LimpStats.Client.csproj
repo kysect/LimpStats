@@ -313,7 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomControls\BlocksOptions\" />
-    <Folder Include="CustomControls\ForProblemTasks\NewFolder1\" />
     <Folder Include="StylesDictionary\" />
   </ItemGroup>
   <ItemGroup>
