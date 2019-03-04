@@ -23,10 +23,13 @@ namespace LimpStats.Client.CustomControls.ForStudents
     public partial class StudentGroupSettings : UserControl
     {
         private UserGroup _group;
-        public StudentGroupSettings(UserGroup group)
+        private Action _updateParentView;
+
+        public StudentGroupSettings(UserGroup group, Action updateParentView)
         {
             InitializeComponent();
             _group = group;
+            _updateParentView = updateParentView;
             Update();
         }
 
@@ -35,7 +38,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             CardTitle.DataContext = _group.Title;
             foreach (var user in _group.Users)
             {
-                Panel.Children.Add(new StudentSettingsControl(user));
+                Panel.Children.Add(new StudentSettingsControl(user, _group));
             }
 
         }
@@ -47,7 +50,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void ButtonClick_Del(object sender, RoutedEventArgs e)
         {
             DataProvider.UserGroupRepository.Delete(_group);
-            
+            _updateParentView();
         }
     }
 }
