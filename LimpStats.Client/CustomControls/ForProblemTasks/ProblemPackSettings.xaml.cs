@@ -33,7 +33,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         }
         private void AddProblemsClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           //TODO: добавление задач
         }
 
         private void ButtonClick_DelPack(object sender, RoutedEventArgs e)
@@ -44,7 +44,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           //TODO: редактирование имени пака
         }
     }
 }
