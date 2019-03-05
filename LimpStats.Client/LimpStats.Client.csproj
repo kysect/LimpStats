@@ -113,8 +113,17 @@
     <Compile Include="CustomControls\BlocksPrewiew\ResultGridBlock.xaml.cs">
       <DependentUpon>ResultGridBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\BlocksSettings\ProblemPackBlockSettings.xaml.cs">
+      <DependentUpon>ProblemPackBlockSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\BlocksSettings\StudentGroupBlockSettings.xaml.cs">
       <DependentUpon>StudentGroupBlockSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ForProblemTasks\ProblemPackSettings.xaml.cs">
+      <DependentUpon>ProblemPackSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ForProblemTasks\ProblemSettingsControl.xaml.cs">
+      <DependentUpon>ProblemSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\ForProblemTasks\ProblemTasksPreview.xaml.cs">
       <DependentUpon>ProblemTasksPreview.xaml</DependentUpon>
@@ -171,7 +180,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\BlocksSettings\ProblemPackBlockSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\BlocksSettings\StudentGroupBlockSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\ForProblemTasks\ProblemPackSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\ForProblemTasks\ProblemSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

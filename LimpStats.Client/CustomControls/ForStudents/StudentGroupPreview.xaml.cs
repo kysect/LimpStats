@@ -125,7 +125,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
             var studentPackBlock = new StudentPackBlockPreview(_group, _navigateService);
-            var studentPackTab = new StudentPackTab(studentPackBlock);
+            var studentPackTab = new StudentPackTab(studentPackBlock, _group);
 
             _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
             _navigateService.OpenView(studentPackTab);

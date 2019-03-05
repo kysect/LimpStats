@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Client.CustomControls.ForProblemTasks;
 using LimpStats.Client.Tools;
+using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
 
@@ -28,7 +29,16 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             }
 
         }
-
+        public void UpdateUi()
+        {
+            ThreadingTools.ExecuteUiThread(() => PackListPanel.Children.Clear());
+            var packs = DataProvider.UserGroupRepository.Read(_userGroup.Title).ProblemsPacks;
+            foreach (var pack in packs)
+            {
+                var settings = new ProblemTasksPreview(_userGroup, pack.Title, _navigateService);
+                ThreadingTools.ExecuteUiThread(() => PackListPanel.Children.Add(settings));
+            }
+        }
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             if (_userGroup.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))

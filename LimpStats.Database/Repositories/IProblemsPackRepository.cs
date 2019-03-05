@@ -8,5 +8,7 @@ namespace LimpStats.Database.Repositories
         ProblemsPack Read(string userGroupTitle, string title);
         void Update(string userGroupTitle, ProblemsPack problemsPack);
         void Delete(string userGroupTitle, ProblemsPack problemsPack);
+        void DeleteProblem(string userGroupTitle, ProblemsPack problemsPack, Problem problem);
+
     }
 }

@@ -51,5 +51,12 @@ namespace LimpStats.Database.Repositories
 
             _userGroupRepository.Update(userGroup);
         }
+        public void DeleteProblem(string userGroupTitle, ProblemsPack problemsPack, Problem problem)
+        {
+            UserGroup userGroup = _userGroupRepository.Read(userGroupTitle);
+
+            userGroup.ProblemsPacks.Find(e => e.Title == problemsPack.Title).Problems.RemoveAll(e => e.Title == problem.Title);
+            _userGroupRepository.Update(userGroup);
+        }
     }
 }
