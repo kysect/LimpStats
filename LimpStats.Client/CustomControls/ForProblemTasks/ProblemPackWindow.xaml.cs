@@ -12,14 +12,15 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
     {
         private readonly IViewNavigateService _navigateService;
 
-        public readonly UserGroup _group;
-        public readonly string _packTitle;
+        public readonly UserGroup Group;
+        public readonly string PackTitle;
+
         public ProblemPackWindow(string packTitle, UserGroup group, IViewNavigateService navigateService)
         {
             _navigateService = navigateService;
 
-            _group = group;
-            _packTitle = packTitle;
+            Group = group;
+            PackTitle = packTitle;
             InitializeComponent();
             Panel.Children.Add(new ProblemTaskPreview(this, "A"));
         }
@@ -37,11 +38,11 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 switch (task.DomainBox.Text)
                 {
                     case "Eolymp":
-                        problems.Add(new Problem(task.TaskNumberInput.Text, Model.Problems.Domain.EOlymp));
+                        problems.Add(new Problem(task.TaskNumberInput.Text, Domain.EOlymp));
                         break;
 
                     case "Codeforces":
-                        problems.Add(new Problem(task.TaskNumberInput.Text, Model.Problems.Domain.Codeforces));
+                        problems.Add(new Problem(task.TaskNumberInput.Text, Domain.Codeforces));
                         break;
                 }
 
@@ -49,9 +50,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             //var problems = Problem.CreateEOlympFromList(taskList);
             
-            _group.ProblemsPacks.Add(new ProblemsPack(_packTitle, problems));
-            //TODO:
-            DataProvider.ProblemsPackRepository.Create(_group.Title, new ProblemsPack(_packTitle, problems));
+            Group.ProblemsPacks.Add(new ProblemsPack(PackTitle, problems));
+            DataProvider.ProblemsPackRepository.Create(Group.Title, new ProblemsPack(PackTitle, problems));
 
             PanelViewer.ScrollToRightEnd();
             Close();

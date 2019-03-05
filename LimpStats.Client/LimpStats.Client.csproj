@@ -167,7 +167,6 @@
     <Compile Include="CustomControls\UserResPrewiew.xaml.cs">
       <DependentUpon>UserResPrewiew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Domain.cs" />
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
     <Compile Include="Models\UserGroupCard.cs" />

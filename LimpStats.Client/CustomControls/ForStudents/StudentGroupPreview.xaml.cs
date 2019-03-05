@@ -33,7 +33,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
             CardTitle.DataContext = _studentGroupTitle;
             _group = DataProvider.UserGroupRepository.Read(studentGroupTitle);
 
-            //TODO: temp solution, remove
             if (_group == null)
             {
                 _group = new UserGroup
@@ -42,7 +41,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
                     Users = new List<LimpUser>(),
                     ProblemsPacks = new List<ProblemsPack>
                     {
-                        //TODO: implement testing factory
                         //new ProblemPackInfo("A", TaskPackStorage.TasksAGroup),
                         //new ProblemPackInfo("B", TaskPackStorage.TasksBGroup)
                     }
@@ -50,7 +48,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
                 DataProvider.UserGroupRepository.Create(_group);
             }
 
-            //TODO: Что по неймингу?)
             Task.Run(() => GetUserProfileData());
 
             //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
@@ -95,7 +92,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
             //  ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = true);
 
-            //TODO:
             DataProvider.UserGroupRepository.Update(_group);
             //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
@@ -117,7 +113,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
             userAdding.ShowDialog();
 
                 _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
-                //TODO:
                 DataProvider.UserGroupRepository.Update(_group);
                 //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }

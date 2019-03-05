@@ -21,7 +21,6 @@ namespace LimpStats.Core.Tools
         //    return res;
         //}
 
-        //TODO: fix
         public static string GenerateNextNumber(string number)
         {
             var n = number.ToCharArray();

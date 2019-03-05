@@ -126,14 +126,14 @@ namespace LimpParse.TelegramBot
 
         private static string GenerateDayResults(LimpUser user)
         {
-            
-            List<LimpUser> list = JsonBackupManager.LoadFromJson();
-            LimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
+            throw new NotSupportedException();
+            //List<LimpUser> list = JsonBackupManager.LoadFromJson();
+            //LimpUser currentUser = list.FirstOrDefault(u => u.Username == user.Username);
 
-            int completed = user.CompletedTaskCount() -
-                            (currentUser?.CompletedTaskCount() ?? 0);
+            //int completed = user.CompletedTaskCount() -
+            //                (currentUser?.CompletedTaskCount() ?? 0);
 
-            return $"{user.Username,-14} |{user.CompletedTaskCount(),-3} ({completed})";
+            //return $"{user.Username,-14} |{user.CompletedTaskCount(),-3} ({completed})";
         }
     }
 }

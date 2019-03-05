@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="180">
     <StackPanel Orientation="Horizontal">
@@ -14,7 +13,6 @@
                 Foreground="#FFE8F9F2"
                 Background="#FF666666"
                 FontSize="18"
-                Canvas.Left="2" 
                 BorderBrush="{x:Null}"
                 />
         <Button x:Name="Result"
@@ -24,7 +22,6 @@
                 Foreground="#FFE8F9F2"
                 Background="#FF666666"
                 FontSize="18"
-                Canvas.Left="123"
                 BorderBrush="{x:Null}" />
     </StackPanel>
 </UserControl>
