@@ -25,7 +25,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         private void Update_Problem(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //TODO: изменение названия задачи\макс балов по ней
         }
 
         private void DelProblem(object sender, RoutedEventArgs e)

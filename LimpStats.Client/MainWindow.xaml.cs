@@ -47,6 +47,8 @@ namespace LimpStats.Client
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)
         {
             DataProvider.ClearCache();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }

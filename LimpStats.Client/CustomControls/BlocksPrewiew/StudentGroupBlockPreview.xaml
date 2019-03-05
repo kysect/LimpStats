@@ -32,11 +32,17 @@
                     TextChanged="FilePath_OnTextChanged"
                     TextWrapping="Wrap" />
             </StackPanel>
-            <StackPanel
+            <ScrollViewer
+                Name="PanelViewer"
+                MaxWidth="600"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Disabled">
+                <StackPanel
                     x:Name="GroupListPanel"                
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" />
+                </ScrollViewer>
         </StackPanel>
     </Canvas>
 </UserControl>

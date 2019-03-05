@@ -32,7 +32,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         }
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //TODO: изменение названия группы
         }
 
         private void ButtonClick_Del(object sender, RoutedEventArgs e)
@@ -45,9 +45,14 @@ namespace LimpStats.Client.CustomControls.ForStudents
         {
             var userAdding = new UserAddingWindow(_group.Users);
             userAdding.ShowDialog();
-            _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
-            DataProvider.UserGroupRepository.Update(_group);     
-            Update();
+            //TODO: костыли
+            if (userAdding.NameBox.Text != "Name")
+            {
+                _group.Users.Add(
+                    new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
+                DataProvider.UserGroupRepository.Update(_group);
+                Update();
+            }
             //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
     }
