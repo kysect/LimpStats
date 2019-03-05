@@ -9,7 +9,7 @@
     Height="600"
     mc:Ignorable="d">
     <Grid Background="DarkGray">
-        <Button Margin="0,535,0,0" Click="ButtonAddPack" />
+        <Button Margin="0,535,0,0" Click="ButtonAddPack" Content="Add Pack" />
 
         <ScrollViewer
             Name="PanelViewer"
@@ -19,6 +19,7 @@
             VerticalScrollBarVisibility="Visible">
                 <StackPanel
                 x:Name="Panel"
+                Background="#333333"
                 Width="492"
                 Height="535"
                 MinWidth="300"

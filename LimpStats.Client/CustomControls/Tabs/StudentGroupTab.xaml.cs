@@ -18,6 +18,7 @@ namespace LimpStats.Client.CustomControls.Tabs
         private void Show_StudentGroupBlock_Prewiew(object sender, RoutedEventArgs e)
         {
             StudentBlockPanel.Children.Clear();
+            _block.UpdateUi();
             StudentBlockPanel.Children.Add(_block);
         }
 

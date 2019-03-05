@@ -16,16 +16,18 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         {
             _navigateService = navigateService;
             InitializeComponent();
-            
-            //TODO:
-            List<UserGroup> groups = DataProvider.UserGroupRepository.ReadAll();
-            foreach (var group in groups)
-            {
-                GroupListPanel.Children.Add(new StudentGroupPreview(group.Title, _navigateService));
-            }
-
+            UpdateUi();
         }
-
+        public void UpdateUi()
+        {
+            ThreadingTools.ExecuteUiThread(() => GroupListPanel.Children.Clear());
+            List<UserGroup> groups = DataProvider.UserGroupRepository.ReadAll();
+            foreach (UserGroup group in groups)
+            {
+                var preview = new StudentGroupPreview(group.Title, _navigateService);
+                ThreadingTools.ExecuteUiThread(() => GroupListPanel.Children.Add(preview));
+            }
+        }
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
             //TODO:

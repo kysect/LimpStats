@@ -4,54 +4,53 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Добавление пользователя"
-    Width="353"
-    Height="180"
+    Title="Add User"
+    Width="470"
+    Height="252"
     ResizeMode="NoResize"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Background="#333333">
 
         <TextBox
             Name="LoginEolympTextBox"
-            Height="20"
+            Height="34"
             MinWidth="100"
-            Margin="124,34,123,0"
+            Margin="182,49,182,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
-            Text="Введите логин"
-            TextWrapping="Wrap" />
+            Text="Login"
+            TextWrapping="Wrap" Foreground="AliceBlue"/>
         <Button
-            Width="50"
-            Height="25"
-            Margin="0,50,0,0"
+            Height="Auto"
+            Margin="182,166,166,19"
             Click="ValidateLogin"
             Content="Add" />
         <TextBox
             x:Name="LoginCodeforcesTextBox"
-            Height="20"
+            Height="26"
             MinWidth="100"
-            Margin="124,63,123,0"
+            Margin="182,98,182,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
-            Text="Введите логин"
-            TextWrapping="Wrap" />
+            Text="Login"
+            TextWrapping="Wrap" Foreground="AliceBlue"/>
         <TextBox
             x:Name="NameBox"
-            Height="20"
+            Height="26"
             MinWidth="100"
-            Margin="97,8,97,0"
+            Margin="182,8,182,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
-            Text="Введите логин"
-            TextWrapping="Wrap" />
-        <TextBlock Text="Codeforces" Margin="53,64,223,56"/>
-        <TextBlock Text="Eolymp" Margin="66,35,228,90"/>
-        <TextBlock Text="Имя" Margin="71,8,223,108"/>
+            Text="Login"
+            TextWrapping="Wrap" Foreground="AliceBlue" />
+        <TextBlock Text="Codeforces handle" Margin="52,102,297,99" Foreground="AliceBlue"/>
+        <TextBlock Text="Eolymp login" Margin="52,59,312,145" Foreground="AliceBlue"/>
+        <TextBlock Text="Name" Margin="71,8,326,179" Foreground="AliceBlue"/>
     </Grid>
 </Window>

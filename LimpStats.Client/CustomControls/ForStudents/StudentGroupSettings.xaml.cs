@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using LimpStats.Client.Tools;
 using LimpStats.Database;
 using LimpStats.Model;
 
@@ -21,10 +22,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void Update()
         {
+            ThreadingTools.ExecuteUiThread(() => Panel.Children.Clear());
             CardTitle.DataContext = _group.Title;
             foreach (LimpUser user in _group.Users)
             {
-                Panel.Children.Add(new StudentSettingsControl(user, _group));
+                ThreadingTools.ExecuteUiThread(() => Panel.Children.Add(new StudentSettingsControl(user, _group, _updateParentView)));
             }
 
         }
@@ -37,6 +39,17 @@ namespace LimpStats.Client.CustomControls.ForStudents
         {
             DataProvider.UserGroupRepository.Delete(_group);
             _updateParentView();
+        }
+
+        private void AddUserClick(object sender, RoutedEventArgs e)
+        {
+            var userAdding = new UserAddingWindow(_group.Users);
+            userAdding.ShowDialog();
+            _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
+            //TODO:
+            DataProvider.UserGroupRepository.Update(_group);     
+            Update();
+            //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
     }
 }

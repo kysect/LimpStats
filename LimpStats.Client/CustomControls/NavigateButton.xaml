@@ -26,6 +26,5 @@
             Width="30"
             HorizontalAlignment="Left"
             Source="/LimpStats.Client;component/icons/iconPack-02.png" />
-        <Button  x:Name="Flag"  Canvas.Left="130" />
     </Canvas>
 </UserControl>

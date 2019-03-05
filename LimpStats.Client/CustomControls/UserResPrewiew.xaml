@@ -13,7 +13,6 @@
                 HorizontalAlignment="Left"
                 Foreground="#FFE8F9F2"
                 Background="#FF666666"
-                FontFamily="Bahnschrift Regular"
                 FontSize="18"
                 Canvas.Left="2" 
                 BorderBrush="{x:Null}"
@@ -24,7 +23,6 @@
                 HorizontalAlignment="Left"
                 Foreground="#FFE8F9F2"
                 Background="#FF666666"
-                FontFamily="Bahnschrift Regular"
                 FontSize="18"
                 Canvas.Left="123"
                 BorderBrush="{x:Null}" />
