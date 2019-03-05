@@ -5,21 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LimpStats.Client.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="180">
-    <Canvas >
+             d:DesignHeight="40" d:DesignWidth="180">
+    <StackPanel Orientation="Horizontal" >
         <Button x:Name="Title"
-                Height="30"
-                Width="148"
+                Height="40"
+                Width="140"
                 HorizontalAlignment="Left"
                 Click="Update_User"
+                Foreground="#FFE8F9F2"
+                Background="#333333"
                 FontSize="18"/>
         <Button x:Name="Del"
-                Height="30"
-                Width="30"
-                HorizontalAlignment="Left"
                 Content="✘" 
-                Canvas.Left="150"
+                Height="40"
+                Width="40"
+                Style="{DynamicResource Close}" 
+                Canvas.Left="140"
                 Click="DelUser"
                 />
-    </Canvas>
+    </StackPanel>
 </UserControl>

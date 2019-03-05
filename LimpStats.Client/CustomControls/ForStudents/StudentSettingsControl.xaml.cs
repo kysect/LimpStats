@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Database;
 using LimpStats.Model;
@@ -9,10 +10,11 @@ namespace LimpStats.Client.CustomControls.ForStudents
     {
         private UserGroup _group;
         private LimpUser _user;
-        public StudentSettingsControl(LimpUser user, UserGroup group)
+        private Action _updateUI;
+        public StudentSettingsControl(LimpUser user, UserGroup group, Action updateUI)
         {
             InitializeComponent();
-
+            _updateUI = updateUI;
             _group = group;
             _user = user;
             Title.Content = user.Username;
@@ -27,6 +29,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
         {
             _group.Users.Remove(_user);
             DataProvider.UserGroupRepository.Update(_group);
+            _updateUI();
         }
     }
 }
