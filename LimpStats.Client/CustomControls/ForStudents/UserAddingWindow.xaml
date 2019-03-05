@@ -6,51 +6,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Add User"
     Width="470"
-    Height="252"
+    Height="250"
     ResizeMode="NoResize"
     mc:Ignorable="d">
-    <Grid Background="#333333">
+    <Canvas Background="#333333">
 
         <TextBox
             Name="LoginEolympTextBox"
             Height="34"
             MinWidth="100"
-            Margin="182,49,182,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
             Text="Login"
-            TextWrapping="Wrap" Foreground="AliceBlue"/>
+            TextWrapping="Wrap" Foreground="AliceBlue" Canvas.Left="182" Canvas.Top="57"/>
         <Button
-            Height="Auto"
-            Margin="182,166,166,19"
             Click="ValidateLogin"
-            Content="Add" />
+            Content="Add" Canvas.Left="182" Canvas.Top="166" Width="100" />
         <TextBox
             x:Name="LoginCodeforcesTextBox"
             Height="26"
             MinWidth="100"
-            Margin="182,98,182,0"
+
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
-            Text="Login"
-            TextWrapping="Wrap" Foreground="AliceBlue"/>
+            Text="Handle"
+            TextWrapping="Wrap" Foreground="AliceBlue" Canvas.Left="182" Canvas.Top="106"/>
         <TextBox
             x:Name="NameBox"
             Height="26"
             MinWidth="100"
-            Margin="182,8,182,0"
+            Margin="182,16,182,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             GotFocus="LoginTextBox_OnGotFocus"
             MaxLength="250"
-            Text="Login"
+            Text="Name"
             TextWrapping="Wrap" Foreground="AliceBlue" />
-        <TextBlock Text="Codeforces handle" Margin="52,102,297,99" Foreground="AliceBlue"/>
-        <TextBlock Text="Eolymp login" Margin="52,59,312,145" Foreground="AliceBlue"/>
-        <TextBlock Text="Name" Margin="71,8,326,179" Foreground="AliceBlue"/>
-    </Grid>
+        <Label Content="Name" Margin="40,16,353,176" Foreground="AliceBlue"/>
+        <Label Content="Eolymp login" Margin="40,65,324,125" Foreground="AliceBlue"/>
+        <Label Content="Codeforces handle" Margin="40,106,312,85" Foreground="AliceBlue"/>
+
+    </Canvas>
 </Window>
