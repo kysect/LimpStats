@@ -3,39 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Height="564" Width="831">
-    <Canvas Margin="0,0,504,0">
+             mc:Ignorable="d" Height="442">
+    <Canvas>
         <StackPanel VerticalAlignment="Stretch">
-            <StackPanel
+            <Canvas
                 Height="40"
                 VerticalAlignment="Top"
-                Orientation="Horizontal">
+                Width="328">
                 <Button
                     x:Name="PrewiewButton"
-                    Width="70"
+                    Width="108"
                     Height="35"
-                    Click="Show_StudentPackBlock_Prewiew"
-                    Content="Prewiew"/>
+                    Click="Show_ProblemPackBlock_Prewiew"
+                    Content="Prewiew" Canvas.Top="2"/>
                 <Button
                     x:Name="OptionButton"
-                    Width="70"
+                    Width="102"
                     Height="35"
-                    Click="Show_StudentPackBlock_Options"
-                    Content="Option"/>
+                    Click="Show_ProblemPackBlock_Options"
+                    Content="Option" Canvas.Left="113" Canvas.Top="2"/>
                 <Button
                     x:Name="SettingsButton"
-                    Width="70"
+                    Width="99"
                     Height="35"
-                    Click="Show_StudentPackBlock_Settings"
-                    Content="Settings"/>
-            </StackPanel>
+                    Click="Show_ProblemPackBlock_Settings"
+                    Content="Settings" Canvas.Left="220" Canvas.Top="2"/>
+            </Canvas>
             <StackPanel
                 x:Name="StudentBlockPanel"
                 MinWidth="300"
                 MinHeight="400"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Orientation="Horizontal" />
+                Orientation="Horizontal" Height="382" />
         </StackPanel>
     </Canvas>
 </UserControl>
