@@ -48,7 +48,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
                 }
             var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService);
             packWindow.Show();
-           PackListPanel.Children.Add(new ProblemTasksPreview(packWindow._group, packWindow._packTitle, _navigateService));
+           PackListPanel.Children.Add(new ProblemTasksPreview(packWindow.Group, packWindow.PackTitle, _navigateService));
         }
 
         //TODO: возможно, стоит вынести это в отдельный тулзовый класс т.к. это логика будет использовать в нескольких классах

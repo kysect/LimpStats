@@ -46,7 +46,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
             var userAdding = new UserAddingWindow(_group.Users);
             userAdding.ShowDialog();
             _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
-            //TODO:
             DataProvider.UserGroupRepository.Update(_group);     
             Update();
             //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);

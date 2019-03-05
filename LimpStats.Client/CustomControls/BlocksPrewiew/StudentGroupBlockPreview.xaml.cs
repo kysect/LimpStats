@@ -30,7 +30,6 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         }
         public void AddGroupToPanel(object sender, RoutedEventArgs e)
         {
-            //TODO:
             UserGroup group = DataProvider.UserGroupRepository.Read(FilePath.Text);
             //var cards = JsonBackupManager.LoadCardName();
             if (group != null)
