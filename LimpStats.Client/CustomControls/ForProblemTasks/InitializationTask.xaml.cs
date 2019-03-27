@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
+using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
 {
@@ -19,8 +20,36 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _problemPackWindow = problemPackWindow;
             _problemPackWindow.PanelViewer.ScrollToEnd();
         }
+        public ProblemTaskPreview(ProblemPackWindow problemPackWindow, Problem problem, string number)
+        {
+            InitializeComponent();
 
-  
+            NumberTask.Content = number;
+
+            TaskNumberInput.Text = problem.Title;
+            TaskNumberInput.IsEnabled = false;
+
+            switch (problem.Type)
+            {
+                case Domain.EOlymp:
+                {
+                    DomainBox.Text = "Eolymp";
+                }
+                    break;
+                case Domain.Codeforces:
+                {
+                    DomainBox.Text = "Codeforces";
+                }
+                    break;
+            }
+            DomainBox.IsEnabled = false;
+            
+            _problemPackWindow = problemPackWindow;
+            _problemPackWindow.PanelViewer.ScrollToEnd();
+        }
+
+
+
         private void FilePath_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

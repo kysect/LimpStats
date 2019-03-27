@@ -33,7 +33,11 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         }
         private void AddProblemsClick(object sender, RoutedEventArgs e)
         {
-           //TODO: добавление задач
+            var packWindow = new ProblemPackWindow(_pack, _group);
+            packWindow.Show();
+          
+            _updateParentView();
+
         }
 
         private void ButtonClick_DelPack(object sender, RoutedEventArgs e)
