@@ -14,6 +14,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
         public readonly UserGroup Group;
         public readonly string PackTitle;
+        public bool IsUpdPack = false;
 
         public ProblemPackWindow(string packTitle, UserGroup group, IViewNavigateService navigateService)
         {
@@ -24,10 +25,43 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             InitializeComponent();
             Panel.Children.Add(new ProblemTaskPreview(this, "A"));
         }
+        public ProblemPackWindow(ProblemsPack pack, UserGroup group)
+        {
+         
+            InitializeComponent();
+            Group = group;
+            PackTitle = pack.Title;
+            IsUpdPack = true;
+            var num = "";
+            foreach (var problem in pack.Problems)
+            {
+                Panel.Children.Add(new ProblemTaskPreview(this, problem, num = Core.Tools.Tools.GenerateNextNumber(num)));
+            }
+            Panel.Children.Add(new ProblemTaskPreview(this, Core.Tools.Tools.GenerateNextNumber(num)));
 
+        }
         private void ButtonAddPack(object sender, RoutedEventArgs e)
         {
-            var problems = new List<Problem>(); 
+            if (IsUpdPack)
+            {
+                DataProvider.ProblemsPackRepository.Update(Group.Title, CreatePack());
+                PanelViewer.ScrollToRightEnd();
+                Close();
+            }
+            else
+            {
+                var pack = CreatePack();
+                Group.ProblemsPacks.Add(pack);
+                DataProvider.ProblemsPackRepository.Create(Group.Title, new ProblemsPack(PackTitle, pack.Problems));
+
+                PanelViewer.ScrollToRightEnd();
+                Close();
+            }
+        }
+
+        public ProblemsPack CreatePack()
+        {
+            var problems = new List<Problem>();
             IEnumerable<ProblemTaskPreview> taskList = Panel
                 .Children
                 .OfType<ProblemTaskPreview>()
@@ -47,14 +81,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 }
 
             }
-
+            return new ProblemsPack(PackTitle, problems);
             //var problems = Problem.CreateEOlympFromList(taskList);
-            
-            Group.ProblemsPacks.Add(new ProblemsPack(PackTitle, problems));
-            DataProvider.ProblemsPackRepository.Create(Group.Title, new ProblemsPack(PackTitle, problems));
 
-            PanelViewer.ScrollToRightEnd();
-            Close();
         }
     }
 }

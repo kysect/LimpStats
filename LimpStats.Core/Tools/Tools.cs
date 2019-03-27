@@ -23,6 +23,8 @@ namespace LimpStats.Core.Tools
 
         public static string GenerateNextNumber(string number)
         {
+            if (number == "")
+                return "A";
             var n = number.ToCharArray();
             n[number.Length - 1]++;
             string s = "";
