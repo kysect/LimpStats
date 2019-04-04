@@ -28,8 +28,9 @@
             Width="205"
             Grid.Row="0">
             <Button Height="30" Content = "Clear Cache" Click="ButtonCleanCache_OnClick"/>
-            <Button Height="30" Style="{DynamicResource MainButtonStyle}" DataContext="Main" Click="ButtonHome_OnClickEolymp" />
-         </StackPanel>
+            <Button Height="30" Content = "Generate DataTemplate" Click="ButtonGenerate_OnClick" Margin="0,0,-0.2,0"/>
+            <Button Height="30" Style="{DynamicResource MainButtonStyle}" DataContext="Main" Click="ButtonHome_OnClickEolymp" Margin="0,0,-0.2,0" />
+        </StackPanel>
         <UserControl
             x:Name="MainWindowContent"
             Grid.Column="1"

@@ -50,5 +50,11 @@ namespace LimpStats.Client
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
+        private void ButtonGenerate_OnClick(object sender, RoutedEventArgs e)
+        {
+            DataProvider.Generate();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace LimpStats.Database.Repositories
 {
     public interface IUserGroupRepository
     {
+        void Generate();
         void Create(UserGroup userGroup);
         UserGroup Read(string title);
         void Update(UserGroup userGroup);
