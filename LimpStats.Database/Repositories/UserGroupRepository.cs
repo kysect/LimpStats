@@ -11,6 +11,11 @@ namespace LimpStats.Database.Repositories
     {
         private const string FilePath = "UserGroup.json";
 
+        public void Generate()
+        {
+            var s = File.ReadAllText("DataTemplate.json");
+            File.WriteAllText(FilePath, s);
+        }
         public void Create(UserGroup userGroup)
         {
             List<UserGroup> groups = ReadAll();

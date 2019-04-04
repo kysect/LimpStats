@@ -17,5 +17,9 @@ namespace LimpStats.Database
         {
             UserGroupRepository.DeleteAll();
         }
+        public static void Generate()
+        {
+            UserGroupRepository.Generate();
+        }
     }
 }

@@ -27,6 +27,7 @@
                     VerticalContentAlignment="Center"
                     GotFocus="FilePath_OnGotFocus"
                     KeyDown="FilePath_OnKeyDown"
+                    
                     Text="NameCard"
                     Foreground="Azure"
                     TextChanged="FilePath_OnTextChanged"
