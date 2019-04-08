@@ -54,34 +54,37 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         {
             if (e.Key == Key.Enter)
             {
-                IsEnabled = false;
-                string num = Core.Tools.Tools.GenerateNextNumber(NumberTask.Content.ToString());
-                _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
-                try
+                BlockProblem(sender, e);
+            }
+        }
+        private void BlockProblem(object sender, RoutedEventArgs e)
+        {
+            TaskNumberInput.IsEnabled = false;
+            DomainBox.IsEnabled = false;
+            string num = Core.Tools.Tools.GenerateNextNumber(NumberTask.Content.ToString());
+            _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
+            try
+            {
+                switch (DomainBox.Text)
                 {
-                    switch (DomainBox.Text)
-                    {
-                        case "Eolymp":
+                    case "Eolymp":
                         {
                             int n = int.Parse(TaskNumberInput.Text);
                             TaskName.Content = Parser.GetTitleTask(n);
                         }
-                            break;
-                        case "Codeforces":
+                        break;
+                    case "Codeforces":
                         {
-                            TaskName.Content = CodeforcesProfileParser.GetTitleName(Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1)), TaskNumberInput.Text[TaskNumberInput.Text.Length-1].ToString());
+                            TaskName.Content = CodeforcesProfileParser.GetTitleName(Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1)), TaskNumberInput.Text[TaskNumberInput.Text.Length - 1].ToString());
                         }
-                            break;
-                    }
+                        break;
                 }
-                catch (Exception exception)
-                {
-                    MessageBox.Show($"{exception}");
-                }
-
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"{exception}");
             }
         }
-        
 
    
     }

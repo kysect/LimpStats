@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,9 +50,20 @@ namespace LimpStats.Client.CustomControls.ForStudents
             }
 
             Task.Run(() => GetUserProfileData());
-
             //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             //StudentList.SelectionChanged += LimpUserStatistic;
+        }
+        private static int LongRunningMethod()
+        {
+            var r = new Random();
+
+            var randomNumber = r.Next(1, 10);
+
+            var delayInMilliseconds = randomNumber * 1000;
+
+            Task.Delay(delayInMilliseconds).Wait();
+
+            return randomNumber;
         }
         private void GetUserProfileData()
         {

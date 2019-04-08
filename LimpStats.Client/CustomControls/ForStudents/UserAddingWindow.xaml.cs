@@ -27,11 +27,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
             //TODO: проверка существования codeforces-аккаунта
             if (Parser.IsUserExist(username) && _users.Count(f => f.Username == username) == 0)
             {
-                
-                MessageBox.Show($"{username} добавлен");
-                UsernameEolymp = username;
-                UsernameCodeforces = LoginCodeforcesTextBox.Text;
                 Name = NameBox.Text;
+                MessageBox.Show($"{Name} добавлен");
+                UsernameEolymp = username;
+                UsernameCodeforces = LoginCodeforcesTextBox.Text;       
                 Close();
             }
             else

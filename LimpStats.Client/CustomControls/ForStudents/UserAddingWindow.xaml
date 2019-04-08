@@ -13,6 +13,7 @@
 
         <TextBox
             Name="LoginEolympTextBox"
+            TabIndex="1"
             Height="34"
             MinWidth="100"
             HorizontalAlignment="Center"
@@ -23,9 +24,11 @@
             TextWrapping="Wrap" Foreground="AliceBlue" Canvas.Left="182" Canvas.Top="57"/>
         <Button
             Click="ValidateLogin"
+            TabIndex="3"
             Content="Add" Canvas.Left="182" Canvas.Top="166" Width="100" />
         <TextBox
             x:Name="LoginCodeforcesTextBox"
+            TabIndex="2"
             Height="26"
             MinWidth="100"
 
@@ -37,6 +40,7 @@
             TextWrapping="Wrap" Foreground="AliceBlue" Canvas.Left="182" Canvas.Top="106"/>
         <TextBox
             x:Name="NameBox"
+            TabIndex="0"
             Height="26"
             MinWidth="100"
             Margin="182,16,182,0"
