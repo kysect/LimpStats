@@ -36,7 +36,12 @@
         <Label
             x:Name="TaskName"
             Height="30"
-            Margin="10,10"
-            Foreground="AliceBlue" Width="93" />
+           
+            Foreground="AliceBlue" Width="208" />
+        <Button 
+         Content="Add"
+            Click="BlockProblem"
+            Margin="0,9,0,8.6"
+            />
     </StackPanel>
 </UserControl>
