@@ -34,6 +34,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             CardTitle.DataContext = _studentGroupTitle;
             _group = DataProvider.UserGroupRepository.Read(studentGroupTitle);
 
+            // TODO: Remove?
             if (_group == null)
             {
                 _group = new UserGroup
@@ -86,14 +87,13 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             Task.Run(() => Update());
         }
+
         private void Update()
         {
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
 
             MultiThreadParser.LoadProfiles(_group);
-            IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
-
-            studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            IEnumerable<ProfilePreviewData> studentsData = ProfilePreviewData.GetProfilePreview(_group);
 
             ThreadingTools.ExecuteUiThread(() => Panel.Children.Clear());
             foreach (var currRes in studentsData)
@@ -106,27 +106,6 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             DataProvider.UserGroupRepository.Update(_group);
             //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
-        }
-
-        private void LimpUserStatistic(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count == 1)
-            {
-                if (e.AddedItems[0] is ProfilePreviewData user)
-                {
-                    MessageBox.Show($"{user.Username} has {user.Points} points.");
-                }
-            }
-        }
-
-        private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var userAdding = new UserAddingWindow(_group.Users);
-            userAdding.ShowDialog();
-
-                _group.Users.Add(new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
-                DataProvider.UserGroupRepository.Update(_group);
-                //JsonBackupManager.SaveCardUserList(_group, _studentGroupTitle);
         }
 
         private void CardTitle_OnClick(object sender, RoutedEventArgs e)

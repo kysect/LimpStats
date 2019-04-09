@@ -42,10 +42,10 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
             if (_userGroup.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))
-                {
-                    MessageBox.Show($"The name of group must be unique!");
-                    return;
-                }
+            {
+                MessageBox.Show("The name of group must be unique!");
+                return;
+            }
             var packWindow = new ProblemPackWindow(PackTitleInput.Text, _userGroup, _navigateService);
             packWindow.Show();
            PackListPanel.Children.Add(new ProblemTasksPreview(packWindow.Group, packWindow.PackTitle, _navigateService));

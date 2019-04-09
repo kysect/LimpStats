@@ -5,10 +5,10 @@ namespace LimpStats.Model
 {
     public class LimpUser
     {
-        public LimpUser(string eolymplogin = null, string codeforcesHandle = null, string username = null)
+        public LimpUser(string eolympLogin, string codeforcesHandle, string username)
         {
             Username = username;
-            EOlympLogin = eolymplogin;
+            EOlympLogin = eolympLogin;
             CodeforcesHandle = codeforcesHandle;
 
             EOlimpProblemsResult = new Dictionary<int, int>();

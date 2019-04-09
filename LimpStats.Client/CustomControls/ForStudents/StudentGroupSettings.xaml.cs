@@ -49,7 +49,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
             if (userAdding.NameBox.Text != "Name")
             {
                 _group.Users.Add(
-                    new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Name));
+                    new LimpUser(userAdding.UsernameEolymp, userAdding.UsernameCodeforces, userAdding.Nickname));
                 DataProvider.UserGroupRepository.Update(_group);
                 Update();
             }

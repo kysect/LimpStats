@@ -105,12 +105,12 @@ namespace LimpParse.TelegramBot
             {
                 throw new NotImplementedException();
                 string username = e.Message.Text.Replace("/adduser -", "");
-                var elimpUser = new LimpUser(username);
-                Parser.LoadProfileData(elimpUser);
-                foreach (KeyValuePair<int, int> valuePair in elimpUser.EOlimpProblemsResult)
-                {
-                    //UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
-                }
+                //var elimpUser = new LimpUser(username);
+                //Parser.LoadProfileData(elimpUser);
+                //foreach (KeyValuePair<int, int> valuePair in elimpUser.EOlimpProblemsResult)
+                //{
+                //    //UserRepositoriy.UpdateAllInfoDB(User, valuePair.Key, valuePair.Value);
+                //}
             }
         }
 
