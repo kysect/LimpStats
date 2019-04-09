@@ -10,10 +10,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
 {
     public partial class UserAddingWindow : Window
     {
-        public string Name;
+        public string Nickname;
         public string UsernameEolymp;
         public string UsernameCodeforces;
-        private List<LimpUser> _users;
+        private readonly List<LimpUser> _users;
 
         public UserAddingWindow(List<LimpUser> users)
         {
@@ -27,8 +27,8 @@ namespace LimpStats.Client.CustomControls.ForStudents
             //TODO: проверка существования codeforces-аккаунта
             if (Parser.IsUserExist(username) && _users.Count(f => f.Username == username) == 0)
             {
-                Name = NameBox.Text;
-                MessageBox.Show($"{Name} добавлен");
+                Nickname = NameBox.Text;
+                MessageBox.Show($"{Nickname} добавлен");
                 UsernameEolymp = username;
                 UsernameCodeforces = LoginCodeforcesTextBox.Text;       
                 Close();
