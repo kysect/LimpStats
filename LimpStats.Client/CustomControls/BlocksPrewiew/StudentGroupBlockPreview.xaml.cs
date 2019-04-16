@@ -24,6 +24,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             List<UserGroup> groups = DataProvider.UserGroupRepository.ReadAll();
             foreach (UserGroup group in groups)
             {
+
                 var preview = new StudentGroupPreview(group.Title, _navigateService);
                 ThreadingTools.ExecuteUiThread(() => GroupListPanel.Children.Add(preview));
             }

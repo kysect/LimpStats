@@ -276,16 +276,78 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="ExcelButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                            x:Name="Border"                      
+                            Background="#333333"/>
+                        <Image 
+                            x:Name="icon"
+                            Stretch="Fill" 
+                            Height="10"
+                            Width="10" 
+                            HorizontalAlignment="Center" 
+                            Source="/LimpStats.Client;component/icons/ExcelIcon.png" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter
+                                Property="Background"
+                                TargetName="Border"
+                                Value="#4C4C4C" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter
+                                Property="Background"
+                                TargetName="Border"
+                                Value="#4C4C4C" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ShareButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                            x:Name="Border"                      
+                            Background="#333333"/>
+                        <Image 
+                            x:Name="icon"
+                            Stretch="Fill" 
+                            Height="10"
+                            Width="10" 
+                            HorizontalAlignment="Center" 
+                            Source="/LimpStats.Client;component/icons/ShareIcon.png" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter
+                                Property="Background"
+                                TargetName="Border"
+                                Value="#4C4C4C" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter
+                                Property="Background"
+                                TargetName="Border"
+                                Value="#4C4C4C" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="CardTitle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

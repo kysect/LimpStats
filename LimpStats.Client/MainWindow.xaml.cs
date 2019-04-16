@@ -14,6 +14,7 @@ namespace LimpStats.Client
         public MainWindow()
         {
             InitializeComponent();
+    
             var studentGroupBlockEolymp = new StudentGroupBlockPreview(this);
             var studentGroupTabEolymp = new StudentGroupTab(studentGroupBlockEolymp);
             OpenView(studentGroupTabEolymp);
