@@ -11,6 +11,9 @@ using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
+using System.IO;
+using OfficeOpenXml;
+using Microsoft.Win32;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
@@ -115,6 +118,34 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             _navigateService.AddToViewList(_studentGroupTitle, studentPackTab);
             _navigateService.OpenView(studentPackTab);
+        }
+
+        private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            var studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
+            {
+                var ws = excel.Workbook.Worksheets.Add("StudentGroup");
+                int i = 1;
+                foreach(var curRes in studentsData)
+                {
+                    ws.Cells[i, 1].Value = curRes.Username;
+                    ws.Cells[i, 2].Value = curRes.Points;
+                    i++;
+                }
+                excel.Save();
+            }
+
+
+        }
+        private static string SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                return saveFileDialog.FileName;
+            }
+            return null;
         }
     }
 }

@@ -13,16 +13,39 @@
                 Orientation="Horizontal">
             <Button
                     x:Name="CardTitle"
-                    Width="140"
+                    Width="120"
                     VerticalAlignment="Stretch"
                     Background="#333333"
                     Click="CardTitle_OnClick"
                     DataContext="GroupTitle"
                     BorderBrush="{x:Null}"
                     Style="{DynamicResource CardTitle}" />
+            <StackPanel>
+                <Button
+                        x:Name="SaveToExcelButton"
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Stretch"
+                        Background="#333333"
+                        Click="SaveToExcelButton_Click"
+                        DataContext="GroupTitle"
+                        BorderBrush="{x:Null}"
+                        Style="{DynamicResource ExcelButton}"/>
+                <Button
+                        x:Name="ShareButton"
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Stretch"
+                        Background="#333333"
+                        Click="CardTitle_OnClick"
+                        DataContext="GroupTitle"
+                        BorderBrush="{x:Null}"
+                        Style="{DynamicResource ShareButton}"/>
+            </StackPanel>
             <Button
                     x:Name="UpdateButton"
                     Width="40"
+                
                     HorizontalAlignment="Left"
                     Click="ButtonClick_Update"
                     BorderBrush="{x:Null}"
