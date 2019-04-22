@@ -23,20 +23,39 @@ namespace LimpStats.Client.CustomControls.ForStudents
         
         private void ValidateLogin(object sender, EventArgs e)
         {
-            string username = LoginEolympTextBox.Text;
-            //TODO: проверка существования codeforces-аккаунта
-            if (Parser.IsUserExist(username) && _users.Count(f => f.Username == username) == 0)
+            string EolympLogin = LoginEolympTextBox.Text;
+            string CodeforcesHandle = LoginCodeforcesTextBox.Text;
+            string nickname = NameBox.Text;
+            if (!Parser.IsUserExist(EolympLogin) && _users.Count(f => f.EOlympLogin == EolympLogin) != 0)
             {
-                Nickname = NameBox.Text;
-                MessageBox.Show($"{Nickname} добавлен");
-                UsernameEolymp = username;
-                UsernameCodeforces = LoginCodeforcesTextBox.Text;       
-                Close();
+                MessageBox.Show("Неверный логин Eolymp");
+                return;
+            }
+            //TODO: проверка существования codeforces-аккаунта
+            if (Parser.IsUserExist(EolympLogin) && _users.Count(f => f.CodeforcesHandle == CodeforcesHandle) == 0)
+            {
+                //TODO: какая-то галочка проверки возле текстбокса
             }
             else
             {
-                MessageBox.Show("Неверный логин или пользователь уже добавлен в группу");
+                MessageBox.Show("Неверный логин Codeforces или пользователь с таким хэндлом уже существует");
+                return;
             }
+            if(_users.Count(f => f.Username == nickname) == 0)
+            {
+                //TODO: какая-то галочка проверки возле текстбокса
+            }
+            else
+            {
+                MessageBox.Show("Пользователь с таким ником уже существует");
+                return;
+            }
+
+            Nickname = nickname;
+            MessageBox.Show($"{Nickname} добавлен");
+            UsernameEolymp = EolympLogin;
+            UsernameCodeforces = LoginCodeforcesTextBox.Text;
+            Close();
         }
 
         private void LoginTextBox_OnGotFocus(object sender, RoutedEventArgs e)

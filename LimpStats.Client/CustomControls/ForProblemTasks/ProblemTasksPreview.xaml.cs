@@ -97,12 +97,17 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             _navigateService.AddToViewList(CardTitle.DataContext.ToString(), resultGridBlock);
             _navigateService.OpenView(resultGridBlock);
-
+            
         }
 
         private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
         {
             var studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
+           
+            foreach (var curres in studentsData)
+            {
+
+            }
             using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
             {
                 var ws = excel.Workbook.Worksheets.Add("StudentGroup");

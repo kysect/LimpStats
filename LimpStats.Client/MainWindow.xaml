@@ -8,7 +8,7 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
-    Height="535"
+    Height="450"
     Width="768"
     mc:Ignorable="d">
     <Grid
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel
             x:Name="NavigatePanel"
-            Height="506"
+            Height="420"
             Background="#333333"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -34,7 +34,7 @@
         <UserControl
             x:Name="MainWindowContent"
             Grid.Column="1"
-            Height="500"
+            Height="420"
             Width="500"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"

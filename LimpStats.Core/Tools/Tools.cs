@@ -7,7 +7,13 @@ using System.Net.NetworkInformation;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Microsoft.Win32;
-
+using System.Windows;
+using LimpStats.Model.Problems;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using LimpStats.Core.Parsers;
+using LimpStats.Database;
 namespace LimpStats.Core.Tools
 {
     public static class Tools
@@ -60,7 +66,72 @@ namespace LimpStats.Core.Tools
                 return false;
             }
         }
+        public static void SaveToExcel(ProblemsPack pack, List<LimpUser> users)
+        {
+            var fileinfo = SaveFileDialog();
+            if (fileinfo == null)
+                return;
+            using (var excel = new ExcelPackage(new FileInfo(fileinfo)))
+            {
+                var ws = excel.Workbook.Worksheets.Add("StudentGroup");
+                int i = 2;
+                foreach (Problem problem in pack.Problems)
+                {
+                    ws.Cells[1, i].Value = problem.Title;
+                    i++;
+                }
+                i = 2;
+                foreach (LimpUser user in users)
+                {
+                    int k = 2;
+                    ws.Cells[i, 1].Value = user.Username;
+                    foreach (Problem problem in pack.Problems)
+                    {
+                        ws.Cells[i, k].Value = problem.GetUserResult(user);
+                        k++;
+                    }
+                    i++;
+                }
 
-          
+                excel.Save();
+            }
+        }
+        //public static void SaveToExcel(ProfilePreviewData studentsData)
+        //{
+        //    var studentsData = ProfilePreviewData.GetProfilePreview(_group);
+        //    using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
+        //    {
+        //        var ws = excel.Workbook.Worksheets.Add("StudentGroup");
+        //        int i = 1;
+        //        foreach (var curRes in studentsData)
+        //        {
+        //            ws.Cells[i, 1].Value = curRes.Username;
+        //            ws.Cells[i, 2].Value = curRes.Points;
+        //            i++;
+        //        }
+        //        excel.Save();
+        //    }
+
+        //}
+        
+        private static string SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            saveFileDialog.DefaultExt = "xlsx";
+            saveFileDialog.AddExtension = true;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (saveFileDialog.CheckFileExists)
+                {
+                    MessageBox.Show("Incorrect file name");
+                }
+                else
+                    return saveFileDialog.FileName;
+
+            }
+            return null;
+        }
+
     }
 }
