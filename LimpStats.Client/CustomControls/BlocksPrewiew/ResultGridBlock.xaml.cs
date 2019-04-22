@@ -7,6 +7,7 @@ using LimpStats.Model.Problems;
 using System.IO;
 using OfficeOpenXml;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
@@ -34,7 +35,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             {
                 table.Columns.Add(problem.Title);
             }
-
+            table.Columns.Add("Sum");
             foreach (LimpUser user in _users)
             {
                 var data = new List<object> {user.Username};
@@ -42,7 +43,8 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
                 {
                     data.Add(problem.GetUserResult(user));
                 }
-
+                //знаю что дичь, оставлю TODO
+                data.Add(_pack.GetResults(_users).Find(e => e.Username == user.Username).SumOfPoint);
                 table.Rows.Add(data.ToArray());
             }
 
@@ -51,43 +53,8 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
 
         private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-      
-           
-            using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
-            {
-                var ws = excel.Workbook.Worksheets.Add("StudentGroup");
-                int i = 2;
-                foreach (Problem problem in _pack.Problems)
-                {
-                    ws.Cells[1, i].Value = problem.Title;
-                    i++;
-                }
-                i = 2;
-                foreach (LimpUser user in _users)
-                {
-                    int k = 2;
-                    ws.Cells[i, 1].Value = user.Username;
-                    foreach (Problem problem in _pack.Problems)
-                    {
-                        ws.Cells[i, k].Value = problem.GetUserResult(user);
-                        k++;
-                    }           
-                    i++;
-                }
-               
-                excel.Save();
-            }
-
-
+            Core.Tools.Tools.SaveToExcel(_pack, _users);
         }
-        private static string SaveFileDialog()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                return saveFileDialog.FileName;
-            }
-            return null;
-        }
+        
     }
 }

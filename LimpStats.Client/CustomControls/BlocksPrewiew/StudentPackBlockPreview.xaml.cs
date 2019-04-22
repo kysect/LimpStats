@@ -41,6 +41,11 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         }
         public void OnClick_UpdatePanel(object sender, RoutedEventArgs e)
         {
+            if(PackTitleInput.Text == "Pack name")
+            {
+                MessageBox.Show("Write nameo of group");
+                return;
+            }
             if (_userGroup.ProblemsPacks.Any(p => p.Title == PackTitleInput.Text))
             {
                 MessageBox.Show("The name of group must be unique!");

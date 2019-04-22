@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             Width="180"
+             Width="210"
              Height="270"
              mc:Ignorable="d">
-    <StackPanel Background="#333333" Height="270" Width="180">
+    <StackPanel Background="#333333" Height="270" Width="200">
         <StackPanel
                 Height="40"
                 Orientation="Horizontal">
             <Button
                     x:Name="CardTitle"
-                    Width="120"
+                    Width="140"
                     VerticalAlignment="Stretch"
                     Background="#333333"
                     Click="CardTitle_OnClick"
@@ -51,7 +51,7 @@
         <StackPanel
             x:Name="Panel"
             Height="205"
-            Width="180"
+            Width="200"
             VerticalAlignment="Bottom"
             Orientation="Vertical" />
     </StackPanel>

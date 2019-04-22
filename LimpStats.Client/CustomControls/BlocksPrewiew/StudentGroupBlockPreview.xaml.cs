@@ -33,6 +33,11 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
         {
             UserGroup group = DataProvider.UserGroupRepository.Read(FilePath.Text);
             //var cards = JsonBackupManager.LoadCardName();
+            if (FilePath.Text == "NameCard")
+            {
+                MessageBox.Show("Write nameo of group");
+                return;
+            }
             if (group != null)
             {
                 MessageBox.Show($"The name of group must be unique!");

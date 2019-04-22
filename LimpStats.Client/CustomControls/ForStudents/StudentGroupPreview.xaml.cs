@@ -122,30 +122,22 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
         private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            var studentsData = ProfilePreviewData.GetProfilePreview(_group);
-            using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
-            {
-                var ws = excel.Workbook.Worksheets.Add("StudentGroup");
-                int i = 1;
-                foreach(var curRes in studentsData)
-                {
-                    ws.Cells[i, 1].Value = curRes.Username;
-                    ws.Cells[i, 2].Value = curRes.Points;
-                    i++;
-                }
-                excel.Save();
-            }
-
+    //        var studentsData = ProfilePreviewData.GetProfilePreview(_group);
+            
+    //        using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
+    //        {
+    //            var ws = excel.Workbook.Worksheets.Add("StudentGroup");
+    //            int i = 1;
+    //            foreach (var curRes in studentsData)
+    //            {
+    //                ws.Cells[i, 1].Value = curRes.Username;
+    //                ws.Cells[i, 2].Value = curRes.Points;
+    //                i++;
+    //            }
+    //            excel.Save();
+    //        }
 
         }
-        private static string SaveFileDialog()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                return saveFileDialog.FileName;
-            }
-            return null;
-        }
+       
     }
 }
