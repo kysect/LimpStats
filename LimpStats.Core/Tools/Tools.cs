@@ -118,7 +118,7 @@ namespace LimpStats.Core.Tools
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            saveFileDialog.DefaultExt = "xlsx";
+            saveFileDialog.DefaultExt = ".xlsx";
             saveFileDialog.AddExtension = true;
             if (saveFileDialog.ShowDialog() == true)
             {
