@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeforcesApiWrapper;
 using CodeforcesApiWrapper.Types;
+using LimpStats.Model;
 
 namespace LimpStats.Core.CodeforcesParser
 {
@@ -34,8 +35,7 @@ namespace LimpStats.Core.CodeforcesParser
         {
             if (response.Status == "FAILED")
             {
-                //TODO: Custom exception
-                throw new Exception(response.Comment);
+                throw new LimpStatsException(response.Comment);
             }
         }
 
