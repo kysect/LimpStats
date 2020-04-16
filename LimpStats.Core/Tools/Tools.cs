@@ -11,7 +11,6 @@ using System.Windows;
 using LimpStats.Model.Problems;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
 namespace LimpStats.Core.Tools
@@ -66,12 +65,9 @@ namespace LimpStats.Core.Tools
                 return false;
             }
         }
-        public static void SaveToExcel(ProblemsPack pack, List<LimpUser> users)
+        public static void SaveToExcel(ProblemsPack pack, List<LimpUser> users, string fileName)
         {
-            var fileinfo = SaveFileDialog();
-            if (fileinfo == null)
-                return;
-            using (var excel = new ExcelPackage(new FileInfo(fileinfo)))
+            using (var excel = new ExcelPackage(new FileInfo(fileName)))
             {
                 var ws = excel.Workbook.Worksheets.Add("StudentGroup");
                 int i = 2;
@@ -113,25 +109,5 @@ namespace LimpStats.Core.Tools
         //    }
 
         //}
-        
-        private static string SaveFileDialog()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            saveFileDialog.DefaultExt = ".xlsx";
-            saveFileDialog.AddExtension = true;
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                if (saveFileDialog.CheckFileExists)
-                {
-                    MessageBox.Show("Incorrect file name");
-                }
-                else
-                    return saveFileDialog.FileName;
-
-            }
-            return null;
-        }
-
     }
 }
