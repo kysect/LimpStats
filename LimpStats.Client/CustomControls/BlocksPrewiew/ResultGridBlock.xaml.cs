@@ -53,8 +53,31 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
 
         private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            Core.Tools.Tools.SaveToExcel(_pack, _users);
+            string fileName = SaveFileDialog();
+            if (fileName == null)
+                return;
+
+            Core.Tools.Tools.SaveToExcel(_pack, _users, fileName);
         }
-        
+
+        private static string SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            saveFileDialog.DefaultExt = ".xlsx";
+            saveFileDialog.AddExtension = true;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (saveFileDialog.CheckFileExists)
+                {
+                    MessageBox.Show("Incorrect file name");
+                }
+                else
+                    return saveFileDialog.FileName;
+
+            }
+            return null;
+        }
+
     }
 }
