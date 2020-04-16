@@ -5,13 +5,11 @@ using LimpStats.Model;
 
 namespace LimpStats.Core.Parsers
 {
-    //TODO: rename to ElimpParser
-    //TODO: Add interface IProfileParser
-    public static class Parser
+    public class ElimpParser : IProblemParser
     {
-        private const string DomainUrl = "https://www.e-olymp.com/ru";
+        public const string DomainUrl = "https://www.e-olymp.com/ru";
 
-        public static bool IsUserExist(string username)
+        public bool IsUserExist(string username)
         {
             var client = new HtmlWeb();
             string link = DomainUrl + $"/users/{username}";
@@ -19,26 +17,23 @@ namespace LimpStats.Core.Parsers
             return client.Load(link).Text.Contains($"{username}");
         }
 
-        public static int LoadSolutionCount(string username)
+        public string GetProblemTitle(string problemIdentifier)
         {
-            var client = new HtmlWeb();
-            string link = DomainUrl + $"/users/{username}";
+            int id = int.Parse(problemIdentifier);
 
-            HtmlNode floatRow = client.Load(link)
+            string url = DomainUrl + $"/problems/{id}";
+            var web = new HtmlWeb();
+            HtmlNode doc = web.Load(url)
                 .DocumentNode
-                .SelectSingleNode("//*[contains(@class,'eo-flex-row')]");
+                .SelectSingleNode("//*[contains(@class,'eo-paper__content')]");
 
-            return int.Parse(floatRow
-                .ChildNodes[1]
-                .ChildNodes[0]
-                .ChildNodes[1]
-                .InnerText);
+            return doc.ChildNodes[0].InnerHtml ?? throw new ParserException($"Task with id={id} wasn't found");
         }
 
-        public static void LoadProfileData(LimpUser user)
+        public void LoadUserData(LimpUser user)
         {
             var client = new HtmlWeb();
-            string link = DomainUrl + $"/users/{user.EOlympLogin}/punchcard";
+            string link = ElimpParser.DomainUrl + $"/users/{user.EOlympLogin}/punchcard";
 
             Dictionary<int, int> userResult = client.Load(link)
                 .GetElementbyId("punch-card")
@@ -67,15 +62,20 @@ namespace LimpStats.Core.Parsers
             return int.Parse(stringRes);
         }
 
-        public static string GetTitleTask(int number)
+        public static int LoadSolutionCount(string username)
         {
-            string url = DomainUrl + $"/problems/{number}";
-            var web = new HtmlWeb();
-            HtmlNode doc = web.Load(url)
-                .DocumentNode
-                .SelectSingleNode("//*[contains(@class,'eo-paper__content')]");
+            var client = new HtmlWeb();
+            string link = DomainUrl + $"/users/{username}";
 
-            return doc.ChildNodes[0].InnerHtml ?? throw new ParserException($"Task with id={number} wasn't found");
+            HtmlNode floatRow = client.Load(link)
+                .DocumentNode
+                .SelectSingleNode("//*[contains(@class,'eo-flex-row')]");
+
+            return int.Parse(floatRow
+                .ChildNodes[1]
+                .ChildNodes[0]
+                .ChildNodes[1]
+                .InnerText);
         }
     }
 }

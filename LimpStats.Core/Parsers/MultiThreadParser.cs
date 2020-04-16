@@ -10,17 +10,22 @@ namespace LimpStats.Core.Parsers
 
         public static void LoadProfiles(UserGroup group)
         {
-            Parallel.ForEach(group.Users, TryLoad);
+            var elimpParser = new ElimpParser();
+            var cfParser = new CodeforcesProfileParser();
+            Parallel.ForEach(group.Users, u =>
+            {
+                TryLoad(u, elimpParser);
+                TryLoad(u, cfParser);
+            });
         }
 
-        private static void TryLoad(LimpUser user)
+        private static void TryLoad(LimpUser user, IProblemParser parser)
         {
             for (var i = 0; i < MaxRequestPerUserCount; i++)
             {
                 try
                 {
-                    Parser.LoadProfileData(user);
-                    user.CodeforcesSubmissions = CodeforcesParser.CodeforcesProfileParser.GetUserSolvedProblem(user.CodeforcesHandle);
+                    parser.LoadUserData(user);
                     return;
                 }
                 catch (ParserException)
