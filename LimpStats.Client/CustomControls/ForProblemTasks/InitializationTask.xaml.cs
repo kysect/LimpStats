@@ -2,9 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
-using LimpStats.Model;
 using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -56,22 +54,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             try
             {
                 Domain domain = DomainExtensions.Parse(DomainBox.Text);
-                switch (domain)
-                {
-                    case Domain.EOlymp:
-                        int n = int.Parse(TaskNumberInput.Text);
-                        TaskName.Content = Parser.GetTitleTask(n);
-                        break;
-
-                    case Domain.Codeforces:
-                        int contestId = Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1));
-                        string letter = TaskNumberInput.Text[TaskNumberInput.Text.Length - 1].ToString();
-                        TaskName.Content = CodeforcesProfileParser.GetTitleName(contestId, letter);
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException(domain.ToString());
-                }
+                IProblemParser parser = ProblemParserExtensions.GetForDomain(domain);
+                TaskName.Content = parser.GetProblemTitle(TaskNumberInput.Text);
             }
             catch (Exception exception)
             {

@@ -109,7 +109,8 @@ namespace LimpParse.TelegramBot
 
         private static string GenerateMessage(List<LimpUser> users)
         {
-            users.ForEach(Parser.LoadProfileData);
+            var parser = new ElimpParser();
+            users.ForEach(parser.LoadUserData);
             IEnumerable<string> res = users
                 .OrderByDescending(e => e.CompletedTaskCount())
                 .Select(GenerateDayResults);

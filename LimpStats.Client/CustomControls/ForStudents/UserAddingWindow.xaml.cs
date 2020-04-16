@@ -26,22 +26,26 @@ namespace LimpStats.Client.CustomControls.ForStudents
             string eolympLogin = LoginEolympTextBox.Text;
             string codeforcesHandle = LoginCodeforcesTextBox.Text;
             string nickname = NameBox.Text;
-            if (!Parser.IsUserExist(eolympLogin) && _users.Count(f => f.EOlympLogin == eolympLogin) != 0)
+
+            var elimpParser = new ElimpParser();
+            var cfParser = new CodeforcesProfileParser();
+            
+
+            if (!elimpParser.IsUserExist(eolympLogin)
+                || _users.Any(f => f.EOlympLogin == eolympLogin))
             {
-                MessageBox.Show("Неверный логин Eolymp");
+                MessageBox.Show("Неверный логин Eolymp или пользователь с таким хэндлом уже добавлен");
                 return;
             }
-            //TODO: проверка существования codeforces-аккаунта
-            if (Parser.IsUserExist(eolympLogin) && _users.Count(f => f.CodeforcesHandle == codeforcesHandle) == 0)
+
+            if (!cfParser.IsUserExist(codeforcesHandle)
+                || _users.Any(f => f.CodeforcesHandle == codeforcesHandle))
             {
-                //TODO: какая-то галочка проверки возле текстбокса
-            }
-            else
-            {
-                MessageBox.Show("Неверный логин Codeforces или пользователь с таким хэндлом уже существует");
+                MessageBox.Show("Неверный логин Codeforces или пользователь с таким хэндлом уже добавлен");
                 return;
             }
-            if(_users.Count(f => f.Username == nickname) == 0)
+
+            if(_users.All(f => f.Username != nickname))
             {
                 //TODO: какая-то галочка проверки возле текстбокса
             }

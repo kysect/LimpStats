@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
@@ -13,8 +12,6 @@ namespace LimpParse.ConsoleApp
     {
         private static void Main()
         {
-            CodeforcesProfileParser.GetTitleName(34, "A");
-
             UserGroup group = TemplatesFactory.UserGroup();
             MultiThreadParser.LoadProfiles(group);
 
