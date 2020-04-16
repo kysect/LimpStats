@@ -23,16 +23,16 @@ namespace LimpStats.Client.CustomControls.ForStudents
         
         private void ValidateLogin(object sender, EventArgs e)
         {
-            string EolympLogin = LoginEolympTextBox.Text;
-            string CodeforcesHandle = LoginCodeforcesTextBox.Text;
+            string eolympLogin = LoginEolympTextBox.Text;
+            string codeforcesHandle = LoginCodeforcesTextBox.Text;
             string nickname = NameBox.Text;
-            if (!Parser.IsUserExist(EolympLogin) && _users.Count(f => f.EOlympLogin == EolympLogin) != 0)
+            if (!Parser.IsUserExist(eolympLogin) && _users.Count(f => f.EOlympLogin == eolympLogin) != 0)
             {
                 MessageBox.Show("Неверный логин Eolymp");
                 return;
             }
             //TODO: проверка существования codeforces-аккаунта
-            if (Parser.IsUserExist(EolympLogin) && _users.Count(f => f.CodeforcesHandle == CodeforcesHandle) == 0)
+            if (Parser.IsUserExist(eolympLogin) && _users.Count(f => f.CodeforcesHandle == codeforcesHandle) == 0)
             {
                 //TODO: какая-то галочка проверки возле текстбокса
             }
@@ -53,7 +53,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             Nickname = nickname;
             MessageBox.Show($"{Nickname} добавлен");
-            UsernameEolymp = EolympLogin;
+            UsernameEolymp = eolympLogin;
             UsernameCodeforces = LoginCodeforcesTextBox.Text;
             Close();
         }

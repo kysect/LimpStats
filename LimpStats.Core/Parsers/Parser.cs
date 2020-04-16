@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using LimpStats.Model;
 
 namespace LimpStats.Core.Parsers
 {
+    //TODO: rename to ElimpParser
+    //TODO: Add interface IProfileParser
     public static class Parser
     {
         private const string DomainUrl = "https://www.e-olymp.com/ru";
@@ -72,11 +73,9 @@ namespace LimpStats.Core.Parsers
             var web = new HtmlWeb();
             HtmlNode doc = web.Load(url)
                 .DocumentNode
-                .SelectSingleNode("//*[contains(@class,'eo-paper__content')]"); ;
+                .SelectSingleNode("//*[contains(@class,'eo-paper__content')]");
 
             return doc.ChildNodes[0].InnerHtml ?? throw new ParserException($"Task with id={number} wasn't found");
-            
-            
         }
     }
 }

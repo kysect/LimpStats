@@ -4,10 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
-using System.IO;
-using OfficeOpenXml;
 using Microsoft.Win32;
-using System.Linq;
 
 namespace LimpStats.Client.CustomControls.BlocksPrewiew
 {
@@ -60,6 +57,7 @@ namespace LimpStats.Client.CustomControls.BlocksPrewiew
             Core.Tools.Tools.SaveToExcel(_pack, _users, fileName);
         }
 
+        //TODO: Duplicate
         private static string SaveFileDialog()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();

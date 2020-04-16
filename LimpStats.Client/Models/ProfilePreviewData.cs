@@ -9,6 +9,7 @@ namespace LimpStats.Client.Models
     {
         public string Username { get; }
         public int Points { get; }
+
         public ProfilePreviewData(string username, int points)
         {
             Username = username;

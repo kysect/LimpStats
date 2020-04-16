@@ -45,12 +45,14 @@ namespace LimpStats.Client
         {
             OpenView(_tab);
         }
+
         private void ButtonCleanCache_OnClick(object sender, RoutedEventArgs e)
         {
             DataProvider.ClearCache();
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
+
         private void ButtonGenerate_OnClick(object sender, RoutedEventArgs e)
         {
             DataProvider.Generate();

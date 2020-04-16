@@ -31,18 +31,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _group = users;
             PackTitle = packTitle;
             CardTitle.DataContext = packTitle;
-            //if (_group == null)
-            //{
-            //    _group = new StudyGroup
-            //    {
-            //        UserList = new List<LimpUser>(),
-            //        ProblemPackList = new List<ProblemPackInfo>
-            //        {
-            //            new ProblemPackInfo(PackTitle, TaskPackStorage.TasksAGroup)
-            //        }
-            //    };
-            //}
-
 
             if (_group.ProblemsPacks.Capacity != 0)
             {
@@ -76,9 +64,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             ThreadingTools.ExecuteUiThread(() => UpdateButton.IsEnabled = false);
 
             MultiThreadParser.LoadProfiles(_group);
-            IEnumerable<ProfilePreviewData> studentsData = new List<ProfilePreviewData>();
 
-            studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
+            IEnumerable<ProfilePreviewData> studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
 
             ThreadingTools.ExecuteUiThread(() => Panel.Children.Clear());
 
@@ -104,10 +91,6 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         {
             var studentsData = ProfilePreviewData.GetProfilePackPreview(_group, PackTitle);
            
-            foreach (var curres in studentsData)
-            {
-
-            }
             using (var excel = new ExcelPackage(new FileInfo(SaveFileDialog() + ".xlsx")))
             {
                 var ws = excel.Workbook.Worksheets.Add("StudentGroup");
@@ -120,9 +103,9 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 }
                 excel.Save();
             }
-
-
         }
+
+        //TODO: Duplicate
         private static string SaveFileDialog()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -133,4 +116,4 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             return null;
         }
     }
-    }
+}

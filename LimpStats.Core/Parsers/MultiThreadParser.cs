@@ -12,6 +12,7 @@ namespace LimpStats.Core.Parsers
         {
             Parallel.ForEach(group.Users, TryLoad);
         }
+
         private static void TryLoad(LimpUser user)
         {
             for (var i = 0; i < MaxRequestPerUserCount; i++)
@@ -29,6 +30,5 @@ namespace LimpStats.Core.Parsers
             }
             throw new ParserException($"Can't load user data for {user.Username}");
         }
-
     }
 }

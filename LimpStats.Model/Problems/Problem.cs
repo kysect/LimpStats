@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +8,8 @@ namespace LimpStats.Model.Problems
     {
         public Problem()
         {
-            
         }
+
         public Problem(string title, Domain type)
         {
             Title = title;

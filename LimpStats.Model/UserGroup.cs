@@ -6,11 +6,16 @@ namespace LimpStats.Model
 {
     public class UserGroup
     {
-        public UserGroup(string title = null)
+        public UserGroup(string title) : this(title, new List<LimpUser>(), new List<ProblemsPack>())
+        {
+        }
+
+
+        public UserGroup(string title, List<LimpUser> users, List<ProblemsPack> problemsPacks)
         {
             Title = title;
-            Users = new List<LimpUser>();
-            ProblemsPacks = new List<ProblemsPack>();
+            Users = users;
+            ProblemsPacks = problemsPacks;
         }
 
         public string Title { get; set; }
