@@ -20,8 +20,7 @@ namespace LimpStats.Database.Repositories
 
             if (userGroup.ProblemsPacks.Any(p => p.Title == problemsPack.Title))
             {
-                //TODO: custom exceptions
-                throw new Exception("Pack with title already exist");
+                throw new LimpStatsException("Pack with title already exist");
             }
 
             userGroup.ProblemsPacks.Add(problemsPack);
@@ -47,8 +46,7 @@ namespace LimpStats.Database.Repositories
             int removedElementCount = userGroup.ProblemsPacks.RemoveAll(p => p.Title == problemsPack.Title);
             if (removedElementCount == 0)
             {
-                //TODO: custom exceptions
-                throw new Exception("Group not found in json");
+                throw new LimpStatsException("Group not found in json");
             }
 
             _userGroupRepository.Update(userGroup);

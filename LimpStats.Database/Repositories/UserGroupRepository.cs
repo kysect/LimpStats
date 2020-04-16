@@ -22,8 +22,7 @@ namespace LimpStats.Database.Repositories
             List<UserGroup> groups = ReadAll();
             if (groups.Any(g => g.Title == userGroup.Title))
             {
-                //TODO: custom exceptions
-                throw new Exception("Group with title already exist");
+                throw new LimpStatsException("Group with title already exist");
             }
 
             groups.Add(userGroup);
