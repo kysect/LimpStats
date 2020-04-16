@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,27 +21,31 @@ namespace LimpStats.Model.Problems
 
         public int GetUserResult(LimpUser user)
         {
-            if (Type == Domain.EOlymp)
+            switch (Type)
             {
-                user.EOlimpProblemsResult.TryGetValue(int.Parse(Title), out int points);
-                return points;
-            }
+                case Domain.EOlymp:
+                    //TODO: Handle case when problem was not found
 
-            if (Type == Domain.Codeforces)
-            {
-                return user.CodeforcesSubmissions.Contains(Title) ? 100 : 0;
-            }
+                    user.EOlimpProblemsResult.TryGetValue(int.Parse(Title), out int points);
+                    return points;
 
-            throw new ArgumentException(nameof(user));
+                case Domain.Codeforces:
+                    return user.CodeforcesSubmissions.Contains(Title) ? 100 : 0;
+
+                default:
+                    throw new ArgumentException(nameof(user));
+            }
         }
 
         public static List<Problem> CreateEOlympFromList(IEnumerable<int> problemsNumber)
         {
-            return problemsNumber.Select(num => new Problem()
-            {
-                Title = num.ToString(),
-                Type = Domain.EOlymp
-            }).ToList();
+            return problemsNumber
+                .Select(num => new Problem
+                {
+                    Title = num.ToString(),
+                    Type = Domain.EOlymp
+                })
+                .ToList();
         }
     }
 }

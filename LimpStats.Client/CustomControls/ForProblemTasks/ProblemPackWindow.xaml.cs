@@ -69,17 +69,8 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
 
             foreach (var task in taskList)
             {
-                switch (task.DomainBox.Text)
-                {
-                    case "Eolymp":
-                        problems.Add(new Problem(task.TaskNumberInput.Text, Domain.EOlymp));
-                        break;
-
-                    case "Codeforces":
-                        problems.Add(new Problem(task.TaskNumberInput.Text, Domain.Codeforces));
-                        break;
-                }
-
+                Domain domain = DomainExtensions.Parse(task.DomainBox.Text);
+                problems.Add(new Problem(task.TaskNumberInput.Text, domain));
             }
             return new ProblemsPack(PackTitle, problems);
             //var problems = Problem.CreateEOlympFromList(taskList);
