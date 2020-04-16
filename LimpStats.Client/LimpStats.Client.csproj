@@ -176,7 +176,6 @@
     </Compile>
     <Compile Include="Models\ProfilePreviewData.cs" />
     <Compile Include="Models\UserCard.cs" />
-    <Compile Include="Models\UserGroupCard.cs" />
     <Compile Include="CustomControls\ForProblemTasks\ProblemPackWindow.xaml.cs">
       <DependentUpon>ProblemPackWindow.xaml</DependentUpon>
     </Compile>

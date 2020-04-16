@@ -5,9 +5,11 @@ namespace LimpStats.Model.Problems
 {
     public class ProblemsPack
     {
-        public ProblemsPack(string title = null, List<Problem> problems = null)
+        public ProblemsPack(string title, List<Problem> problems)
         {
             Title = title;
+
+            //TODO: wtf?
             Problems = problems ?? new List<Problem>();
         }
 

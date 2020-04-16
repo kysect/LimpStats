@@ -11,10 +11,10 @@ namespace LimpStats.Client.CustomControls.ForStudents
         private UserGroup _group;
         private LimpUser _user;
         private Action _updateUI;
-        public StudentSettingsControl(LimpUser user, UserGroup group, Action updateUI)
+        public StudentSettingsControl(LimpUser user, UserGroup group, Action updateUi)
         {
             InitializeComponent();
-            _updateUI = updateUI;
+            _updateUI = updateUi;
             _group = group;
             _user = user;
             Title.Content = user.Username;

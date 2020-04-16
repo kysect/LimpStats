@@ -13,14 +13,14 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
         private ProblemsPack _pack;
         private Problem _problem;
         private Action _updateUI;
-        public ProblemSettingsControl(UserGroup group, ProblemsPack pack, Problem problem, Action updateUI)
+        public ProblemSettingsControl(UserGroup group, ProblemsPack pack, Problem problem, Action updateUi)
         {
             InitializeComponent();
             Title.Content = problem.Title;
             _group = group;
             _pack = pack;
             _problem = problem;
-            _updateUI = updateUI;
+            _updateUI = updateUi;
         }
 
         private void Update_Problem(object sender, RoutedEventArgs e)

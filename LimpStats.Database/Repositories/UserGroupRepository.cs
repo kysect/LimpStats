@@ -13,14 +13,16 @@ namespace LimpStats.Database.Repositories
 
         public void Generate()
         {
-            var s = File.ReadAllText("DataTemplate.json");
+            string s = File.ReadAllText("DataTemplate.json");
             File.WriteAllText(FilePath, s);
         }
+
         public void Create(UserGroup userGroup)
         {
             List<UserGroup> groups = ReadAll();
             if (groups.Any(g => g.Title == userGroup.Title))
             {
+                //TODO: custom exceptions
                 throw new Exception("Group with title already exist");
             }
 
@@ -51,6 +53,7 @@ namespace LimpStats.Database.Repositories
 
             WriteToJson(groups);
         }
+
         public void DeleteAll()
         {
             File.Delete(FilePath);

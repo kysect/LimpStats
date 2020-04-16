@@ -9,6 +9,7 @@ namespace LimpStats.Database
     {
         public static List<LimpUser> UserList()
         {
+            //TODO: Add feature: achievements
             return new List<LimpUser>
             {
                 //new LimpUser("Andrey2005"),
@@ -52,12 +53,9 @@ namespace LimpStats.Database
 
         public static UserGroup UserGroup()
         {
+            //TODO: remove?
             throw new NotSupportedException();
-            return new UserGroup("Testing User Group")
-            {
-                ProblemsPacks = EOlimpPacks(),
-                Users = UserList()
-            };
+            //return new UserGroup("Testing User Group", UserList(), EOlimpPacks());
         }
     }
 }

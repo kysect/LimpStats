@@ -12,7 +12,7 @@ namespace LimpStats.Model.Problems
                 .Select(problem => problem.GetUserResult(user))
                 .ToList();
 
-            return new ProblemPackResult()
+            return new ProblemPackResult
             {
                 Points =  result,
                 Username = user.Username

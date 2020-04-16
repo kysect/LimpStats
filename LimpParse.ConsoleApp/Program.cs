@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LimpStats.Core;
 using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
 using LimpStats.Database;
@@ -47,6 +46,5 @@ namespace LimpParse.ConsoleApp
 
             return output;
         }
-
     }
 }

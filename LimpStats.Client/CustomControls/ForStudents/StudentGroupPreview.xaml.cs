@@ -11,9 +11,6 @@ using LimpStats.Core.Parsers;
 using LimpStats.Database;
 using LimpStats.Model;
 using LimpStats.Model.Problems;
-using System.IO;
-using OfficeOpenXml;
-using Microsoft.Win32;
 
 namespace LimpStats.Client.CustomControls.ForStudents
 {
@@ -40,10 +37,8 @@ namespace LimpStats.Client.CustomControls.ForStudents
             // TODO: Remove?
             if (_group == null)
             {
-                _group = new UserGroup
+                _group = new UserGroup(studentGroupTitle)
                 {
-                    Title = studentGroupTitle,
-                    Users = new List<LimpUser>(),
                     ProblemsPacks = new List<ProblemsPack>
                     {
                         //new ProblemPackInfo("A", TaskPackStorage.TasksAGroup),
@@ -57,6 +52,8 @@ namespace LimpStats.Client.CustomControls.ForStudents
             //ThreadingTools.ExecuteUiThread(() => StudentList.ItemsSource = studentsData);
             //StudentList.SelectionChanged += LimpUserStatistic;
         }
+
+        //TODO: ??
         private static int LongRunningMethod()
         {
             var r = new Random();
@@ -69,6 +66,7 @@ namespace LimpStats.Client.CustomControls.ForStudents
 
             return randomNumber;
         }
+
         private void GetUserProfileData()
         {
             var studentsData = ProfilePreviewData.GetProfilePreview(_group);

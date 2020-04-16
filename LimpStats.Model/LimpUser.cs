@@ -22,9 +22,6 @@ namespace LimpStats.Model
         public Dictionary<int, int> EOlimpProblemsResult { get; set; }
         public List<string> CodeforcesSubmissions { get; set; }
 
-        public int CompletedTaskCount()
-        {
-            return EOlimpProblemsResult.Count(t => t.Value == 100);
-        }
+        public int CompletedTaskCount() => EOlimpProblemsResult.Count(t => t.Value == 100);
     }
 }

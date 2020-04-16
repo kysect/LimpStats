@@ -34,9 +34,11 @@ namespace LimpStats.Core.CodeforcesParser
         {
             if (response.Status == "FAILED")
             {
+                //TODO: Custom exception
                 throw new Exception(response.Comment);
             }
         }
+
         public static string GetTitleName(int contestId, string letter)
         {
             return      CodeforcesClient
