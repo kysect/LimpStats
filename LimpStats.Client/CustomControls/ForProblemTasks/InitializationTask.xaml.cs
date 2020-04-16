@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LimpStats.Core.CodeforcesParser;
 using LimpStats.Core.Parsers;
+using LimpStats.Model;
 using LimpStats.Model.Problems;
 
 namespace LimpStats.Client.CustomControls.ForProblemTasks
@@ -29,19 +30,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             TaskNumberInput.Text = problem.Title;
             TaskNumberInput.IsEnabled = false;
 
-            switch (problem.Type)
-            {
-                case Domain.EOlymp:
-                {
-                    DomainBox.Text = "Eolymp";
-                }
-                    break;
-                case Domain.Codeforces:
-                {
-                    DomainBox.Text = "Codeforces";
-                }
-                    break;
-            }
+            DomainBox.Text = problem.Type.ToUiString();
             DomainBox.IsEnabled = false;
             
             _problemPackWindow = problemPackWindow;
@@ -57,6 +46,7 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 BlockProblem(sender, e);
             }
         }
+
         private void BlockProblem(object sender, RoutedEventArgs e)
         {
             TaskNumberInput.IsEnabled = false;
@@ -65,19 +55,22 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
             _problemPackWindow.Panel.Children.Add(new ProblemTaskPreview(_problemPackWindow, num));
             try
             {
-                switch (DomainBox.Text)
+                Domain domain = DomainExtensions.Parse(DomainBox.Text);
+                switch (domain)
                 {
-                    case "Eolymp":
-                        {
-                            int n = int.Parse(TaskNumberInput.Text);
-                            TaskName.Content = Parser.GetTitleTask(n);
-                        }
+                    case Domain.EOlymp:
+                        int n = int.Parse(TaskNumberInput.Text);
+                        TaskName.Content = Parser.GetTitleTask(n);
                         break;
-                    case "Codeforces":
-                        {
-                            TaskName.Content = CodeforcesProfileParser.GetTitleName(Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1)), TaskNumberInput.Text[TaskNumberInput.Text.Length - 1].ToString());
-                        }
+
+                    case Domain.Codeforces:
+                        int contestId = Int32.Parse(TaskNumberInput.Text.Remove(TaskNumberInput.Text.Length - 1));
+                        string letter = TaskNumberInput.Text[TaskNumberInput.Text.Length - 1].ToString();
+                        TaskName.Content = CodeforcesProfileParser.GetTitleName(contestId, letter);
                         break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(domain.ToString());
                 }
             }
             catch (Exception exception)
@@ -85,7 +78,5 @@ namespace LimpStats.Client.CustomControls.ForProblemTasks
                 MessageBox.Show($"{exception}");
             }
         }
-
-   
     }
 }
