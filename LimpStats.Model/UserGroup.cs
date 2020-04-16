@@ -6,6 +6,10 @@ namespace LimpStats.Model
 {
     public class UserGroup
     {
+        public UserGroup()
+        {
+        }
+
         public UserGroup(string title) : this(title, new List<LimpUser>(), new List<ProblemsPack>())
         {
         }
