@@ -11,7 +11,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Telegram.Bot" Version="14.10.0" />
   </ItemGroup>
   <ItemGroup>
